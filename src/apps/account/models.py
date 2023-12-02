@@ -14,14 +14,13 @@ class CustomBaseUserManager(BaseUserManager):
         """
         if not phonenumber:
             raise ValueError("The phonenumber must be set")
-        email = self.normalize_email(email)
-        user = self.model(email=email, phonenumber=phonenumber, **extra_fields)
+        user = self.model(phonenumber=phonenumber, **extra_fields)
         user.set_password(password)
         user.save()
         return user
 
     def create_operator_user(self, phonenumber, password, email=None, **extra_fields):
-        return self.create_user(phonenumber=phonenumber, password=password, role='operator_user', email=email,
+        return self.create_user(phonenumber=phonenumber, password=password, role='operator_user',
                                 **extra_fields)
 
     def create_superuser(self, phonenumber, password, email=None, **extra_fields):
@@ -34,7 +33,7 @@ class CustomBaseUserManager(BaseUserManager):
             raise ValueError("Superuser must have is_staff=True.")
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("Superuser must have is_superuser=True.")
-        return self.create_user(phonenumber=phonenumber, password=password, role='super_user', email=email,
+        return self.create_user(phonenumber=phonenumber, password=password, role='super_user',
                                 **extra_fields)
 
 

@@ -48,7 +48,7 @@ def login_register(request):
                 return redirect(next_url)
         except:
             pass
-        return redirect('account:dashboard')
+        return redirect('dashboard:index')
 
     def register_perform(data):
         f = forms.RegisterUserForm(data=data)
@@ -59,7 +59,6 @@ def login_register(request):
         phonenumber = f.cleaned_data['phonenumber']
         first_name = f.cleaned_data['first_name']
         last_name = f.cleaned_data['last_name']
-        email = f.cleaned_data['email']
         if User.objects.filter(phonenumber=phonenumber).exists():
             messages.error(request, 'کاربری با این شماره از قبل ثبت شده است')
             return redirect('account:login_register')
@@ -206,7 +205,7 @@ class ConfirmPhonenumber(LoginRequiredMixin, View):
     def get(self, request):
         user = request.user
         if user.is_phonenumber_confirmed:
-            return redirect('account:dashboard')
+            return redirect('dashboard:index')
         key = CONFIRM_PHONENUMBER_CONFIG['STORE_BY'].format(user.get_raw_phonenumber())
         context = {
             'code_is_sent': bool(get_value(key))

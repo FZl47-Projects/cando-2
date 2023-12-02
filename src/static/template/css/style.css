@@ -48,14 +48,16 @@ body {
 
 body {
     line-height: 29px;
-    font-size: 16px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 400;
     visibility: visible;
-    font-family: "Roboto", sans-serif;
+    font-family: "Vazir";
     color: #282828;
+    background: #fff;
     letter-spacing: 0.02em;
 }
+
 
 h1,
 h2,
@@ -63,10 +65,11 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Playfair Display", serif;
+    font-family: "KalamehBlack";
     margin-top: 0;
     font-weight: 600;
 }
+
 
 p:last-child {
     margin-bottom: 0;
@@ -247,7 +250,6 @@ figure {
     border-radius: 25px;
     overflow: hidden;
     text-transform: uppercase;
-    font-family: "Roboto", sans-serif;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -1275,7 +1277,7 @@ textarea:-ms-input-placeholder {
 }
 
 .header_account > ul > li > a {
-    font-size: 25px;
+    font-size: 24px;
     display: inline-block;
     color: #000000;
 }
@@ -2356,7 +2358,6 @@ textarea:-ms-input-placeholder {
     line-height: 31px;
     font-weight: 600;
     color: #2b4174;
-    font-family: "Roboto", sans-serif;
     margin-bottom: 20px;
 }
 
@@ -4625,7 +4626,6 @@ textarea:-ms-input-placeholder {
 }
 
 .comments_title h2 {
-    font-family: "Roboto", sans-serif;
     font-size: 24px;
     line-height: 1.4;
     margin-bottom: 0;
@@ -4729,7 +4729,6 @@ textarea:-ms-input-placeholder {
 }
 
 .comment_list .comment_content h5 {
-    font-family: "Roboto", sans-serif;
     font-size: 18px;
     line-height: 1.4;
     font-weight: 500;
@@ -4745,7 +4744,6 @@ textarea:-ms-input-placeholder {
 
 .comment_list .comment_content h5 span {
     color: #2b4174;
-    font-family: "Roboto", sans-serif;
     font-size: 16px;
     display: inline-block;
     margin-top: 6px;
@@ -5394,7 +5392,6 @@ textarea:-ms-input-placeholder {
 
 .banner_text h3 {
     color: #2b4174;
-    font-family: "Roboto", sans-serif;
     font-weight: 600;
     margin-bottom: 10px;
 }
@@ -5555,7 +5552,6 @@ textarea:-ms-input-placeholder {
     line-height: 1.2;
     color: #2b4174;
     font-weight: 500;
-    font-family: "Roboto", sans-serif;
     margin-bottom: 21px;
 }
 
@@ -6000,7 +5996,6 @@ textarea:-ms-input-placeholder {
     font-size: 16px;
     line-height: 32px;
     font-weight: 500;
-    font-family: "Roboto", sans-serif;
     margin-bottom: 0;
 }
 
@@ -6061,7 +6056,6 @@ textarea:-ms-input-placeholder {
 
 .widget__list h3 {
     text-transform: uppercase;
-    font-family: "Roboto", sans-serif;
     color: #000000;
     font-weight: 600;
     margin-bottom: 13px;
@@ -6082,7 +6076,6 @@ textarea:-ms-input-placeholder {
 
 .widget_filter_list h4 {
     text-transform: uppercase;
-    font-family: "Roboto", sans-serif;
     font-size: 16px;
     line-height: 24px;
     font-weight: 500;
@@ -6511,7 +6504,6 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
     font-size: 18px;
     line-height: 30px;
     font-weight: 500;
-    font-family: "Roboto", sans-serif;
     margin-bottom: 3px;
 }
 
@@ -6813,7 +6805,6 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
     font-size: 30px;
     line-height: 47px;
     font-weight: 500;
-    font-family: "Roboto", sans-serif;
     margin-bottom: 6px;
 }
 
@@ -8718,7 +8709,6 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
     transform-origin: 50% 50% 0px;
     letter-spacing: 2px;
     line-height: 1.2;
-    font-family: "Roboto", sans-serif;
 }
 
 .error-404-content .sub-title {
@@ -9302,7 +9292,6 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
 }
 
 .compare-table .table tbody tr td {
-    font-family: "Roboto", sans-serif;
     min-width: 250px;
     padding-left: 15px;
     padding-right: 15px;
@@ -9324,7 +9313,6 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
 }
 
 .compare-table .table tbody tr td .compare-product-name {
-    font-family: "Roboto", sans-serif;
     font-size: 14px;
     margin-bottom: 0;
 }
@@ -9360,7 +9348,6 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
     position: relative;
     width: auto;
     text-transform: none;
-    font-family: "Roboto", sans-serif;
 }
 
 .coupon-accordion h3:before {
@@ -9689,7 +9676,7 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
 }
 
 .payment-method .payment-accordion .panel-title {
-    font-family: "Roboto", sans-serif;
+
     font-weight: 600;
     font-size: 18px;
     cursor: pointer;
@@ -9710,4 +9697,8 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
     width: 100%;
     border: 1px solid transparent;
     cursor: pointer;
+}
+
+.header_section{
+    /*background: #fff;*/
 }

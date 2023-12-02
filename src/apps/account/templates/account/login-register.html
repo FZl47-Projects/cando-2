@@ -17,14 +17,13 @@
             overflow-x: hidden;
         }
 
-        .container {
+        .container.forms {
             font-size: 120%;
             height: 100vh;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #eee;
             column-gap: 30px;
         }
 
@@ -54,7 +53,7 @@
             pointer-events: none;
         }
 
-        header {
+        .forms header {
             font-family: "KalamehBlack";
             font-size: 39px;
             font-weight: 600;
@@ -163,6 +162,16 @@
 {% endblock %}
 
 {% block Content %}
+    {% include 'base/components/header.html' %}
+    <section class="breadcrumb">
+        <li>
+            <a href="{% url 'public:home' %}">خانه</a>
+        </li>
+        <li>حساب کاربری</li>
+        <li>
+            <a href="">ایجاد حساب - ورود</a>
+        </li>
+    </section>
     <section class="container forms">
         <div class="form form-effect login">
             <div class="form-content">
@@ -171,7 +180,8 @@
                     {% csrf_token %}
                     <input type="hidden" name="type-page" value="login">
                     <div class="field input-field">
-                        <input type="tel" placeholder="شماره همراه" class="input" maxlength="14" name="phonenumber" required>
+                        <input type="tel" placeholder="شماره همراه" class="input" maxlength="14" name="phonenumber"
+                               required>
                     </div>
 
                     <div class="field input-field">
@@ -212,9 +222,6 @@
                         <input type="tel" placeholder="شماره همراه" class="input" name="phonenumber" required>
                     </div>
                     <div class="field input-field">
-                        <input type="email" placeholder="ایمیل" class="input" name="email" required>
-                    </div>
-                    <div class="field input-field">
                         <input type="password" placeholder="رمز عبور" class="password" name="password" required>
                     </div>
 
@@ -232,10 +239,9 @@
                     <span>حسابی دارید ؟ <a href="#" class="link login-link">وارد شوید</a></span>
                 </div>
             </div>
-
-
         </div>
     </section>
+    {% include 'base/components/footer.html' %}
 {% endblock %}
 
 {% block Script %}

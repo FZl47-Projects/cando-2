@@ -13,14 +13,13 @@
 
     <style>
 
-        .container {
+        .container.forms {
             font-size: 120%;
             height: 100vh;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #eee;
             column-gap: 30px;
         }
 
@@ -35,7 +34,7 @@
             box-shadow: 0 4px 15px #ddd
         }
 
-        header {
+        .forms header {
             font-family: "KalamehBlack";
             font-size: 39px;
             font-weight: 600;
@@ -84,6 +83,16 @@
 {% endblock %}
 
 {% block Content %}
+    {% include 'base/components/header.html' %}
+    <section class="breadcrumb">
+        <li>
+            <a href="{% url 'public:home' %}">خانه</a>
+        </li>
+        <li>حساب کاربری</li>
+        <li>
+            <a href="">تایید شماره همراه</a>
+        </li>
+    </section>
     <section class="container forms">
         <div class="form form-effect" id="send-code">
             <div class="form-content">
@@ -91,7 +100,7 @@
                 <form action="{% url 'account:confirm_phonenumber' %}" id="form-confirm-phonenumber">
                     <!-- send with ajax -->
                     <div class="field input-field">
-                        <label>
+                        <label class="font-60">
                             شماره همراه
                         </label>
                         <input type="tel" placeholder="شماره همراه" class="input" value="{{ user.get_raw_phonenumber }}"
@@ -114,12 +123,12 @@
             <div class="form-content">
                 <header>تایید شماره همراه</header>
                 <form action="{% url 'account:confirm_phonenumber_check_code' %}"
-                      dashboard-url="{% url 'account:dashboard' %}" id="form-check-phonenumber">
+                      dashboard-url="{% url 'dashboard:index' %}" id="form-check-phonenumber">
                     <!-- send with ajax -->
-                    <label>
+                    <label class="font-60 mt-2">
                         لطفا کد ارسال شده را وارد نمایید
                     </label>
-                    <div class="field input-field">
+                    <div class="field input-field mt-0">
                         <input type="text" placeholder="کد" class="input" name="code">
                     </div>
 
@@ -231,13 +240,13 @@
             cnt_check.classList.add('d-none')
         }
 
-        document.querySelector('#form-confirm-phonenumber').addEventListener('submit',function(e){
+        document.querySelector('#form-confirm-phonenumber').addEventListener('submit', function (e) {
             e.preventDefault()
             btn_send_code.click()
         })
 
-        
-        document.querySelector('#form-check-phonenumber').addEventListener('submit',function(e){
+
+        document.querySelector('#form-check-phonenumber').addEventListener('submit', function (e) {
             e.preventDefault()
             btn_check_code.click()
         })

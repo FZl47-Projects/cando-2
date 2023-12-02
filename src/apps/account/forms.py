@@ -23,15 +23,9 @@ class UpdateUserForm(forms.ModelForm):
 
 
 class RegisterUserForm(forms.Form):
-    email_error_messages = {
-        'invalid': 'ایمیل نامعتبر است',
-        'unique': 'این ایمیل توسط کاربر دیگه ای در حال استفاده است'
-    }
-
     first_name = forms.CharField(max_length=100, required=True)
     last_name = forms.CharField(max_length=100, required=True)
     phonenumber = PhoneNumberField(region='IR')
-    email = forms.EmailField(required=True, error_messages=email_error_messages)
     password = forms.CharField(max_length=64, min_length=8, required=True, widget=forms.PasswordInput())
     password2 = forms.CharField(max_length=64, min_length=8, required=True, widget=forms.PasswordInput())
 

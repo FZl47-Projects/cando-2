@@ -495,8 +495,11 @@ option[disabled] {
 }
 
 .breadcrumb {
+    direction: rtl;
     margin-bottom: 0 !important;
-    margin-top: 13px;
+    margin-top: 20px;
+    background: #f9f9f9;
+    padding: 10px 20px;
 }
 
 .breadcrumb ul {
@@ -506,15 +509,15 @@ option[disabled] {
 }
 
 .breadcrumb li {
-    font-size: 65%;
+    font-size: 80%;
     display: inline-block;
-    color: #b5b5b5;
+    color: #b9b9b9;
 }
 
 .breadcrumb li:after {
     content: "/";
-    margin: 0 3px;
-    font-size: 70%;
+    margin: 0 9px;
+    font-size: 80%;
     color: #ccc;
 }
 
