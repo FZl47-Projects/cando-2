@@ -45,7 +45,7 @@ class Image(models.Model):
     image = models.ImageField(upload_to=upload_image_src, max_length=400, null=True)
 
     class Meta:
-        abstract = True
+        # abstract = True
         ordering = '-id',
 
     def __str__(self):

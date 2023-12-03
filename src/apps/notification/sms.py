@@ -101,6 +101,6 @@ NOTIFICATION_USER_HANDLERS = {
     'PASSWORD_CHANGED_SUCCESSFULLY': NotificationUser.handler_password_changed_successfully,
     'RESET_PASSWORD_CODE_SENT': NotificationUser.handler_reset_password_code_sent,
     'USER_ACCOUNT_ACTIVATED': NotificationUser.handler_user_account_activated,
-    'CONFIRM_PHONENUMBER_CODE_SENT':NotificationUser.handler_confirm_phonenumber_code_sent,
-    'PHONENUMBER_CONFIRMED':NotificationUser.handler_phonenumber_confirmed,
+    'CONFIRM_PHONENUMBER_CODE_SENT': NotificationUser.handler_confirm_phonenumber_code_sent,
+    'PHONENUMBER_CONFIRMED': NotificationUser.handler_phonenumber_confirmed,
 }

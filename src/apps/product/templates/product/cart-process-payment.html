@@ -1,0 +1,357 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    پرداخت و تکمیل خرید
+{% endblock %}
+
+{% block Link %}
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}"/>
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/swiper.css' %}"/>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{% static 'frontend/styles/Proceed-to-pay.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'frontend/static/css/lib/persian-datepicker.min.css' %}">
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}
+
+{% block Style %}
+    <style>
+
+
+        .container {
+            width: 300px;
+            height: 36px;
+            margin: auto;
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .inner-container {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: inherit;
+            height: inherit;
+            text-transform: uppercase;
+            font-size: 0.6em;
+            letter-spacing: 0.2em;
+        }
+
+        .inner-container:first-child {
+            background: #e9e9e9;
+        }
+
+        .inner-container:nth-child(2) {
+            background: dodgerblue;
+            clip-path: inset(0 50% 0 0);
+            transition: 0.3s cubic-bezier(0, 0, 0, 1);
+            color: #fff;
+        }
+
+        .toggle {
+            font-size: 130%;
+            width: 50%;
+            text-align: center;
+            left: 0;
+            position: absolute;
+            height: inherit;
+            display: flex;
+            box-sizing: border-box;
+        }
+
+        .toggle p {
+            margin: auto;
+        }
+
+        .toggle:nth-child(1) {
+            right: 0;
+        }
+
+        .content_container {
+            margin-top: 2rem;
+            width: 100%;
+            cursor: initial;
+        }
+
+        .content_inner_container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            min-height: 300px;
+            height: 100%;
+        }
+
+        .content {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all 0.3s cubic-bezier(0, 0, 0, 1);
+            padding: 10px;
+        }
+
+        #page-one {
+            width: 100%;
+            height: 10000px;
+        }
+
+        #page-two {
+            width: 100%;
+            height: 1000px;
+            transform: translateX(-100%);
+        }
+
+        .btn-main {
+            position: initial;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block Content %}
+
+    <body>
+
+
+    <!-- START content modal submit time-->
+    <div class="content-modal" id="modal-submit-time">
+        <div class="inner-modal">
+            <div class="content p-3">
+                <div class="col-12 top-modal">
+
+                    <img src="./assets/images/Path 3147.png">
+                    <input class="col-5 text-center" type="text" placeholder="شنبه23آبان">
+                    <img src="./assets/images/Path 3148.png">
+                </div>
+
+                <div class="col-12 center-content">
+                    <div class="col-12 item">
+                        <input class="col-6 p-2 " type="text" value="ساعت4تا6" readonly>
+                        <input class="col-6 p-2 free" type="text" value="رایگان" readonly>
+                    </div>
+                    <div class="col-12 item">
+                        <input class="col-6 p-2 " type="text" value="ساعت6تا10" readonly>
+                        <input class="col-6 p-2 free" type="text" value="40,500تومان" readonly>
+                    </div>
+                    <div class="col-12 item">
+                        <input class="col-6 p-2 " type="text" value="ساعت4تا6" readonly>
+                        <input class="col-6 p-2 free" type="text" value="رایگان" readonly>
+                    </div>
+                    <div class="col-12 item">
+                        <input class="col-6 p-2 " type="text" value="ساعت4تا6" readonly>
+                        <input class="col-6 p-2 free" type="text" value="رایگان" readonly>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- End content modal  submit time-->
+
+
+    <!-- START Header proceed to pay-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+        <header class="header-m-oprator">
+            <div class="title">
+              <span class="back"><img src="{% static 'frontend/images/black.f.png' %}"
+                                      alt="icon"
+              /></span>
+                <h5>اقدام به پرداخت</h5>
+            </div>
+            <div class="line"></div>
+        </header>
+        <!-- end  Header proceed to pay-->
+
+        <!-- START MENU-BOTTOM -->
+        {% include 'base/menu-mobile.html' %}
+        <!-- END MENU-BOTTOM -->
+
+        <!-- START MAIN -->
+        {% with cart=user.cart %}
+            <main class="main">
+                <div class="content-page">
+                    <!-- start -->
+                    <div class="col-12 content-up-page p-3">
+                        {% for order in cart.get_orders %}
+                            <div class="col-12 col-md-6 py-1 px-2 content-up-page-item">
+                                <span>
+                                    {{ order.product.name }} ({{ order.count }})
+                                </span>
+                                <span>
+                                    <span class="price-el">{{ order.get_total_price }}</span>
+                                    <span>تومان</span>
+                                </span>
+                            </div>
+                        {% endfor %}
+                        {% for order in cart.get_custom_orders %}
+                            <div class="col-12 col-md-6 py-1 px-2 content-up-page-item">
+                                <span>
+                                    سفارش دلخواه
+                                    {{ forloop.counter }}
+                                </span>
+                                <span>
+                                    <span class="price-el">{{ order.price }}</span>
+                                    <span>تومان</span>
+                                </span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="line center"></div>
+                    <div class="col-12 content-up-page p-3">
+                        <div class="col-12 col-md-6 py-1 px-2 content-up-page-item">
+                            <span class="d-flex align-items-center">قیمت کل</span>
+                            <span class="d-flex align-items-center">
+                                <span class="price-el">{{ cart.get_total_price }}</span>
+                                <span>تومان</span>
+                            </span>
+
+                        </div>
+                        <div class="col-12 col-md-6 py-1 px-2 content-up-page-item">
+                            <span class="d-flex align-items-center">هزینه ارسال</span>
+                            <span class="d-flex align-items-center font-80">
+                                {% if cart.get_total_price > settings.TRANSPORTATION_CONFIG.free_if_price_more_than %}
+                                    <span class="text-bg-success p-1" style="border-radius: 5px">رایگان</span>
+
+                                    <span class="font-80">(ارسال های بالا <span class="price-el">{{ settings.TRANSPORTATION_CONFIG.free_if_price_more_than }}</span> تومان)</span>
+                                {% else %}
+                                    <span class="price-el">{{ settings.TRANSPORTATION_CONFIG.fee }}</span>
+                                    <span>تومان</span>
+                                {% endif %}
+                            </span>
+
+                        </div>
+                        <div class="col-12 col-md-6 py-1 px-2 content-up-page-item fs-5">
+                            <span>مجموع</span>
+                            <div>
+                                <span class="price-el">{{ cart.get_total_price_for_payment }}</span>
+                                <span>تومان</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="line center"></div>
+                    <div class="wrapper mt-5">
+                        <div id="container" class="container">
+                            <div class="inner-container">
+                                <div class="toggle">
+                                    <p>تحویل حضوری</p>
+                                </div>
+                                <div class="toggle">
+                                    <p>تحویل درب منزل</p>
+                                </div>
+                            </div>
+                            <div class="inner-container" id='toggle-container'>
+
+                                <div class="toggle">
+                                    <p>تحویل حضوری</p>
+                                </div>
+                                <div class="toggle">
+                                    <p>تحویل درب منزل</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content_container">
+                            <div class="content_inner_container">
+                                <div id="page-one" class="content">
+                                    <form action="{% url 'product:cart_process_payment' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="delivery_type" value="online">
+                                        <div class="col-12 content-center-page paddingbottom p-3">
+                                            <div class="col-12 col-md-12 py-1 px-1">
+                                                <div class="col-12 d-flex justify-content-between">
+                                                    <p>ادرس مورد نظر را انتخاب کنید</p>
+                                                    <div>
+                                                        <a href="{% url 'transportation:address_create' %}"
+                                                           class="btn btn-warning mb-4">
+                                                            افزودن ادرس
+                                                            <i class="fa fa-location"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <select class="form-control form-select col-12" name="address"
+                                                            required>
+                                                        {% for address in user.get_addresses %}
+                                                            <option value="{{ address.id }}">{{ address.address|truncatechars:70 }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-12 py-1 px-1 page-item">
+                                                <label class="p-1">یاداشت(اختیاری)</label>
+                                                <textarea class="form-control col-12" name="note" rows="8"></textarea>
+                                            </div>
+                                        </div>
+                                        {% if user.get_addresses.count > 0 %}
+                                            <div class="btn-main col-12" id="new-sweet-btn">
+                                                <div class="btn-main-content">
+                                                    <button class="col-12 btn text-white p-0">پرداخت</button>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <p class="text-danger">ادرسی یافت نشد برای ادامه لطفا یک ادرس اضافه کنید</p>
+                                            <div class="btn-main col-12" id="new-sweet-btn" style="opacity: .7;cursor:not-allowed;">
+                                                <div class="btn-main-content">
+                                                    <button class="col-12 btn text-white p-0 disabled" type="button">
+                                                        پرداخت
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        {% endif %}
+                                    </form>
+                                </div>
+                                <div id="page-two" class="content">
+                                    <form action="{% url 'product:cart_process_payment' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="delivery_type" value="in-person">
+                                        <div class="text-center fs-4">
+                                            <p>ادرس محل دریافت</p>
+                                            کرمان خیابان ...
+                                        </div>
+                                        <div class="col-12 col-md-12 py-1 px-1 page-item">
+                                            <label class="p-1">یاداشت(اختیاری)</label>
+                                            <textarea class="form-control col-12" name="note" rows="8"></textarea>
+                                        </div>
+                                        <div class="btn-main col-12 mt-3" id="new-sweet-btn">
+                                            <div class="btn-main-content">
+                                                <button class="col-12 btn text-white p-0">پرداخت</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        {% endwith %}
+
+    </div>
+    </body>
+{% endblock %}
+
+{% block Script %}
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+
+    <!-- MAIN JS -->
+
+    <script src="{% static 'frontend/static/js/lib/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'frontend/static/js/lib/persian-date.min.js' %}"></script>
+    <script src="{% static 'frontend/static/js/lib/persian-datepicker.min.js' %}"></script>
+    <script src="{% static 'frontend/static/js/app.js' %}"></script>
+    <script src="{% static 'frontend/js/Proceed-to-pay.js' %}" type="module"></script>
+{% endblock %}

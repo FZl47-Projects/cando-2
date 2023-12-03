@@ -1,0 +1,355 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    ثبت کیک دلخواه
+{% endblock %}
+
+{% block Link %}
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}"/>
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/swiper.css' %}"/>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{% static 'frontend/styles/Favorite-cake.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'frontend/static/css/lib/persian-datepicker.min.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/static/css/main.css' %}">
+
+    <style>
+        input::placeholder {
+            color: #999;
+        }
+
+        textarea::placeholder {
+            color: #999;
+        }
+
+        textarea {
+            color: #fff;
+        }
+
+        select {
+            background: #262626 !important;
+            color: #fff !important;
+        }
+    </style>
+{% endblock %}
+
+{% block Content %}
+    <body class="bg">
+
+
+    <!-- START Header favorite-cake-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+        <header class="header-m-oprator">
+            <div class="title">
+          <span class="back"><img src="{% static 'frontend/images/icon/Group 1900.png' %}"
+                                  alt="icon"
+          /></span>
+                <h5>کیک تصویری و طرح دلخواه</h5>
+            </div>
+            <div class="The-dividing-line"></div>
+        </header>
+        <!--Edn Header favorite-cake-->
+
+        <!-- START MENU-BOTTOM -->
+        <div class="menu-bottom">
+            <ul class="list-bottom">
+                <li class="item-bottom active">
+                    <a href="#">
+                        <img src="{% static 'frontend/images/icon/users.png' %}" alt="icon"/>
+                    </a>
+                </li>
+                <li class="item-bottom">
+                    <a href="#">
+                        <img src="{% static 'frontend/images/icon/home.png' %}" alt="icon"/>
+                    </a>
+                </li>
+                <li class="item-bottom">
+                    <a href="#">
+                        <img src="{% static 'frontend/images/icon/Bag.png' %}" alt="icon"/>
+                    </a>
+                </li>
+                <li class="item-bottom">
+                    <a href="#">
+                        <img src="{% static 'frontend/images/icon/hat.png' %}" alt="icon"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- END MENU-BOTTOM -->
+
+
+        <!-- START MAIN -->
+        <form action="{% url 'product:custom_order_product' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <input type="hidden" name="taste_spongy" required value="وانیل">
+            <input type="hidden" name="taste_cream" required value="وانیل">
+            <input type="hidden" name="filing_cake" required value="اناناس و گردو">
+
+
+            <main class="main p-3">
+                <!-- start content -->
+                <section class="image-cake">
+                    <!-- start -->
+                    <div class="col-12 col-md-4 order-type py-1">
+                        <label>نوع سفارش</label>
+                        <select class="my-2" name="type_order" id="Order">
+                            <option value="چاپ عکس از روی کیک" key="pic-on-cake">چاپ عکس از روی کیک</option>
+                            <option value="سفارش از روی مدل" key="model" selected>سفارش از روی مدل</option>
+                        </select>
+
+                    </div>
+                    <div class="col-12 image py-1">
+                        <div class="col-12 col-md-6 name-taste py-1">
+                            <label class="p-1">طعم اسفنج</label>
+                            <div class="image-content col-12 ">
+                                <div class="image-taste col-3 p-1 active esfang-div" id="esfang-div">
+                                    <div class="img" id="esfang-img">
+                                        <img src="{% static 'frontend/images/vanil.png' %}">
+                                    </div>
+                                    <div class="Ntaste">
+                                        وانیل
+                                    </div>
+
+                                </div>
+                                <div class="image-taste col-3 p-1 esfang-div" id="esfang-div">
+                                    <div class="img" id="esfang-img">
+                                        <img src="{% static 'frontend/images/chocolate.png' %}">
+                                    </div>
+                                    <div class="Ntaste">
+                                        شکلات
+                                    </div>
+
+                                </div>
+                                <div class="image-taste col-3 p-1 esfang-div" id="esfang-div">
+                                    <div class="img " id="esfang-img">
+                                        <img class="bb" src="{% static 'frontend/images/radolot.png' %}">
+                                    </div>
+                                    <div class="Ntaste">
+                                        رد ولوت
+                                    </div>
+
+                                </div>
+                                <div class="image-taste col-3 p-1 esfang-div" id="esfang-div">
+                                    <div class="img" id="esfang-img">
+                                        <img src="{% static 'frontend/images/neskafe.png' %}">
+                                    </div>
+                                    <div class="Ntaste">
+                                        نسکافه
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-12 col-md-6 name-taste py-1">
+                            <label class="p-1">فیلینگ کیک(لایه میانی)</label>
+                            <div class="image-content col-12">
+                                <div class="image-taste col-3 p-1 active filing-div" id="filing-div">
+                                    <div class="img active" id="filing-img">
+                                        <img src="{% static 'frontend/images/ananas.png' %}">
+                                    </div>
+                                    <div class="Ntaste">
+                                        آناناس و گردو
+                                    </div>
+
+                                </div>
+                                <div class="image-taste col-3 p-1 filing-div" id="filing-div">
+                                    <div class="img " id="filing-img">
+                                        <img src="{% static 'frontend/images/banana.png' %}">
+                                    </div>
+                                    <div class="Ntaste">
+                                        موز و گردو
+                                    </div>
+                                </div>
+                                <div class="image-taste col-3 p-1 filing-div" id="filing-div">
+                                    <div class="img " id="filing-img">
+                                        <img src="{% static 'frontend/images/banana.png' %}">
+                                    </div>
+                                    <div class="Ntaste">
+                                        توت فرنگی و گردو
+                                    </div>
+                                </div>
+                                <div class="image-taste col-3 p-1 filing-div" id="filing-div">
+                                    <div class="img " id="filing-img">
+                                        <img src="{% static 'frontend/images/banana.png' %}">
+                                    </div>
+                                    <div class="Ntaste">
+                                        انبه و گردو
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>
+                                <div class="image-taste col-3 p-1 filing-div" id="filing-div">
+                                    <div class="img " id="filing-img">
+                                        <img src="{% static 'frontend/images/banana.png' %}">
+                                    </div>
+                                    <div class="Ntaste">
+                                        اناناس و گردو
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-md-6 name-taste py-1">
+                            <label class="p-1">طعم خامه</label>
+                            <div class="image-content col-12">
+                                <div class="image-taste col-3 p-1 active cream-div" id="cream-div">
+                                    <div class="img active" id="cream-img">
+                                        <img src="{% static 'frontend/images/vanil.png' %}">
+                                    </div>
+                                    <div class="Ntaste">
+                                        وانیل
+                                    </div>
+
+                                </div>
+                                <div class="image-taste col-3 p-1 cream-div" id="cream-div">
+                                    <div class="img " id="cream-img">
+                                        <img src="{% static 'frontend/images/neskafe.png' %}">
+                                    </div>
+                                    <div class="Ntaste">
+                                        قهوه
+                                    </div>
+
+                                </div>
+                                <div class="image-taste col-3 p-1 cream-div" id="cream-div">
+                                    <div class="img" id="cream-img">
+                                        <img src="{% static 'frontend/images/chocolate.png' %}">
+                                    </div>
+                                    <div class="Ntaste">
+                                        شکلات
+                                    </div>
+
+                                </div>
+                                <div class="image-taste col-3 p-1 cream-div" id="cream-div">
+                                    <div class="img" id="cream-img">
+                                        <a href="#"> <img src="{% static 'frontend/images/neskafe.png' %}"></a>
+                                    </div>
+                                    <div class="Ntaste">
+                                        نسکافه
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="col-12 date-tasvir py-1">
+                        <div class="col-12 col-md-8 date-content">
+                            <div class="col-6 date p-1">
+                                <label for="persianDatapicker">تاریخ دریافت</label>
+                                <input type="text " name="" id="persianDatapicker"
+                                       set-on="date_receive" required>
+                                <input type="hidden" name="date_receive" id="date_receive" required>
+                            </div>
+                            <div class="col-6 time p-1">
+                                <label>ساعت دریافت</label>
+                                <div class="col-12 content-time">
+                                    <input class="col-4 mx-1" type="text" name="hour" id="times" placeholder="ساعت"
+                                           required>
+                                    <span class="m-1">:</span>
+                                    <input class="col-4 mx-1" type="text" name="minute" id="minutes"
+                                           placeholder="دقیقه" required>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-md-4 tasvir-content">
+                            <div class="container-image-fields tasvir p-1">
+                                <label>تصویر</label>
+                                <div>
+                                    <input type="file" class="my-1" name="image" id="imgfile" required>
+                                </div>
+                            </div>
+                            <div id="btn-add-image-field" class="p-2"
+                                 style="margin: 10px;margin-top: 25px;color: #18dc3f;cursor: pointer">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-12 ranges py-1">
+                        <div class="col-12 col-md-6 p-2 ranges-content">
+                            <label>میزان خامه</label>
+                            <div class="range-item col-12">
+                                <div class="col-12 select-range">
+                                    <select name="amount_cream" id="amount-cream" class="form-select" required>
+                                        <option value="کم">کم</option>
+                                        <option value="متوسط">متوسط</option>
+                                        <option value="زیاد">زیاد</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-md-6 p-2 ranges-content">
+                            <label>وزن کیک(کیلوگرم)</label>
+                            <div class="range-item col-12">
+                                <div class="col-12 select-range">
+                                    <select name="weight" id="cake-weight" class="form-select" required>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="بیشتر از 10">بیشتر از 10</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 information py-1">
+                        <div class="col-12 col-md-6 p-2">
+                            <input type="text" name="writing_on_cake" id="writing-cake" placeholder="نوشته روی کیک">
+                        </div>
+                        <div class="col-12 col-md-6 p-2">
+                        <textarea class="des" rows="3" name="description" id="description"
+                                  placeholder="توضیحات"></textarea>
+                        </div>
+                    </div>
+                </section>
+                <!-- start btn bottom -->
+                <div class="btn-main col-12 active" id="new-birth-btn">
+                    <div class="btn-main-content">
+                        <button class="mb-0 me-1 col-12 btn">درخواست سفارش</button>
+
+                    </div>
+
+                </div>
+
+            </main>
+        </form>
+
+    </div>
+    </body>
+{% endblock %}
+
+{% block Script %}
+
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+
+    <!-- MAIN JS -->
+    <script src="{% static 'frontend/static/js/lib/persian-date.min.js' %}"></script>
+    <script src="{% static 'frontend/static/js/lib/persian-datepicker.min.js' %}"></script>
+    <script src="{% static 'frontend/static/js/app.js' %}"></script>
+
+    <script src="{% static 'frontend/js/Favorite-cake.js' %}"></script>
+
+{% endblock %}

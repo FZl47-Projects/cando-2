@@ -1,0 +1,290 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    محصول {{ product.name }}
+{% endblock %}
+
+{% block Link %}
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}"/>
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/swiper.css' %}"/>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{% static 'frontend/styles/Each-product-page.css' %}"/>
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}
+
+{% block Style %}
+    <style>
+        .content-section {
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+        }
+
+        .content-top {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #838383);
+        }
+
+        .product-stars {
+            font-size: 105%;
+        }
+
+        input, textarea, select {
+            border-color: #ddd !important;
+        }
+    </style>
+{% endblock %}
+
+{% block Content %}
+
+    <body>
+
+
+    <!-- START Header each-product-page-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+
+        <!--Edn Header each-product-page-->
+        <!-- START MENU-BOTTOM -->
+        {% include 'base/menu-mobile.html' %}
+        <!-- END MENU-BOTTOM -->
+
+        <!-- START MAIN -->
+        <main class="main p-3">
+            <!-- start section-top -->
+            <section class="section-top ">
+                <div class="content-section" style="background: url('{{ product.get_image_url }}')">
+                    <header class="header-section-top">
+                    <span class="back"><img src="{% static 'frontend/images/icon/Group 1900.png' %}"
+                                            alt="icon"
+                    /></span>
+
+                    </header>
+                    <div class="content-top">
+                        <div class="col-6 section-right">
+                            <h1>{{ product.name }}</h1>
+                            <span>
+                            {{ product.description }}
+                        </span>
+                        </div>
+                        <div class="col-6 section-left">
+                            <div class="col-5 content-left-top fs-5">
+                                <div class="price p-2">
+                                    <h6 class="price-el fs-4">{{ product.price }}</h6>
+                                    <span>تومان</span>
+                                </div>
+                            </div>
+                            <div class="col-5 content-left-down">
+                                <div class="col-12 image-point product-stars">
+                                    <span class="p-1">{{ product.get_rate }}</span>
+                                    <div class="stars" rate="{{ product.get_rate }}">
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                </div>
+                                <span class="col-12">({{ product.get_comments.count }} نظر)</span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </section>
+            <!-- end section-top -->
+
+            <!-- start section-bottom -->
+            <section class="section-bottom">
+                <div class="content-section-b">
+                    <h4 class="p-4">محصولات مشابه</h4>
+                    <div class="second-sec">
+                        <div class="swiper py-1 active" id="myswiper">
+                            <div class="swiper-wrapper">
+                                {% for product in product.get_similar_products|slice:':8' %}
+                                    <div class="swiper-slide text-center">
+                                        <a href="{{ product.get_absolute_url }}" class="d-inline-block col-12">
+                                            <div class="col-12 p-1">
+                                                <div class="img">
+                                                    <img src="{{ product.get_image_url }}">
+                                                </div>
+                                                <div class="Ntase">
+                                                    {{ product.name }}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% empty %}
+                                    <div class="container-not-found-base">
+                                        <p>
+                                            چیزی یافت نشد
+                                        </p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                                <span class="swiper-pagination-bullet" tabindex="0" role="button"
+                                      aria-label="Go to slide 1"></span>
+                                <span class="swiper-pagination-bullet" tabindex="0" role="button"
+                                      aria-label="Go to slide 2"></span>
+                                <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"
+                                      role="button" aria-label="Go to slide 4" aria-current="true"></span>
+                            </div>
+                        </div>
+                        <div class="down">
+                            <div class="p-5 col-12 col-md-7 mx-auto"
+                                 style="border-radius: 10px;box-shadow: 0 2px 6px #ddd">
+                                <div class="text-center">
+                                    <h4>ارسال نظر</h4>
+                                </div>
+                                {% if user.is_anonymous is False %}
+                                    <form action="{% url 'product:comment_add' product_id=product.id %}" method="post">
+                                        {% csrf_token %}
+                                        <div>
+                                            <label>
+                                                عنوان
+                                            </label>
+                                            <input type="text" required name="title" class="form-control">
+                                        </div>
+                                        <div>
+                                            <label>
+                                                توضیحات
+                                            </label>
+                                            <textarea name="description" class="form-control" rows="10"
+                                                      required></textarea>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                امتیاز
+                                            </label>
+                                            <select name="rate" required class="form-control form-select">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            <button class="btn btn-success col-12">
+                                                ثبت نظر
+                                            </button>
+                                        </div>
+                                    </form>
+                                {% else %}
+                                    <a href="{% url 'account:login' %}" class="text-primary">
+                                        برای ارسال نظر اول باید وارد حساب کاربری خود بشوید
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="col-12 comments py-1 mt-5">
+                                {% for comment in product.get_comments %}
+                                    <div class="col-12 comments-cotent p-2 py-3">
+                                        <div class="col-1 img">
+                                            <img src="{% static 'frontend/images/yyyyyy.png' %}"
+                                                 class="text-center d-block mx-auto mb-2"
+                                                 style="width: 30px;height: 100%">
+                                            <span>{{ comment.user.name }}</span>
+                                        </div>
+                                        <div class="col-6 text-des">
+                                            <h4>{{ comment.title }}</h4>
+                                            <span>{{ comment.description }}</span>
+
+                                        </div>
+                                        <div class="col-5 tarikh">
+                                            <div class="col-12 tarikh-item">
+                                                <div>
+                                                    <i class="fa fa-star"></i>
+                                                    <span>{{ comment.rate }}</span>
+                                                </div>
+                                                <div>
+                                                    <div class="text-left">{{ comment.get_created_at_timepast }}</div>
+                                                    <div class="datetime-convert font-70 text-center"
+                                                         style="color: #aaa">({{ comment.get_created_at }})
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 like-item future-item">
+                                                <div class="col-4 col-md-3 mx-1 like p-1">
+                                                    <img src="./assets/images/icon/like (1).png">
+                                                    <span>3</span>
+                                                </div>
+                                                <div class="col-4 col-md-3 like p-1">
+                                                    <img src="./assets/images/icon/dislike (1).png">
+                                                    <span>3</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                {% empty %}
+                                    <div class="container-not-found-base">
+                                        <p>نظری یافت نشد</p>
+                                        <p class="font-80 text-success" style="font-family: Vazir">
+                                            شما اولین نفری باشید که دیدگاهی ثبت میکنید
+                                        </p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="footer">
+                    <div class="row p-2 footer-item">
+                        <div class="col-5 col-md-2 col-sm-3 btn-bottom">
+                            <a href="{% url 'product:cart_add' product_id=product.id %}" class="col-12">
+                                <div class=" p-1 text-btn">
+                                    افزودن به سبد خرید
+                                </div>
+                            </a>
+                        </div>
+                        <div class=" col-3 col-md-2 g-0 fs-6 txt-left">
+                            <div>
+                                <p>قیمت :</p>
+                                <div>
+                                    <span class="price-el">{{ product.price }}</span>
+                                    <span>تومان</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- end section-bottom -->
+
+
+        </main>
+
+    </div>
+    </body>
+{% endblock %}
+
+{% block Script %}
+
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+    <script src="{% static 'frontend/vendors/swiper.js' %}"></script>
+    <!-- MAIN JS -->
+    <script src="{% static 'frontend/js/Each-product-page.js' %}"></script>
+    <script>
+        let stars = document.querySelector('.product-stars .stars')
+        let stars_item = stars.querySelectorAll('i')
+        let rate = Math.round(stars.getAttribute('rate'))
+        for (let i = 0; i < rate; i++) {
+            stars_item[i].classList.replace('far', 'fa')
+        }
+    </script>
+{% endblock %}

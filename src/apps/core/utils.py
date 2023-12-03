@@ -116,3 +116,5 @@ def get_host_url(url):
 def get_media_url(url):
     return settings.MEDIA_URL + url
 
+
+
