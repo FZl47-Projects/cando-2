@@ -3,12 +3,14 @@ from apps.core.utils import get_time, get_timesince_persian, random_str
 
 
 def upload_file_src(instance, path):
+    # TODO: add validator format
     frmt = str(path).split('.')[-1]
     tm = get_time('%Y-%m-%d')
     return f'files/{tm}/{random_str()}.{frmt}'
 
 
 def upload_image_src(instance, path):
+    # TODO: add validator format
     frmt = str(path).split('.')[-1]
     tm = get_time('%Y-%m-%d')
     return f'images/{tm}/{random_str()}.{frmt}'
