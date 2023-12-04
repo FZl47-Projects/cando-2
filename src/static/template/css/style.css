@@ -1031,10 +1031,11 @@ textarea:-ms-input-placeholder {
 .main_menu nav > ul > li {
     position: relative;
     margin-right: 47px;
+    margin-left: 5px;
 }
 
 .main_menu nav > ul > li:last-child {
-    margin-right: 0;
+    /*margin-right: 0;*/
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
