@@ -20,34 +20,34 @@ class CategoryCreateForm(forms.ModelForm):
         fields = '__all__'
 
 
-class FactorCakeImageForm(forms.ModelForm):
-    description = forms.CharField(max_length=400, required=False)
-
-    class Meta:
-        model = models.FactorCakeImage
-        exclude = ('images',)
-
-
-class FactorCreateForm(forms.ModelForm):
-    note = forms.CharField(required=False)
-
-    class Meta:
-        model = models.Factor
-        exclude = ('track_code',)
-
-
-class FactorCreateNonAddressForm(forms.ModelForm):
-    note = forms.CharField(required=False)
-
-    class Meta:
-        model = models.Factor
-        exclude = ('track_code', 'address')
+# class FactorCakeImageForm(forms.ModelForm):
+#     description = forms.CharField(max_length=400, required=False)
+#
+#     class Meta:
+#         model = models.FactorCakeImage
+#         exclude = ('images',)
+#
+#
+# class FactorCreateForm(forms.ModelForm):
+#     note = forms.CharField(required=False)
+#
+#     class Meta:
+#         model = models.Factor
+#         exclude = ('track_code',)
 
 
-class CartStatusForm(forms.ModelForm):
-    class Meta:
-        model = models.CartStatus
-        fields = '__all__'
+# class FactorCreateNonAddressForm(forms.ModelForm):
+#     note = forms.CharField(required=False)
+#
+#     class Meta:
+#         model = models.Factor
+#         exclude = ('track_code', 'address')
+
+
+# class CartStatusForm(forms.ModelForm):
+#     class Meta:
+#         model = models.CartStatus
+#         fields = '__all__'
 
 
 class CommentAddForm(forms.ModelForm):
@@ -56,17 +56,17 @@ class CommentAddForm(forms.ModelForm):
         fields = ('product', 'user', 'title', 'description', 'rate')
 
 
-class CustomOrderProductAccept(forms.ModelForm):
-    note = forms.CharField(max_length=1000, required=False)
-
-    class Meta:
-        model = models.CustomOrderProduct
-        fields = ('note', 'price', 'is_checked', 'cart', 'status')
-
-
-class CustomOrderProductReject(forms.ModelForm):
-    note = forms.CharField(max_length=1000, required=False)
-
-    class Meta:
-        model = models.CustomOrderProduct
-        fields = ('note', 'status')
+# class CustomOrderProductAccept(forms.ModelForm):
+#     note = forms.CharField(max_length=1000, required=False)
+#
+#     class Meta:
+#         model = models.CustomOrderProduct
+#         fields = ('note', 'price', 'is_checked', 'cart', 'status')
+#
+#
+# class CustomOrderProductReject(forms.ModelForm):
+#     note = forms.CharField(max_length=1000, required=False)
+#
+#     class Meta:
+#         model = models.CustomOrderProduct
+#         fields = ('note', 'status')

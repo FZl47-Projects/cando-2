@@ -5793,6 +5793,8 @@ textarea:-ms-input-placeholder {
 
 .product_thumb img {
     width: 100%;
+    height: 290px;
+    object-fit: cover;
 }
 
 .slick_navigation > button {
@@ -5960,7 +5962,7 @@ textarea:-ms-input-placeholder {
 }
 
 .action_links ul li {
-    margin-right: 3px;
+    margin: 3px;
 }
 
 .action_links ul li:last-child {
@@ -6005,10 +6007,18 @@ textarea:-ms-input-placeholder {
 }
 
 .price_box span {
-    font-size: 24px;
     line-height: 32px;
-    font-weight: 500;
     display: inline-block;
+}
+
+.price_box .price-el{
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.price_box .price-label{
+    font-size: 15px;
+    font-weight: bold;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -9702,4 +9712,9 @@ span.ui-slider-handle.ui-corner-all.ui-state-default {
 
 .header_section{
     /*background: #fff;*/
+}
+
+
+.product_content .product__title{
+    font-size: 120%;
 }

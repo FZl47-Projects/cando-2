@@ -5,10 +5,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 from django.views.generic import View
 from django.conf import settings
-from core.models import Image
-from core.utils import form_validate_err, get_host_url
+from apps.core.models import Image
+from apps.core.utils import form_validate_err, get_host_url
 # from core.notify import send_sms
-from core.auth.decorators import admin_required_cbv
+from apps.core.auth.decorators import admin_required_cbv
 from . import models, forms
 
 User = get_user_model()

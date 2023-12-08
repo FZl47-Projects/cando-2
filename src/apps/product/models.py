@@ -3,20 +3,53 @@ from django.db import models
 from apps.core.models import BaseModel
 
 
+class ProductManager(models.Manager):
+
+    def get_best_sellers(self):
+        # TODO: must be completed
+        return self.get_queryset()
+
+    def get_news(self):
+        # TODO: must be completed
+        return self.get_queryset()
+
+    def get_suggested(self):
+        # TODO: must be completed
+        return self.get_queryset()
+
+
 class Product(BaseModel):
+    STATUS_OPTIONS = (
+        ('active', 'فعال'),
+        ('disable', 'غیر فعال'),
+        ('archived', 'ارشیو'),
+    )
+
     title = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
-    price = models.PositiveBigIntegerField(null=True)
-    categories = models.ManyToManyField('Category')
-    tags = models.ManyToManyField('Tag')
-    image_cover = models.ForeignKey('core.Image', on_delete=models.SET_NULL, null=True, related_name='product_cover')
-    images = models.ManyToManyField('core.Image')
+    price = models.PositiveBigIntegerField(null=True, blank=True)
+    categories = models.ManyToManyField('Category', blank=True)
+    tags = models.ManyToManyField('Tag', blank=True)
+    image_cover = models.ForeignKey('core.Image', on_delete=models.SET_NULL, null=True, blank=True,
+                                    related_name='product_cover')
+    images = models.ManyToManyField('core.Image', blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_OPTIONS, default='active')
+
+    objects = ProductManager()
 
     class Meta:
         ordering = '-id',
 
     def __str__(self):
         return self.title
+
+    def add_to_cart_url(self):
+        # TODO: must be completed
+        return ''
+
+    def add_to_wishlist_url(self):
+        # TODO: must be completed
+        return ''
 
     def get_price(self):
         return self.price
@@ -38,9 +71,16 @@ class Product(BaseModel):
         avg = round(avg, 1)
         return avg
 
+    def get_image_cover(self):
+        try:
+            return self.image_cover.image.url
+        except:
+            # TODO: must be completed
+            return '/static/images/logo.png'
+
 
 class Category(BaseModel):
-    type_name = models.CharField(max_length=100, null=True)
+    title = models.CharField(max_length=100, null=True)
     name = models.CharField(max_length=100)
 
     def __str__(self):

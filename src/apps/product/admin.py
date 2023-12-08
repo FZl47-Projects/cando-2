@@ -9,4 +9,11 @@ from . import models
 # admin.site.register(models.ShowCase)
 # admin.site.register(models.Factor)
 # admin.site.register(models.FactorPayment)
-# admin.site.register(models.ProductFavoriteList)
+
+
+admin.site.register(models.Product)
+admin.site.register(models.Category)
+admin.site.register(models.Tag)
+admin.site.register(models.DiscountCoupon)
+
+

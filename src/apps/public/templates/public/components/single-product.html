@@ -1,0 +1,29 @@
+
+    <article class="single_product">
+        <figure>
+            <div class="product_thumb">
+                <a href="{{ product.get_absolute_url }}"><img
+                        src="{{ product.get_image_cover }}"
+                        alt="{{ product.title }}" title="{{ product.title }}"></a>
+                <div class="action_links">
+                    <ul class="d-flex justify-content-center">
+                        <li class="add_to_cart"><a href="{{ product.add_to_cart_url }}" title="افزودن به سبد خرید">
+                            <span class="pe-7s-shopbag"></span></a></li>
+                        <li class="wishlist"><a href="{{ product.add_to_wishlist_url }}"
+                                                title="افزودن به لیست مورد علاقه ها"><span
+                                class="pe-7s-like"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <figcaption class="product_content text-center">
+                <p class="product__title"><a href="{{ product.get_absolute_url }}">{{ product.title|truncatechars:20 }}</a></p>
+                <div class="price_box">
+                    <span class="current_price">
+                        <span class="price-el">{{ product.price }}</span>
+                        <span class="price-label">تومان</span>
+                    </span>
+                </div>
+            </figcaption>
+        </figure>
+    </article>
