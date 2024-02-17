@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="769011da-9191-4737-9cb7-b11e03fe2413" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/template/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/template/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/base/components/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/components/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/settings/base.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +108,20 @@
       <workItem from="1701561064147" duration="69000" />
       <workItem from="1701646409162" duration="1496000" />
       <workItem from="1701702800974" duration="756000" />
-      <workItem from="1701709508871" duration="1694000" />
+      <workItem from="1701709508871" duration="1793000" />
+      <workItem from="1701731407402" duration="2067000" />
+      <workItem from="1701806455185" duration="125000" />
+      <workItem from="1702050814608" duration="7026000" />
+      <workItem from="1702125043901" duration="615000" />
+      <workItem from="1702210630733" duration="690000" />
+      <workItem from="1703775308494" duration="203000" />
+      <workItem from="1703843314893" duration="19000" />
+      <workItem from="1704524579862" duration="2985000" />
+      <workItem from="1704963166436" duration="587000" />
+      <workItem from="1707096164823" duration="3258000" />
+      <workItem from="1707160762994" duration="44000" />
+      <workItem from="1707807275698" duration="913000" />
+      <workItem from="1707815092009" duration="918000" />
     </task>
     <servers />
   </component>
