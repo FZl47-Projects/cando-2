@@ -2,10 +2,10 @@
   using Django 4.2.10
 """
 
-import os
 from django.utils.translation import gettext_lazy as _
-from pathlib import Path
 from dotenv import load_dotenv
+from pathlib import Path
+import os
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -99,14 +99,15 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGES = [
-    ("fa", _("Persian")),
+    ('fa', _('Persian')),
 ]
 
 LOCALE_PATHS = [
-    os.getenv('LOCALE_PATHS', BASE_DIR / 'locale'),
+    os.getenv('LOCALE_PATH', BASE_DIR / 'locale'),
+    os.getenv('DJANGO_Q_LOCALE_PATH', BASE_DIR / 'locale/django_q'),
 ]
 
-LANGUAGE_CODE = "fa-ir"
+LANGUAGE_CODE = 'fa-ir'
 
 TIME_ZONE = 'Asia/Tehran'
 
@@ -154,13 +155,13 @@ REDIS_CONFIG = {
 }
 
 RESET_PASSWORD_CONFIG = {
-    'TIMEOUT': 300,  # by sec
+    'TIMEOUT': 300,  # by seconds
     'CODE_LENGTH': 6,
     'STORE_BY': 'reset_password_phonenumber_{}'
 }
 
 CONFIRM_PHONENUMBER_CONFIG = {
-    'TIMEOUT': 300,  # by sec
+    'TIMEOUT': 300,  # by seconds
     'CODE_LENGTH': 6,
     'STORE_BY': 'confirm_phonenumber_{}'
 }

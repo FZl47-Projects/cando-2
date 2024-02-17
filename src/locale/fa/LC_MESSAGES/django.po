@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-17 15:30+0330\n"
+"POT-Creation-Date: 2024-02-17 20:12+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,122 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: .\apps\account\admin.py:19
+msgid "Permissions"
+msgstr "اجازه ها"
+
+#: .\apps\account\admin.py:20
+msgid "Dates"
+msgstr "تاریخ ها"
+
+#: .\apps\account\apps.py:8
+msgid "Account"
+msgstr "حساب کاربری"
+
+#: .\apps\account\enums.py:7
+msgid "Normal user"
+msgstr "کاربر عادی"
+
+#: .\apps\account\enums.py:8
+msgid "Operator user"
+msgstr "کاربر اپراتور"
+
+#: .\apps\account\enums.py:9
+msgid "Super user"
+msgstr "ادمین ویژه"
+
+#: .\apps\account\enums.py:14
+#: .\venv\Lib\site-packages\django\forms\widgets.py:794
+msgid "Unknown"
+msgstr "نامشخص"
+
+#: .\apps\account\enums.py:15
+msgid "Male"
+msgstr "مرد"
+
+#: .\apps\account\enums.py:16
+msgid "Female"
+msgstr "زن"
+
+#: .\apps\account\managers.py:13
+msgid "The phonenumber must be set"
+msgstr ""
+
+#: .\apps\account\managers.py:31
+msgid "Superuser must have is_staff=True."
+msgstr ""
+
+#: .\apps\account\managers.py:33
+msgid "Superuser must have is_superuser=True."
+msgstr ""
+
+#: .\apps\account\mixins.py:27
+msgid "You do not have permission to access this page!"
+msgstr ""
+
+#: .\apps\account\models.py:14
+msgid "First name"
+msgstr "نام"
+
+#: .\apps\account\models.py:14
+msgid "No name"
+msgstr "بدون نام"
+
+#: .\apps\account\models.py:17
+msgid "Phone number"
+msgstr "شماره تلفن"
+
+#: .\apps\account\models.py:18
+msgid "Is confirmed"
+msgstr "تایید شده"
+
+#: .\apps\account\models.py:19
+msgid "User role"
+msgstr "نقش کاربر"
+
+#: .\apps\account\models.py:30 .\apps\account\models.py:76
+msgid "User"
+msgstr "کاربر"
+
+#: .\apps\account\models.py:31
+msgid "Users"
+msgstr "کاربران"
+
+#: .\apps\account\models.py:77
+msgid "Melli code"
+msgstr "کد ملی"
+
+#: .\apps\account\models.py:78
+msgid "Gender"
+msgstr "جنسیت"
+
+#: .\apps\account\models.py:79
+msgid "Date of birth"
+msgstr "تاریخ تولد"
+
+#: .\apps\account\models.py:81
+msgid "Created at"
+msgstr "زمان ایجاد"
+
+#: .\apps\account\models.py:82
+msgid "Updated at"
+msgstr "زمان ویرایش"
+
+#: .\apps\account\models.py:85
+msgid "User profile"
+msgstr "پروفایل کاربر"
+
+#: .\apps\account\models.py:86
+msgid "User profiles"
+msgstr "پروفایل کاربران"
+
 #: .\config\settings\base.py:102
 msgid "Persian"
-msgstr ""
+msgstr "فارسی"
 
 #: .\venv\Lib\site-packages\django\contrib\messages\apps.py:15
 msgid "Messages"
-msgstr ""
+msgstr "پیام‌ها"
 
 #: .\venv\Lib\site-packages\django\contrib\sitemaps\apps.py:8
 msgid "Site Maps"
@@ -652,10 +761,6 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:465
 msgid "Change"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\widgets.py:794
-msgid "Unknown"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:795
