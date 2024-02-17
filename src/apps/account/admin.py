@@ -1,33 +1,42 @@
-from django.contrib import admin
+from django.utils.translation import gettext as _
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Group
+from django.contrib import admin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import User
 
 
+# Unregister Groups
+admin.site.unregister(Group)
+
+
+# Register Custom user admin
+@admin.register(User)
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
 
     model = User
 
-    list_display = ('phonenumber',  'is_active',
-                    'is_staff', 'is_superuser', 'last_login', 'role')
-    list_filter = ('is_active', 'is_staff', 'is_superuser', 'role', 'first_name', 'last_name')
+    list_display = ('get_phone_number',  'is_active', 'is_staff', 'is_superuser', 'is_phonenumber_confirmed', 'last_login', 'role')
+    list_filter = ('is_active', 'is_staff', 'is_superuser', 'role',)
     fieldsets = (
         (None, {'fields': ('phonenumber', 'password', 'role', 'first_name', 'last_name')}),
-        ('Permissions', {'fields': ('is_staff', 'is_active','is_phonenumber_confirmed',
-                                    'is_superuser', 'groups', 'user_permissions')}),
-        ('Dates', {'fields': ('last_login', 'date_joined')})
+        (_('Permissions'), {'fields': ('is_staff', 'is_active', 'is_superuser', 'is_phonenumber_confirmed', 'user_permissions')}),
+        (_('Dates'), {'fields': ('last_login', 'date_joined')})
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('phonenumber', 'password1', 'password2', 'is_staff', 'is_active',
-                       'is_phonenumber_confirmed', 'first_name', 'last_name')}
-         ),
+            'fields': (
+                'phonenumber', 'password1', 'password2', 'is_staff', 'is_active', 'is_phonenumber_confirmed', 'first_name', 'last_name'
+            )
+        }),
     )
     search_fields = ('phonenumber',)
     ordering = ('phonenumber',)
 
-
-admin.site.register(User, CustomUserAdmin)
+    @admin.display(description=_('Phone number'))
+    def get_phone_number(self, obj):
+        if obj.id:
+            return str(obj.phonenumber).replace('+98', '0')
