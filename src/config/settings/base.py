@@ -1,5 +1,5 @@
 """
-  using Django 4.1
+  using Django 4.2.10
 """
 
 import os
@@ -7,15 +7,18 @@ from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 from dotenv import load_dotenv
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 load_dotenv(BASE_DIR / '.env')
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+DEBUG = int(os.getenv('DEBUG', 1))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
+
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED', 'http://127.0.0.1').split(',')
 
 # Application definition
 
@@ -26,10 +29,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Third-party
+    # Third party modules
     'django_render_partial',
     'phonenumber_field',
     'django_q',
+
     # Apps
     'apps.public',
     'apps.core',
@@ -96,6 +100,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGES = [
     ("fa", _("Persian")),
+]
+
+LOCALE_PATHS = [
+    os.getenv('LOCALE_PATHS', BASE_DIR / 'locale'),
 ]
 
 LANGUAGE_CODE = "fa-ir"
