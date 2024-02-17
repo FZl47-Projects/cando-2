@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-17 20:12+0330\n"
+"POT-Creation-Date: 2024-02-17 23:05+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\apps\account\admin.py:19
+#: .\apps\account\admin.py:25
 msgid "Permissions"
 msgstr "اجازه ها"
 
-#: .\apps\account\admin.py:20
+#: .\apps\account\admin.py:26
 msgid "Dates"
 msgstr "تاریخ ها"
+
+#: .\apps\account\admin.py:39 .\apps\account\models.py:19
+msgid "Phone number"
+msgstr "شماره تلفن"
 
 #: .\apps\account\apps.py:8
 msgid "Account"
@@ -71,59 +75,59 @@ msgstr ""
 msgid "You do not have permission to access this page!"
 msgstr ""
 
-#: .\apps\account\models.py:14
+#: .\apps\account\models.py:16
 msgid "First name"
 msgstr "نام"
 
-#: .\apps\account\models.py:14
+#: .\apps\account\models.py:16
 msgid "No name"
 msgstr "بدون نام"
 
-#: .\apps\account\models.py:17
-msgid "Phone number"
-msgstr "شماره تلفن"
-
-#: .\apps\account\models.py:18
+#: .\apps\account\models.py:20
 msgid "Is confirmed"
 msgstr "تایید شده"
 
-#: .\apps\account\models.py:19
+#: .\apps\account\models.py:21
 msgid "User role"
 msgstr "نقش کاربر"
 
-#: .\apps\account\models.py:30 .\apps\account\models.py:76
+#: .\apps\account\models.py:32 .\apps\account\models.py:83
 msgid "User"
 msgstr "کاربر"
 
-#: .\apps\account\models.py:31
+#: .\apps\account\models.py:33
 msgid "Users"
 msgstr "کاربران"
 
-#: .\apps\account\models.py:77
+#: .\apps\account\models.py:84
 msgid "Melli code"
 msgstr "کد ملی"
 
-#: .\apps\account\models.py:78
+#: .\apps\account\models.py:85
 msgid "Gender"
 msgstr "جنسیت"
 
-#: .\apps\account\models.py:79
+#: .\apps\account\models.py:86
 msgid "Date of birth"
 msgstr "تاریخ تولد"
 
-#: .\apps\account\models.py:81
+#: .\apps\account\models.py:87
+msgid "Profile picture"
+msgstr "تصویر پروفایل"
+
+#: .\apps\account\models.py:89
 msgid "Created at"
 msgstr "زمان ایجاد"
 
-#: .\apps\account\models.py:82
+#: .\apps\account\models.py:90
 msgid "Updated at"
 msgstr "زمان ویرایش"
 
-#: .\apps\account\models.py:85
+#: .\apps\account\models.py:93
 msgid "User profile"
 msgstr "پروفایل کاربر"
 
-#: .\apps\account\models.py:86
+#: .\apps\account\models.py:94
 msgid "User profiles"
 msgstr "پروفایل کاربران"
 

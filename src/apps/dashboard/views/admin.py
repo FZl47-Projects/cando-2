@@ -1,9 +1,7 @@
-from django.shortcuts import render, HttpResponse
-from django.views import View
+from django.views.generic import View, TemplateView, DetailView
 from apps.core.auth.mixins import LoginRequiredMixinCustom
 
 
-class Index(LoginRequiredMixinCustom, View):
-
-    def get(self, request):
-        return HttpResponse('Dashboard')
+# Render AdminDashboard view
+class AdminDashboardView(LoginRequiredMixinCustom, TemplateView):
+    template_name = 'dashboard/admin/index.html'

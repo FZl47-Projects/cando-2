@@ -1,11 +1,11 @@
 {% load static %}
+
 <!doctype html>
 <html lang="fa" dir="ltr" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-
 
     <meta name="description" content="شیرینی سرای کندو"/>
     {# TODO: should be completed #}
@@ -26,11 +26,7 @@
     <link rel="icon" type="image/x-icon" href="{% static 'images/logo.png' %}">
     <meta name="msapplication-TileImage" content="---"/>
 
-    <title>
-        {% block Title %}
-
-        {% endblock %}
-    </title>
+    <title>{% block Title %}{% endblock %}</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'fonts/fontawesome/css/all.css' %}" />
@@ -50,7 +46,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vazir-font/28.0.0/font-face.css"/>
 
     <!-- JS -->
-
     <script src="{% static 'template/js/vendor/modernizr-3.11.2.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
@@ -69,59 +64,57 @@
 
     {% block Style %}
     {% endblock %}
-
 </head>
+
 <body>
 {% block Content %}
-
 {% endblock %}
 
-<script src="{% static 'scripts/urls.js' %}"></script>
-<script src="{% static 'scripts/notify.js' %}"></script>
-<script src="{% static 'scripts/base.js' %}"></script>
+    <script src="{% static 'scripts/urls.js' %}"></script>
+    <script src="{% static 'scripts/notify.js' %}"></script>
+    <script src="{% static 'scripts/base.js' %}"></script>
+    <script>
+        window.CSRF_TOKEN = '{{ csrf_token }}'
+        {% for message in messages %}
+            createNotify({
+                title: '{{ message.tags }}' === 'success' ? 'موفق' : 'خطا',
+                message: '{{ message }}',
+                theme: '{{ message.tags }}'
+            })
+        {% endfor %}
+    </script>
 
-<script>
-    window.CSRF_TOKEN = '{{ csrf_token }}'
-    {% for message in messages %}
-        createNotify({
-            title: '{{ message.tags }}' == 'success' ? 'موفق' : 'خطا',
-            message: '{{ message }}',
-            theme: '{{ message.tags }}'
-        })
-    {% endfor %}
-</script>
+    <script src="{% static 'template/js/vendor/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'template/js/vendor/jquery-migrate-3.3.2.min.js' %}"></script>
+    <script src="{% static 'template/js/vendor/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'template/js/slick.min.js' %}"></script>
+    {#<script src="{% static 'template/js/owl.carousel.min.js' %}"></script>#}
+    <script src="{% static 'template/js/wow.min.js' %}"></script>
+    <script src="{% static 'template/js/jquery.scrollup.min.js' %}"></script>
+    <script src="{% static 'template/js/jquery.nice-select.js' %}"></script>
+    <script src="{% static 'template/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'template/js/mailchimp-ajax.js' %}"></script>
+    <script src="{% static 'template/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'template/js/jquery.zoom.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
-<script src="{% static 'template/js/vendor/jquery-3.6.0.min.js' %}"></script>
-<script src="{% static 'template/js/vendor/jquery-migrate-3.3.2.min.js' %}"></script>
-<script src="{% static 'template/js/vendor/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'template/js/slick.min.js' %}"></script>
-{#<script src="{% static 'template/js/owl.carousel.min.js' %}"></script>#}
-<script src="{% static 'template/js/wow.min.js' %}"></script>
-<script src="{% static 'template/js/jquery.scrollup.min.js' %}"></script>
-<script src="{% static 'template/js/jquery.nice-select.js' %}"></script>
-<script src="{% static 'template/js/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'template/js/mailchimp-ajax.js' %}"></script>
-<script src="{% static 'template/js/jquery-ui.min.js' %}"></script>
-<script src="{% static 'template/js/jquery.zoom.min.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <!-- Main JS -->
+    <script src="{% static 'template/js/main.js' %}"></script>
 
-<!-- Main JS -->
-<script src="{% static 'template/js/main.js' %}"></script>
+    <script>
+        {% for message in messages %}
+            createNotify({
+                title: '{{ message.tags }}' == 'success' ? 'موفق' : 'ارور',
+                message: '{{ message }}',
+                theme: '{{ message.tags }}'
+            })
+        {% endfor %}
+    </script>
+    {% block Script %}
+    {% endblock %}
 
-<script>
-    {% for message in messages %}
-        createNotify({
-            title: '{{ message.tags }}' == 'success' ? 'موفق' : 'ارور',
-            message: '{{ message }}',
-            theme: '{{ message.tags }}'
-        })
-    {% endfor %}
-</script>
-{% block Script %}
-{% endblock %}
-
-{% block Js %}
-{% endblock %}
+    {% block Js %}
+    {% endblock %}
 </body>
 
 </html>

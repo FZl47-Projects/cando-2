@@ -48,7 +48,7 @@ def login_register(request):
         if next_url:
             return redirect(next_url)
 
-        return redirect('dashboard:index')
+        return redirect('public:home')
 
     def register_perform(data):
         form = forms.RegisterUserForm(data=data)

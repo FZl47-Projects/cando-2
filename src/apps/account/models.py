@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext as _
+from django.templatetags.static import static
+from django.shortcuts import reverse
 from django.conf import settings
 from django.db import models
 from . import managers
@@ -68,6 +70,11 @@ class User(AbstractUser):
             return self.last_login.strftime('%Y-%m-%d %H:%M:%S')
         return '-'
 
+    def get_dashboard_url(self):
+        if self.role in settings.ADMIN_USER_ROLES:
+            return reverse('dashboard:admin')
+        return reverse('dashboard:user')
+
 
 # Users' Profile model
 class UserProfile(models.Model):
@@ -77,6 +84,7 @@ class UserProfile(models.Model):
     melli_code = models.CharField(_('Melli code'), max_length=10, null=True, blank=True)
     gender = models.CharField(_('Gender'), max_length=16, choices=Genders.choices, default=Genders.UNKNOWN)
     date_of_birth = models.DateField(_('Date of birth'), null=True, blank=True)
+    image = models.ImageField(_('Profile picture'), upload_to='images/profiles/', null=True, blank=True)
 
     created_at = models.DateTimeField(_('Created at'), auto_now_add=True)
     updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
@@ -88,3 +96,11 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f'{self.user.get_raw_phonenumber()}'
+
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        return static('images/user-default.png')
+
+    def get_gender_label(self):
+        return self.get_gender_display()

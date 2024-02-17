@@ -7,9 +7,9 @@ urlpatterns = [
     path('', include('apps.public.urls', namespace='public')),
     path('', include('apps.product.urls', namespace='product')),
     path('', include('apps.notification.urls', namespace='notification')),
-    path('d/', include('apps.dashboard.urls', namespace='dashboard')),
+    path('dashboard/', include('apps.dashboard.urls', namespace='dashboard')),
     path('u/', include('apps.account.urls', namespace='account')),
-    path('dj-admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
 ]
 
 
