@@ -55,12 +55,12 @@ class User(AbstractUser):
         p = str(self.phonenumber).replace('+98', '')
         return p
 
-    def get_full_name(self):
-        fl = f'{self.first_name} {self.last_name}'.strip() or 'بدون نام'
-        return fl
+    def get_phone_number(self):
+        return str(self.phonenumber).replace('+98', '0')
 
-    def get_email(self):
-        return self.email or '-'
+    def get_full_name(self):
+        fl = f'{self.first_name} {self.last_name}'.strip() or _('No name')
+        return fl
 
     def get_image_url(self):
         return '/static/images/dashboard/client_img.png'
@@ -71,7 +71,7 @@ class User(AbstractUser):
         return '-'
 
     def get_dashboard_url(self):
-        if self.role in settings.ADMIN_USER_ROLES:
+        if self.is_admin:
             return reverse('dashboard:admin')
         return reverse('dashboard:user')
 

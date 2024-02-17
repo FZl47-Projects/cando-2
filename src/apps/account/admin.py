@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
 from django.contrib import admin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import User
+from .models import User, UserProfile
 
 
 # Unregister Groups
@@ -40,3 +40,17 @@ class CustomUserAdmin(UserAdmin):
     def get_phone_number(self, obj):
         if obj.id:
             return str(obj.phonenumber).replace('+98', '0')
+
+
+# Register UserProfile admin
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ['id', 'get_phone_number', 'gender', 'melli_code']
+    list_display_links = ['id', 'get_phone_number']
+    list_filter = ['gender']
+    search_fields = ['user__phonenumber']
+
+    @admin.display(description=_('Phone number'))
+    def get_phone_number(self, obj):
+        if obj.id:
+            return str(obj.user.phonenumber).replace('+98', '0')
