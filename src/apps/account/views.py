@@ -1,22 +1,23 @@
-import json
-from django.contrib import messages
-from django.conf import settings
-from django.db.models import Value, Q
-from django.db.models.functions import Concat
-from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponseBadRequest, Http404, HttpResponse
-from django.views.decorators.http import require_POST
-from django.views.generic import View
-from django.core import serializers
-from django.core.paginator import Paginator
+from django.contrib.auth import authenticate, login, get_user_model
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import authenticate, login, get_user_model, logout as logout_handler
-from apps.core.auth.mixins import LoginRequiredMixinCustom
+from django.views.decorators.http import require_POST
+from django.db.models.functions import Concat
+from django.core.paginator import Paginator
+from django.db.models import Value, Q
+from django.views.generic import View
+from django.contrib import messages
+from django.core import serializers
+from django.conf import settings
+
 from apps.core.utils import add_prefix_phonenum, random_num, form_validate_err
-from apps.core.auth.decorators import admin_required_cbv
 from apps.core.redis_py import set_value_expire, remove_key, get_value
+from apps.core.auth.mixins import LoginRequiredMixinCustom
+from apps.core.auth.decorators import admin_required_cbv
 from apps.notification.models import NotificationUser
 from apps.account import forms
+import json
 
 User = get_user_model()
 RESET_PASSWORD_CONFIG = settings.RESET_PASSWORD_CONFIG
@@ -27,43 +28,50 @@ def login_register(request):
     def login_perform(data):
         phonenumber = data.get('phonenumber', None)
         password = data.get('password', None)
+
         if not (phonenumber or password):
             messages.error(request, 'لطفا فیلد هارا به درستی وارد نمایید')
             return redirect('account:login_register')
+
+        # Authenticate user
         phonenumber = add_prefix_phonenum(phonenumber)
         user = authenticate(request, username=phonenumber, password=password)
+
         if user is None:
-            messages.error(request, 'کاربری با این مشخصات یافت نشد یا حساب غیر فعال میباشد')
+            messages.error(request, 'کاربری با این مشخصات یافت نشد!')
             return redirect('account:login_register')
-        if user.is_active is False:
+        elif user.is_active is False:
             messages.error(request, 'حساب شما غیر فعال میباشد')
             return redirect('account:login_register')
+
+        # Login user
         login(request, user)
         messages.success(request, 'خوش امدید')
-        # redirect to url or dashboard
+
+        # Redirect to url or dashboard
         next_url = request.GET.get('next')
-        try:
-            # maybe next url not valid
-            if next_url:
-                return redirect(next_url)
-        except:
-            pass
+        if next_url:
+            return redirect(next_url)
+
         return redirect('dashboard:index')
 
     def register_perform(data):
-        f = forms.RegisterUserForm(data=data)
-        if f.is_valid() is False:
+        form = forms.RegisterUserForm(data=data)
+        if form.is_valid() is False:
             messages.error(request, 'لطفا فیلد هارا به درستی وارد نمایید')
             return redirect('account:login_register')
-        # check for exists normal_user
-        phonenumber = f.cleaned_data['phonenumber']
-        first_name = f.cleaned_data['first_name']
-        last_name = f.cleaned_data['last_name']
+
+        phonenumber = form.cleaned_data['phonenumber']
+        first_name = form.cleaned_data['first_name']
+        last_name = form.cleaned_data['last_name']
+
+        # Check for exists normal_user
         if User.objects.filter(phonenumber=phonenumber).exists():
             messages.error(request, 'کاربری با این شماره از قبل ثبت شده است')
             return redirect('account:login_register')
-        # create user
-        password = f.cleaned_data['password2']
+
+        # Create user
+        password = form.cleaned_data['password2']
         user = User(
             phonenumber=phonenumber,
             first_name=first_name,
@@ -72,9 +80,11 @@ def login_register(request):
         )
         user.set_password(password)
         user.save()
-        # login
+
+        # Login user
         login(request, user)
         messages.success(request, 'حساب شما با موفقیت ایجاد شد پس از تایید شماره همراه حساب شما فعال میشود')
+
         return redirect('account:confirm_phonenumber')
 
     if request.method == 'GET':
@@ -83,17 +93,11 @@ def login_register(request):
     elif request.method == 'POST':
         data = request.POST
         type_page = data.get('type-page', 'login')
+
         if type_page == 'login':
             return login_perform(data)
         elif type_page == 'register':
             return register_perform(data)
-
-
-class Logout(View):
-
-    def get(self, request):
-        logout_handler(request)
-        return redirect('public:home')
 
 
 def reset_password(request):
@@ -199,7 +203,7 @@ def reset_password_set(request):
     return JsonResponse({})
 
 
-class ConfirmPhonenumber(LoginRequiredMixin, View):
+class ConfirmPhoneNumber(LoginRequiredMixin, View):
     template_name = 'account/confirm-phonenumber.html'
 
     def get(self, request):
@@ -237,7 +241,7 @@ class ConfirmPhonenumber(LoginRequiredMixin, View):
         return JsonResponse({})
 
 
-class ConfirmPhonenumberCheckCode(LoginRequiredMixin, View):
+class ConfirmPhoneNumberCheckCode(LoginRequiredMixin, View):
 
     def post(self, request):
         # AJAX view
@@ -280,42 +284,6 @@ class DashboardInfoChangePassword(LoginRequiredMixinCustom, View):
 
     def get(self, request):
         return render(request, 'account/dashboard/information/change-password.html')
-
-
-# class UserAdd(View):
-#     template_name = 'account/dashboard/user/add.html'
-
-#     @admin_required_cbv()
-#     def get(self, request):
-#         context = {
-#             'buildings':Building.objects.filter(is_active=True)
-#         }
-#         return render(request, self.template_name,context)
-
-#     @admin_required_cbv()
-#     def post(self, request):
-#         data = request.POST
-#         f = forms.RegisterUserFullForm(data=data)
-#         if form_validate_err(request, f) is False:
-#             return render(request, self.template_name)
-#         # create user
-#         user = f.save()
-#         user.is_active = True
-#         user.set_password(f.cleaned_data['password2'])
-#         user.save()
-#         # create notif for admin
-#         NotificationUser.objects.create(
-#             type='CREATE_USER_BY_ADMIN',
-#             to_user=request.user,
-#             title='ایجاد کاربر توسط ادمین',
-#             description=f"""
-#                     کاربر {user.phonenumber}
-#                     ایجاد شد
-#                 """,
-#             is_showing=False
-#         )
-#         messages.success(request, 'حساب کاربر با موفقیت ایجاد شد')
-#         return redirect(user.get_absolute_url())
 
 
 class UserAdd(View):
@@ -495,6 +463,5 @@ class UserListComponentPartial(View):
             raise Http404
         users = User.normal_user.all()
         users = search(request, users)
-        users_serialized = serializers.serialize('json', users,
-                                                 fields=('id', 'first_name', 'last_name', 'email', 'phonenumber'))
+        users_serialized = serializers.serialize('json', users, fields=('id', 'first_name', 'last_name', 'email', 'phonenumber'))
         return JsonResponse(users_serialized, safe=False)

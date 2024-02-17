@@ -54,7 +54,7 @@
         }
 
         .forms header {
-            font-family: "KalamehBlack";
+            font-family: "KalamehBlack", sans-serif;
             font-size: 39px;
             font-weight: 600;
             color: #232836;
@@ -163,15 +163,17 @@
 
 {% block Content %}
     {% include 'base/components/header.html' %}
-    <section class="breadcrumb">
+    <ul class="breadcrumb">
         <li>
             <a href="{% url 'public:home' %}">خانه</a>
         </li>
-        <li>حساب کاربری</li>
+        <li>
+            حساب کاربری
+        </li>
         <li>
             <a href="">ایجاد حساب - ورود</a>
         </li>
-    </section>
+    </ul>
     <section class="container forms">
         <div class="form form-effect login">
             <div class="form-content">
@@ -183,23 +185,21 @@
                         <input type="tel" placeholder="شماره همراه" class="input" maxlength="14" name="phonenumber"
                                required>
                     </div>
-
                     <div class="field input-field">
                         <input type="password" placeholder="رمز عبور" class="password" name="password" required>
                         <i class='bx bx-hide eye-icon'></i>
                     </div>
-
                     <div class="form-link">
-                        <a href="{% url 'account:reset_password' %}" class="forgot-pass">رمز خودرا فراموش کرده اید ؟</a>
+                        <a href="{% url 'account:reset_password' %}" class="forgot-pass">رمز خود را فراموش کرده اید ؟</a>
                     </div>
 
                     <div class="field button-field">
-                        <button>Login</button>
+                        <button>ورود</button>
                     </div>
                 </form>
 
                 <div class="form-link">
-                    <span>حسابی ندارید ؟ <a href="#" class="link signup-link">ایجاد حساب</a></span>
+                    <span>حسابی ندارید؟ <a href="#" class="link signup-link">ایجاد حساب</a></span>
                 </div>
             </div>
         </div>
@@ -224,19 +224,18 @@
                     <div class="field input-field">
                         <input type="password" placeholder="رمز عبور" class="password" name="password" required>
                     </div>
-
                     <div class="field input-field">
                         <input type="password" placeholder="تایید رمز عبور" class="password" name="password2" required>
                         <i class='bx bx-hide eye-icon'></i>
                     </div>
 
                     <div class="field button-field">
-                        <button>Signup</button>
+                        <button>ثبت نام</button>
                     </div>
                 </form>
 
                 <div class="form-link">
-                    <span>حسابی دارید ؟ <a href="#" class="link login-link">وارد شوید</a></span>
+                    <span>حسابی دارید؟ <a href="#" class="link login-link">وارد شوید</a></span>
                 </div>
             </div>
         </div>
