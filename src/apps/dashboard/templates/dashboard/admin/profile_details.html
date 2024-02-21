@@ -1,4 +1,5 @@
 {% extends 'dashboard/base_admin.html' %}
+{% load filters %}
 {% load static %}
 
 
@@ -37,7 +38,7 @@
                                         <div class="card card-bordered">
                                             <ul class="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
                                                 <li class="nav-item">
-                                                    <a class="nav-link {% if request.resolver_match.url_name == 'admin_profile_details' %}active{% endif %}"
+                                                    <a class="nav-link active"
                                                        href="{% url 'dashboard:admin_profile_details' %}">
                                                         <em class="icon ni ni-user-fill-c"></em>
                                                         <span>شخصی</span>
@@ -50,7 +51,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" href="#">
+                                                    <a class="nav-link" href="{% url 'dashboard:admin_profile_settings' %}">
                                                         <em class="icon ni ni-lock-alt-fill"></em>
                                                         <span>تنظیمات امنیتی</span>
                                                     </a>
@@ -118,7 +119,24 @@
                                                              data-bs-target="#profile-edit">
                                                             <div class="data-col">
                                                                 <span class="data-label">تاریخ تولد</span>
-                                                                <span class="data-value">{{ user.profile.get_date_of_birth|default:'ثبت نشده' }}</span>
+                                                                <span class="data-value">
+                                                                    {{ user.profile.get_date_of_birth|convert_date|date:'Y/m/d'|default:'ثبت نشده' }}
+                                                                </span>
+                                                            </div>
+                                                            <div class="data-col data-col-end">
+                                                                <span class="data-more">
+                                                                    <em class="icon ni ni-forward-ios"></em>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item" data-bs-toggle="modal"
+                                                             data-bs-target="#profile-edit">
+                                                            <div class="data-col">
+                                                                <span class="data-label">جنسیت</span>
+                                                                <span class="data-value">
+                                                                    {{ user.profile.get_gender_label }}
+                                                                </span>
                                                             </div>
                                                             <div class="data-col data-col-end">
                                                                 <span class="data-more">
@@ -189,21 +207,21 @@
                             </li>
                         </ul>
                         <!-- .nav-tabs -->
-                        <form method="post" action="" class="tab-content">
+                        <form method="post" action="" enctype="multipart/form-data" class="tab-content">
                             {% csrf_token %}
                             <div class="tab-pane active" id="personal">
                                 <div class="row gy-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="full-name">نام</label>
-                                            <input type="text" class="form-control form-control-lg" id="full-name" name="first_name"
+                                            <label class="form-label" for="first-name">نام</label>
+                                            <input type="text" class="form-control form-control-lg" id="first-name" name="first_name"
                                                    value="{{ user.first_name|default:'' }}" placeholder="نام کامل خود را وارد کنید"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label" for="display-name">نام خانوادگی</label>
-                                            <input type="text" class="form-control form-control-lg" id="display-name" name="last_name"
+                                            <label class="form-label" for="last-name">نام خانوادگی</label>
+                                            <input type="text" class="form-control form-control-lg" id="last-name" name="last_name"
                                                    value="{{ user.last_name|default:'' }}" placeholder="نام نمایشی خود را وارد کنید">
                                         </div>
                                     </div>
@@ -218,7 +236,47 @@
                                         <div class="form-group">
                                             <label class="form-label" for="birth-day">تاریخ تولد</label>
                                             <input type="text" class="form-control form-control-lg date-picker" id="birth-day" name="date_of_birth"
-                                                   placeholder="روز/ماه/سال" data-date-format="yyyy-mm-dd" readonly value="{{ user.profile.date_of_birth|date:'Y-m-d'|default:'' }}">
+                                                   placeholder="روز/ماه/سال" data-date-format="yyyy-mm-dd"
+                                                   readonly value="{{ user.profile.get_date_of_birth|convert_date }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="gender-1">جنسیت</label>
+                                            <ul class="custom-control-group g-3 align-center flex-wrap">
+                                                <li>
+                                                    <div class="custom-control custom-radio checked">
+                                                        <input type="radio" class="custom-control-input" {% if user.profile.gender == 'male' %}checked{% endif %}
+                                                               name="gender" id="gender-1" value="male">
+                                                        <label class="custom-control-label" for="gender-1">مرد</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" {% if user.profile.gender == 'female' %}checked{% endif %}
+                                                               name="gender" id="gender-2" value="female">
+                                                        <label class="custom-control-label" for="gender-2">زن</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" {% if user.profile.gender == 'unknown' %}checked{% endif %}
+                                                               name="gender" id="gender-3" value="unknown">
+                                                        <label class="custom-control-label" for="gender-3">نامشخص</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="profile-image">تصویر پروفایل</label>
+                                            <div class="form-control-wrap">
+                                                <div class="form-file">
+                                                    <input type="file" accept="image/jpeg, image/png" class="form-file-input" name="image" id="profile-image">
+                                                    <label class="form-file-label small" for="profile-image">انتخاب فایل</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12">

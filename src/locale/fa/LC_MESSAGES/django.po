@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-21 16:10+0330\n"
+"POT-Creation-Date: 2024-02-21 21:21+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,6 +59,10 @@ msgstr "مرد"
 #: .\apps\account\enums.py:16
 msgid "Female"
 msgstr "زن"
+
+#: .\apps\account\forms.py:131
+msgid "Enter a valid phone number"
+msgstr "یک شماره تلفن معتبر وارد کنید"
 
 #: .\apps\account\managers.py:13
 msgid "The phonenumber must be set"
@@ -132,11 +136,15 @@ msgstr "پروفایل کاربر"
 msgid "User profiles"
 msgstr "پروفایل کاربران"
 
-#: .\apps\dashboard\forms.py:24
-msgid "Enter a valid phone number"
-msgstr "یک شماره تلفن معتبر وارد کنید"
+#: .\apps\account\views.py:296
+msgid "Password is not correct"
+msgstr "رمز عبور صحیح نیست!"
 
-#: .\apps\dashboard\views\admin.py:24
+#: .\apps\account\views.py:303
+msgid "Password successfully changed"
+msgstr "رمز عبور با موفقیت تغییر کرد"
+
+#: .\apps\dashboard\views\admin.py:25
 msgid "Profile update success"
 msgstr "پروفایل با موفقیت بروزرسانی شد"
 

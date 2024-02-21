@@ -1,0 +1,214 @@
+{% extends 'dashboard/base_admin.html' %}
+{% load static %}
+
+
+{% block Title %}کندو | پروفایل{% endblock %}
+
+{% block content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                <!-- main header @e -->
+                {% include 'dashboard/admin/components/header.html' %}
+                <!-- main header @e -->
+
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            <!-- Start aside -->
+                            {% include 'dashboard/admin/components/aside_menu.html' %}
+                            <!-- .End aside -->
+
+                            <!-- Start main body -->
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head">
+                                        <div class="nk-block-head-content">
+                                            <h3 class="nk-block-title page-title">پروفایل من</h3>
+                                            <div class="nk-block-des">
+                                                <p>شما کنترل کاملی برای مدیریت تنظیمات حساب کاربری خود دارید.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered">
+                                            <ul class="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="{% url 'dashboard:admin_profile_details' %}">
+                                                        <em class="icon ni ni-user-fill-c"></em>
+                                                        <span>شخصی</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#">
+                                                        <em class="icon ni ni-bell-fill"></em>
+                                                        <span>اطلاع رسانی ها</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" href="{% url 'dashboard:admin_profile_settings' %}">
+                                                        <em class="icon ni ni-lock-alt-fill"></em>
+                                                        <span>تنظیمات امنیتی</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <!-- .nav-tabs -->
+                                            <div class="card-inner card-inner-lg">
+                                                <div class="nk-block-head">
+                                                    <div class="nk-block-head-content">
+                                                        <h4 class="nk-block-title">تنظیمات امنیتی</h4>
+                                                        <div class="nk-block-des">
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- .nk-block-head -->
+                                                <div class="nk-block">
+                                                    <div class="card">
+                                                        <div class="card-inner-group">
+                                                            <div class="card-inner px-0">
+                                                                <div class="between-center flex-wrap g-3">
+                                                                    <div class="nk-block-text">
+                                                                        <h6>تغییر رمز عبور</h6>
+                                                                        <p>یک رمز عبور منحصر به فرد برای محافظت از حساب خود تنظیم کنید.</p>
+                                                                    </div>
+                                                                    <div class="nk-block-actions flex-shrink-sm-0">
+                                                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-3 gy-2">
+                                                                            <li class="order-md-last">
+                                                                                <button type="button" data-bs-toggle="modal" data-bs-target="#password-edit"
+                                                                                        class="btn btn-primary">
+                                                                                    تغییر رمز عبور
+                                                                                </button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .card-inner -->
+                                                        </div>
+                                                        <!-- .card-inner-group -->
+                                                    </div>
+                                                    <!-- .card -->
+                                                </div>
+                                                <!-- .nk-block -->
+                                            </div>
+                                            <!-- .card-inner -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+
+                                <!-- footer @s -->
+                                <div class="nk-footer">
+                                    <div class="container wide-xl">
+                                        <div class="nk-footer-wrap g-2">
+                                            <div class="nk-footer-copyright">© تمام حقوق محفوظ است.
+                                                <a target="_blank" rel="nofollow" href="#">شیرینی سرای کندو</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- footer @e -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+
+        <!-- @@ Profile Edit Modal @e -->
+        <div class="modal fade" role="dialog" id="password-edit">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-bs-dismiss="modal">
+                        <em class="icon ni ni-cross-sm"></em>
+                    </a>
+                    <div class="modal-body modal-body-lg">
+                        <h5 class="title">تغییر رمز عبور</h5>
+                        <!-- .nav-tabs -->
+                        <form method="post" action="{% url 'account:change_password' %}" class="tab-content">
+                            {% csrf_token %}
+                            <div class="tab-pane active" id="personal">
+                                <div class="row gy-4">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="password">رمز عبور</label>
+                                            <div class="form-control-wrap pass-toggle">
+                                                <div role="button" class="form-icon form-icon-right">
+                                                    <em class="icon ni ni-eye"></em>
+                                                </div>
+                                                <input type="password" class="form-control form-control-lg" id="password" name="password"
+                                                   placeholder="رمز عبور فعلی" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="password2">رمز عبور جدید</label>
+                                            <div class="form-control-wrap pass-toggle">
+                                                <div role="button" class="form-icon form-icon-right">
+                                                    <em class="icon ni ni-eye"></em>
+                                                </div>
+                                                <input type="password" class="form-control form-control-lg" id="password2" name="password2"
+                                                   placeholder="رمز عبور جدید" minlength="4" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                            <li>
+                                                <button type="submit" class="btn btn-lg btn-primary">
+                                                    تغییر رمز عبور
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-bs-dismiss="modal" class="link link-light">لغو</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .tab-pane -->
+                        </form>
+                        <!-- .tab-content -->
+                    </div>
+                    <!-- .modal-body -->
+                </div>
+                <!-- .modal-content -->
+            </div>
+            <!-- .modal-dialog -->
+        </div>
+        <!-- .modal -->
+    </div>
+    <!-- app-root @e -->
+{% endblock %}
+
+{% block Script %}
+    <script>
+        // Toggle passwords input to text and reverse
+        const passToggles = document.querySelectorAll('.pass-toggle');
+        passToggles.forEach((item, index) => {
+            let icon = item.querySelector('.icon');
+            let input = item.querySelector('input[type=password]');
+
+            icon.addEventListener('click', function (e){
+                if(input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.replace('ni-eye', 'ni-eye-off');
+                }
+                else {
+                    input.type ='password';
+                    icon.classList.replace('ni-eye-off', 'ni-eye');
+                }
+            })
+        })
+    </script>
+{% endblock %}
