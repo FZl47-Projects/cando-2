@@ -5,8 +5,12 @@ from .views import admin, user
 app_name = 'apps.dashboard'
 
 urlpatterns = [
+    # Admin dashboard url
     path('admin/', admin.AdminDashboardView.as_view(), name='admin'),
     path('admin/profile/', admin.AdminProfileView.as_view(), name='admin_profile_details'),
     path('admin/profile/settings/', admin.AdminProfileSettingsView.as_view(), name='admin_profile_settings'),
+    path('admin/users/list/', admin.UsersListView.as_view(), name='admin_users_list'),
+
+    # User dashboard urls
     path('', user.Index.as_view(), name='user'),
 ]

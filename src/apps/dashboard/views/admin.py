@@ -1,10 +1,11 @@
-from django.views.generic import View, TemplateView, DetailView
+from django.views.generic import View, TemplateView, DetailView, ListView
 from django.utils.translation import gettext as _
 from django.shortcuts import redirect
 from django.contrib import messages
 
 from apps.core.auth.mixins import AdminRequiredMixin
 from apps.core.utils import form_validate_err
+from apps.account.models import User
 from apps.account import forms
 
 
@@ -30,3 +31,10 @@ class AdminProfileView(AdminRequiredMixin, TemplateView):
 # Render AdminProfileSettings view
 class AdminProfileSettingsView(AdminRequiredMixin, TemplateView):
     template_name = 'dashboard/admin/profile_settings.html'
+
+
+# Render UsersList view
+class UsersListView(AdminRequiredMixin, ListView):
+    template_name = 'dashboard/admin/users_list.html'
+    model = User
+    paginate_by = 40
