@@ -19,4 +19,6 @@ urlpatterns = [
     path('reset-password/send-code/', views.reset_password_send, name='reset_password_send_code'),
     path('reset-password/check-code/', views.reset_password_check, name='reset_password_check_code'),
     path('reset-password/set/', views.reset_password_set, name='reset_password_set'),
+
+    path('password/change/', views.UpdatePasswordView.as_view(), name='change_password'),
 ]

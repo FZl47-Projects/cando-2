@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, get_user_model
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.http import require_POST
+from django.utils.translation import gettext as _
 from django.views.generic import View
 from django.contrib import messages
 from django.conf import settings
@@ -279,3 +280,25 @@ class DashboardInfoChangePassword(LoginRequiredMixinCustom, View):
 
     def get(self, request):
         return render(request, 'account/dashboard/information/change-password.html')
+
+
+# UpdatePassword view
+class UpdatePasswordView(LoginRequiredMixinCustom, View):
+    def get_referer_url(self, request):
+        referer_url = request.META.get('HTTP_REFERER')
+        return referer_url
+
+    def post(self, request):
+        user = request.user
+        password = request.POST.get('password')
+
+        if not user.check_password(password):
+            messages.error(request, _('Password is not correct'))
+            return redirect(self.get_referer_url(request) or '/')
+
+        password2 = request.POST.get('password2')
+        user.set_password(password2)
+        user.save()
+
+        messages.success(request, _('Password successfully changed'))
+        return redirect(self.get_referer_url(request) or '/')

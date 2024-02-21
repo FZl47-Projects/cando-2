@@ -1,5 +1,13 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.utils.translation import gettext as _
+from django.core.exceptions import ValidationError
 from django import forms
+
+from apps.core.utils import check_phone_number, add_prefix_phonenum
+from apps.account.models import UserProfile
+from persiantools.jdatetime import JalaliDate
+
+
 from phonenumber_field.formfields import PhoneNumberField
 from .models import User
 
@@ -94,3 +102,43 @@ class UpdateUserPassword(forms.Form):
         if p1 != p2:
             raise forms.ValidationError('رمز های عبور وارد شده با یکدیگر مغایرت دارند')
         return p2
+
+
+# UpdateProfile form
+class UpdateProfileForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=128, widget=forms.TextInput)
+    last_name = forms.CharField(max_length=128, widget=forms.TextInput)
+    phonenumber = forms.CharField(max_length=13, widget=forms.TextInput)
+
+    class Meta:
+        model = UserProfile
+        fields = ['date_of_birth', 'gender', 'image']
+
+    def clean_date_of_birth(self):
+        date_of_birth = self.cleaned_data.get('date_of_birth')
+
+        # Convert jalali date to iso format
+        if date_of_birth:
+            date_of_birth = JalaliDate.to_gregorian(date_of_birth).isoformat()
+
+        return date_of_birth
+
+    def clean(self):
+        phone_number = self.cleaned_data.get('phonenumber')
+
+        # Validate phone number
+        if not check_phone_number(phone_number):
+            raise ValidationError(_('Enter a valid phone number'), code='BAD-PHONE-NUMBER')
+
+    def save(self, commit=True):
+        profile = super().save(commit)
+        user = profile.user
+
+        # Update user data
+        user.phonenumber = add_prefix_phonenum(self.cleaned_data.get('phonenumber'))
+        user.first_name = self.cleaned_data.get('first_name')
+        user.last_name = self.cleaned_data.get('last_name')
+        user.save()
+
+        profile.save()
+        return profile
