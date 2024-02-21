@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-17 23:05+0330\n"
+"POT-Creation-Date: 2024-02-21 16:10+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,8 @@ msgstr "اجازه ها"
 msgid "Dates"
 msgstr "تاریخ ها"
 
-#: .\apps\account\admin.py:39 .\apps\account\models.py:19
+#: .\apps\account\admin.py:39 .\apps\account\admin.py:53
+#: .\apps\account\models.py:19
 msgid "Phone number"
 msgstr "شماره تلفن"
 
@@ -79,7 +80,7 @@ msgstr ""
 msgid "First name"
 msgstr "نام"
 
-#: .\apps\account\models.py:16
+#: .\apps\account\models.py:16 .\apps\account\models.py:62
 msgid "No name"
 msgstr "بدون نام"
 
@@ -130,6 +131,14 @@ msgstr "پروفایل کاربر"
 #: .\apps\account\models.py:94
 msgid "User profiles"
 msgstr "پروفایل کاربران"
+
+#: .\apps\dashboard\forms.py:24
+msgid "Enter a valid phone number"
+msgstr "یک شماره تلفن معتبر وارد کنید"
+
+#: .\apps\dashboard\views\admin.py:24
+msgid "Profile update success"
+msgstr "پروفایل با موفقیت بروزرسانی شد"
 
 #: .\config\settings\base.py:102
 msgid "Persian"

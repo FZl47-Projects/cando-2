@@ -104,3 +104,6 @@ class UserProfile(models.Model):
 
     def get_gender_label(self):
         return self.get_gender_display()
+
+    def get_date_of_birth(self):
+        return self.date_of_birth.strftime('%Y/%m/%d')

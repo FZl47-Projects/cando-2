@@ -1,13 +1,14 @@
-import string
-import random
-import datetime
-import requests
-import json
 from django.utils import timezone
 from django.core.mail import send_mail as _send_email_django
 from django.conf import settings
 from django_q.tasks import async_task
 from django.contrib import messages
+import datetime
+import requests
+import string
+import random
+import json
+import re
 
 
 def random_str(size=15, chars=string.ascii_lowercase + string.ascii_uppercase + string.digits):
@@ -65,12 +66,13 @@ def send_sms(phonenumber, pattern_code, values={}):
         'Content-Type': 'application/json'
     }
 
-    async_task(requests.request,
-               'POST',
-               settings.SMS_CONFIG['API_URL'],
-               headers=headers,
-               data=payload
-               )
+    async_task(
+        requests.request,
+        'POST',
+        settings.SMS_CONFIG['API_URL'],
+        headers=headers,
+        data=payload
+    )
 
 
 def send_email(email, subject, content, **kwargs):
@@ -81,6 +83,14 @@ def send_email(email, subject, content, **kwargs):
                settings.EMAIL_HOST_USER,
                [email]
                )
+
+
+# Check phone number format(IR)
+def check_phone_number(number):
+    mobile_regex = "^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$"
+    if number and re.search(mobile_regex, number):
+        return True
+    return False
 
 
 def add_prefix_phonenum(phonenumber):
