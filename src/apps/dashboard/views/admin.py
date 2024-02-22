@@ -1,6 +1,6 @@
 from django.views.generic import View, TemplateView, DetailView, ListView, FormView
+from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import gettext as _
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.db.models import Q
@@ -77,4 +77,15 @@ class AddUserView(AdminRequiredMixin, FormView):
     
     def form_invalid(self, form):
         message_form_errors(self.request, form)
+        return redirect('dashboard:admin_users_list')
+
+
+# DeleteUser view
+class DeleteUserView(AdminRequiredMixin, View):
+    def post(self, request):
+        user_id = request.POST.get('id')
+        user = get_object_or_404(User, id=user_id)
+        user.delete()
+
+        messages.success(request, _('User successfully deleted'))
         return redirect('dashboard:admin_users_list')

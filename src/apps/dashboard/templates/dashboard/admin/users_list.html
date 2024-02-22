@@ -298,6 +298,13 @@
                                                                                                 <span>تعلیق کاربر</span>
                                                                                             </a>
                                                                                         </li>
+                                                                                        <li>
+                                                                                            <a role="button" data-bs-toggle="modal" data-bs-target="#delete-user"
+                                                                                                data-title="{{ obj.get_full_name }}" data-phone="{{ obj.get_phone_number }}" data-id="{{ obj.id }}">
+                                                                                                <em class="icon ni ni-trash"></em>
+                                                                                                <span>حذف کاربر</span>
+                                                                                            </a>
+                                                                                        </li>
                                                                                     </ul>
                                                                                 </div>
                                                                             </div>
@@ -392,49 +399,18 @@
         </div>
         <!-- main @e -->
 
+        <!-- Start add user modal -->
         {% include 'dashboard/admin/components/add_user.html' %}
+        <!-- .End add user modal -->
+
+        <!-- Start delete user modal -->
+        {% include 'dashboard/admin/components/delete_user.html' %}
+        <!-- .End delete user modal -->
     </div>
     <!-- app-root @e -->
 {% endblock %}
 
 {% block Script %}
     <script src="{% static 'dashboard/js/jdate.js' %}"></script>
-
-    <script>
-        // Validation before submit
-        document.getElementById('addUserForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            let password1 = e.target.querySelector('input[name=password]').value;
-            let password2 = e.target.querySelector('input[name=password2]').value;
-
-            if(password1 != password2) {
-                createNotify({
-                    title: 'خطا',
-                    message: 'رمز عبور و تکرار آن یکسان نیست!',
-                    theme: 'warning'
-                })
-            }
-            else {
-                e.target.submit();
-            }
-        })
-
-        // Toggle passwords input to text and reverse
-        const passToggles = document.querySelectorAll('.pass-toggle');
-        passToggles.forEach((item, index) => {
-            let icon = item.querySelector('.icon');
-            let input = item.querySelector('input[type=password]');
-
-            icon.addEventListener('click', function (e){
-                if(input.type === 'password') {
-                    input.type = 'text';
-                    icon.classList.replace('ni-eye', 'ni-eye-off');
-                }
-                else {
-                    input.type ='password';
-                    icon.classList.replace('ni-eye-off', 'ni-eye');
-                }
-            })
-        })
-    </script>
+    <script src="{% static 'scripts/admin-users.js' %}"></script>
 {% endblock %}
