@@ -182,13 +182,14 @@
                                                         <!-- .card-tools -->
                                                     </div>
                                                     <!-- .card-title-group -->
-                                                    <div class="card-search search-wrap" data-search="search">
+                                                    <div class="card-search search-wrap {% if request.GET.q %}active{% endif %}" data-search="search">
                                                         <div class="card-body">
                                                             <form method="get" action="" class="search-content">
                                                                 <a href="#" class="search-back btn btn-icon toggle-search" data-target="search">
                                                                     <em class="icon ni ni-arrow-left"></em>
                                                                 </a>
-                                                                <input type="text" class="form-control border-transparent form-focus-none" placeholder="جستجو بر اساس نام یا شماره موبایل" />
+                                                                <input type="text" name="q" class="form-control border-transparent form-focus-none"
+                                                                       placeholder="جستجو بر اساس نام یا شماره موبایل" value="{{ request.GET.q }}">
                                                                 <button type="submit" class="search-submit btn btn-icon">
                                                                     <em class="icon ni ni-search"></em>
                                                                 </button>
@@ -277,13 +278,13 @@
                                                                                 <div class="dropdown-menu dropdown-menu-end">
                                                                                     <ul class="link-list-opt no-bdr">
                                                                                         <li>
-                                                                                            <a href="{% url 'dashboard:admin_user_details' obj.id %}">
+                                                                                            <a href="{% url 'dashboard:admin_user_details' obj.id %}?tab=personal">
                                                                                                 <em class="icon ni ni-eye"></em>
                                                                                                 <span>مشاهده مشخصات</span>
                                                                                             </a>
                                                                                         </li>
                                                                                         <li>
-                                                                                            <a href="#">
+                                                                                            <a href="{% url 'dashboard:admin_user_details' obj.id %}?tab=orders">
                                                                                                 <em class="icon ni ni-repeat"></em>
                                                                                                 <span>سفارشات</span>
                                                                                             </a>

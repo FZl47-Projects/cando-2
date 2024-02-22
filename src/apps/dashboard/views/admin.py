@@ -2,9 +2,10 @@ from django.views.generic import View, TemplateView, DetailView, ListView
 from django.utils.translation import gettext as _
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.db.models import Q
 
+from apps.core.utils import form_validate_err, normalize_phone
 from apps.core.auth.mixins import AdminRequiredMixin
-from apps.core.utils import form_validate_err
 from apps.account.models import User
 from apps.account import forms
 
@@ -39,7 +40,20 @@ class UsersListView(AdminRequiredMixin, ListView):
     model = User
     paginate_by = 40
 
-    # TODO: Add filters and search
+    # TODO: Add filters
+
+    def search(self, objects):
+        q = self.request.GET.get('q')
+        if q:
+            q = normalize_phone(q)
+            objects = objects.filter(Q(phonenumber__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
+        return objects
+
+    def get_queryset(self):
+        queryset = User.objects.all()
+        queryset = self.search(queryset)
+
+        return queryset
 
 
 # Render UserDetails view

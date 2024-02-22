@@ -51,13 +51,13 @@
                                         <div class="card card-bordered">
                                             <ul class="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active" data-bs-toggle="tab" href="#personal">
+                                                    <a class="nav-link {% if not request.GET.tab or request.GET.tab == 'personal' %}active{% endif %}" data-bs-toggle="tab" href="#personal">
                                                         <em class="icon ni ni-user-circle"></em>
                                                         <span>شخصی</span>
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" data-bs-toggle="tab" href="#orders">
+                                                    <a class="nav-link {% if request.GET.tab == 'orders' %}active{% endif %}" data-bs-toggle="tab" href="#orders">
                                                         <em class="icon ni ni-repeat"></em>
                                                         <span>سفارشات</span>
                                                     </a>
@@ -71,7 +71,7 @@
                                             </ul>
                                             <!-- .nav-tabs -->
                                             <div class="tab-content">
-                                                <div class="card-inner tab-pane active" id="personal">
+                                                <div class="card-inner tab-pane {% if not request.GET.tab or request.GET.tab == 'personal' %}active{% endif %}" id="personal">
                                                     <div class="nk-block">
                                                         <div class="nk-block-head">
                                                             <h5 class="title">اطلاعات شخصی</h5>
@@ -174,7 +174,7 @@
                                                 </div>
 
                                                 <!-- User orders -->
-                                                <div class="col-12 tab-pane" id="orders">
+                                                <div class="col-12 tab-pane {% if request.GET.tab == 'orders' %}active{% endif %}" id="orders">
                                                     <div class="card card-full">
                                                         <div class="card-inner">
                                                             <div class="card-title-group">
@@ -189,9 +189,8 @@
                                                             <div class="nk-tb-list nk-tb-orders">
                                                                 <div class="nk-tb-item nk-tb-head">
                                                                     <div class="nk-tb-col"><span>شماره سفارش</span></div>
-                                                                    <div class="nk-tb-col tb-col-sm"><span>مشتری</span></div>
                                                                     <div class="nk-tb-col tb-col-md"><span>تاریخ</span></div>
-                                                                    <div class="nk-tb-col tb-col-lg"><span>ارجاع</span></div>
+                                                                    <div class="nk-tb-col tb-col-lg"><span>نوع</span></div>
                                                                     <div class="nk-tb-col"><span>مبلغ</span></div>
                                                                     <div class="nk-tb-col"><span class="d-none d-sm-inline">وضعیت</span></div>
                                                                     <div class="nk-tb-col"><span>&nbsp;</span></div>
@@ -200,82 +199,39 @@
                                                                 <div class="nk-tb-item">
                                                                     <div class="nk-tb-col">
                                                                         <span class="tb-lead">
-                                                                            <a href="#">#95954</a>
+                                                                            <a href="#">32</a>
                                                                         </span>
-                                                                    </div>
-                                                                    <div class="nk-tb-col tb-col-sm">
-                                                                        <div class="user-card">
-                                                                            <div class="user-avatar user-avatar-sm bg-purple">
-                                                                                <span>ف‌ت</span>
-                                                                            </div>
-                                                                            <div class="user-name">
-                                                                                <span class="tb-lead">فرشید ترنیان</span>
-                                                                            </div>
-                                                                        </div>
                                                                     </div>
                                                                     <div class="nk-tb-col tb-col-md">
                                                                         <span class="tb-sub">1402/08/21</span>
                                                                     </div>
                                                                     <div class="nk-tb-col tb-col-lg">
-                                                                        <span class="tb-sub text-primary">SUB-2309232</span>
+                                                                        <span class="tb-sub text-primary">عادی</span>
                                                                     </div>
                                                                     <div class="nk-tb-col">
-                                                                        <span class="tb-sub tb-amount">4,597,000 <span>تومان</span></span>
+                                                                        <span class="tb-sub tb-amount">
+                                                                            4,597,000
+                                                                            <small>تومان</small>
+                                                                        </span>
                                                                     </div>
                                                                     <div class="nk-tb-col">
                                                                         <span class="badge badge-dot badge-dot-xs bg-success">پرداخت شده</span>
                                                                     </div>
                                                                     <div class="nk-tb-col nk-tb-col-action">
                                                                         <div class="dropdown">
-                                                                            <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                                            <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown">
+                                                                                <em class="icon ni ni-more-h"></em>
+                                                                            </a>
                                                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                                                                 <ul class="link-list-plain">
                                                                                     <li><a href="#">مشاهده</a></li>
-                                                                                    <li><a href="#">فاکتورها</a></li>
                                                                                     <li><a href="#">چاپ</a></li>
                                                                                 </ul>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="nk-tb-item">
-                                                                    <div class="nk-tb-col">
-                                                                        <span class="tb-lead"><a href="#">#95850</a></span>
-                                                                    </div>
-                                                                    <div class="nk-tb-col tb-col-sm">
-                                                                        <div class="user-card">
-                                                                            <div class="user-avatar user-avatar-sm bg-azure">
-                                                                                <span>ف‌ا</span>
-                                                                            </div>
-                                                                            <div class="user-name">
-                                                                                <span class="tb-lead">فریبا آتش دامن</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="nk-tb-col tb-col-md">
-                                                                        <span class="tb-sub">1402/02/02</span>
-                                                                    </div>
-                                                                    <div class="nk-tb-col tb-col-lg">
-                                                                        <span class="tb-sub text-primary">SUB-2309154</span>
-                                                                    </div>
-                                                                    <div class="nk-tb-col">
-                                                                        <span class="tb-sub tb-amount">597,000 <span>تومان</span></span>
-                                                                    </div>
-                                                                    <div class="nk-tb-col">
-                                                                        <span class="badge badge-dot badge-dot-xs bg-danger">لغو شده</span>
-                                                                    </div>
-                                                                    <div class="nk-tb-col nk-tb-col-action">
-                                                                        <div class="dropdown">
-                                                                            <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
-                                                                                <ul class="link-list-plain">
-                                                                                    <li><a href="#">مشاهده</a></li>
-                                                                                    <li><a href="#">حذف</a></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+
                                                             </div>
                                                         </div>
                                                     </div>

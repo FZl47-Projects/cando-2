@@ -103,6 +103,16 @@ def get_raw_phonenum(phonenumber):
     return p
 
 
+def normalize_phone(phonenumber):
+    try:
+        if phonenumber[0] == '0':
+            phonenumber = str(phonenumber).replace('0', '+98', 1)
+    except (TypeError, IndexError):
+        pass
+
+    return phonenumber
+
+
 def form_validate_err(request, form):
     if form.is_valid() is False:
         errors = form.errors.as_data()
