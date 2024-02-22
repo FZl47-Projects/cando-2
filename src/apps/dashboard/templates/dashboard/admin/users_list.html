@@ -218,7 +218,7 @@
 
                                                         <!-- .nk-tb-item -->
                                                         {% for obj in page_obj %}
-                                                            <div class="nk-tb-item">
+                                                            <div class="nk-tb-item" id="user-{{ obj.id }}">
                                                                 <div class="nk-tb-col">
                                                                     <span>{{ forloop.counter }}</span>
                                                                 </div>
@@ -265,9 +265,9 @@
                                                                 </div>
                                                                 <div class="nk-tb-col">
                                                                     {% if obj.is_active %}
-                                                                        <span class="tb-status text-success">فعال</span>
+                                                                        <span class="tb-status text-success nk-status">فعال</span>
                                                                     {% else %}
-                                                                        <span class="tb-status text-danger">غیرفعال</span>
+                                                                        <span class="tb-status text-danger nk-status">غیرفعال</span>
                                                                     {% endif %}
                                                                 </div>
                                                                 <div class="nk-tb-col nk-tb-col-tools">
@@ -293,9 +293,14 @@
                                                                                         </li>
                                                                                         <li class="divider"></li>
                                                                                         <li>
-                                                                                            <a href="#">
-                                                                                                <em class="icon ni ni-na"></em>
-                                                                                                <span>تعلیق کاربر</span>
+                                                                                            <a role="button" class="nk-status-btn" onclick="deactivateUser({{ obj.id }})">
+                                                                                                {% if obj.is_active %}
+                                                                                                    <em class="icon ni ni-na"></em>
+                                                                                                    <span>تعلیق کاربر</span>
+                                                                                                {% else %}
+                                                                                                    <em class="icon ni ni-check-circle"></em>
+                                                                                                    <span>فعال کردن</span>
+                                                                                                {% endif %}
                                                                                             </a>
                                                                                         </li>
                                                                                         <li>

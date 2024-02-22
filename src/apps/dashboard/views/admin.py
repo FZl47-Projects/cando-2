@@ -1,6 +1,7 @@
 from django.views.generic import View, TemplateView, DetailView, ListView, FormView
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import gettext as _
+from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.db.models import Q
@@ -89,3 +90,18 @@ class DeleteUserView(AdminRequiredMixin, View):
 
         messages.success(request, _('User successfully deleted'))
         return redirect('dashboard:admin_users_list')
+
+
+# DisableUser view
+class DisableUserView(AdminRequiredMixin, View):
+    def get(self, request, pk):
+        try:
+            obj = User.objects.get(id=pk)
+            obj.is_active = not obj.is_active
+            obj.save()
+
+            return JsonResponse({'disable': obj.is_active})
+        except User.DoesNotExist:
+            pass
+
+        return JsonResponse({'disable': False})

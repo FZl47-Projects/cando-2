@@ -45,4 +45,24 @@ $('#delete-user').on('show.bs.modal', function (event) {
     modal.find('.modal-body #user-name-title').text(title);
     modal.find('.modal-body #user-phone-title').text(phone);
 })
-// ------------------------- Add data to delete user modal -------------------------- //
+
+
+// ---------------------- DeActive/Active user by ajax ---------------------------- //
+function deactivateUser(id){
+    let user_obj = document.getElementById(`user-${id}`);
+    let nk_status = user_obj.querySelector('.nk-status');
+    let nk_status_btn = user_obj.querySelector('.nk-status-btn');
+
+    $.get(`/dashboard/admin/user/${id}/disable/`).then(response =>{
+        if(response['disable'] === true){
+            nk_status.classList.replace('text-danger', 'text-success');
+            nk_status.innerHTML = 'فعال';
+            nk_status_btn.innerHTML = '<em class="icon ni ni-na"></em><span>تعلیق کاربر</span>';
+        }
+        else{
+            nk_status.classList.replace('text-success', 'text-danger');
+            nk_status.innerHTML = 'غیرفعال';
+            nk_status_btn.innerHTML = '<em class="icon ni ni-check-circle"></em><span>فعال کردن</span>';
+        }
+    })
+}
