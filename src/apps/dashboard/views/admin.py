@@ -1,10 +1,11 @@
-from django.views.generic import View, TemplateView, DetailView, ListView
+from django.views.generic import View, TemplateView, DetailView, ListView, FormView
 from django.utils.translation import gettext as _
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.contrib import messages
 from django.db.models import Q
 
-from apps.core.utils import form_validate_err, normalize_phone
+from apps.core.utils import form_validate_err, message_form_errors, normalize_phone
 from apps.core.auth.mixins import AdminRequiredMixin
 from apps.account.models import User
 from apps.account import forms
@@ -60,3 +61,20 @@ class UsersListView(AdminRequiredMixin, ListView):
 class UserDetailsView(AdminRequiredMixin, DetailView):
     template_name = 'dashboard/admin/user_details.html'
     model = User
+
+
+# AddUser view
+class AddUserView(AdminRequiredMixin, FormView):
+    template_name = 'dashboard/admin/users_list.html'
+    form_class = forms.AddUserForm
+    success_url = reverse_lazy('dashboard:admin_users_list')
+    
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, _('User successfully added'))
+        
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        message_form_errors(self.request, form)
+        return redirect('dashboard:admin_users_list')

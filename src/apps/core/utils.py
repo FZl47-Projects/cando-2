@@ -1,8 +1,9 @@
-from django.utils import timezone
 from django.core.mail import send_mail as _send_email_django
+from django.utils.translation import gettext as _
+from django.contrib import messages
+from django.utils import timezone
 from django.conf import settings
 from django_q.tasks import async_task
-from django.contrib import messages
 import datetime
 import requests
 import string
@@ -88,8 +89,14 @@ def send_email(email, subject, content, **kwargs):
 # Check phone number format(IR)
 def check_phone_number(number):
     mobile_regex = "^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$"
-    if number and re.search(mobile_regex, number):
-        return True
+    try:
+        number = str(number)
+        print(number)
+        if number and re.search(mobile_regex, number):
+            return True
+    except (TypeError, NameError):
+        pass
+
     return False
 
 
@@ -127,6 +134,18 @@ def form_validate_err(request, form):
             messages.error(request, 'دیتای ورودی نامعتبر است')
         return False
     return True
+
+
+# Message form errors utils
+def message_form_errors(request, form):
+    errors = form.errors.items()
+    if not errors:
+        messages.error(request, _('Entered data is not correct.'))
+        return False
+
+    for field, message in errors:
+        for error in message:
+            messages.error(request, error)
 
 
 def get_host_url(url):

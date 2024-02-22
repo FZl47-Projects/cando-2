@@ -30,7 +30,7 @@
                                             <div class="nk-block-head-content">
                                                 <h3 class="nk-block-title page-title">لیست کاربران</h3>
                                                 <div class="nk-block-des text-soft">
-                                                    <p>شما در مجموع 2595 کاربر دارید.</p>
+                                                    <p>شما در مجموع {{ paginator.count }} کاربر دارید.</p>
                                                 </div>
                                             </div>
                                             <!-- .nk-block-head-content -->
@@ -54,7 +54,9 @@
                                                                     <div class="dropdown-menu dropdown-menu-end">
                                                                         <ul class="link-list-opt no-bdr">
                                                                             <li>
-                                                                                <a href="#"><span>افزودن کاربر</span></a>
+                                                                                <a role="button" data-bs-toggle="modal" data-bs-target="#add-user-modal">
+                                                                                    <span>افزودن کاربر</span>
+                                                                                </a>
                                                                             </li>
                                                                         </ul>
                                                                     </div>
@@ -389,6 +391,50 @@
             <!-- wrap @e -->
         </div>
         <!-- main @e -->
+
+        {% include 'dashboard/admin/components/add_user.html' %}
     </div>
     <!-- app-root @e -->
+{% endblock %}
+
+{% block Script %}
+    <script src="{% static 'dashboard/js/jdate.js' %}"></script>
+
+    <script>
+        // Validation before submit
+        document.getElementById('addUserForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            let password1 = e.target.querySelector('input[name=password]').value;
+            let password2 = e.target.querySelector('input[name=password2]').value;
+
+            if(password1 != password2) {
+                createNotify({
+                    title: 'خطا',
+                    message: 'رمز عبور و تکرار آن یکسان نیست!',
+                    theme: 'warning'
+                })
+            }
+            else {
+                e.target.submit();
+            }
+        })
+
+        // Toggle passwords input to text and reverse
+        const passToggles = document.querySelectorAll('.pass-toggle');
+        passToggles.forEach((item, index) => {
+            let icon = item.querySelector('.icon');
+            let input = item.querySelector('input[type=password]');
+
+            icon.addEventListener('click', function (e){
+                if(input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.replace('ni-eye', 'ni-eye-off');
+                }
+                else {
+                    input.type ='password';
+                    icon.classList.replace('ni-eye-off', 'ni-eye');
+                }
+            })
+        })
+    </script>
 {% endblock %}

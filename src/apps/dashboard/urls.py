@@ -11,6 +11,7 @@ urlpatterns = [
     path('admin/profile/settings/', admin.AdminProfileSettingsView.as_view(), name='admin_profile_settings'),
     path('admin/users/list/', admin.UsersListView.as_view(), name='admin_users_list'),
     path('admin/user/<int:pk>/', admin.UserDetailsView.as_view(), name='admin_user_details'),
+    path('admin/user/add/', admin.AddUserView.as_view(), name='admin_add_user'),
 
     # User dashboard urls
     path('', user.Index.as_view(), name='user'),

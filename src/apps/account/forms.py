@@ -142,3 +142,28 @@ class UpdateProfileForm(forms.ModelForm):
 
         profile.save()
         return profile
+
+
+# Add User form
+class AddUserForm(forms.ModelForm):
+    password = forms.CharField(max_length=128, widget=forms.PasswordInput)
+    password2 = forms.CharField(max_length=128, widget=forms.PasswordInput)
+    date_of_birth = forms.DateField(required=False, widget=forms.DateInput)
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'phonenumber', 'role', 'is_phonenumber_confirmed']
+
+    def save(self, commit=True):
+        user = super().save(commit)
+        profile = user.profile
+        date_of_birth = self.cleaned_data.get('date_of_birth')
+
+        # Convert jalali date to iso format
+        if date_of_birth:
+            date_of_birth = JalaliDate.to_gregorian(date_of_birth).isoformat()
+
+        profile.date_of_birth = date_of_birth
+        profile.save()
+
+        return user
