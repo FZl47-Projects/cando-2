@@ -75,6 +75,9 @@ class User(AbstractUser):
             return reverse('dashboard:admin')
         return reverse('dashboard:user')
 
+    def get_admin_notes(self):
+        return self.admin_notes.all()
+
 
 # Users' Profile model
 class UserProfile(models.Model):

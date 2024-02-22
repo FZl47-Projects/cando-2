@@ -148,24 +148,37 @@
                                                     <div class="nk-block">
                                                         <div class="nk-block-head nk-block-head-sm nk-block-between">
                                                             <h5 class="title">یادداشت مدیر</h5>
-                                                            <a href="#" class="link link-sm">+ افزودن یادداشت</a>
+                                                            <a role="button" data-bs-toggle="modal" data-bs-target="#add-note-modal" class="link link-sm">
+                                                                + افزودن یادداشت
+                                                            </a>
                                                         </div>
                                                         <!-- .nk-block-head -->
                                                         <div class="bq-note">
-                                                            <small>یادداشتی ثبت نشده</small>
-{#                                                            <div class="bq-note-item">#}
-{#                                                                <div class="bq-note-text">#}
-{#                                                                    <p>#}
-{#                                                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز.#}
-{#                                                                    </p>#}
-{#                                                                </div>#}
-{#                                                                <div class="bq-note-meta">#}
-{#                                                                    <span class="bq-note-added">اضافه شده در <span class="date">18 آبان 1402</span> در <span class="time">5:34 بعد از ظهر</span></span>#}
-{#                                                                    <span class="bq-note-sep sep">|</span>#}
-{#                                                                    <span class="bq-note-by">توسط <span>سافت نیو</span></span>#}
-{#                                                                    <a href="#" class="link link-sm link-danger">حذف یادداشت</a>#}
-{#                                                                </div>#}
-{#                                                            </div>#}
+                                                            {% for obj in object.get_admin_notes %}
+                                                                <div class="bq-note-item">
+                                                                    <div class="bq-note-text">
+                                                                        <small>
+                                                                            {{ obj.text }}
+                                                                        </small>
+                                                                    </div>
+                                                                    <div class="bq-note-meta">
+                                                                        <span class="bq-note-added">اضافه شده در
+                                                                            <span class="date">{{ obj.created_at|convert_datetime|date:'Y/m/d H:i' }}</span>
+                                                                        </span>
+                                                                        <span class="bq-note-sep sep">|</span>
+                                                                        <span class="bq-note-by">توسط:
+                                                                            <span>{{ obj.author.get_full_name }}</span>
+                                                                            -
+                                                                            <span>{{ obj.author.get_phone_number }}</span>
+                                                                        </span>
+                                                                        <a href="{% url 'dashboard:admin_delete_note' obj.pk %}" class="link link-sm link-danger">
+                                                                            حذف یادداشت
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            {% empty %}
+                                                                <small>یادداشتی ثبت نشده</small>
+                                                            {% endfor %}
                                                             <!-- .bq-note-item -->
                                                         </div>
                                                         <!-- .bq-note -->
@@ -178,11 +191,9 @@
                                                     <div class="card card-full">
                                                         <div class="card-inner">
                                                             <div class="card-title-group">
-                                                                <div class="card-title">
-                                                                    <h5 class="title">
-                                                                        <span class="me-2">سفارشات کاربر</span>
-                                                                    </h5>
-                                                                </div>
+                                                                <h5 class="title">
+                                                                    سفارشات کاربر
+                                                                </h5>
                                                             </div>
                                                         </div>
                                                         <div class="card-inner p-0 border-top">
@@ -256,8 +267,7 @@
                                 </div>
                                 <!-- footer @e -->
                             </div>
-
-                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- content @e -->
@@ -265,6 +275,51 @@
             <!-- wrap @e -->
         </div>
         <!-- main @e -->
+
+        <!-- @@ Add note modal @e -->
+        <div class="modal fade" role="dialog" id="add-note-modal">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-bs-dismiss="modal">
+                        <em class="icon ni ni-cross-sm"></em>
+                    </a>
+                    <div class="modal-body modal-body-lg">
+                        <h5 class="title">افزودن یادداشت</h5>
+                        <!-- .nav-tabs -->
+                        <form method="post" action="{% url 'dashboard:admin_add_note' %}" id="addNoteForm" class="tab-content">
+                            {% csrf_token %}
+                            <div class="tab-pane active">
+                                <input type="hidden" name="user" value="{{ object.pk }}">
+                                <div class="row gy-4">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="text">متن یادداشت</label>
+                                            <div class="form-control-wrap">
+                                                <textarea class="form-control no-resize" name="text" id="text" required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                            <li>
+                                                <button type="submit" class="btn btn-lg btn-primary">
+                                                    ثبت یادداشت
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-bs-dismiss="modal" class="link link-light">لغو</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- @@ .Add note modal @e -->
+
     </div>
     <!-- app-root @e -->
 {% endblock %}

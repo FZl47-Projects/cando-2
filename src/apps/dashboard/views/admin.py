@@ -1,5 +1,5 @@
 from django.views.generic import View, TemplateView, DetailView, ListView, FormView
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, reverse
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.urls import reverse_lazy
@@ -7,9 +7,11 @@ from django.contrib import messages
 from django.db.models import Q
 
 from apps.core.utils import form_validate_err, message_form_errors, normalize_phone
+from apps.account.forms import UpdateProfileForm, AddUserForm
 from apps.core.auth.mixins import AdminRequiredMixin
 from apps.account.models import User
-from apps.account import forms
+from ..models import UserNote
+from .. import forms
 
 
 # Render AdminDashboard view
@@ -22,7 +24,7 @@ class AdminProfileView(AdminRequiredMixin, TemplateView):
     template_name = 'dashboard/admin/profile_details.html'
 
     def post(self, request):
-        form = forms.UpdateProfileForm(data=request.POST, files=request.FILES, instance=request.user.profile)
+        form = UpdateProfileForm(data=request.POST, files=request.FILES, instance=request.user.profile)
 
         if form_validate_err(request, form):
             form.save(commit=False)
@@ -67,7 +69,7 @@ class UserDetailsView(AdminRequiredMixin, DetailView):
 # AddUser view
 class AddUserView(AdminRequiredMixin, FormView):
     template_name = 'dashboard/admin/users_list.html'
-    form_class = forms.AddUserForm
+    form_class = AddUserForm
     success_url = reverse_lazy('dashboard:admin_users_list')
     
     def form_valid(self, form):
@@ -105,3 +107,43 @@ class DisableUserView(AdminRequiredMixin, View):
             pass
 
         return JsonResponse({'disable': False})
+
+
+# Add UserNote view
+class AddUserNoteView(AdminRequiredMixin, FormView):
+    template_name = 'dashboard/admin/user_details.html'
+    form_class = forms.AddUserNoteForm
+
+    def get_success_url(self):
+        pk = self.request.POST.get('user')
+        return reverse('dashboard:admin_user_details', args=[pk])
+
+    def get_form(self, form_class=None):
+        data = self.request.POST.copy()
+        data.update({
+            'author': self.request.user,
+        })
+
+        form_class = forms.AddUserNoteForm(data=data)
+        return form_class
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, _('There is an issue. please try again'))
+        return super().get_success_url()
+
+
+# Delete UserNote view
+class DeleteUserNoteView(AdminRequiredMixin, View):
+    def get(self, request, pk):
+        try:
+            obj = UserNote.objects.get(pk=pk)
+            obj.delete()
+        except UserNote.DoesNotExist:
+            messages.error(request, _('There is an issue. please try again'))
+
+        referer_url = request.META.get('HTTP_REFERER')
+        return redirect(referer_url or reverse('dashboard:admin_users_list'))

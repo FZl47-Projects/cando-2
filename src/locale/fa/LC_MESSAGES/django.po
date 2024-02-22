@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-21 21:21+0330\n"
+"POT-Creation-Date: 2024-02-22 22:06+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgid "Dates"
 msgstr "تاریخ ها"
 
 #: .\apps\account\admin.py:39 .\apps\account\admin.py:53
-#: .\apps\account\models.py:19
+#: .\apps\account\models.py:19 .\apps\dashboard\admin.py:13
 msgid "Phone number"
 msgstr "شماره تلفن"
 
@@ -97,6 +97,7 @@ msgid "User role"
 msgstr "نقش کاربر"
 
 #: .\apps\account\models.py:32 .\apps\account\models.py:83
+#: .\apps\dashboard\models.py:11
 msgid "User"
 msgstr "کاربر"
 
@@ -144,9 +145,50 @@ msgstr "رمز عبور صحیح نیست!"
 msgid "Password successfully changed"
 msgstr "رمز عبور با موفقیت تغییر کرد"
 
-#: .\apps\dashboard\views\admin.py:25
+#: .\apps\core\utils.py:143
+msgid "Entered data is not correct."
+msgstr "اطلاعات وارد شده صحیح نیست!"
+
+#: .\apps\dashboard\admin.py:17
+msgid "Name"
+msgstr "نام"
+
+#: .\apps\dashboard\apps.py:8
+msgid "Dashboard"
+msgstr "داشبورد"
+
+#: .\apps\dashboard\models.py:12
+msgid "Author"
+msgstr "نویسنده"
+
+#: .\apps\dashboard\models.py:13
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2373
+msgid "Text"
+msgstr "متن"
+
+#: .\apps\dashboard\models.py:14
+msgid "Active"
+msgstr "فعال"
+
+#: .\apps\dashboard\models.py:17
+msgid "User note"
+msgstr "یادداشت کاربر"
+
+#: .\apps\dashboard\models.py:18
+msgid "User notes"
+msgstr "یادداشت‌های کاربر"
+
+#: .\apps\dashboard\views\admin.py:29
 msgid "Profile update success"
 msgstr "پروفایل با موفقیت بروزرسانی شد"
+
+#: .\apps\dashboard\views\admin.py:75
+msgid "User successfully added"
+msgstr "کاربر با موفقیت اضافه شد"
+
+#: .\apps\dashboard\views\admin.py:91
+msgid "User successfully deleted"
+msgstr "کاربر با موفقیت حذف شد"
 
 #: .\config\settings\base.py:102
 msgid "Persian"
@@ -514,10 +556,6 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2337
 #, python-format
 msgid "Slug (up to %(max_length)s)"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2373
-msgid "Text"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2448
