@@ -109,7 +109,7 @@
         self.closest("li").children('.nk-menu-sub').css('display', 'block');
         self.parents().closest("li").children('.nk-menu-sub').css('display', 'block');
       } else {
-        self.closest("li").removeClass('active current-page').parents().closest("li:not(.current-page)").removeClass("active");
+        // self.closest("li").removeClass('active current-page').parents().closest("li:not(.current-page)").removeClass("active");
       }
     });
   };

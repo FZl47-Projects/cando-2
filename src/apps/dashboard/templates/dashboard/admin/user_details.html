@@ -1,0 +1,314 @@
+{% extends 'dashboard/base_admin.html' %}
+{% load filters %}
+{% load static %}
+
+
+{% block Title %}کندو | اطلاعات کاربر{% endblock %}
+
+{% block content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                <!-- main header @e -->
+                {% include 'dashboard/admin/components/header.html' %}
+                <!-- main header @e -->
+
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            <!-- .nk-aside -->
+                            {% include 'dashboard/admin/components/aside_menu.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head">
+                                        <div class="nk-block-between g-3">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">کاربر / <strong class="text-primary small">{{ object.get_full_name }}</strong></h3>
+                                                <div class="nk-block-des text-soft">
+                                                    <ul class="list-inline">
+                                                        <li>شناسه کاربر: <span class="text-base">{{ object.id }}</span></li>
+                                                        <li>آخرین ورود: <span class="text-base">{{ object.last_login|convert_datetime|date:'Y/m/d H:i' }}</span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="nk-block-head-content">
+                                                <a href="{% url 'dashboard:admin_users_list' %}" class="btn btn-outline-light bg-white d-none d-sm-inline-flex">
+                                                    <em class="icon ni ni-arrow-left"></em>
+                                                    <span>بازگشت</span>
+                                                </a>
+                                                <a href="{% url 'dashboard:admin_users_list' %}" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none">
+                                                    <em class="icon ni ni-arrow-left"></em>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered">
+                                            <ul class="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-bs-toggle="tab" href="#personal">
+                                                        <em class="icon ni ni-user-circle"></em>
+                                                        <span>شخصی</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#orders">
+                                                        <em class="icon ni ni-repeat"></em>
+                                                        <span>سفارشات</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#">
+                                                        <em class="icon ni ni-activity"></em>
+                                                        <span>فعالیت ها</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <!-- .nav-tabs -->
+                                            <div class="tab-content">
+                                                <div class="card-inner tab-pane active" id="personal">
+                                                    <div class="nk-block">
+                                                        <div class="nk-block-head">
+                                                            <h5 class="title">اطلاعات شخصی</h5>
+                                                        </div>
+                                                        <!-- .nk-block-head -->
+                                                        <div class="profile-ud-list">
+                                                            <div class="profile-ud-item">
+                                                                <div class="profile-ud wider">
+                                                                    <span class="profile-ud-label">نام</span>
+                                                                    <span class="profile-ud-value">
+                                                                        {{ object.first_name }}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-ud-item">
+                                                                <div class="profile-ud wider">
+                                                                    <span class="profile-ud-label">نام خانوادگی</span>
+                                                                    <span class="profile-ud-value">
+                                                                        {{ object.last_name|default:'ثبت نشده' }}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-ud-item">
+                                                                <div class="profile-ud wider">
+                                                                    <span class="profile-ud-label">تاریخ تولد</span>
+                                                                    <span class="profile-ud-value">
+                                                                        {{ user.profile.get_date_of_birth|convert_date|date:'Y/m/d'|default:'ثبت نشده' }}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-ud-item">
+                                                                <div class="profile-ud wider">
+                                                                    <span class="profile-ud-label">شماره همراه</span>
+                                                                    <span class="profile-ud-value">{{ object.get_phone_number }}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-ud-item">
+                                                                <div class="profile-ud wider">
+                                                                    <span class="profile-ud-label">نقش</span>
+                                                                    <span class="profile-ud-value">{{ object.get_role_label }}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="profile-ud-item">
+                                                                <div class="profile-ud wider">
+                                                                    <span class="profile-ud-label">وضعیت</span>
+                                                                    {% if object.is_active %}
+                                                                        <span class="profile-ud-value text-success">فعال</span>
+                                                                    {% else %}
+                                                                        <span class="profile-ud-value text-danger">غیرفعال</span>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- .profile-ud-list -->
+                                                    </div>
+                                                    <!-- .nk-block -->
+                                                    <div class="nk-block">
+                                                        <div class="nk-block-head nk-block-head-line">
+                                                            <h6 class="title overline-title text-base">اطلاعات تکمیلی</h6>
+                                                        </div>
+                                                        <!-- .nk-block-head -->
+                                                        <div class="profile-ud-list">
+                                                            <div class="profile-ud-item">
+                                                                <div class="profile-ud wider">
+                                                                    <span class="profile-ud-label">تاریخ عضویت</span>
+                                                                    <span class="profile-ud-value">{{ object.date_joined|convert_datetime|date:'Y/m/d - H:i' }}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- .profile-ud-list -->
+                                                    </div>
+                                                    <!-- .nk-block -->
+                                                    <div class="nk-divider divider md"></div>
+                                                    <div class="nk-block">
+                                                        <div class="nk-block-head nk-block-head-sm nk-block-between">
+                                                            <h5 class="title">یادداشت مدیر</h5>
+                                                            <a href="#" class="link link-sm">+ افزودن یادداشت</a>
+                                                        </div>
+                                                        <!-- .nk-block-head -->
+                                                        <div class="bq-note">
+                                                            <small>یادداشتی ثبت نشده</small>
+{#                                                            <div class="bq-note-item">#}
+{#                                                                <div class="bq-note-text">#}
+{#                                                                    <p>#}
+{#                                                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز.#}
+{#                                                                    </p>#}
+{#                                                                </div>#}
+{#                                                                <div class="bq-note-meta">#}
+{#                                                                    <span class="bq-note-added">اضافه شده در <span class="date">18 آبان 1402</span> در <span class="time">5:34 بعد از ظهر</span></span>#}
+{#                                                                    <span class="bq-note-sep sep">|</span>#}
+{#                                                                    <span class="bq-note-by">توسط <span>سافت نیو</span></span>#}
+{#                                                                    <a href="#" class="link link-sm link-danger">حذف یادداشت</a>#}
+{#                                                                </div>#}
+{#                                                            </div>#}
+                                                            <!-- .bq-note-item -->
+                                                        </div>
+                                                        <!-- .bq-note -->
+                                                    </div>
+                                                    <!-- .nk-block -->
+                                                </div>
+
+                                                <!-- User orders -->
+                                                <div class="col-12 tab-pane" id="orders">
+                                                    <div class="card card-full">
+                                                        <div class="card-inner">
+                                                            <div class="card-title-group">
+                                                                <div class="card-title">
+                                                                    <h5 class="title">
+                                                                        <span class="me-2">سفارشات کاربر</span>
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-inner p-0 border-top">
+                                                            <div class="nk-tb-list nk-tb-orders">
+                                                                <div class="nk-tb-item nk-tb-head">
+                                                                    <div class="nk-tb-col"><span>شماره سفارش</span></div>
+                                                                    <div class="nk-tb-col tb-col-sm"><span>مشتری</span></div>
+                                                                    <div class="nk-tb-col tb-col-md"><span>تاریخ</span></div>
+                                                                    <div class="nk-tb-col tb-col-lg"><span>ارجاع</span></div>
+                                                                    <div class="nk-tb-col"><span>مبلغ</span></div>
+                                                                    <div class="nk-tb-col"><span class="d-none d-sm-inline">وضعیت</span></div>
+                                                                    <div class="nk-tb-col"><span>&nbsp;</span></div>
+                                                                </div>
+
+                                                                <div class="nk-tb-item">
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="tb-lead">
+                                                                            <a href="#">#95954</a>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-sm">
+                                                                        <div class="user-card">
+                                                                            <div class="user-avatar user-avatar-sm bg-purple">
+                                                                                <span>ف‌ت</span>
+                                                                            </div>
+                                                                            <div class="user-name">
+                                                                                <span class="tb-lead">فرشید ترنیان</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-md">
+                                                                        <span class="tb-sub">1402/08/21</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-lg">
+                                                                        <span class="tb-sub text-primary">SUB-2309232</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="tb-sub tb-amount">4,597,000 <span>تومان</span></span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="badge badge-dot badge-dot-xs bg-success">پرداخت شده</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col nk-tb-col-action">
+                                                                        <div class="dropdown">
+                                                                            <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
+                                                                                <ul class="link-list-plain">
+                                                                                    <li><a href="#">مشاهده</a></li>
+                                                                                    <li><a href="#">فاکتورها</a></li>
+                                                                                    <li><a href="#">چاپ</a></li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="nk-tb-item">
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="tb-lead"><a href="#">#95850</a></span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-sm">
+                                                                        <div class="user-card">
+                                                                            <div class="user-avatar user-avatar-sm bg-azure">
+                                                                                <span>ف‌ا</span>
+                                                                            </div>
+                                                                            <div class="user-name">
+                                                                                <span class="tb-lead">فریبا آتش دامن</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-md">
+                                                                        <span class="tb-sub">1402/02/02</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-lg">
+                                                                        <span class="tb-sub text-primary">SUB-2309154</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="tb-sub tb-amount">597,000 <span>تومان</span></span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="badge badge-dot badge-dot-xs bg-danger">لغو شده</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col nk-tb-col-action">
+                                                                        <div class="dropdown">
+                                                                            <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
+                                                                                <ul class="link-list-plain">
+                                                                                    <li><a href="#">مشاهده</a></li>
+                                                                                    <li><a href="#">حذف</a></li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .card -->
+                                                </div>
+                                            </div>
+                                            <!-- .card-inner -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                <div class="nk-footer">
+                                    <div class="container wide-xl">
+                                        <div class="nk-footer-wrap g-2">
+                                            <div class="nk-footer-copyright">© تمام حقوق محفوظ است.
+                                                <a target="_blank" rel="nofollow" href="#">شیرینی سرای کندو</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- footer @e -->
+                            </div>
+
+                            </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+{% endblock %}

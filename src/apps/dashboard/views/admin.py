@@ -38,3 +38,11 @@ class UsersListView(AdminRequiredMixin, ListView):
     template_name = 'dashboard/admin/users_list.html'
     model = User
     paginate_by = 40
+
+    # TODO: Add filters and search
+
+
+# Render UserDetails view
+class UserDetailsView(AdminRequiredMixin, DetailView):
+    template_name = 'dashboard/admin/user_details.html'
+    model = User
