@@ -74,7 +74,7 @@ class AddUserView(AdminRequiredMixin, FormView):
     success_url = reverse_lazy('dashboard:admin_users_list')
     
     def form_valid(self, form):
-        form.save()
+        form.save(commit=False)
         messages.success(self.request, _('User successfully added'))
         
         return super().form_valid(form)

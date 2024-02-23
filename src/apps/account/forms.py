@@ -156,6 +156,11 @@ class AddUserForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit)
+
+        # Set user password
+        user.set_password(self.cleaned_data.get('password2'))
+        user.save()
+
         profile = user.profile
         date_of_birth = self.cleaned_data.get('date_of_birth')
 
