@@ -276,6 +276,15 @@ class ConfirmPhoneNumberCheckCode(LoginRequiredMixin, View):
 class ProfileView(LoginRequiredMixinCustom, TemplateView):
     template_name = 'account/profile/profile_details.html'
 
+    def post(self, request):
+        form = forms.UpdateProfileForm(data=request.POST, files=request.FILES, instance=request.user.profile)
+
+        if form_validate_err(request, form):
+            form.save(commit=False)
+            messages.success(request, _('Profile update success'))
+
+        return redirect('account:profile')
+
 
 # UpdatePassword view
 class UpdatePasswordView(LoginRequiredMixinCustom, View):
