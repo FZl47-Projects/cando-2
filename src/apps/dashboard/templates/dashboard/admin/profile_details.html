@@ -191,7 +191,7 @@
         </div>
         <!-- main @e -->
 
-        <!-- @@ Profile Edit Modal @e -->
+        <!-- @@ Edit profile modal @e -->
         <div class="modal fade" role="dialog" id="profile-edit">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
@@ -200,11 +200,11 @@
                         <h5 class="title">به روز رسانی پروفایل</h5>
                         <ul class="nk-nav nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#personal">شخصی</a>
+                                <a class="nav-link active" data-bs-toggle="tab" href="#">شخصی</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#address">نشانی</a>
-                            </li>
+{#                            <li class="nav-item">#}
+{#                                <a class="nav-link" data-bs-toggle="tab" href="#address">نشانی</a>#}
+{#                            </li>#}
                         </ul>
                         <!-- .nav-tabs -->
                         <form method="post" action="" enctype="multipart/form-data" class="tab-content">
@@ -282,44 +282,6 @@
                                     <div class="col-12">
                                         <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                                             <li>
-                                                <button type="submit" data-bs-dismiss="modal" class="btn btn-lg btn-primary">
-                                                    به روز رسانی پروفایل
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-bs-dismiss="modal" class="link link-light">لغو</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- .tab-pane -->
-                            <div class="tab-pane" id="address">
-                                <div class="row gy-4">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="form-label" for="address-l1">خط نشانی</label>
-                                            <input type="text" class="form-control form-control-lg" id="address-l1"
-                                                   value="" placeholder="خ اول، ک ۳۲">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="address-province">استان</label>
-                                            <input type="text" class="form-control form-control-lg" id="address-province"
-                                                   value="" placeholder="تهران">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="address-city">شهر</label>
-                                            <input type="text" class="form-control form-control-lg" id="address-city"
-                                                   value="" placeholder="تهران">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
-                                            <li>
                                                 <button type="submit" class="btn btn-lg btn-primary">
                                                     به روز رسانی پروفایل
                                                 </button>
@@ -332,16 +294,49 @@
                                 </div>
                             </div>
                             <!-- .tab-pane -->
+{#                            <div class="tab-pane" id="address">#}
+{#                                <div class="row gy-4">#}
+{#                                    <div class="col-12">#}
+{#                                        <div class="form-group">#}
+{#                                            <label class="form-label" for="address-l1">خط نشانی</label>#}
+{#                                            <input type="text" class="form-control form-control-lg" id="address-l1"#}
+{#                                                   value="" placeholder="خ اول، ک ۳۲">#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-md-6">#}
+{#                                        <div class="form-group">#}
+{#                                            <label class="form-label" for="address-province">استان</label>#}
+{#                                            <input type="text" class="form-control form-control-lg" id="address-province"#}
+{#                                                   value="" placeholder="تهران">#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-md-6">#}
+{#                                        <div class="form-group">#}
+{#                                            <label class="form-label" for="address-city">شهر</label>#}
+{#                                            <input type="text" class="form-control form-control-lg" id="address-city"#}
+{#                                                   value="" placeholder="تهران">#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-12">#}
+{#                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">#}
+{#                                            <li>#}
+{#                                                <button type="submit" class="btn btn-lg btn-primary">#}
+{#                                                    به روز رسانی پروفایل#}
+{#                                                </button>#}
+{#                                            </li>#}
+{#                                            <li>#}
+{#                                                <a href="#" data-bs-dismiss="modal" class="link link-light">لغو</a>#}
+{#                                            </li>#}
+{#                                        </ul>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
                         </form>
-                        <!-- .tab-content -->
                     </div>
-                    <!-- .modal-body -->
                 </div>
-                <!-- .modal-content -->
             </div>
-            <!-- .modal-dialog -->
         </div>
-        <!-- .modal -->
+        <!-- .Edit profile modal -->
     </div>
     <!-- app-root @e -->
 {% endblock %}
