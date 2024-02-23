@@ -1,4 +1,4 @@
-{% extends 'dashboard/base_admin.html' %}
+{% extends 'base/base_admin.html' %}
 {% load filters %}
 {% load static %}
 
@@ -12,7 +12,7 @@
             <!-- wrap @s -->
             <div class="nk-wrap">
                 <!-- main header @e -->
-                {% include 'dashboard/admin/components/header.html' %}
+                {% include 'base/components/dashboard/header.html' %}
                 <!-- main header @e -->
 
                 <!-- content @s -->
@@ -20,7 +20,7 @@
                     <div class="container wide-xl">
                         <div class="nk-content-inner">
                             <!-- Start aside -->
-                            {% include 'dashboard/admin/components/aside_menu.html' %}
+                            {% include 'base/components/dashboard/aside_menu.html' %}
                             <!-- .End aside -->
 
                             <div class="nk-content-body">
@@ -317,20 +317,6 @@
                                                    value="" placeholder="تهران">
                                         </div>
                                     </div>
-{#                                    <div class="col-md-6">#}
-{#                                        <div class="form-group">#}
-{#                                            <label class="form-label" for="address-county">کشور</label>#}
-{#                                            <select class="form-select js-select2" id="address-county" data-ui="lg">#}
-{#                                                <option>ایران</option>#}
-{#                                                <option>ایالات متحده آمریکا</option>#}
-{#                                                <option>انگلستان</option>#}
-{#                                                <option>استرالیا</option>#}
-{#                                                <option>کانادا</option>#}
-{#                                                <option>آلمان</option>#}
-{#                                                <option>ترکیه</option>#}
-{#                                            </select>#}
-{#                                        </div>#}
-{#                                    </div>#}
                                     <div class="col-12">
                                         <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                                             <li>

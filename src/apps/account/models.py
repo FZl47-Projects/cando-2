@@ -73,7 +73,7 @@ class User(AbstractUser):
     def get_dashboard_url(self):
         if self.is_admin:
             return reverse('dashboard:admin')
-        return reverse('dashboard:user')
+        return reverse('account:profile')
 
     def get_admin_notes(self):
         return self.admin_notes.all()

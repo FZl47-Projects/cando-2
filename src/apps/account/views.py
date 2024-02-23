@@ -1,10 +1,10 @@
 from django.http import JsonResponse, HttpResponseBadRequest, Http404, HttpResponse
+from django.views.generic import View, TemplateView, ListView, FormView
 from django.contrib.auth import authenticate, login, get_user_model
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.http import require_POST
 from django.utils.translation import gettext as _
-from django.views.generic import View
 from django.contrib import messages
 from django.conf import settings
 
@@ -12,7 +12,7 @@ from apps.core.utils import add_prefix_phonenum, random_num, form_validate_err
 from apps.core.redis_py import set_value_expire, remove_key, get_value
 from apps.core.auth.mixins import LoginRequiredMixinCustom
 from apps.notification.models import NotificationUser
-from apps.account import forms
+from . import forms
 import json
 
 User = get_user_model()
@@ -248,14 +248,16 @@ class ConfirmPhoneNumberCheckCode(LoginRequiredMixin, View):
             return HttpResponseBadRequest()
         user = request.user
         key = CONFIRM_PHONENUMBER_CONFIG['STORE_BY'].format(user.get_raw_phonenumber())
-        # check code
+
+        # Check code
         code_stored = get_value(key)
         if code_stored is None:
-            # code is not seted or timeout
+            # code is not set or timeout
             return HttpResponse(status=410)
         if code_stored != code:
             # code is wrong(not same)
             return HttpResponse(status=409)
+
         # confirm phonenumber
         user.is_phonenumber_confirmed = True
         user.save()
@@ -270,16 +272,9 @@ class ConfirmPhoneNumberCheckCode(LoginRequiredMixin, View):
         return JsonResponse({})
 
 
-class DashboardInfoDetail(LoginRequiredMixinCustom, View):
-
-    def get(self, request):
-        return render(request, 'account/dashboard/information/detail.html')
-
-
-class DashboardInfoChangePassword(LoginRequiredMixinCustom, View):
-
-    def get(self, request):
-        return render(request, 'account/dashboard/information/change-password.html')
+# Render Profile view
+class ProfileView(LoginRequiredMixinCustom, TemplateView):
+    template_name = 'account/profile/profile_details.html'
 
 
 # UpdatePassword view

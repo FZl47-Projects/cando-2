@@ -1,4 +1,4 @@
-{% extends 'dashboard/base_admin.html' %}
+{% extends 'base/base_admin.html' %}
 {% load filters %}
 {% load static %}
 
@@ -12,7 +12,7 @@
             <!-- wrap @s -->
             <div class="nk-wrap">
                 <!-- main header @e -->
-                {% include 'dashboard/admin/components/header.html' %}
+                {% include 'base/components/dashboard/header.html' %}
                 <!-- main header @e -->
 
                 <!-- content @s -->
@@ -20,18 +20,29 @@
                     <div class="container wide-xl">
                         <div class="nk-content-inner">
                             <!-- .nk-aside -->
-                            {% include 'dashboard/admin/components/aside_menu.html' %}
+                            {% include 'base/components/dashboard/aside_menu.html' %}
                             <!-- .nk-aside -->
+
                             <div class="nk-content-body">
                                 <div class="nk-content-wrap">
                                     <div class="nk-block-head">
                                         <div class="nk-block-between g-3">
                                             <div class="nk-block-head-content">
-                                                <h3 class="nk-block-title page-title">کاربر / <strong class="text-primary small">{{ object.get_full_name }}</strong></h3>
+                                                <h3 class="nk-block-title page-title">کاربر /
+                                                    <strong class="text-primary small">
+                                                        {{ object.get_full_name }}
+                                                    </strong>
+                                                </h3>
                                                 <div class="nk-block-des text-soft">
                                                     <ul class="list-inline">
-                                                        <li>شناسه کاربر: <span class="text-base">{{ object.id }}</span></li>
-                                                        <li>آخرین ورود: <span class="text-base">{{ object.last_login|convert_datetime|date:'Y/m/d H:i' }}</span></li>
+                                                        <li>شناسه کاربر:
+                                                            <span class="text-base">{{ object.id }}</span>
+                                                        </li>
+                                                        <li>آخرین ورود:
+                                                            <span class="text-base">
+                                                                {{ object.last_login|convert_datetime|date:'Y/m/d H:i' }}
+                                                            </span>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -51,13 +62,15 @@
                                         <div class="card card-bordered">
                                             <ul class="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
                                                 <li class="nav-item">
-                                                    <a class="nav-link {% if not request.GET.tab or request.GET.tab == 'personal' %}active{% endif %}" data-bs-toggle="tab" href="#personal">
+                                                    <a class="nav-link {% if not request.GET.tab or request.GET.tab == 'personal' %}active{% endif %}"
+                                                       data-bs-toggle="tab" href="#personal">
                                                         <em class="icon ni ni-user-circle"></em>
                                                         <span>شخصی</span>
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link {% if request.GET.tab == 'orders' %}active{% endif %}" data-bs-toggle="tab" href="#orders">
+                                                    <a class="nav-link {% if request.GET.tab == 'orders' %}active{% endif %}"
+                                                       data-bs-toggle="tab" href="#orders">
                                                         <em class="icon ni ni-repeat"></em>
                                                         <span>سفارشات</span>
                                                     </a>
@@ -189,12 +202,32 @@
                                                 <!-- User orders -->
                                                 <div class="col-12 tab-pane {% if request.GET.tab == 'orders' %}active{% endif %}" id="orders">
                                                     <div class="card card-full">
-                                                        <div class="card-inner">
+                                                        <div class="card-inner d-flex justify-content-between">
                                                             <div class="card-title-group">
                                                                 <h5 class="title">
                                                                     سفارشات کاربر
                                                                 </h5>
                                                             </div>
+                                                            <div class="dropdown">
+                                                                <a href="#" class="btn btn-trigger btn-icon dropdown-toggle" data-bs-toggle="dropdown">
+                                                                    <em class="icon ni ni-setting"></em>
+                                                                </a>
+                                                                <div class="dropdown-menu dropdown-menu-xs dropdown-menu-end">
+                                                                    <ul class="link-check">
+                                                                        <li><span>فیلتر وضعیت</span></li>
+                                                                        <li class="active">
+                                                                            <a href="#">پرداخت شده</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">لغو شده</a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#">در انتظار</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .dropdown -->
                                                         </div>
                                                         <div class="card-inner p-0 border-top">
                                                             <div class="nk-tb-list nk-tb-orders">

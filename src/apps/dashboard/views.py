@@ -10,8 +10,8 @@ from apps.core.utils import form_validate_err, message_form_errors, normalize_ph
 from apps.account.forms import UpdateProfileForm, AddUserForm
 from apps.core.auth.mixins import AdminRequiredMixin
 from apps.account.models import User
-from ..models import UserNote
-from .. import forms
+from .models import UserNote
+from . import forms
 
 
 # Render AdminDashboard view
@@ -64,6 +64,7 @@ class UsersListView(AdminRequiredMixin, ListView):
 class UserDetailsView(AdminRequiredMixin, DetailView):
     template_name = 'dashboard/admin/user_details.html'
     model = User
+    context_object_name = 'object'
 
 
 # AddUser view

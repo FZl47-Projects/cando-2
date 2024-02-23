@@ -1,0 +1,102 @@
+<div class="nk-aside" data-content="sideNav" data-toggle-overlay="true" data-toggle-screen="lg" data-toggle-body="true">
+    <div class="nk-sidebar-menu" data-simplebar>
+        <!-- .nk-menu -->
+        <ul class="nk-menu">
+            <!-- .nk-menu-item -->
+            <li class="nk-menu-heading">
+                <h6 class="overline-title text-primary-alt">صفحات دسترسی</h6>
+            </li>
+            <!-- .nk-menu-item -->
+            <li class="nk-menu-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+                <a href="{% url 'account:profile' %}" class="nk-menu-link">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-users"></em>
+                    </span>
+                    <span class="nk-menu-text">پروفایل من</span>
+                </a>
+            </li>
+            <!-- .nk-menu-item -->
+            <li class="nk-menu-item">
+                <a href="#" class="nk-menu-link">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-card-view"></em>
+                    </span>
+                    <span class="nk-menu-text">علاقه مندی‌ها</span>
+                </a>
+            </li>
+            <!-- .nk-menu-item -->
+            <li class="nk-menu-item has-sub">
+                <a href="#" class="nk-menu-link nk-menu-toggle">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-tranx"></em>
+                    </span>
+                    <span class="nk-menu-text">سفارشات من</span>
+                </a>
+                <ul class="nk-menu-sub">
+                    <li class="nk-menu-item">
+                        <a href="#" class="nk-menu-link">
+                            <span class="nk-menu-text">لیست سفارشات</span>
+                        </a>
+                    </li>
+                    <li class="nk-menu-item">
+                        <a href="#" class="nk-menu-link">
+                            <span class="nk-menu-text">سفارشات دلخواه</span>
+                        </a>
+                    </li>
+                    <li class="nk-menu-item">
+                        <a href="#" class="nk-menu-link">
+                            <span class="nk-menu-text">لیست تراکنش‌ها</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- .nk-menu-sub -->
+            </li>
+            <!-- .nk-menu-item -->
+            <li class="nk-menu-item has-sub">
+                <a href="#" class="nk-menu-link nk-menu-toggle">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-help-alt"></em>
+                    </span>
+                    <span class="nk-menu-text">تیکت ها</span>
+                </a>
+                <ul class="nk-menu-sub">
+                    <li class="nk-menu-item">
+                        <a href="#" class="nk-menu-link">
+                            <span class="nk-menu-text">لیست تیکت ها</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- .nk-menu-sub -->
+            </li>
+            <!-- .nk-menu-item -->
+            <li class="nk-menu-heading">
+                <h6 class="overline-title text-primary-alt">سایر</h6>
+            </li>
+            <!-- .nk-menu-heading -->
+            <li class="nk-menu-item">
+                <a href="#" class="nk-menu-link">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-text-rich"></em>
+                    </span>
+                    <span class="nk-menu-text">صفحه خارجی ۱</span>
+                </a>
+            </li>
+            <li class="nk-menu-item">
+                <a href="#" class="nk-menu-link">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-layers"></em>
+                    </span>
+                    <span class="nk-menu-text">صفحه خارجی ۲</span>
+                </a>
+            </li>
+        </ul>
+        <!-- .nk-menu -->
+    </div>
+    <!-- .nk-sidebar-menu -->
+    <div class="nk-aside-close">
+        <a href="#" class="toggle" data-target="sideNav">
+            <em class="icon ni ni-cross"></em>
+        </a>
+    </div>
+    <!-- .nk-aside-close -->
+</div>

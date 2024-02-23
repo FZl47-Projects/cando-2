@@ -1,4 +1,4 @@
-{% extends 'dashboard/base_admin.html' %}
+{% extends 'base/base_admin.html' %}
 {% load filters %}
 {% load static %}
 
@@ -12,7 +12,7 @@
             <!-- wrap @s -->
             <div class="nk-wrap">
                 <!-- main header @e -->
-                {% include 'dashboard/admin/components/header.html' %}
+                {% include 'base/components/dashboard/header.html' %}
                 <!-- main header @e -->
 
                 <!-- content @s -->
@@ -20,7 +20,7 @@
                     <div class="container wide-xl">
                         <div class="nk-content-inner">
                             <!-- .nk-aside -->
-                            {% include 'dashboard/admin/components/aside_menu.html' %}
+                            {% include 'base/components/dashboard/aside_menu.html' %}
                             <!-- .nk-aside -->
 
                             <div class="nk-content-body">

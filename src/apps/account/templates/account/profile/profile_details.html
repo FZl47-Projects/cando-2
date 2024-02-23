@@ -1,0 +1,454 @@
+{% extends 'base/base_admin.html' %}
+{% load filters %}
+{% load static %}
+
+
+{% block Title %}کندو | پروفایل{% endblock %}
+
+{% block content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                <!-- main header @e -->
+                {% include 'base/components/dashboard/user_header.html' %}
+                <!-- main header @e -->
+
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            <!-- Start aside -->
+                            {% include 'base/components/dashboard/user_aside_menu.html' %}
+                            <!-- .End aside -->
+
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head">
+                                        <div class="nk-block-head-content">
+                                            <h3 class="nk-block-title page-title">پروفایل من</h3>
+                                            <div class="nk-block-des">
+                                                <p>شما کنترل کاملی برای مدیریت تنظیمات حساب کاربری خود دارید.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered">
+                                            <ul class="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active"
+                                                       data-bs-toggle="tab" href="#personal">
+                                                        <em class="icon ni ni-user-fill-c"></em>
+                                                        <span>شخصی</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link"
+                                                       data-bs-toggle="tab" href="#address">
+                                                        <em class="icon ni ni-bell-fill"></em>
+                                                        <span>آدرس ها</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link"
+                                                       data-bs-toggle="tab" href="#notification">
+                                                        <em class="icon ni ni-bell-fill"></em>
+                                                        <span>اطلاع رسانی ها</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link"
+                                                       data-bs-toggle="tab" href="#settings">
+                                                        <em class="icon ni ni-lock-alt-fill"></em>
+                                                        <span>تنظیمات امنیتی</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <!-- .nav-tabs -->
+                                            <div class="tab-content">
+                                                <div id="personal" class="card-inner card-inner-lg tab-pane active">
+                                                    <div class="nk-block-head">
+                                                        <div class="nk-block-head-content">
+                                                            <h4 class="nk-block-title">اطلاعات شخصی</h4>
+                                                            <div class="nk-block-des">
+                                                                <p>
+                                                                    اطلاعات پایه، مانند نام و نشانی شما، که در پلتفرم استفاده می
+                                                                    کنید.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .nk-block-head -->
+                                                    <div class="nk-block">
+                                                        <div class="nk-data data-list data-list-s2">
+                                                            <div class="data-head">
+                                                                <h6 class="overline-title">پایه</h6>
+                                                            </div>
+                                                            <div class="data-item" data-bs-toggle="modal"
+                                                                 data-bs-target="#profile-edit">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">نام</span>
+                                                                    <span class="data-value">{{ user.first_name|default:'' }}</span>
+                                                                </div>
+                                                                <div class="data-col data-col-end">
+                                                                    <span class="data-more">
+                                                                        <em class="icon ni ni-forward-ios"></em>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <!-- data-item -->
+                                                            <div class="data-item" data-bs-toggle="modal"
+                                                                 data-bs-target="#profile-edit">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">نام خانوادگی</span>
+                                                                    <span class="data-value">{{ user.last_name|default:'' }}</span>
+                                                                </div>
+                                                                <div class="data-col data-col-end">
+                                                                    <span class="data-more">
+                                                                        <em class="icon ni ni-forward-ios"></em>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <!-- data-item -->
+                                                            <div class="data-item" data-bs-toggle="modal"
+                                                                 data-bs-target="#profile-edit">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">شماره موبایل</span>
+                                                                    <span class="data-value text-soft">{{ user.get_phone_number }}</span>
+                                                                </div>
+                                                                <div class="data-col data-col-end">
+                                                                    <span class="data-more">
+                                                                        <em class="icon ni ni-forward-ios"></em>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <!-- data-item -->
+                                                            <div class="data-item" data-bs-toggle="modal"
+                                                                 data-bs-target="#profile-edit">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">تاریخ تولد</span>
+                                                                    <span class="data-value">
+                                                                        {{ user.profile.get_date_of_birth|convert_date|date:'Y/m/d'|default:'ثبت نشده' }}
+                                                                    </span>
+                                                                </div>
+                                                                <div class="data-col data-col-end">
+                                                                    <span class="data-more">
+                                                                        <em class="icon ni ni-forward-ios"></em>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <!-- data-item -->
+                                                            <div class="data-item" data-bs-toggle="modal"
+                                                                 data-bs-target="#profile-edit">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">جنسیت</span>
+                                                                    <span class="data-value">
+                                                                        {{ user.profile.get_gender_label }}
+                                                                    </span>
+                                                                </div>
+                                                                <div class="data-col data-col-end">
+                                                                    <span class="data-more">
+                                                                        <em class="icon ni ni-forward-ios"></em>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .nk-block -->
+                                                </div>
+
+                                                <!-- Start Address tab -->
+                                                <div id="address" class="card-inner card-inner-lg tab-pane">
+                                                    <div class="nk-block-head">
+                                                        <div class="nk-block-head-content">
+                                                            <h4 class="nk-block-title">آدرس ها</h4>
+                                                            <div class="nk-block-des">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .nk-block-head -->
+                                                    <div class="nk-block">
+                                                        <div class="nk-data data-list data-list-s2">
+
+                                                            {# TODO: Add address data here #}
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- .End Address tab -->
+
+                                                <!-- Start Notification tab -->
+                                                <div id="notification" class="card-inner card-inner-lg tab-pane">
+                                                    <div class="nk-block-head">
+                                                        <div class="nk-block-head-content">
+                                                            <h4 class="nk-block-title">اعلان ها</h4>
+                                                            <div class="nk-block-des">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .nk-block-head -->
+                                                    <div class="nk-block">
+                                                        <div class="nk-data data-list data-list-s2">
+
+                                                            {# TODO: Add notifications data here #}
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- .End Notification tab -->
+
+                                                <!-- Start Settings tab -->
+                                                <div id="settings" class="card-inner card-inner-lg tab-pane">
+                                                    <div class="nk-block-head">
+                                                        <div class="nk-block-head-content">
+                                                            <h4 class="nk-block-title">تنظیمات امنیتی</h4>
+                                                            <div class="nk-block-des">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .nk-block-head -->
+                                                    <div class="nk-block">
+                                                        <div class="nk-data data-list data-list-s2">
+                                                            <div class="card">
+                                                                <div class="card-inner-group">
+                                                                    <div class="card-inner px-0">
+                                                                        <div class="between-center flex-wrap g-3">
+                                                                            <div class="nk-block-text">
+                                                                                <h6>تغییر رمز عبور</h6>
+                                                                                <p>یک رمز عبور منحصر به فرد برای محافظت از حساب خود تنظیم کنید.</p>
+                                                                            </div>
+                                                                            <div class="nk-block-actions flex-shrink-sm-0">
+                                                                                <ul class="align-center flex-wrap flex-sm-nowrap gx-3 gy-2">
+                                                                                    <li class="order-md-last">
+                                                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#password-edit"
+                                                                                                class="btn btn-primary">
+                                                                                            تغییر رمز عبور
+                                                                                        </button>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- .End Settings tab -->
+
+                                            </div>
+                                            <!-- .card-inner -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+
+                                <!-- footer @s -->
+                                <div class="nk-footer">
+                                    <div class="container wide-xl">
+                                        <div class="nk-footer-wrap g-2">
+                                            <div class="nk-footer-copyright">© تمام حقوق محفوظ است.
+                                                <a target="_blank" rel="nofollow" href="#">شیرینی سرای کندو</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- footer @e -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+
+        <!-- @@ Profile Edit Modal @e -->
+        <div class="modal fade" role="dialog" id="profile-edit">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-bs-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+                    <div class="modal-body modal-body-lg">
+                        <h5 class="title">به روز رسانی پروفایل</h5>
+                        <form method="post" action="" enctype="multipart/form-data" class="tab-content">
+                            {% csrf_token %}
+                            <div class="tab-pane active">
+                                <div class="row gy-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="first-name">نام</label>
+                                            <input type="text" class="form-control form-control-lg" id="first-name" name="first_name"
+                                                   value="{{ user.first_name|default:'' }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="last-name">نام خانوادگی</label>
+                                            <input type="text" class="form-control form-control-lg" id="last-name" name="last_name"
+                                                   value="{{ user.last_name|default:'' }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="phone-no">شماره موبایل</label>
+                                            <input type="text" class="form-control form-control-lg" id="phone-no" name="phonenumber"
+                                                   value="{{ user.get_phone_number }}" placeholder="09180000000" maxlength="11">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="birth-day">تاریخ تولد</label>
+                                            <input type="text" class="form-control form-control-lg date-picker" id="birth-day" name="date_of_birth"
+                                                   placeholder="روز/ماه/سال" data-date-format="yyyy-mm-dd"
+                                                   readonly value="{{ user.profile.get_date_of_birth|convert_date }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="gender-1">جنسیت</label>
+                                            <ul class="custom-control-group g-3 align-center flex-wrap">
+                                                <li>
+                                                    <div class="custom-control custom-radio checked">
+                                                        <input type="radio" class="custom-control-input" {% if user.profile.gender == 'male' %}checked{% endif %}
+                                                               name="gender" id="gender-1" value="male">
+                                                        <label class="custom-control-label" for="gender-1">مرد</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" {% if user.profile.gender == 'female' %}checked{% endif %}
+                                                               name="gender" id="gender-2" value="female">
+                                                        <label class="custom-control-label" for="gender-2">زن</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" {% if user.profile.gender == 'unknown' %}checked{% endif %}
+                                                               name="gender" id="gender-3" value="unknown">
+                                                        <label class="custom-control-label" for="gender-3">نامشخص</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="profile-image">تصویر پروفایل</label>
+                                            <div class="form-control-wrap">
+                                                <div class="form-file">
+                                                    <input type="file" accept="image/jpeg, image/png" class="form-file-input" name="image" id="profile-image">
+                                                    <label class="form-file-label small" for="profile-image">انتخاب فایل</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                            <li>
+                                                <button type="submit" data-bs-dismiss="modal" class="btn btn-lg btn-primary">
+                                                    به روز رسانی پروفایل
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-bs-dismiss="modal" class="link link-light">لغو</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .Profile Edit Modal -->
+
+        <!-- Edit password modal -->
+        <div class="modal fade" role="dialog" id="password-edit">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-bs-dismiss="modal">
+                        <em class="icon ni ni-cross-sm"></em>
+                    </a>
+                    <div class="modal-body modal-body-lg">
+                        <h5 class="title">تغییر رمز عبور</h5>
+                        <!-- .nav-tabs -->
+                        <form method="post" action="{% url 'account:change_password' %}" class="tab-content">
+                            {% csrf_token %}
+                            <div class="tab-pane active" id="personal">
+                                <div class="row gy-4">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="password">رمز عبور</label>
+                                            <div class="form-control-wrap pass-toggle">
+                                                <div role="button" class="form-icon form-icon-right">
+                                                    <em class="icon ni ni-eye"></em>
+                                                </div>
+                                                <input type="password" class="form-control form-control-lg" id="password" name="password"
+                                                   placeholder="رمز عبور فعلی" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="password2">رمز عبور جدید</label>
+                                            <div class="form-control-wrap pass-toggle">
+                                                <div role="button" class="form-icon form-icon-right">
+                                                    <em class="icon ni ni-eye"></em>
+                                                </div>
+                                                <input type="password" class="form-control form-control-lg" id="password2" name="password2"
+                                                   placeholder="رمز عبور جدید" minlength="4" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                            <li>
+                                                <button type="submit" class="btn btn-lg btn-primary">
+                                                    تغییر رمز عبور
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-bs-dismiss="modal" class="link link-light">لغو</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .Edit password modal -->
+
+    </div>
+    <!-- app-root @e -->
+{% endblock %}
+
+{% block Script %}
+    <script src="{% static 'dashboard/js/jdate.js' %}"></script>
+    <script>
+        // Toggle passwords input to text and reverse
+        const passToggles = document.querySelectorAll('.pass-toggle');
+        passToggles.forEach((item, index) => {
+            let icon = item.querySelector('.icon');
+            let input = item.querySelector('input[type=password]');
+
+            icon.addEventListener('click', function (e){
+                if(input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.replace('ni-eye', 'ni-eye-off');
+                }
+                else {
+                    input.type ='password';
+                    icon.classList.replace('ni-eye-off', 'ni-eye');
+                }
+            })
+        })
+    </script>
+{% endblock %}
