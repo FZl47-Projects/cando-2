@@ -12,6 +12,7 @@ class Address(BaseModel):
     province = models.CharField(_('Province'), max_length=128, null=True, blank=True)
     city = models.CharField(_('City'), max_length=128, null=True, blank=True)
     address_line = models.CharField(_('Address'), max_length=255)
+    post_code = models.CharField(_('Post code'), max_length=16, null=True, blank=True)
     active = models.BooleanField(_('Active address'), default=False)
 
     class Meta:

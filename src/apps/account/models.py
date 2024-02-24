@@ -78,6 +78,9 @@ class User(AbstractUser):
     def get_admin_notes(self):
         return self.admin_notes.all()
 
+    def get_addresses(self):
+        return self.addresses.all()
+
 
 # Users' Profile model
 class UserProfile(models.Model):

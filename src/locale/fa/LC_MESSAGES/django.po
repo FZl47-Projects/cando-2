@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-22 22:06+0330\n"
+"POT-Creation-Date: 2024-02-25 00:06+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,6 +28,7 @@ msgstr "تاریخ ها"
 
 #: .\apps\account\admin.py:39 .\apps\account\admin.py:53
 #: .\apps\account\models.py:19 .\apps\dashboard\admin.py:13
+#: .\apps\navigation\admin.py:13
 msgid "Phone number"
 msgstr "شماره تلفن"
 
@@ -78,7 +79,7 @@ msgstr ""
 
 #: .\apps\account\mixins.py:27
 msgid "You do not have permission to access this page!"
-msgstr ""
+msgstr "شما اجازه دسترسی به این صفحه را ندارید!"
 
 #: .\apps\account\models.py:16
 msgid "First name"
@@ -96,8 +97,8 @@ msgstr "تایید شده"
 msgid "User role"
 msgstr "نقش کاربر"
 
-#: .\apps\account\models.py:32 .\apps\account\models.py:83
-#: .\apps\dashboard\models.py:11
+#: .\apps\account\models.py:32 .\apps\account\models.py:89
+#: .\apps\dashboard\models.py:11 .\apps\navigation\models.py:11
 msgid "User"
 msgstr "کاربر"
 
@@ -105,43 +106,47 @@ msgstr "کاربر"
 msgid "Users"
 msgstr "کاربران"
 
-#: .\apps\account\models.py:84
+#: .\apps\account\models.py:90
 msgid "Melli code"
 msgstr "کد ملی"
 
-#: .\apps\account\models.py:85
+#: .\apps\account\models.py:91
 msgid "Gender"
 msgstr "جنسیت"
 
-#: .\apps\account\models.py:86
+#: .\apps\account\models.py:92
 msgid "Date of birth"
 msgstr "تاریخ تولد"
 
-#: .\apps\account\models.py:87
+#: .\apps\account\models.py:93
 msgid "Profile picture"
 msgstr "تصویر پروفایل"
 
-#: .\apps\account\models.py:89
+#: .\apps\account\models.py:95
 msgid "Created at"
 msgstr "زمان ایجاد"
 
-#: .\apps\account\models.py:90
+#: .\apps\account\models.py:96
 msgid "Updated at"
 msgstr "زمان ویرایش"
 
-#: .\apps\account\models.py:93
+#: .\apps\account\models.py:99
 msgid "User profile"
 msgstr "پروفایل کاربر"
 
-#: .\apps\account\models.py:94
+#: .\apps\account\models.py:100
 msgid "User profiles"
 msgstr "پروفایل کاربران"
 
-#: .\apps\account\views.py:296
+#: .\apps\account\views.py:284 .\apps\dashboard\views.py:31
+msgid "Profile update success"
+msgstr "پروفایل با موفقیت بروزرسانی شد"
+
+#: .\apps\account\views.py:300
 msgid "Password is not correct"
 msgstr "رمز عبور صحیح نیست!"
 
-#: .\apps\account\views.py:303
+#: .\apps\account\views.py:307
 msgid "Password successfully changed"
 msgstr "رمز عبور با موفقیت تغییر کرد"
 
@@ -178,19 +183,56 @@ msgstr "یادداشت کاربر"
 msgid "User notes"
 msgstr "یادداشت‌های کاربر"
 
-#: .\apps\dashboard\views\admin.py:29
-msgid "Profile update success"
-msgstr "پروفایل با موفقیت بروزرسانی شد"
-
-#: .\apps\dashboard\views\admin.py:75
+#: .\apps\dashboard\views.py:78
 msgid "User successfully added"
 msgstr "کاربر با موفقیت اضافه شد"
 
-#: .\apps\dashboard\views\admin.py:91
+#: .\apps\dashboard\views.py:94
 msgid "User successfully deleted"
 msgstr "کاربر با موفقیت حذف شد"
 
-#: .\config\settings\base.py:102
+#: .\apps\dashboard\views.py:136 .\apps\dashboard\views.py:147
+#: .\apps\navigation\views.py:46
+msgid "There is an issue. please try again"
+msgstr "مشکلی پیش آمده. لطفا مجدد امتحان کنید"
+
+#: .\apps\navigation\apps.py:8
+msgid "Navigation"
+msgstr "ناوبری"
+
+#: .\apps\navigation\models.py:12
+msgid "Province"
+msgstr "استان"
+
+#: .\apps\navigation\models.py:13
+msgid "City"
+msgstr "شهر"
+
+#: .\apps\navigation\models.py:14 .\apps\navigation\models.py:19
+msgid "Address"
+msgstr "آدرس"
+
+#: .\apps\navigation\models.py:15
+msgid "Post code"
+msgstr ""
+
+#: .\apps\navigation\models.py:16
+msgid "Active address"
+msgstr "آدرس فعال"
+
+#: .\apps\navigation\models.py:20
+msgid "Addresses"
+msgstr "آدرس‌ها"
+
+#: .\apps\navigation\views.py:28
+msgid "Address successfully added"
+msgstr "آدرس با موفقیت اضافه شد"
+
+#: .\apps\navigation\views.py:44
+msgid "Address successfully deleted"
+msgstr "آدرس با موفقیت حذف شد"
+
+#: .\config\settings\base.py:103
 msgid "Persian"
 msgstr "فارسی"
 

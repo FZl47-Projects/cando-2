@@ -38,7 +38,7 @@
                                         <div class="card card-bordered">
                                             <ul class="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active"
+                                                    <a class="nav-link"
                                                        data-bs-toggle="tab" href="#personal">
                                                         <em class="icon ni ni-user-fill-c"></em>
                                                         <span>شخصی</span>
@@ -68,7 +68,7 @@
                                             </ul>
                                             <!-- .nav-tabs -->
                                             <div class="tab-content">
-                                                <div id="personal" class="card-inner card-inner-lg tab-pane active">
+                                                <div id="personal" class="card-inner card-inner-lg tab-pane">
                                                     <div class="nk-block-head">
                                                         <div class="nk-block-head-content">
                                                             <h4 class="nk-block-title">اطلاعات شخصی</h4>
@@ -162,18 +162,70 @@
                                                 <!-- Start Address tab -->
                                                 <div id="address" class="card-inner card-inner-lg tab-pane">
                                                     <div class="nk-block-head">
-                                                        <div class="nk-block-head-content">
+                                                        <div class="nk-block-head-content d-flex justify-content-between">
                                                             <h4 class="nk-block-title">آدرس ها</h4>
-                                                            <div class="nk-block-des">
-                                                            </div>
+                                                            <a class="btn btn-icon btn-primary" data-bs-toggle="modal" data-bs-target="#addAddressModal">
+                                                                <em class="icon ni ni-plus"></em>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                     <!-- .nk-block-head -->
                                                     <div class="nk-block">
-                                                        <div class="nk-data data-list data-list-s2">
-
-                                                            {# TODO: Add address data here #}
-
+                                                        <div class="row g-gs">
+                                                            {% for obj in user.get_addresses %}
+                                                                <div class="col-sm-8 col-xl-6">
+                                                                    <div class="card card-bordered h-100">
+                                                                        <div class="card-inner">
+                                                                            <div class="project">
+                                                                                <div class="project-head">
+                                                                                    <div class="project-title">
+                                                                                        <div class="project-info">
+                                                                                            <h6 class="title">{{ user.get_full_name }}</h6>
+                                                                                            <small class="sub-text">{{ obj.created_at|date:'Y/m/d' }}</small>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="drodown">
+                                                                                        <a href="#" class="dropdown-toggle btn btn-sm btn-icon btn-trigger mt-n1 me-n1" data-bs-toggle="dropdown">
+                                                                                            <em class="icon ni ni-more-h"></em>
+                                                                                        </a>
+                                                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                                                            <ul class="link-list-opt no-bdr">
+                                                                                                <li>
+                                                                                                    <a data-bs-toggle="modal" data-bs-target="#deleteAddressModal" data-pk="{{ obj.pk }}">
+                                                                                                        <em class="icon ni ni-trash"></em>
+                                                                                                        <span>حذف آدرس</span>
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="project-details">
+                                                                                    <div class="d-flex sub-text">
+                                                                                        <small>{{ obj.province }}، </small>
+                                                                                        <small> {{ obj.city }} </small>
+                                                                                    </div>
+                                                                                    <p>{{ obj.address_line }}</p>
+                                                                                </div>
+                                                                                <div class="project-meta">
+                                                                                    <ul class="project-users g-1">
+                                                                                        <li>
+                                                                                            <small>کد پستی:
+                                                                                                {{ obj.post_code }}
+                                                                                            </small>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                    {% if obj.active %}
+                                                                                        <span class="badge badge-dim bg-success">
+                                                                                            آدرس فعال
+                                                                                        </span>
+                                                                                    {% endif %}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -267,7 +319,9 @@
         </div>
         <!-- main @e -->
 
-        <!-- @@ Profile Edit Modal @e -->
+        <!-- Start modals -->
+
+        <!-- Edit profile modal -->
         <div class="modal fade" role="dialog" id="profile-edit">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
@@ -367,7 +421,71 @@
                 </div>
             </div>
         </div>
-        <!-- .Profile Edit Modal -->
+        <!-- .Edit profile modal -->
+
+        <!-- Add Address modal -->
+        <div class="modal fade" role="dialog" id="addAddressModal">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-bs-dismiss="modal">
+                        <em class="icon ni ni-cross-sm"></em>
+                    </a>
+                    <div class="modal-body modal-body-lg">
+                        <h5 class="title">افزودن نشانی</h5>
+                        <!-- .nav-tabs -->
+                        <form method="post" action="{% url 'navigation:create_address' %}" class="tab-content">
+                            {% csrf_token %}
+                            <input type="hidden" name="redirect_path" value="{{ request.get_full_path }}">
+                            <div class="tab-pane active">
+                                <div class="row gy-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="address-province">استان</label>
+                                            <input type="text" class="form-control form-control-lg" name="province"
+                                                   id="address-province" placeholder="تهران" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="address-city">شهرستان</label>
+                                            <input type="text" class="form-control form-control-lg" name="city"
+                                                   id="address-city" placeholder="تهران" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="address-l1">نشانی</label>
+                                            <input type="text" class="form-control form-control-lg" name="address_line"
+                                                   id="address-l1" placeholder="خ اول، ک ۳۲" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="post-code">کد پستی</label>
+                                            <input type="text" class="form-control form-control-lg" name="post_code"
+                                                   id="post-code" placeholder="کد پستی را بدون خط تیره و فاصله وارد کنید" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                            <li>
+                                                <button type="submit" class="btn btn-lg btn-primary">
+                                                    افزودن آدرس
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-bs-dismiss="modal" class="link link-light">لغو</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .Add Address modal -->
 
         <!-- Edit password modal -->
         <div class="modal fade" role="dialog" id="password-edit">
@@ -428,29 +546,46 @@
         </div>
         <!-- .Edit password modal -->
 
+        <!-- Delete address modal -->
+        <div class="modal fade" role="dialog" id="deleteAddressModal">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-bs-dismiss="modal">
+                        <em class="icon ni ni-cross-sm"></em>
+                    </a>
+                    <div class="modal-body modal-body-lg">
+                        <h5 class="title">حذف آدرس</h5>
+                        <!-- .nav-tabs -->
+                        <form method="post" action="{% url 'navigation:delete_address' %}" class="tab-content">
+                            {% csrf_token %}
+                            <div class="tab-pane active" id="personal">
+                                <div class="row gy-4">
+                                    <input type="hidden" name="pk" value="None">
+                                    <h6>آیا از حذف این آدرس اطمینان دارید؟</h6>
+                                    <div class="col-12 mt-4">
+                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                            <li>
+                                                <button type="submit" class="btn btn-lg btn-primary">بله حذف</button>
+                                            </li>
+                                            <li>
+                                                <a href="#" data-bs-dismiss="modal" class="link link-light">لغو</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .Delete address modal -->
+
     </div>
     <!-- app-root @e -->
 {% endblock %}
 
 {% block Script %}
     <script src="{% static 'dashboard/js/jdate.js' %}"></script>
-    <script>
-        // Toggle passwords input to text and reverse
-        const passToggles = document.querySelectorAll('.pass-toggle');
-        passToggles.forEach((item, index) => {
-            let icon = item.querySelector('.icon');
-            let input = item.querySelector('input[type=password]');
-
-            icon.addEventListener('click', function (e){
-                if(input.type === 'password') {
-                    input.type = 'text';
-                    icon.classList.replace('ni-eye', 'ni-eye-off');
-                }
-                else {
-                    input.type ='password';
-                    icon.classList.replace('ni-eye-off', 'ni-eye');
-                }
-            })
-        })
-    </script>
+    <script src="{% static 'scripts/profile-details.js' %}"></script>
 {% endblock %}
