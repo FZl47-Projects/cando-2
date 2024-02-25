@@ -1,0 +1,352 @@
+{% extends 'base/base_admin.html' %}
+{% load filters %}
+{% load static %}
+
+
+{% block Title %}کندو | لیست کاربران{% endblock %}
+
+{% block content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                <!-- main header @e -->
+                {% include 'base/components/dashboard/header.html' %}
+                <!-- main header @e -->
+
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            <!-- .nk-aside -->
+                            {% include 'base/components/dashboard/aside_menu.html' %}
+                            <!-- .nk-aside -->
+
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">محصولات</h3>
+                                                <div class="nk-block-des">
+                                                    <form method="get" action="" id="categoryForm" class="form-group">
+                                                        <div class="form-control-wrap">
+                                                            <select class="form-select form-select-sm js-select2" id="categoryInput" data-search="on" tabindex="-1">
+                                                                <option value="Bashe">کیک تولد</option>
+                                                                <option value="Bashe">کیک عروسی</option>
+                                                                <option value="Bashe">کیک فانتزی</option>
+                                                                <option value="Bashe">کیک ساده</option>
+                                                            </select>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                            <div class="nk-block-head-content">
+                                                <div class="toggle-wrap nk-block-tools-toggle">
+                                                    <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu">
+                                                        <em class="icon ni ni-more-v"></em>
+                                                    </a>
+                                                    <div class="toggle-expand-content" data-content="pageMenu">
+                                                        <ul class="nk-block-tools g-3">
+                                                            <li>
+                                                                <form action="" class="form-control-wrap">
+                                                                    <div class="form-icon form-icon-right">
+                                                                        <em class="icon ni ni-search"></em>
+                                                                    </div>
+                                                                    <input type="text" class="form-control" id="q" name="q" placeholder="جستجوی بر اساس شناسه">
+                                                                </form>
+                                                            </li>
+                                                            <li>
+                                                                <div class="drodown">
+                                                                    <a href="#" class="dropdown-toggle dropdown-indicator btn btn-outline-light btn-white" data-bs-toggle="dropdown">
+                                                                        نوع
+                                                                    </a>
+                                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                                        <ul class="link-list-opt no-bdr">
+                                                                            <li>
+                                                                                <a href="#">
+                                                                                    <span>عادی</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="#">
+                                                                                    <span>ویترینی</span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nk-block-tools-opt">
+                                                                <a href="#" data-target="addProduct" class="toggle btn btn-icon btn-primary d-md-none">
+                                                                    <em class="icon ni ni-plus"></em>
+                                                                </a>
+                                                                <a href="#" data-target="addProduct" class="toggle btn btn-primary d-none d-md-inline-flex">
+                                                                    <em class="icon ni ni-plus"></em>
+                                                                    <span>افزودن محصول</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                        </div>
+                                        <!-- .nk-block-between -->
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered">
+                                            <div class="card-inner-group">
+                                                <div class="card-inner p-0">
+                                                    <div class="nk-tb-list">
+                                                        <div class="nk-tb-item nk-tb-head">
+                                                            <div class="nk-tb-col nk-col-sm"><span>#</span></div>
+                                                            <div class="nk-tb-col tb-col-sm"><span>عنوان</span></div>
+                                                            <div class="nk-tb-col"><span>شناسه</span></div>
+                                                            <div class="nk-tb-col"><span>قیمت</span></div>
+                                                            <div class="nk-tb-col"><small>موجودی</small></div>
+                                                            <div class="nk-tb-col tb-col-md"><span>دسته بندی</span></div>
+                                                            <div class="nk-tb-col tb-col-md"><span>ویترین</span></div>
+                                                            <div class="nk-tb-col nk-tb-col-tools">
+                                                                <ul class="nk-tb-actions gx-1 my-n1">
+                                                                    <li class="me-n1">
+                                                                        <div class="dropdown">
+                                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown">
+                                                                                <em class="icon ni ni-more-h"></em>
+                                                                            </a>
+                                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                                <ul class="link-list-opt no-bdr">
+                                                                                    <li>
+                                                                                        <a href="#"><em class="icon ni ni-edit"></em>
+                                                                                            <span>ویرایش انتخاب شده</span>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="#">
+                                                                                            <em class="icon ni ni-trash"></em>
+                                                                                            <span>حذف انتخاب شده</span>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <!-- .nk-tb-item -->
+
+                                                        <div class="nk-tb-item">
+                                                            <div class="nk-tb-col nk-col-sm">
+                                                                <span>1</span>
+                                                            </div>
+                                                            <div class="nk-tb-col tb-col-sm">
+                                                                <span class="tb-product">
+                                                                    <img src="{% static 'dashboard/images/product/a.png' %}" alt="" class="thumb">
+                                                                    <span class="title">ردیاب تناسب اندام صورتی</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="nk-tb-col">
+                                                                <span class="tb-sub">CC2</span>
+                                                            </div>
+                                                            <div class="nk-tb-col">
+                                                                <span class="tb-lead">99,000
+                                                                    <small>تومان</small>
+                                                                </span>
+                                                            </div>
+                                                            <div class="nk-tb-col">
+                                                                <span class="tb-sub">49</span>
+                                                            </div>
+                                                            <div class="nk-tb-col tb-col-md">
+                                                                <span class="tb-sub">کیک، کیک تولد</span>
+                                                            </div>
+                                                            <div class="nk-tb-col tb-col-md">
+                                                                <div class="asterisk tb-asterisk">
+                                                                    <em class="icon ni ni-check-circle"></em>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- .nk-tb-item -->
+
+                                                    </div>
+                                                    <!-- .nk-tb-list -->
+                                                </div>
+
+                                                <div class="card-inner">
+                                                    <div class="nk-block-between-md g-3">
+                                                        <div class="g">
+                                                            <ul class="pagination justify-content-center justify-content-md-start">
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="#">
+                                                                        <em class="icon ni ni-chevrons-left"></em>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                                <li class="page-item">
+                                                                    <span class="page-link">
+                                                                        <em class="icon ni ni-more-h"></em>
+                                                                    </span>
+                                                                </li>
+                                                                <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                                                <li class="page-item"><a class="page-link" href="#">7</a></li>
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="#"><em class="icon ni ni-chevrons-right"></em></a>
+                                                                </li>
+                                                            </ul>
+                                                            <!-- .pagination -->
+                                                        </div>
+                                                    </div>
+                                                    <!-- .nk-block-between -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .nk-block -->
+
+                                    <!-- Add product modal -->
+                                    <div class="nk-add-product toggle-slide toggle-slide-right" data-content="addProduct" data-toggle-screen="any" data-toggle-overlay="true" data-toggle-body="true" data-simplebar>
+                                        <div class="nk-block-head">
+                                            <div class="nk-block-head-content">
+                                                <h5 class="nk-block-title">محصول جدید</h5>
+                                            </div>
+                                        </div>
+                                        <!-- .nk-block-head -->
+                                        <form method="post" action="" class="nk-block">
+                                            {% csrf_token %}
+                                            <div class="row g-3">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="product-title">عنوان محصول</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="text" class="form-control" id="product-title" name="title" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="price-input">
+                                                            قیمت
+                                                            <small class="text-secondary">(به ازای هر کیلو)</small>
+                                                        </label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="number" class="form-control" id="price-input" name="price" min="0" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="discount-input">
+                                                            تخفیف
+                                                            <small class="text-secondary">(اختیاری)</small>
+                                                        </label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="number" class="form-control" id="discount-input" name="discount" min="0" placeholder="درصد">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mt-2">
+                                                        <div class="form-control-wrap">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="on-display-input" name="on_display" onchange="activeField('onDisplayFields', this.checked)">
+                                                                <label class="custom-control-label" for="on-display-input">ویترین روز</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="onDisplayFields" class="d-flex g-2 w-100 mt-4 d-none">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="form-label" for="selling-weight">
+                                                                وزن فروش
+                                                            </label>
+                                                            <div class="form-control-wrap">
+                                                                <input type="number" class="form-control" id="selling-weight" name="selling_weight" min="0" step="0.5">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="form-label" for="selling-stock">
+                                                                تعداد موجودی
+                                                            </label>
+                                                            <div class="form-control-wrap">
+                                                                <input type="number" class="form-control" id="selling-stock" name="selling_stock" min="0">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="categories">دسته بندی</label>
+                                                        <div class="form-control-wrap">
+                                                            <select class="form-select js-select2" name="category" id="categories" multiple="" data-placeholder="چندین گزینه را انتخاب کنید" tabindex="-1" aria-hidden="true">
+                                                                <option value="default_option">گزینه پیش فرض</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="tags">
+                                                            برچسب ها
+                                                            <small class="text-secondary">(اختیاری)</small>
+                                                        </label>
+                                                            <div class="form-control-wrap">
+                                                            <select class="form-select js-select2" name="tags" id="tags" multiple="" data-placeholder="چندین گزینه را انتخاب کنید" tabindex="-1" aria-hidden="true">
+                                                                <option value="default_option">گزینه پیش فرض</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mt-4">
+                                                    <div class="form-file">
+                                                        <input type="file" multiple="" class="form-file-input" id="images-input" name="images">
+                                                        <label class="form-file-label" for="images-input">تصاویر</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button class="btn btn-primary">
+                                                        <em class="icon ni ni-plus"></em>
+                                                        <span>افزودن جدید</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <!-- footer @s -->
+                                <div class="nk-footer">
+                                    <div class="container wide-xl">
+                                        <div class="nk-footer-wrap g-2">
+                                            <div class="nk-footer-copyright">© تمام حقوق محفوظ است.
+                                                <a target="_blank" rel="nofollow" href="#">شیرینی سرای کندو</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- footer @e -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+
+    </div>
+    <!-- app-root @e -->
+{% endblock %}
+
+{% block Script %}
+    <script src="{% static 'dashboard/js/jdate.js' %}"></script>
+    <script src="{% static 'scripts/admin-products.js' %}"></script>
+{% endblock %}

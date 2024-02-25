@@ -9,6 +9,7 @@ from django.db.models import Q
 from apps.core.utils import form_validate_err, message_form_errors, normalize_phone
 from apps.account.forms import UpdateProfileForm, AddUserForm
 from apps.core.auth.mixins import AdminRequiredMixin
+from apps.product import models as product_models
 from apps.account.models import User
 from .models import UserNote
 from . import forms
@@ -148,3 +149,26 @@ class DeleteUserNoteView(AdminRequiredMixin, View):
 
         referer_url = request.META.get('HTTP_REFERER')
         return redirect(referer_url or reverse('dashboard:admin_users_list'))
+
+
+# Render ProductList view
+class ProductListView(AdminRequiredMixin, ListView):
+    template_name = 'dashboard/admin/products.html'
+    model = product_models.CakeProduct
+    paginate_by = 20
+
+    def get_queryset(self):
+        queryset = product_models.CakeProduct.objects.all()
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        return context
+
+
+# Create CakeProduct view
+# class CreateCakeProductView(AdminRequiredMixin, View):
+#     def post(self, request):
+

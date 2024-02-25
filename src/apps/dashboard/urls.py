@@ -16,4 +16,6 @@ urlpatterns = [
     path('admin/user/<int:pk>/disable/', views.DisableUserView.as_view(), name='admin_disable_user'),
     path('admin/user/note/add/', views.AddUserNoteView.as_view(), name='admin_add_note'),
     path('admin/user/note/<int:pk>/del/', views.DeleteUserNoteView.as_view(), name='admin_delete_note'),
+
+    path('admin/products/', views.ProductListView.as_view(), name='admin_products'),
 ]

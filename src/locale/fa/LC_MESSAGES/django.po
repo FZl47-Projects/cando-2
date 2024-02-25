@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-25 00:06+0330\n"
+"POT-Creation-Date: 2024-02-25 22:39+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,11 +122,11 @@ msgstr "تاریخ تولد"
 msgid "Profile picture"
 msgstr "تصویر پروفایل"
 
-#: .\apps\account\models.py:95
+#: .\apps\account\models.py:95 .\apps\product\models.py:15
 msgid "Created at"
 msgstr "زمان ایجاد"
 
-#: .\apps\account\models.py:96
+#: .\apps\account\models.py:96 .\apps\product\models.py:16
 msgid "Updated at"
 msgstr "زمان ویرایش"
 
@@ -231,6 +231,166 @@ msgstr "آدرس با موفقیت اضافه شد"
 #: .\apps\navigation\views.py:44
 msgid "Address successfully deleted"
 msgstr "آدرس با موفقیت حذف شد"
+
+#: .\apps\product\apps.py:8 .\apps\product\models.py:142
+msgid "Product"
+msgstr ""
+
+#: .\apps\product\models.py:11 .\apps\product\models.py:36
+#: .\apps\product\models.py:50 .\apps\product\models.py:64
+msgid "Title"
+msgstr ""
+
+#: .\apps\product\models.py:12
+msgid "Description"
+msgstr ""
+
+#: .\apps\product\models.py:13
+#, fuzzy
+#| msgid "Active"
+msgid "Is active"
+msgstr "فعال"
+
+#: .\apps\product\models.py:24
+msgid "Category title"
+msgstr ""
+
+#: .\apps\product\models.py:27
+msgid "Product category"
+msgstr ""
+
+#: .\apps\product\models.py:28
+msgid "Product categories"
+msgstr ""
+
+#: .\apps\product\models.py:37 .\apps\product\models.py:51
+#: .\apps\product\models.py:65
+msgid "Cake added price"
+msgstr ""
+
+#: .\apps\product\models.py:40
+msgid "Cake cream"
+msgstr ""
+
+#: .\apps\product\models.py:41
+msgid "Cake creams"
+msgstr ""
+
+#: .\apps\product\models.py:54
+msgid "Cake sponge"
+msgstr ""
+
+#: .\apps\product\models.py:55
+msgid "Cake sponges"
+msgstr ""
+
+#: .\apps\product\models.py:68
+msgid "Cake filling"
+msgstr ""
+
+#: .\apps\product\models.py:69
+msgid "Cake fillings"
+msgstr ""
+
+#: .\apps\product\models.py:78
+msgid "Tag title"
+msgstr ""
+
+#: .\apps\product\models.py:81
+msgid "Tag"
+msgstr ""
+
+#: .\apps\product\models.py:82 .\apps\product\models.py:124
+msgid "Tags"
+msgstr ""
+
+#: .\apps\product\models.py:90 .\apps\product\models.py:94
+msgid "Weight"
+msgstr ""
+
+#: .\apps\product\models.py:91
+msgid "Short description"
+msgstr ""
+
+#: .\apps\product\models.py:95 .\apps\product\models.py:118
+msgid "Weights"
+msgstr ""
+
+#: .\apps\product\models.py:108
+msgid "Category"
+msgstr ""
+
+#: .\apps\product\models.py:109
+msgid "Product code"
+msgstr ""
+
+#: .\apps\product\models.py:110
+msgid "Price"
+msgstr ""
+
+#: .\apps\product\models.py:110
+msgid "Per 1Kg"
+msgstr ""
+
+#: .\apps\product\models.py:111
+#, fuzzy
+#| msgid "Account"
+msgid "Discount"
+msgstr "حساب کاربری"
+
+#: .\apps\product\models.py:111
+msgid "Percentage"
+msgstr ""
+
+#: .\apps\product\models.py:112
+#, fuzzy
+#| msgid "Melli code"
+msgid "Selling price"
+msgstr "کد ملی"
+
+#: .\apps\product\models.py:112
+msgid "Final price to pay"
+msgstr ""
+
+#: .\apps\product\models.py:114
+msgid "is in display"
+msgstr ""
+
+#: .\apps\product\models.py:115
+msgid "Selling weight"
+msgstr ""
+
+#: .\apps\product\models.py:119
+msgid "Cream"
+msgstr ""
+
+#: .\apps\product\models.py:120
+msgid "Sponge"
+msgstr ""
+
+#: .\apps\product\models.py:121
+msgid "Filling"
+msgstr ""
+
+#: .\apps\product\models.py:127
+msgid "Cake product"
+msgstr ""
+
+#: .\apps\product\models.py:128
+msgid "Cake products"
+msgstr ""
+
+#: .\apps\product\models.py:143
+msgid "Product image"
+msgstr ""
+
+#: .\apps\product\models.py:146
+msgid "Cake image"
+msgstr ""
+
+#: .\apps\product\models.py:147
+msgid "Cake images"
+msgstr ""
 
 #: .\config\settings\base.py:103
 msgid "Persian"
