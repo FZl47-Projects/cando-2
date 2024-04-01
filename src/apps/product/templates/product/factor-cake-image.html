@@ -1,0 +1,72 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    بارگذاری تصاویر فاکتور
+{% endblock %}
+
+
+{% block Content %}
+    <!--offcanvas menu area start-->
+    <div class="body_overlay">
+
+    </div>
+    {% include 'base/components/menu-aside.html' %}
+    <!--offcanvas menu area end-->
+
+    <!--header area start-->
+    {% include 'base/components/header.html' %}
+
+    <section class="breadcrumb">
+        <li>
+            <a href="{% url 'public:home' %}">خانه</a>
+        </li>
+        <li>صفحات</li>
+        <li>
+            <a href="">باگذاری تصویر کیک</a>
+        </li>
+    </section>
+
+    <div class="contact_page_section mb-100">
+        <div class="container">
+            <div class="contact_details">
+                <div class="">
+                    <div class="col-12">
+                        <div class="contact_form col-12 col-md-8 col-lg-7 mx-auto"
+                             data-bgimg="assets/img/others/contact-form-bg-shape.png">
+                            <h2>بارگذاری تصویر فاکتور کیک</h2>
+                            <form id="contact-form" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form_input">
+                                    <input name="user_name" placeholder="نام بر روی فاکتور*" type="text" required>
+                                </div>
+                                <div class="form_input">
+                                    <input name="factor_code" placeholder="کد فاکتور*" type="text" required>
+                                </div>
+                                <div class="form_input mb-4">
+                                    <input name="images" class="form-control p-2 mb-0" placeholder="تصویر" type="file" required multiple=""
+                                           accept="image/*">
+                                    <span class="text-muted font-60">میتوانید چندین تصویر را انتخاب نمایید</span>
+                                </div>
+                                <div class="form_textarea">
+                                    <textarea name="description" placeholder="توضیحات"></textarea>
+                                </div>
+                                <div class="form_input_btn text-left">
+                                    <button type="submit" class="btn btn-link">بارگذاری و ثبت</button>
+                                </div>
+                                <p class="form-message"></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer area start-->
+    {% include 'base/components/footer.html' %}
+    <!--footer area end-->
+
+
+{% endblock %}
+
+

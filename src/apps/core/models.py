@@ -1,5 +1,6 @@
 from django.db import models
 from apps.core.utils import get_time, get_timesince_persian, random_str
+from apps.core.mixins.models import RemovePastFileMixin
 
 
 def upload_file_src(instance, path):
@@ -17,6 +18,7 @@ def upload_image_src(instance, path):
 
 
 class BaseModel(models.Model):
+    id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -29,9 +31,16 @@ class BaseModel(models.Model):
     def get_created_at_timepast(self):
         return get_timesince_persian(self.created_at)
 
+    def get_updated_at(self):
+        return self.updated_at.strftime('%Y-%m-%d %H:%M:%S')
 
-class File(models.Model):
+    def get_updated_at_timepast(self):
+        return get_timesince_persian(self.updated_at)
+
+
+class File(RemovePastFileMixin, models.Model):
     # TODO: add hashing and prevent duplicate file | feature
+    FIELDS_REMOVE_FILES = ('file',)
     file = models.FileField(upload_to=upload_file_src, max_length=400)
 
     class Meta:
@@ -42,8 +51,9 @@ class File(models.Model):
         return f'#{self.id} File'
 
 
-class Image(models.Model):
+class Image(RemovePastFileMixin, models.Model):
     # TODO: add hashing and prevent duplicate image | feature
+    FIELDS_REMOVE_FILES = ('image',)
     image = models.ImageField(upload_to=upload_image_src, max_length=400, null=True)
 
     class Meta:

@@ -13,7 +13,7 @@ User = get_user_model()
 
 
 class NotificationAdd(View):
-    template_name = 'notification/dashboard/add.html'
+    template_name = 'notification/dashboard/create.html'
 
     @admin_required_cbv(['super_user'])
     def get(self, request):

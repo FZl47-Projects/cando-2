@@ -1,13 +1,18 @@
+import logging
 import string
 import random
+import jdatetime
 import datetime
 import requests
 import json
-from django.utils import timezone
 from django.core.mail import send_mail as _send_email_django
+from django.utils.translation import gettext as _
+from django.utils import timezone
 from django.conf import settings
 from django_q.tasks import async_task
 from django.contrib import messages
+
+_logger = logging.getLogger('root')
 
 
 def random_str(size=15, chars=string.ascii_lowercase + string.ascii_uppercase + string.digits):
@@ -23,6 +28,16 @@ def get_time(frmt='%Y-%m-%d_%H:%M'):
     if frmt is not None:
         t = t.strftime(frmt)
     return t
+
+
+def now_shamsi_date():
+    now = jdatetime.date.today()
+    return now
+
+
+def convert_str_to_shamsi_date(shamsi_date_str, frmt='%Y-%m-%d'):
+    shamsi_date = jdatetime.datetime.strptime(shamsi_date_str, frmt).date()
+    return shamsi_date
 
 
 def get_timesince_persian(time):
@@ -109,6 +124,19 @@ def form_validate_err(request, form):
     return True
 
 
+def create_form_messages(request, form):
+    errors = form.errors.as_data()
+    if errors:
+        for field, err in errors.items():
+            err = str(err[0])
+            err = err.replace('[', '').replace(']', '')
+            err = err.replace("'", '').replace('This', '')
+            err = f'{field} {err}'
+            messages.error(request, err)
+    else:
+        messages.error(request, _('Incorrect Data'))
+
+
 def get_host_url(url):
     return settings.HOST_ADDRESS + url
 
@@ -117,4 +145,14 @@ def get_media_url(url):
     return settings.MEDIA_URL + url
 
 
-
+def log_event(msg, level='info', exc_info=False, **kwargs):
+    level = level.upper()
+    levels = {
+        'NOTSET': 0,
+        'DEBUG': 10,
+        'INFO': 20,
+        'WARNING': 30,
+        'ERROR': 40,
+        'CRITICAL': 50,
+    }
+    logging.log(levels[level], msg=msg, exc_info=exc_info, **kwargs)

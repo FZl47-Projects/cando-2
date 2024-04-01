@@ -1,5 +1,5 @@
 """
-  using Django 4.1
+  using Django 4.2
 """
 
 import os
@@ -43,6 +43,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -98,9 +99,16 @@ LANGUAGES = [
     ("fa", _("Persian")),
 ]
 
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+    BASE_DIR / 'locale/django_q',
+]
+
 LANGUAGE_CODE = "fa-ir"
 
 TIME_ZONE = 'Asia/Tehran'
+
+DATE_FORMAT = "Y-m-d"
 
 USE_I18N = True
 
@@ -162,3 +170,5 @@ SMS_CONFIG = {
     'API_URL': 'http://rest.ippanel.com/v1/messages/patterns/send',
     'ORIGINATOR': '983000505'
 }
+
+

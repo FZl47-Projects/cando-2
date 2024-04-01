@@ -1,3 +1,5 @@
+
+
 function redirect(url) {
     window.location.href = url
 }
@@ -134,70 +136,164 @@ function removeLoading(element) {
 
 
 let all_datetime_convert = document.querySelectorAll('.datetime-convert')
-let all_datetime_convert_inputs = document.querySelectorAll('.datetime-convert-inp')
-
 for (let dt_el of all_datetime_convert) {
-    let dt = dt_el.innerHTML
+    let dt = dt_el.innerHTML || dt_el.value
     dt_el.setAttribute('datetime', dt)
     let dt_persian = new Date(dt).toLocaleDateString('fa-IR', {
-        hour: '2-digit',
-        minute: '2-digit'
+        // hour: '2-digit',
+        // minute: '2-digit'
     });
+    dt_persian = dt_persian.replaceAll('/', '-')
     if (dt_persian != 'Invalid Date') {
         dt_el.innerHTML = dt_persian
-    }
-}
-
-for (let dt_el of all_datetime_convert_inputs) {
-    let dt = dt_el.value
-    dt_el.setAttribute('datetime', dt)
-    let dt_persian = new Date(dt).toLocaleDateString('fa-IR', {
-        hour: '2-digit',
-        minute: '2-digit'
-    });
-    if (dt_persian != 'Invalid Date') {
         dt_el.value = dt_persian
     }
 }
-
-
-// price elements
-document.querySelectorAll('.price-el').forEach((el) => {
-    let p = el.innerText
-    el.setAttribute('price-val', p)
-    el.innerHTML = numberWithCommas(p)
-})
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 
-// full size element
-document.querySelectorAll('.click-full-size').forEach(function (el) {
-    el.addEventListener('click', function () {
-        this.requestFullscreen()
-    })
+// ---
+
+
+let container_select_choices = document.querySelectorAll('.container-select-choices')
+
+$('.container-select-choices input[type="radio"]').on('change', function (e) {
+    let inp = e.currentTarget
+    let choices = inp.parentNode.parentNode
+    choices.setAttribute('choice-val', inp.value)
+
+});
+
+
+// separate elements
+document.querySelectorAll('.price-el').forEach((el) => {
+    let p = el.innerText
+    if (p != 'None' && p != '') {
+        el.setAttribute('price-val', p)
+        el.innerHTML = `${numberWithCommas(p)} ${SYMBOL_CURRENCY} `
+    } else {
+        el.innerHTML = '-'
+    }
+})
+
+document.querySelectorAll('.separate-el').forEach((el) => {
+    let p = el.innerText
+    if (p != 'None' || p) {
+        el.setAttribute('original-val', p)
+        el.innerHTML = numberWithCommas(p)
+    }
+})
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+// random-bg
+document.querySelectorAll('.random-bg').forEach(function (el) {
+    el.style.background = getRandomColor()
 })
 
 
-function secToDateTime(secs) {
-    var t = new Date(1970, 0, 1);
-    t.setSeconds(secs);
-    return t;
+function toggleRelatedField(fieldId, show = true) {
+    const field = document.getElementById(fieldId);
+    if (show) {
+        field.classList.remove('d-none');
+    } else {
+        field.classList.add('d-none');
+    }
 }
 
-function getFormattedDate(date) {
-    let str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes()
-    return str
+// add query params
+let query_params = (new URL(location)).searchParams;
+document.querySelectorAll('.add-params-to-href').forEach(function (el) {
+    let href = el.getAttribute('href')
+    let href_params = new URLSearchParams(href)
+    for (let p of query_params) {
+        let k = p[0]
+        let v = String(p[1])
+        if (href.includes(k) === false) {
+            href_params.set(k, v)
+        }
+    }
+    let params = href_params.toString()
+    if (params.indexOf('?') == -1) {
+        params = '?' + params
+    }
+    el.setAttribute('href', params)
+})
+
+document.querySelectorAll('.add-params-to-form').forEach(function (form) {
+    for (let p of query_params) {
+        let name = p[0]
+        let value = p[1]
+        if (!form.elements[name]) {
+            let inp = document.createElement('input')
+            inp.type = 'hidden'
+            inp.name = name
+            inp.value = value
+            form.appendChild(inp)
+        }
+    }
+})
+
+// select option by filter query search
+document.querySelectorAll('.select-by-filter').forEach(function (select) {
+    let filter_name = select.name || select.getAttribute('filter-name')
+    let filter_value = getUrlParameter(filter_name)
+    try {
+        select.querySelector(`[value="${filter_value}"]`).setAttribute('selected', 'selected')
+    } catch (e) {
+    }
+})
+
+// select option by value select
+document.querySelectorAll('.select-by-value').forEach(function (select) {
+    let value = select.getAttribute('value') || 'false'
+    if (value == 'False') {
+        value = 'false'
+    } else if (value == 'True') {
+        value = 'true'
+    }
+    try {
+        select.querySelector(`option[value="${value}"]`).setAttribute('selected', 'selected')
+    } catch (e) {
+    }
+})
+
+
+
+// view files
+let view_file_elements = document.getElementsByClassName("view-file");
+
+for (var i = 0; i < view_file_elements.length; i++) {
+    view_file_elements[i].addEventListener('click', function () {
+        var fileUrl = this.getAttribute('href');
+        window.open(fileUrl, '_blank');
+    });
 }
 
-function getRawPhonenumber(phonenumber) {
-    return String(phonenumber).replace('+98', '')
+
+function setPriceSpreadInput(input_selector, field_selector, default_val = '0') {
+    let field = document.querySelector(field_selector)
+    let input = document.querySelector(input_selector)
+    set_default(field)
+    input.addEventListener('input', function () {
+        if (input.value) {
+            field.innerText = `${numberWithCommas(input.value)} ${SYMBOL_CURRENCY} `
+        } else {
+            set_default(field)
+        }
+    })
+
+    function set_default(field) {
+        field.innerText = `${numberWithCommas(default_val)} ${SYMBOL_CURRENCY} `
+    }
 }
-
-function truncate(str, max) {
-    return str.length > max ? str.substr(0, max - 1) + '…' : str;
-}
-
-

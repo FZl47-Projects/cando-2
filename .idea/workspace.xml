@@ -5,9 +5,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="769011da-9191-4737-9cb7-b11e03fe2413" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/cando-2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cando-2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements/development.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements/development.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/views/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/views/dashboard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/cart-process-payment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/cart.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/components/favorite-btn.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/custom-order-product.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/order-cake-image.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/order-detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/public/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/settings/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/settings/dev.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/settings/dev.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/scripts/base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/scripts/base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/scripts/datetime-picker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/scripts/notify.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/scripts/notify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/scripts/urls.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/styles/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/styles/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/styles/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/styles/form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/styles/notify.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/styles/notify.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/template/css/nice-select.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/template/css/nice-select.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/template/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/template/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/template/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/template/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/base_template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/base/components/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/components/header.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +61,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -53,21 +95,29 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Project-Company/Smarten/cando-2/src/apps&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Project-Company/Smarten/cando-2/src/apps/dashboard/templates/dashboard/admin/product/factor-cake-image&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PythonContentEntriesConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\factor-cake-image" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\discount\coupon" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\comment" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\attributes\fields" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\attributes\group" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\product\templates\product" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\product" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\core\mixins" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\base\components" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\core" />
     </key>
   </component>
@@ -122,6 +172,25 @@
       <workItem from="1707160762994" duration="44000" />
       <workItem from="1707807275698" duration="913000" />
       <workItem from="1707815092009" duration="918000" />
+      <workItem from="1709733473514" duration="20877000" />
+      <workItem from="1709843081404" duration="9131000" />
+      <workItem from="1709923374191" duration="12042000" />
+      <workItem from="1710010591018" duration="13474000" />
+      <workItem from="1710088790661" duration="22067000" />
+      <workItem from="1710180751345" duration="9124000" />
+      <workItem from="1710268650078" duration="103000" />
+      <workItem from="1710362544677" duration="586000" />
+      <workItem from="1710466699269" duration="6235000" />
+      <workItem from="1710555517506" duration="16680000" />
+      <workItem from="1710641978684" duration="5187000" />
+      <workItem from="1710741265203" duration="5690000" />
+      <workItem from="1711261800268" duration="365000" />
+      <workItem from="1711265571650" duration="597000" />
+      <workItem from="1711267523034" duration="5837000" />
+      <workItem from="1711356440082" duration="126000" />
+      <workItem from="1711358501589" duration="9952000" />
+      <workItem from="1711394389865" duration="2833000" />
+      <workItem from="1711442643281" duration="10309000" />
     </task>
     <servers />
   </component>

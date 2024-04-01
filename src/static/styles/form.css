@@ -6,15 +6,12 @@
 }
 
 
-label {
-    font-size: 75%;
-    text-align: right;
-    color: #858585;
-    display: block;
-}
 
-[label-content-seted]{
-    color: #888;
+label {
+    font-size: 80%;
+    text-align: right;
+    color: #444;
+    display: block;
 }
 
 .form {
@@ -24,7 +21,7 @@ label {
     box-shadow: 0 4px 15px #ddd
 }
 
-.label-detail {
+.label-detail{
     color: #aaa;
     font-size: 80%;
     margin-top: 3px;
@@ -90,10 +87,6 @@ label {
     border: 1px solid #e5e5e5;
 }
 
-input[disabled]{
-    color: #888;
-}
-
 .field input:focus {
     border-bottom-width: 2px;
 }
@@ -122,14 +115,14 @@ input[disabled]{
 }
 
 .field-outline button {
-    color: rgba(32, 92, 145, 0.7);
+    color: rgba(1, 113, 211, 0.4);
     background-color: #fff;
-    border: 1px solid rgba(32, 92, 145, 0.7)!important;
+    border: 1px solid rgba(1, 113, 211, 0.4);
 }
 
 .field-outline button:hover {
-    color: rgba(9, 68, 115, 0.8);
-    border: 1px solid rgba(9, 68, 115, 0.8)!important;
+    color: rgba(1, 113, 211, 0.8);
+    border: 1px solid rgba(1, 113, 211, 0.8);
     background: #fff;
 }
 
@@ -154,20 +147,12 @@ input[disabled]{
     text-decoration: underline;
 }
 
-.field-required {
+.field-required{
     color: #ef4141;
 }
 
-.form-control {
+.form-control{
     margin-bottom: 8px;
-}
-
-.field-container {
-    position: relative;
-    padding: 8px;
-    margin-top: 10px;
-    border-radius: 6px;
-    border: 1px solid #bbc1c9;
 }
 
 @media screen and (max-width: 400px) {

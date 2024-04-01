@@ -1,0 +1,481 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %}مدیریت نظرات{% endblock %}
+
+{% block Content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                {% include 'dashboard/admin/base/components/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            {% include 'dashboard/admin/base/components/menu-aside.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">مدیریت نظرات</h3>
+                                                <nav>
+                                                    <ul class="breadcrumb breadcrumb-arrow">
+                                                        <li class="breadcrumb-item"><a
+                                                                href="{% url 'dashboard:index' %}">صفحه اصلی</a></li>
+                                                        <li class="breadcrumb-item"><a>محصولات</a></li>
+                                                        <li class="breadcrumb-item active">مدیریت نظرات</li>
+                                                    </ul>
+                                                </nav>
+                                                <div class="nk-block-des text-soft mt-2">
+                                                    <p>شما
+                                                        <span class="separate-el">{{ total_count }}</span>
+                                                        نظر دارید.</p>
+                                                </div>
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                            <div class="nk-block-head-content">
+                                                <div class="toggle-wrap nk-block-tools-toggle">
+                                                    <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1"
+                                                       data-target="pageMenu"><em
+                                                            class="icon ni ni-menu-alt-r"></em></a>
+                                                    <div class="toggle-expand-content" data-content="pageMenu">
+                                                        <ul class="nk-block-tools g-3">
+                                                            <li class="nk-block-tools-opt">
+                                                                <div class="drodown">
+                                                                    <a href="#"
+                                                                       class="dropdown-toggle btn btn-white btn-outline-light"
+                                                                       data-bs-toggle="dropdown">
+                                                                        <em
+                                                                                class="icon ni ni-download-cloud"></em>
+                                                                        <span>خروجی گرفتن</span>
+                                                                    </a>
+                                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                                        <ul class="link-list-opt no-bdr">
+                                                                            <li>
+                                                                                <a href="#"><span>خروجی اکسل</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!-- .toggle-wrap -->
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                        </div>
+                                        <!-- .nk-block-between -->
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered card-stretch">
+                                            <div class="card-inner-group">
+                                                <div class="card-inner position-relative card-tools-toggle">
+                                                    <div class="card-title-group">
+                                                        <div class="card-tools">
+                                                            <div class="form-inline flex-nowrap gx-3">
+                                                                <div class="form-wrap w-200px">
+                                                                    <select class="form-select js-select2"
+                                                                            data-search="off"
+                                                                            data-placeholder="عمل دسته جمعی">
+                                                                        <option value="">عمل دسته جمعی</option>
+                                                                        <option value="approve"> تایید</option>
+                                                                        <option value="reject"> رد کردن</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="btn-wrap">
+                                                                    <span class="d-none d-md-block"><button
+                                                                            class="btn btn-dim btn-outline-light disabled">اعمال</button></span>
+                                                                    <span class="d-md-none">
+                                                                            <button class="btn btn-dim btn-outline-light btn-icon disabled"><em
+                                                                                    class="icon ni ni-arrow-right"></em></button>
+                                                                        </span>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .form-inline -->
+                                                        </div>
+                                                        <!-- .card-tools -->
+                                                        <div class="card-tools me-n1">
+                                                            <ul class="btn-toolbar gx-1">
+                                                                <li>
+                                                                    <a href="#"
+                                                                       class="btn btn-icon search-toggle toggle-search"
+                                                                       data-target="search"><em
+                                                                            class="icon ni ni-search"></em>
+                                                                        {% if request.GET.search %}
+                                                                            <div class="dot dot-primary"></div>
+                                                                        {% endif %}
+                                                                    </a>
+                                                                </li>
+                                                                <!-- li -->
+                                                                <li class="btn-toolbar-sep"></li>
+                                                                <!-- li -->
+                                                                <li>
+                                                                    <div class="toggle-wrap">
+                                                                        <a href="#"
+                                                                           class="btn btn-icon btn-trigger toggle"
+                                                                           data-target="cardTools"><em
+                                                                                class="icon ni ni-menu-right"></em></a>
+                                                                        <div class="toggle-content"
+                                                                             data-content="cardTools">
+                                                                            <ul class="btn-toolbar gx-1">
+                                                                                <li class="toggle-close">
+                                                                                    <a href="#"
+                                                                                       class="btn btn-icon btn-trigger toggle"
+                                                                                       data-target="cardTools"><em
+                                                                                            class="icon ni ni-arrow-left"></em></a>
+                                                                                </li>
+                                                                                <!-- li -->
+                                                                                <li>
+                                                                                    <div class="dropdown">
+                                                                                        <a href="#"
+                                                                                           class="btn btn-trigger btn-icon dropdown-toggle"
+                                                                                           data-bs-toggle="dropdown">
+                                                                                            {% if request.GET.filter %}
+                                                                                                <div class="dot dot-primary"></div>
+                                                                                            {% endif %}
+                                                                                            <em class="icon ni ni-filter-alt"></em>
+                                                                                        </a>
+
+                                                                                        <div class="filter-wg dropdown-menu dropdown-menu-xl dropdown-menu-end">
+                                                                                            <div class="dropdown-head">
+                                                                                                <span class="sub-title dropdown-title">فیلتر نظرات</span>
+                                                                                            </div>
+                                                                                            <div class="dropdown-body dropdown-body-rg">
+                                                                                                <form>
+                                                                                                    <input type="hidden"
+                                                                                                           name="filter"
+                                                                                                           value="true">
+                                                                                                    <div class="row gx-6 gy-3">
+                                                                                                        <div class="col-6">
+                                                                                                            <div class="form-group">
+                                                                                                                <label class="overline-title overline-title-alt">وضعیت</label>
+                                                                                                                <select class="form-select js-select2 select-by-filter"
+                                                                                                                        name="status">
+                                                                                                                    <option value="all">
+                                                                                                                        همه
+                                                                                                                    </option>
+                                                                                                                    <option value="pending">
+                                                                                                                        در
+                                                                                                                        انتظار
+                                                                                                                    </option>
+                                                                                                                    <option value="rejected">
+                                                                                                                        رد
+                                                                                                                        شده
+                                                                                                                    </option>
+                                                                                                                    <option value="accepted">
+                                                                                                                        تایید
+                                                                                                                        شده
+                                                                                                                    </option>
+                                                                                                                </select>
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <div class="col-6">
+                                                                                                            <div class="form-group">
+                                                                                                                <label class="overline-title overline-title-alt">نمره</label>
+                                                                                                                <select class="form-select js-select2 select-by-filter"
+                                                                                                                        name="rate">
+                                                                                                                    <option value="all">
+                                                                                                                        همه
+                                                                                                                    </option>
+                                                                                                                    <option value="1">
+                                                                                                                        1
+                                                                                                                    </option>
+                                                                                                                    <option value="2">
+                                                                                                                        2
+                                                                                                                    </option>
+                                                                                                                    <option value="3">
+                                                                                                                        3
+                                                                                                                    </option>
+                                                                                                                    <option value="4">
+                                                                                                                        4
+                                                                                                                    </option>
+                                                                                                                    <option value="5">
+                                                                                                                        5
+                                                                                                                    </option>
+                                                                                                                </select>
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <div class="col-12">
+                                                                                                            <div class="form-group text-end">
+                                                                                                                <button type="submit"
+                                                                                                                        class="btn btn-secondary">
+                                                                                                                    فیلتر
+                                                                                                                </button>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </form>
+                                                                                            </div>
+                                                                                            <div class="dropdown-foot between">
+                                                                                                <a class="clickable"
+                                                                                                   href="{% url 'dashboard:comment__list' %}">بازنشانی
+                                                                                                    فیلتر</a>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <!-- .filter-wg -->
+                                                                                    </div>
+                                                                                    <!-- .dropdown -->
+                                                                                </li>
+                                                                            </ul>
+                                                                            <!-- .btn-toolbar -->
+                                                                        </div>
+                                                                        <!-- .toggle-content -->
+                                                                    </div>
+                                                                    <!-- .toggle-wrap -->
+                                                                </li>
+                                                                <!-- li -->
+                                                            </ul>
+                                                            <!-- .btn-toolbar -->
+                                                        </div>
+                                                        <!-- .card-tools -->
+                                                    </div>
+                                                    <!-- .card-title-group -->
+                                                    <form>
+                                                        <div class="card-search search-wrap" data-search="search">
+
+                                                            <div class="card-body">
+                                                                <div class="search-content">
+                                                                    <a href="#"
+                                                                       class="search-back btn btn-icon toggle-search"
+                                                                       data-target="search"><em
+                                                                            class="icon ni ni-arrow-left"></em></a>
+                                                                    <input type="text" name="search"
+                                                                           class="form-control border-transparent form-focus-none"
+                                                                           value="{{ request.GET.search }}"
+                                                                           placeholder="جستجو بر اساس بخشی از نظر ، شماره همراه کاربر ، نام محصول"/>
+                                                                    <button class="search-submit btn btn-icon"><em
+                                                                            class="icon ni ni-search"></em></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <!-- .card-search -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                                <div class="card-inner p-0">
+                                                    <div class="nk-tb-list nk-tb-ulist">
+                                                        <div class="nk-tb-item nk-tb-head">
+                                                            <div class="nk-tb-col nk-tb-col-check">
+                                                                <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                           id="cid"/>
+                                                                    <label class="custom-control-label"
+                                                                           for="cid"></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="nk-tb-col"><span class="sub-text">کاربر</span>
+                                                            </div>
+                                                            <div class="nk-tb-col tb-col-sm"><span
+                                                                    class="sub-text">محصول</span></div>
+                                                            <div class="nk-tb-col tb-col-md"><span
+                                                                    class="sub-text">نظر</span></div>
+                                                            <div class="nk-tb-col tb-col-xl"><span
+                                                                    class="sub-text">نمره</span></div>
+                                                            <div class="nk-tb-col tb-col-md text-end"><span
+                                                                    class="sub-text">وضعیت</span>
+                                                            </div>
+                                                            <div class="nk-tb-col text-end"><span class="sub-text">اقدامات</span>
+                                                            </div>
+                                                        </div>
+                                                        {% for comment in object_list %}
+                                                            <!-- .nk-tb-item -->
+                                                            <div class="nk-tb-item">
+                                                                <div class="nk-tb-col nk-tb-col-check">
+                                                                    <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                                        <input type="checkbox"
+                                                                               class="custom-control-input action-checkbox"
+                                                                               data-comment-id="{{ comment.id }}"
+                                                                               id="cid-{{ forloop.counter }}"/>
+                                                                        <label class="custom-control-label"
+                                                                               for="cid-{{ forloop.counter }}"></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="nk-tb-col">
+                                                                    <a href="{{ comment.user.get_dashboard_absolute_url }}">
+                                                                        <div class="user-card">
+                                                                            <div class="user-avatar xs bg-primary">
+                                                                                <img src="{{ comment.user.get_image_url }}"
+                                                                                     alt="{{ comment.user.get_full_name }}"
+                                                                                     style="object-fit: cover">
+                                                                            </div>
+                                                                            <div class="user-name">
+                                                                            <span class="tb-lead">
+                                                                                {{ comment.user.get_full_name|truncatechars:20 }}
+                                                                            </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-sm">
+                                                                    <span class="sub-text">
+                                                                        <a href="{{ comment.product.get_dashboard_absolute_url }}">{{ comment.product.title|truncatechars:10 }}</a>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-md">
+                                                                    <span class="sub-text">
+                                                                        {{ comment.text|truncatechars:30 }}
+                                                                    </span>
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-xl">
+                                                                    <span class="sub-text">
+                                                                        {{ comment.rate }}
+                                                                        <em class="icon ni ni-star text-warning"></em>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-md text-end">
+                                                                    <span class="tb-status badge badge-dim bg-{{ comment.status }} fs-11px">{{ comment.get_status_display }}</span>
+                                                                </div>
+                                                                <div class="nk-tb-col nk-tb-col-tools">
+                                                                    <ul class="nk-tb-actions gx-1">
+                                                                        <li>
+                                                                            <div class="drodown">
+                                                                                <a href="#"
+                                                                                   class="dropdown-toggle btn btn-icon btn-trigger"
+                                                                                   data-bs-toggle="dropdown"><em
+                                                                                        class="icon ni ni-more-h"></em></a>
+                                                                                <div class="dropdown-menu dropdown-menu-end">
+                                                                                    <ul class="link-list-opt no-bdr">
+                                                                                        <li>
+                                                                                            <a href="{{ comment.get_dashboard_absolute_url }}"><em
+                                                                                                    class="icon ni ni-eye"></em><span>مشاهده جزئیات</span></a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="{{ comment.product.get_dashboard_absolute_url }}"><em
+                                                                                                    class="icon ni ni-eye"></em><span>مشاهده محصول</span></a>
+                                                                                        </li>
+                                                                                        {% if comment.status == 'accepted' %}
+                                                                                            <li>
+                                                                                                <form action="{% url 'dashboard:comment__manage_status' %}" method="post">
+                                                                                                    {% csrf_token %}
+                                                                                                    <input type="hidden"
+                                                                                                           name="comments"
+                                                                                                           value="{{ comment.id }}">
+                                                                                                    <input type="hidden"
+                                                                                                           name="status"
+                                                                                                           value="rejected">
+                                                                                                    <button class="btn text-danger"
+                                                                                                            type="submit">
+                                                                                                        <em class="icon ni ni-na"></em><span>رد نظر</span>
+                                                                                                    </button>
+                                                                                                </form>
+                                                                                            </li>
+                                                                                        {% else %}
+                                                                                            <li>
+                                                                                                <form action="{% url 'dashboard:comment__manage_status' %}" method="post">
+                                                                                                    {% csrf_token %}
+                                                                                                    <input type="hidden"
+                                                                                                           name="comments"
+                                                                                                           value="{{ comment.id }}">
+                                                                                                    <input type="hidden"
+                                                                                                           name="status"
+                                                                                                           value="accepted">
+                                                                                                    <button class="btn text-success"
+                                                                                                            type="submit">
+                                                                                                        <em class="icon ni ni-check-circle"></em><span>تایید نظر</span>
+                                                                                                    </button>
+                                                                                                </form>
+                                                                                            </li>
+                                                                                        {% endif %}
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        {% empty %}
+                                                            <div class="container-not-found-base nk-tb-item">
+                                                                <div class="nk-tb-col">
+                                                                    <p>چیزی یافت نشد</p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .nk-tb-item -->
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!-- .nk-tb-list -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                                <div class="card-inner">
+                                                    <div class="nk-block-between-md">
+                                                        <div class="g">
+                                                            <ul class="pagination justify-content-center justify-content-md-start">
+                                                                {% if page_obj.has_previous %}
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page=1">اول</a>
+                                                                    </li>
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+                                                                    </li>
+                                                                {% endif %}
+
+                                                                <span class="fs-13px mt-1 mx-2">
+                                                                        صفحه {{ page_obj.number }} از {{ page_obj.paginator.num_pages }}.
+                                                                </span>
+
+                                                                {% if page_obj.has_next %}
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.next_page_number }}">بعدی</a>
+                                                                    </li>
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.paginator.num_pages }}">اخرین</a>
+                                                                    </li>
+                                                                {% endif %}
+                                                            </ul>
+                                                            <!-- .pagination -->
+                                                        </div>
+
+                                                        <!-- .pagination-goto -->
+                                                    </div>
+                                                    <!-- .nk-block-between -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                            </div>
+                                            <!-- .card-inner-group -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                {% include 'dashboard/admin/base/components/footer.html' %}
+                                <!-- footer @e -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+{% endblock %}
+
+{% block Scripts %}
+    <script>
+        document.querySelectorAll('.bg-accepted').forEach(function (el) {
+            el.classList.add('bg-success')
+        })
+        document.querySelectorAll('.bg-rejected').forEach(function (el) {
+            el.classList.add('bg-danger')
+        })
+        document.querySelectorAll('.bg-pending').forEach(function (el) {
+            el.classList.add('bg-warning')
+        })
+    </script>
+{% endblock %}

@@ -16,10 +16,11 @@
                                 <li>
                                     <a class="active" href="{% url 'public:home' %}">خانه</a>
                                 </li>
+                                <li><a href="{% url 'product:basic_product__list' %}">محصولات</a></li>
                                 <li><a href="about.html">درباره ما</a></li>
                                 <li><a href="#">صفحات</a>
                                     <ul class="bucker-dropdown">
-                                        <li><a href="faq.html">FAQ</a></li>
+                                        <li><a href="{% url 'product:factor_cake_image__create' %}">بارگذاری تصویر کیک</a></li>
                                         <li><a href="404.html">Error 404</a></li>
                                     </ul>
                                 </li>

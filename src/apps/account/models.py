@@ -3,7 +3,9 @@ from django.urls import reverse
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+
 from phonenumber_field.modelfields import PhoneNumberField
+from apps.product.models import WishList, Cart
 
 
 class CustomBaseUserManager(BaseUserManager):
@@ -111,9 +113,21 @@ class User(AbstractUser):
         return self.email or '-'
 
     def get_image_url(self):
-        return '/static/images/dashboard/client_img.png'
+        return '/static/images/user-default-img.png'
 
     def get_last_login(self):
         if self.last_login:
             return self.last_login.strftime('%Y-%m-%d %H:%M:%S')
         return '-'
+
+    def get_current_cart(self):
+        cart = Cart.objects.filter(is_active=True)
+        if not cart.exists():
+            cart = Cart.objects.create(user=self)
+        return cart
+
+    def get_wishlist(self):
+        try:
+            return self.wishlist
+        except WishList.DoesNotExist:
+            return WishList.objects.create(user=self)

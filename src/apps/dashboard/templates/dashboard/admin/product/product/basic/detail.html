@@ -1,0 +1,409 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %}جزئیات محصول - {{ product.title }}{% endblock %}
+
+{% block Content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                {% include 'dashboard/admin/base/components/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            {% include 'dashboard/admin/base/components/menu-aside.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between g-3">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">مشخصات محصول</h3>
+                                                <div class="nk-block-des text-soft">
+                                                    <nav>
+                                                        <ul class="breadcrumb breadcrumb-arrow">
+                                                            <li class="breadcrumb-item"><a
+                                                                    href="{% url 'dashboard:index' %}">صفحه اصلی</a>
+                                                            </li>
+                                                            <li class="breadcrumb-item"><a>محصولات</a></li>
+                                                            <li class="breadcrumb-item"><a
+                                                                    href="{% url 'dashboard:basic_product__list' %}">لیست
+                                                                محصولات </a></li>
+                                                            <li class="breadcrumb-item active">{{ product.title|truncatechars:30 }}</li>
+                                                        </ul>
+                                                    </nav>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="row g-gs">
+                                            <div class="col-xl-4">
+                                                <div class="card card-bordered">
+                                                    <div class="card-inner-group">
+                                                        <div class="card-inner">
+                                                            <div class="user-card user-card-s2">
+                                                                <div class="user-avatar lg bg-primary">
+                                                                    <img src="{{ product.get_image_cover }}"
+                                                                         alt="{{ product.title }}"/>
+                                                                </div>
+                                                                <div class="user-info">
+                                                                    <div class="badge bg-light rounded-pill ucap">
+                                                                        {{ product.get_type_display }}
+                                                                    </div>
+                                                                    <h6>{{ product.title }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-inner card-inner-sm">
+                                                            <ul class="btn-toolbar justify-center gx-1">
+                                                                <li>
+                                                                    <a href="#" data-bs-toggle="tooltip"
+                                                                       data-bs-placement="top" title="حذف محصول"
+                                                                       class="btn btn-trigger btn-icon text-danger"><em
+                                                                            class="icon ni ni-trash"></em></a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#"
+                                                                       class="btn btn-trigger btn-icon text-info"
+                                                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                       title="ویرایش محصول"><em
+                                                                            class="icon ni ni-pen"></em></a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#"
+                                                                       class="btn btn-trigger btn-icon text-primary"
+                                                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                       title="تصاویر"><em
+                                                                            class="icon ni ni-img"></em></a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#"
+                                                                       class="btn btn-trigger btn-icon text-warning"
+                                                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                       title="تنظیم تخفیف"><em
+                                                                            class="icon ni ni-percent"></em></a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#"
+                                                                       class="btn btn-trigger btn-icon text-success"
+                                                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                       title="افزایش موجودی"><em
+                                                                            class="icon ni ni-plus"></em></a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="card-inner">
+                                                            <div class="row text-center">
+                                                                <div class="col-4">
+                                                                    <div class="profile-stats">
+                                                                        <span class="amount separate-el">-</span>
+                                                                        <span class="sub-text">کل سفارش</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="profile-stats">
+                                                                        <span class="amount separate-el">{{ product.get_quantity|default:0 }}</span>
+                                                                        <span class="sub-text">موجودی</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="profile-stats">
+                                                                        <span class="amount fs-13px">
+                                                                            <a href="#">مشاهده</a>
+                                                                        </span>
+                                                                        <span class="sub-text">تخفیف</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 mt-3">
+                                                                    <div class="profile-stats">
+                                                                        <span class="amount price-el fs-15px">{{ product.get_price }}</span>
+                                                                        <span class="sub-text">قیمت</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- .card-inner -->
+                                                        <div class="card-inner">
+                                                            <h6 class="overline-title mb-2">اطلاعات کوتاه</h6>
+                                                            <div class="row g-3">
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">شناسه محصول:</span>
+                                                                    <span>{{ product.id }}</span>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">دسته بندی ها:</span>
+                                                                    {% for category in product.get_categories %}
+                                                                        <a href="{{ category.get_dashboard_absolute_url }}">
+                                                                            <span class="badge bg-secondary rounded-pill m-1">{{ category.name }}</span>
+                                                                        </a>
+                                                                    {% empty %}
+                                                                        <span class="text-orange fs-13px">بدون دسته بندی</span>
+                                                                    {% endfor %}
+                                                                </div>
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">تگ ها:</span>
+                                                                    {% for tag in product.get_tags %}
+                                                                        <span class="badge bg-secondary rounded-pill m-1">{{ tag.name }}</span>
+                                                                    {% empty %}
+                                                                        <span class="text-orange fs-13px">بدون تگ</span>
+                                                                    {% endfor %}
+                                                                </div>
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">تعداد کامنت ها:</span>
+                                                                    <span>
+                                                                        {{ product.get_all_comments.count }}
+                                                                        ({{ product.get_comments.count }})
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">میانگین امتیاز:</span>
+                                                                    <span>{{ product.get_rate }}
+                                                                        <em class="ni ni-star text-warning"></em>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">مبلغ فروش از این محصول:</span>
+                                                                    <span>-</span>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">ایجاد شده در:</span>
+                                                                    <span>
+                                                                        <span class="datetime-convert">{{ product.get_created_at }}</span>
+                                                                        <span class="fs-11px">({{ product.get_created_at_timepast }})</span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">ویرایش شده در:</span>
+                                                                    <span>
+                                                                        <span class="datetime-convert">{{ product.get_updated_at }}</span>
+                                                                        <span class="fs-11px">({{ product.get_updated_at_timepast }})</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- .card-inner -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- .col -->
+                                            <div class="col-xl-8">
+                                                <div class="card card-bordered">
+                                                    <div class="card-inner">
+                                                        <div class="nk-block">
+                                                            <div class="nk-block-head d-flex justify-content-between align-items-start">
+                                                                <h5 class="title">اطلاعات محصول</h5>
+                                                                {% if product.status == 'active' %}
+                                                                    <span class="badge badge-dim bg-success p-1">محصول فعال است</span>
+                                                                {% elif product.status == 'inactive' %}
+                                                                    <span class="badge badge-dim bg-danger p-1">محصول غیر فعال است</span>
+                                                                {% else %}
+                                                                    <span class="badge badge-dim bg-warning p-1">محصول آرشیو شده است</span>
+                                                                {% endif %}
+                                                            </div>
+                                                            <!-- .nk-block-head -->
+                                                            <div class="profile-ud-list">
+                                                                <div class="profile-ud-item w-100">
+                                                                    <div class="profile-ud wider">
+                                                                        <span class="profile-ud-label">عنوان</span>
+                                                                        <span class="profile-ud-value">{{ product.title }}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-ud-item w-100">
+                                                                    <div class="profile-ud wider">
+                                                                        <span class="profile-ud-label">نوع محصول</span>
+                                                                        <span class="profile-ud-value">
+                                                                            <span class="badge badge-dim bg-secondary">
+                                                                                {{ product.get_type_display }}
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-ud-item w-100">
+                                                                    <div class="profile-ud wider">
+                                                                        <span class="profile-ud-label">تعداد عکس ها</span>
+                                                                        <span class="profile-ud-value">{{ product.get_images.count }}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-ud-item w-100">
+                                                                    <div class="profile-ud wider">
+                                                                        <span class="profile-ud-label fs-14px">دسته بندی فیلد ها</span>
+                                                                        <span class="profile-ud-value">
+                                                                        {% if product.attr_category %}
+                                                                            <a href="{{ product.attr_category.get_dashboard_absolute_url }}">{{ product.attr_category.name|truncatechars:20 }}</a>
+                                                                        {% else %}
+                                                                            -
+                                                                        {% endif %}
+                                                                    </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-ud-item w-100">
+                                                                    <div class="profile-ud wider">
+                                                                        <span class="profile-ud-label">توضیحات</span>
+                                                                        <span class="profile-ud-value">
+                                                                            {{ product.description|default:'توضیحاتی ثبت نشده است' }}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .profile-ud-list -->
+                                                        </div>
+                                                        <div class="nk-divider divider md"></div>
+                                                        <div class="nk-block">
+                                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                                <h6 class="lead-text mb-3">سفارشات اخیر</h6>
+                                                                <a href="#" class="fs-12px">
+                                                                    مشاهده همه
+                                                                </a>
+                                                            </div>
+                                                            <div class="nk-tb-list nk-tb-ulist is-compact border round-sm">
+                                                                <div class="nk-tb-item nk-tb-head">
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="sub-text">شناسه سفارش</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-sm">
+                                                                        <span class="sub-text">نام کاربر</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-xxl">
+                                                                        <span class="sub-text">تعداد</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-xxl">
+                                                                        <span class="sub-text">قیمت کل</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="sub-text">وضعیت</span>
+                                                                    </div>
+                                                                </div>
+                                                                {% for order in product_orders|slice:':6' %}
+                                                                    <div class="nk-tb-item">
+                                                                        <div class="nk-tb-col">
+                                                                            <a href="#"><span
+                                                                                    class="fw-bold">
+                                                                                #
+                                                                                {{ order.id }}
+                                                                            </span></a>
+                                                                        </div>
+                                                                        <div class="nk-tb-col tb-col-sm">
+                                                                            <span class="tb-product">
+                                                                                <span class="title">{{ order.user.get_full_name|truncatechars:10 }}</span>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="nk-tb-col tb-col-xxl">
+                                                                            <span class="amount separate-el">{{ order.product_count }}</span>
+                                                                        </div>
+                                                                        <div class="nk-tb-col tb-col-xxl">
+                                                                            <span class="amount price-el">{{ order.product_total_price }}</span>
+                                                                        </div>
+                                                                        <div class="nk-tb-col">
+                                                                            <span class="lead-text text-warning">
+                                                                                {{ order.get_status_label }}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                {% empty %}
+                                                                    <div class="container-not-found-base">
+                                                                        <p class="fs-19px">تاکنون سفارشی از این محصول
+                                                                            صورت نگرفته است</p>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                            <!-- .nk-tb-list -->
+                                                        </div>
+                                                        <div class="nk-block">
+                                                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                                                <div>
+                                                                    <h6 class="lead-text ">برخی از نظرات</h6>
+                                                                    <p class="text-soft fs-11px">شامل تمامی نظرات از
+                                                                        جمله
+                                                                        نظرات تایید نشده</p>
+                                                                </div>
+                                                                <a href="{% url 'dashboard:comment__list' %}?filter=true&product={{ product.id }}" class="fs-12px">
+                                                                    مشاهده همه
+                                                                </a>
+                                                            </div>
+                                                            <div class="row g-3">
+                                                                {% for comment in product.get_all_comments|slice:':6' %}
+                                                                    <div class="col-12">
+                                                                        <div class="card card-bordered comment-status-{{ comment.status }}">
+                                                                            <div class="card-inner">
+                                                                                <div class="d-flex align-items-center justify-content-between">
+                                                                                    <div class="d-flex align-items-center">
+                                                                                        <a href="{{ comment.user.get_dashboard_absolute_url }}">
+                                                                                            <div class="icon-circle icon-circle-lg">
+                                                                                                <img src="{{ comment.user.get_image_url }}"
+                                                                                                     alt="{{ comment.user.get_full_name }}">
+                                                                                            </div>
+                                                                                        </a>
+                                                                                        <div class="ms-3">
+                                                                                            <a href="{{ comment.user.get_dashboard_absolute_url }}">
+                                                                                                <h6 class="lead-text">{{ comment.user.get_full_name|truncatechars:10 }}
+                                                                                                    <span class="text-soft ml-1">{{ comment.user.get_raw_phonenumber }}</span>
+                                                                                                </h6>
+                                                                                            </a>
+                                                                                            <span class="sub-text mt-1">{{ comment.text }}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <ul class="btn-toolbar justify-center gx-1 me-n1 flex-nowrap">
+                                                                                        <li>
+                                                                                            <span
+                                                                                                    class="btn btn-icon text-warning"
+                                                                                                    style="cursor: text">
+                                                                                                <span class="fs-16px">{{ comment.rate }}</span>
+                                                                                                &nbsp;
+                                                                                                &nbsp;
+                                                                                                <em
+                                                                                                        class="fs-16px ni ni-star">
+                                                                                                </em>
+                                                                                            </span>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="{{ comment.get_dashboard_absolute_url }}"
+                                                                                               class="btn btn-trigger btn-icon"><em
+                                                                                                    class="icon ni ni-eye"></em></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- .col -->
+                                                                {% empty %}
+                                                                    <div class="container-not-found-base">
+                                                                        <p class="fs-19px">تاکنون نظری برای این محصول
+                                                                            ثبت نشده است</p>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                            <!-- .row -->
+                                                        </div>
+                                                    </div>
+                                                    <!-- .card-inner -->
+                                                </div>
+                                                <!-- .card -->
+                                            </div>
+                                            <!-- .col -->
+                                        </div>
+                                        <!-- .row -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                {% include 'dashboard/admin/base/components/footer.html' %}
+                                <!-- footer @e -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+{% endblock %}

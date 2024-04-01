@@ -1,6 +1,6 @@
 
 function createNotify({
-    title, message, theme, positionClass='nfc-top-right', closeOnClick=true, showDuration=5000
+    title, message, theme, positionClass='nfc-top-right', closeOnClick=true, showDuration=6500
 }) {
     // delete old notify elements
     document.querySelectorAll('.ncf-container').forEach((e) => {
@@ -10,9 +10,33 @@ function createNotify({
     let notify_el = document.createElement('div')
     notify_el.id = `${id}`
     notify_el.className = `ncf-container ${positionClass}`
-    notify_el.innerHTML = `
-        <div class="ncf ${theme}"><p class="ncf-title">${title}</p><p class="nfc-message">${message || ''}</p></div>
-    `
+
+    let notify_el_content = ``
+    if (theme == 'error'){
+        notify_el_content = `
+             <div class="alert alert-fill alert-danger alert-icon">
+                 <em class="icon ni ni-cross-circle"></em>
+                 ${message || ''}
+             </div>
+        `
+    }else if (theme == 'success'){
+        notify_el_content = `
+            <div class="alert alert-fill alert-success alert-icon">
+                <em class="icon ni ni-check-circle"></em> 
+                ${message || ''}
+            </div>
+        `
+    }else if (theme == 'warning'){
+        notify_el_content = `
+            <div class="alert alert-fill alert-warning alert-icon">
+                <em class="icon ni ni-alert-circle"></em>
+                ${message || ''}
+            </div>
+        `
+    }
+
+    notify_el.innerHTML = notify_el_content
+
     document.body.append(notify_el)
     let element = document.getElementById(id)
     if (closeOnClick) {

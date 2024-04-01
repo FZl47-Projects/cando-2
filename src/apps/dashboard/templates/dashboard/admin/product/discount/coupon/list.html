@@ -1,0 +1,461 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %}مدیریت کوپن های تخفیف{% endblock %}
+
+{% block Content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                {% include 'dashboard/admin/base/components/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            {% include 'dashboard/admin/base/components/menu-aside.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">مدیریت کوپن های تخفیف</h3>
+                                                <nav>
+                                                    <ul class="breadcrumb breadcrumb-arrow">
+                                                        <li class="breadcrumb-item"><a
+                                                                href="{% url 'dashboard:index' %}">صفحه اصلی</a></li>
+                                                        <li class="breadcrumb-item"><a>محصولات</a></li>
+                                                        <li class="breadcrumb-item"><a>تخفیف</a></li>
+                                                        <li class="breadcrumb-item active">مدیریت کوپن های تخفیف</li>
+                                                    </ul>
+                                                </nav>
+                                                <div class="nk-block-des text-soft mt-2">
+                                                    <p>شما
+                                                        <span class="separate-el">{{ total_count }}</span>
+                                                        کوپن تخفیف دارید.</p>
+                                                </div>
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                            <div class="nk-block-head-content">
+                                                <div class="toggle-wrap nk-block-tools-toggle">
+                                                    <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1"
+                                                       data-target="pageMenu"><em
+                                                            class="icon ni ni-menu-alt-r"></em></a>
+                                                    <div class="toggle-expand-content" data-content="pageMenu">
+                                                        <ul class="nk-block-tools g-3">
+                                                            <li class="nk-block-tools-opt">
+                                                                <button type="button" class="btn btn-success"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#create-object">ایجاد
+                                                                    کوپن تخفیف
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!-- .toggle-wrap -->
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                        </div>
+                                        <!-- .nk-block-between -->
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered card-stretch">
+                                            <div class="card-inner-group">
+                                                <div class="card-inner position-relative card-tools-toggle">
+                                                    <div class="card-title-group">
+                                                        <div class="card-tools">
+                                                            <div class="form-inline flex-nowrap gx-3">
+                                                                <div class="form-wrap w-200px">
+                                                                    <select class="form-select js-select2"
+                                                                            data-search="off"
+                                                                            data-placeholder="عمل دسته جمعی">
+                                                                        <option value="">عمل دسته جمعی</option>
+                                                                        <option value="delete"> حذف</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="btn-wrap">
+                                                                    <span class="d-none d-md-block"><button
+                                                                            class="btn btn-dim btn-outline-light disabled">اعمال</button></span>
+                                                                    <span class="d-md-none">
+                                                                            <button class="btn btn-dim btn-outline-light btn-icon disabled"><em
+                                                                                    class="icon ni ni-arrow-right"></em></button>
+                                                                        </span>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .form-inline -->
+                                                        </div>
+                                                        <!-- .card-tools -->
+                                                        <div class="card-tools me-n1">
+                                                            <ul class="btn-toolbar gx-1">
+                                                                <li>
+                                                                    <a href="#"
+                                                                       class="btn btn-icon search-toggle toggle-search"
+                                                                       data-target="search"><em
+                                                                            class="icon ni ni-search"></em>
+                                                                        {% if request.GET.search %}
+                                                                            <div class="dot dot-primary"></div>
+                                                                        {% endif %}
+                                                                    </a>
+                                                                </li>
+                                                                <!-- li -->
+                                                                <li class="btn-toolbar-sep"></li>
+                                                                <!-- li -->
+                                                                <li>
+                                                                    <div class="toggle-wrap">
+                                                                        <a href="#"
+                                                                           class="btn btn-icon btn-trigger toggle"
+                                                                           data-target="cardTools"><em
+                                                                                class="icon ni ni-menu-right"></em></a>
+                                                                        <div class="toggle-content"
+                                                                             data-content="cardTools">
+                                                                            <ul class="btn-toolbar gx-1">
+                                                                                <li class="toggle-close">
+                                                                                    <a href="#"
+                                                                                       class="btn btn-icon btn-trigger toggle"
+                                                                                       data-target="cardTools"><em
+                                                                                            class="icon ni ni-arrow-left"></em></a>
+                                                                                </li>
+                                                                                <!-- li -->
+                                                                                <li>
+                                                                                    <div class="dropdown">
+                                                                                        <a href="#"
+                                                                                           class="btn btn-trigger btn-icon dropdown-toggle"
+                                                                                           data-bs-toggle="dropdown">
+                                                                                            {% if request.GET.filter %}
+                                                                                                <div class="dot dot-primary"></div>
+                                                                                            {% endif %}
+                                                                                            <em class="icon ni ni-filter-alt"></em>
+                                                                                        </a>
+
+                                                                                        <div class="filter-wg dropdown-menu dropdown-menu-xl dropdown-menu-end">
+                                                                                            <div class="dropdown-head">
+                                                                                                <span class="sub-title dropdown-title">فیلتر کوپن تخفیف</span>
+                                                                                            </div>
+                                                                                            <div class="dropdown-body dropdown-body-rg">
+                                                                                                <form>
+                                                                                                    <input type="hidden"
+                                                                                                           name="filter"
+                                                                                                           value="true">
+                                                                                                    <div class="row gx-6 gy-3">
+                                                                                                        <div class="col-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <label class="overline-title overline-title-alt">وضعیت</label>
+                                                                                                                <select class="form-select js-select2 select-by-filter"
+                                                                                                                        name="available">
+                                                                                                                    <option value="all">
+                                                                                                                        همه
+                                                                                                                    </option>
+                                                                                                                    <option value="true">
+                                                                                                                        معتبر
+                                                                                                                    </option>
+                                                                                                                    <option value="false">
+                                                                                                                        نامعتبر
+                                                                                                                    </option>
+                                                                                                                </select>
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <div class="col-12">
+                                                                                                            <div class="form-group text-end">
+                                                                                                                <button type="submit"
+                                                                                                                        class="btn btn-secondary">
+                                                                                                                    فیلتر
+                                                                                                                </button>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </form>
+                                                                                            </div>
+                                                                                            <div class="dropdown-foot between">
+                                                                                                <a class="clickable"
+                                                                                                   href="{% url 'dashboard:discount_coupon__list' %}">بازنشانی
+                                                                                                    فیلتر</a>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <!-- .filter-wg -->
+                                                                                    </div>
+                                                                                    <!-- .dropdown -->
+                                                                                </li>
+                                                                            </ul>
+                                                                            <!-- .btn-toolbar -->
+                                                                        </div>
+                                                                        <!-- .toggle-content -->
+                                                                    </div>
+                                                                    <!-- .toggle-wrap -->
+                                                                </li>
+                                                                <!-- li -->
+                                                            </ul>
+                                                            <!-- .btn-toolbar -->
+                                                        </div>
+                                                        <!-- .card-tools -->
+                                                    </div>
+                                                    <!-- .card-title-group -->
+                                                    <form>
+                                                        <div class="card-search search-wrap" data-search="search">
+
+                                                            <div class="card-body">
+                                                                <div class="search-content">
+                                                                    <a href="#"
+                                                                       class="search-back btn btn-icon toggle-search"
+                                                                       data-target="search"><em
+                                                                            class="icon ni ni-arrow-left"></em></a>
+                                                                    <input type="text" name="search"
+                                                                           class="form-control border-transparent form-focus-none"
+                                                                           value="{{ request.GET.search }}"
+                                                                           placeholder="جستجو بر اساس نام"/>
+                                                                    <button class="search-submit btn btn-icon"><em
+                                                                            class="icon ni ni-search"></em></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <!-- .card-search -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                                <div class="card-inner p-0">
+                                                    <div class="nk-tb-list nk-tb-ulist">
+                                                        <div class="nk-tb-item nk-tb-head text-center">
+                                                            <div class="nk-tb-col nk-tb-col-check">
+                                                                <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                           id="cid"/>
+                                                                    <label class="custom-control-label"
+                                                                           for="cid"></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="nk-tb-col"><span class="sub-text">کد</span>
+                                                            </div>
+                                                            <div class="nk-tb-col tb-col-sm"><span
+                                                                    class="sub-text">قیمت</span></div>
+                                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">تعداد قابل استفاده</span>
+                                                            </div>
+                                                            <div class="nk-tb-col tb-col-xl"><span class="sub-text">انقضا</span>
+                                                            </div>
+                                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">سبد خرید بیشتر از</span>
+                                                            </div>
+                                                            <div class="nk-tb-col text-end"><span class="sub-text">اقدامات</span>
+                                                            </div>
+                                                        </div>
+                                                        {% for coupon in object_list %}
+                                                            <!-- .nk-tb-item -->
+                                                            <div class="nk-tb-item text-center">
+                                                                <div class="nk-tb-col nk-tb-col-check">
+                                                                    <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                                        <input type="checkbox"
+                                                                               class="custom-control-input action-checkbox"
+                                                                               data-coupon-id="{{ coupon.id }}"
+                                                                               id="cid-{{ forloop.counter }}"/>
+                                                                        <label class="custom-control-label"
+                                                                               for="cid-{{ forloop.counter }}"></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="nk-tb-col">
+                                                                    <a href="{{ coupon.get_dashboard_absolute_url }}">
+                                                                        {{ coupon.code|truncatechars:20 }}
+                                                                    </a>
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-sm">
+                                                                    <span class="sub-text">
+                                                                        <span class="price-el">{{ coupon.price }}</span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-md">
+                                                                    <span class="sub-text {% if coupon.count > 0 %}text-success{% else %}text-danger{% endif %}">
+                                                                        <span class="separate-el">{{ coupon.count }}</span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-xl">
+                                                                    <span class="sub-text {% if coupon.check_expire %}text-success{% else %}text-danger{% endif %}">
+                                                                        <span>{{ coupon.get_expire_at }}</span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-md">
+                                                                      <span class="sub-text">
+                                                                        <span class="price-el">{{ coupon.cart_price_more }}</span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="nk-tb-col nk-tb-col-tools">
+                                                                    <ul class="nk-tb-actions gx-1">
+                                                                        <li>
+                                                                            <div class="drodown">
+                                                                                <a href="#"
+                                                                                   class="dropdown-toggle btn btn-icon btn-trigger"
+                                                                                   data-bs-toggle="dropdown"><em
+                                                                                        class="icon ni ni-more-h"></em></a>
+                                                                                <div class="dropdown-menu dropdown-menu-end">
+                                                                                    <ul class="link-list-opt no-bdr">
+                                                                                        <li>
+                                                                                            <a href="{{ coupon.get_dashboard_absolute_url }}"><em
+                                                                                                    class="icon ni ni-eye"></em><span>مشاهده جزئیات</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        {% empty %}
+                                                            <div class="container-not-found-base nk-tb-item">
+                                                                <div class="nk-tb-col">
+                                                                    <p>چیزی یافت نشد</p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .nk-tb-item -->
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!-- .nk-tb-list -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                                <div class="card-inner">
+                                                    <div class="nk-block-between-md">
+                                                        <div class="g">
+                                                            <ul class="pagination justify-content-center justify-content-md-start">
+                                                                {% if page_obj.has_previous %}
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page=1">اول</a>
+                                                                    </li>
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+                                                                    </li>
+                                                                {% endif %}
+
+                                                                <span class="fs-13px mt-1 mx-2">
+                                                                        صفحه {{ page_obj.number }} از {{ page_obj.paginator.num_pages }}.
+                                                                </span>
+
+                                                                {% if page_obj.has_next %}
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.next_page_number }}">بعدی</a>
+                                                                    </li>
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.paginator.num_pages }}">اخرین</a>
+                                                                    </li>
+                                                                {% endif %}
+                                                            </ul>
+                                                            <!-- .pagination -->
+                                                        </div>
+
+                                                        <!-- .pagination-goto -->
+                                                    </div>
+                                                    <!-- .nk-block-between -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                            </div>
+                                            <!-- .card-inner-group -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                {% include 'dashboard/admin/base/components/footer.html' %}
+                                <!-- footer @e -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+
+
+    <!-- modals -->
+    <div class="modal fade" tabindex="-1" id="create-object">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">اطلاعات کوپن تخفیف</h5>
+                    <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                        <em class="icon ni ni-cross"></em>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'dashboard:discount_coupon__create' %}" class="form-validate is-alter"
+                          method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="form-label" for="name">کد</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="code" name="code" required=""
+                                       placeholder="کد" minlength="3" maxlength="30">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="count">تعداد</label>
+                            <div class="form-control-wrap">
+                                <input type="number" class="form-control" id="count" name="count" required=""
+                                       placeholder="تعداد">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="price">قیمت تخفیف</label>
+                            <div class="form-control-wrap">
+                                <input type="number" class="form-control" id="price" name="price" required=""
+                                       placeholder="قیمت تخفیف">
+                            </div>
+                            <div id="inp-price-value" class="fs-12px text-muted text-left mt-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cart_price_more">مبلغ سبد خرید بیشتر از</label>
+                            <span class="form-note fs-11px">
+                               (میتوانید تغیین کنید که اگر مبلغ سبد خرید بیشتر از یک مقدار بود بتواند از کوپن تخفیف استفاده نمایید)
+                            </span>
+                            <div class="form-control-wrap">
+                                <input type="number" class="form-control" id="cart_price_more" name="cart_price_more"
+                                       placeholder="مبلغ سبد خرید بیشتر از" value="0">
+                            </div>
+                            <div id="inp-cart-price-more-value" class="fs-12px text-muted text-left mt-1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="expire_at">تاریخ انقضا</label>
+                            <div class="form-control-wrap">
+                                <input type="text" data-date-format="yyyy-mm-d" name="expire_at" id="expire_at"
+                                       class="form-control date-picker" placeholder="تاریخ انقضا" required>
+                            </div>
+                            <div class="form-note">فرمت تاریخ <code>روز/ماه/سال</code></div>
+                        </div>
+                        <div class="form-group text-end mt-5">
+                            <button type="submit" class="btn btn-lg btn-success">
+                                ایجاد کوپن تخفیف
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modals -->
+
+{% endblock %}
+
+{% block Scripts %}
+    <script>
+        document.querySelectorAll('.bg-active').forEach(function (el) {
+            el.classList.add('bg-success')
+        })
+        document.querySelectorAll('.bg-inactive').forEach(function (el) {LS
+            el.classList.add('bg-danger')
+        })
+        document.querySelectorAll('.bg-archived').forEach(function (el) {
+            el.classList.add('bg-warning')
+        })
+
+        setPriceSpreadInput('#price', '#inp-price-value')
+        setPriceSpreadInput('#cart_price_more', '#inp-cart-price-more-value')
+    </script>
+{% endblock %}

@@ -1,0 +1,368 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    محصول - {{ product.title }}
+{% endblock %}
+
+{% block Style %}
+    <style>
+        .product-showcase-info {
+            border-radius: 5px;
+            padding: 1px 4px;
+            font-size: 13px;
+            background: #864cd9;
+            box-shadow: 0 2px 1px #592a9d;
+            color: #fff;
+        }
+
+        .product__options {
+            padding: 20px;
+            margin: 20px auto;
+            border: 1px dashed #ddd;
+            border-radius: 10px;
+        }
+
+        .product__options h4 {
+            margin-bottom: 10px;
+        }
+
+        .product__option {
+            margin-bottom: 5px;
+            background: rgba(246, 246, 246, 0.4);
+            border-radius: 5px;
+            padding: 9px;
+            padding-bottom: 23px;
+        }
+
+        .review {
+            margin: 10px auto;
+            border: 1px solid rgba(238, 238, 238, 0.6);
+            padding: 10px;
+            padding-bottom: 15px;
+            border-radius: 12px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block Content %}
+    <!--offcanvas menu area start-->
+    <div class="body_overlay">
+
+    </div>
+    {% include 'base/components/menu-aside.html' %}
+    <!--offcanvas menu area end-->
+
+    <!--header area start-->
+    {% include 'base/components/header.html' %}
+
+    <section class="breadcrumb">
+        <li>
+            <a href="{% url 'public:home' %}">خانه</a>
+        </li>
+        <li>
+            <a href="{% url 'product:basic_product__list' %}">محصولات</a>
+        </li>
+        <li>
+            <a href="">محصول - {{ product.title }}</a>
+        </li>
+    </section>
+
+    <!-- single product section start-->
+    <div class="single_product_section mb-100 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product_details_sidebar">
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 class="product__title">{{ product.title }}</h2>
+                            {% if product.type == 'showcase' %}
+                                <div class="product-showcase-info">
+                                    محصول ویترینی
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="price_box">
+                            {% if product.has_in_stock %}
+                                <span id="current_price" class="current_price price-el"
+                                      data-price="{{ product.get_price }}">{{ product.get_price }}</span>
+                            {% else %}
+                                <span class="text-danger" style="font-size: 19px">محصول ناموجود است</span>
+                            {% endif %}
+                        </div>
+                        <div class="quickview__info mb-0">
+                            <p class="product_review text-left">
+                                <span class="review__text">
+                                    {{ product.get_rate }}
+                                    <i class="fa fa-star text-warning"></i>
+                                    <span class="font-80">
+                                        (
+                                            {{ product.get_comments.count }}
+                                            نظر
+                                        )
+                                    </span>
+                                </span>
+                            </p>
+                        </div>
+                        <pre class="product_details_desc">{{ product.description|truncatechars:180 }}</pre>
+                        {% if product.has_in_stock and product.get_attr_groups %}
+                            <div class="product__options">
+                                <h4>انتخاب جزئیات :</h4>
+                                {% for group in product.get_attr_groups %}
+                                    <div class="product__option">
+                                        <label for="group-field-{{ forloop.counter }}">{{ group.name }}</label>
+                                        <select name="attr_group" class="form-select d-block mx-auto"
+                                                id="group-field-{{ forloop.counter }}">
+                                            {% for field in group.get_fields %}
+                                                <option value="{{ field.id }}"
+                                                        data-additional-price="{{ field.additional_price }}">
+                                                    {{ field.name }}
+                                                    {% if field.additional_price %}
+                                                        |
+                                                        {{ field.additional_price }}
+                                                        تومان
+                                                    {% endif %}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <div dir="ltr">
+
+                            <div class="product_pro_button quantity d-flex align-items-center">
+                                {% if product.has_in_stock %}
+                                    <div>
+                                        <input type="number" class="form-control" min="1" value="1" max="{{ product.get_quantity }}">
+                                    </div>
+                                    <button class="add_to_cart" type="submit">افزودن به سبد خرید</button>
+                                {% endif %}
+                                <a class="wishlist__btn" href="{% url 'product:wishlist__add' product_id=product.id %}"><i class="pe-7s-like"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="single_product_gallery">
+                        <div class="product_gallery_inner d-flex">
+                            <div class="product_gallery_main_img">
+                                <div class="gallery_img_list">
+                                    <img src="{{ product.get_image_cover }}"
+                                         alt="{{ product.title }} cover">
+                                </div>
+                                {% for image in product.get_images %}
+                                    <div class="gallery_img_list">
+                                        <img src="{{ image.image.url }}"
+                                             alt="{{ product.title }} picture {{ forloop.counter }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="product_gallery_btn_img">
+                                <a class="gallery_btn_img_list" href="javascript:void(0)"><img
+                                        src="{{ product.get_image_cover }}" alt="tab-thumb"></a>
+
+                                {% for image in product.get_images %}
+                                    <a class="gallery_btn_img_list" href="javascript:void(0)"><img
+                                            src="{{ image.image.url }}" alt="tab-thumb"></a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- product details section end-->
+
+    <!-- product tab section start -->
+    <div class="product_tab_section mb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product_tab_navigation">
+                        <ul class="nav justify-content-center">
+                            {% if product.description %}
+                                <li>
+                                    <a class="active" data-bs-toggle="tab" href="#description"
+                                       aria-controls="description">توضیحات</a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a data-bs-toggle="tab" href="#reviews" aria-controls="reviews">
+                                    نظرات
+                                    {{ product.get_comments.count }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="product_page_content_inner tab-content">
+                        {% if product.description %}
+                            <div class="tab-pane fade show active" id="description" role="tabpanel">
+                                <div class="product_tab_desc">
+                                    <pre>{{ product.description }}</pre>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div class="tab-pane fade" id="reviews" role="tabpanel">
+                            <div class="reviews__wrapper">
+                                {% if user.is_authenticated %}
+                                    <h3>نظر خود را بنویسید</h3>
+                                    <p class="text-muted">نظر شما پس از بررسی و تایید نمایش داده خواهد شد</p>
+                                    <div class="product_review_form mb-5">
+                                        <form action="{% url 'product:comment__create' %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="product" value="{{ product.id }}">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <label for="rate">نمره </label>
+                                                    <select class="border form-select col-12" name="rate" id="rate">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="review_comment">متن نظر </label>
+                                                    <textarea class="border" name="text"
+                                                              id="review_comment"></textarea>
+                                                </div>
+                                            </div>
+                                            <button class="btn custom-btn text-white" data-hover="Submit"
+                                                    type="submit">ثبت نظر
+                                            </button>
+                                        </form>
+                                    </div>
+                                {% else %}
+                                    <div class="text-center">
+                                        برای ثبت نظر باید
+                                        <a href="{% url 'account:login_register' %}" class="text-info">
+                                            وارد شوید
+                                        </a>
+                                    </div>
+                                {% endif %}
+                                <div class="customer__reviews d-flex justify-content-between mt-3">
+                                    <div class="col-12 col-md-11 col-lg-10 mx-auto">
+                                        <h3 class="reviews__title">نظرات این محصول</h3>
+                                        {% for comment in product.get_comments %}
+                                            <div class="review">
+                                                <div class="reviews__desc">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <p>{{ comment.user.get_full_name }}</p>
+                                                        <div>
+                                                            <span class="font-60">
+                                                                ({{ comment.get_created_at_timepast }})
+                                                            </span>
+                                                            <span>
+                                                                {{ comment.rate }}
+                                                                <i class="fa fa-star text-warning"></i>
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                    <p>
+                                                        {{ comment.text }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        {% empty %}
+                                            <div class="container-not-found-base">
+                                                <p>نظری ثبت نشده است ، شما اولین شخصی باشید که نظر خود را ثبت میکنید</p>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- product tab section end -->
+
+    <!-- product section start -->
+    <div class="product_section mb-80">
+        <div class="container">
+            <div class="section_title text-center mb-55">
+                <h2>محصولات مرتبط</h2>
+            </div>
+            <div class="row product_slick slick_navigation slick__activation" data-slick='{
+                "slidesToShow": 4,
+                "slidesToScroll": 1,
+                "arrows": true,
+                "dots": false,
+                "autoplay": false,
+                "speed": 300,
+                "infinite": true ,
+                "responsive":[
+                  {"breakpoint":992, "settings": { "slidesToShow": 3 } },
+                  {"breakpoint":768, "settings": { "slidesToShow": 2 } },
+                  {"breakpoint":500, "settings": { "slidesToShow": 1 } }
+                 ]
+            }'>
+                {% for product in product.get_similar_products|slice:':8' %}
+                    <div class="col-lg-3">
+                        {# TODO: add discount information #}
+                        <article class="single_product">
+                            <figure>
+                                <div class="product_thumb">
+                                    <a href="{{ product.get_absolute_url }}"><img src="{{ product.get_image_cover }}"
+                                                                                  alt="{{ product.title }}"></a>
+                                    <div class="action_links">
+                                        <ul class="d-flex justify-content-center">
+                                            {# TODO: add cart - wishlist urls #}
+                                            <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
+                                                    class="pe-7s-shopbag"></span></a></li>
+                                            <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
+                                                    class="pe-7s-like"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <figcaption class="product_content text-center">
+                                    <h4>
+                                        <a href="{{ product.get_absolute_url }}">{{ product.title|truncatechars:20 }}</a>
+                                    </h4>
+                                    <div class="price_box">
+                                        <span class="current_price price-el">
+                                            {{ product.get_price }}
+                                        </span>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </article>
+                    </div>
+                {% empty %}
+                    <div class="container-not-found-base">
+                        <p>محصولی یافت نشد</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- product section end -->
+    <!--footer area start-->
+    {% include 'base/components/footer.html' %}
+    <!--footer area end-->
+
+{% endblock %}
+
+{% block Script %}
+    <script>
+        let current_price_el = document.getElementById('current_price')
+        document.querySelectorAll('[name="attr_group"]').forEach(function (el) {
+            el.addEventListener('change', function () {
+                let option = el.options[el.selectedIndex]
+                let additional_price = Number(option.dataset['additionalPrice']) || 0
+
+            })
+        })
+
+
+    </script>
+{% endblock %}
