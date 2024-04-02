@@ -24,6 +24,4 @@ admin.site.register(models.FactorCakeImage)
 admin.site.register(models.WishList)
 admin.site.register(models.Cart)
 admin.site.register(models.ProductCart)
-admin.site.register(models.ProductAttrCart)
-
-
+admin.site.register(models.ProductCartOption)

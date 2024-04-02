@@ -140,7 +140,7 @@
                                     </div>
                                     <button class="add_to_cart" type="submit">افزودن به سبد خرید</button>
                                 {% endif %}
-                                <a class="wishlist__btn" href="{% url 'product:wishlist__add' product_id=product.id %}"><i class="pe-7s-like"></i></a>
+                                <a class="wishlist__btn" href="{% url 'product:wishlist__create' product_id=product.id %}"><i class="pe-7s-like"></i></a>
                             </div>
                         </div>
                     </div>

@@ -249,7 +249,11 @@
                                                             </p>
                                                             <div class="price_box">
                                                                 <span class="current_price">
-                                                                    <span class="price-el">{{ product.get_price }}</span>
+                                                                    {% if product.has_in_stock %}
+                                                                        <span class="price-el">{{ product.get_price }}</span>
+                                                                        {% else %}
+                                                                        <span class="text-danger">ناموجود</span>
+                                                                    {% endif %}
                                                                 </span>
                                                             </div>
                                                         </figcaption>

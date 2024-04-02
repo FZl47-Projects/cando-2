@@ -1,2 +1,2 @@
 from .main import *
-from . import product
+from . import product, user

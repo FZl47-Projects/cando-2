@@ -5,8 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="769011da-9191-4737-9cb7-b11e03fe2413" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/cando-2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cando-2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/basic/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/basic/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/basic/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/basic/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +32,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -42,34 +55,39 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2Ywksle2u5HUKOtxfLHe9qtb215" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Project-Company/Smarten/cando-2/src/apps/dashboard/templates/dashboard/admin/product/factor-cake-image&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/ehyasystem/Desktop/web-projects/alfa_machine/main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PythonContentEntriesConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ehyasystem\Desktop\web-projects\cando-2\src\apps\dashboard\templates\dashboard\admin\user" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\factor-cake-image" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\discount\coupon" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\comment" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\attributes\fields" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\attributes\group" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\product\templates\product" />
@@ -82,6 +100,7 @@
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="cando-2" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -102,6 +121,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-67fca87a943a-c986f194a52a-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.11799.259" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -150,6 +176,8 @@
       <workItem from="1711394389865" duration="2833000" />
       <workItem from="1711442643281" duration="10309000" />
       <workItem from="1711981560470" duration="965000" />
+      <workItem from="1712037332780" duration="4191000" />
+      <workItem from="1712041855236" duration="3433000" />
     </task>
     <servers />
   </component>
