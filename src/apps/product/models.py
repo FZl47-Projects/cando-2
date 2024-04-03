@@ -65,7 +65,9 @@ class BasicProduct(BaseProduct):
         ordering = ('-id',)
 
     def has_in_stock(self):
-        return True if self.get_quantity() > 0 else False
+        if self.get_quantity() > 0 and self.get_price() > 0:
+            return True
+        return False
 
     def get_absolute_url(self):
         return reverse('product:basic_product__detail', args=(self.id,))
@@ -241,14 +243,6 @@ class DiscountCoupon(BaseModel):
         return False
 
 
-class ProductFavoriteList(BaseModel):
-    user = models.OneToOneField('account.User', on_delete=models.CASCADE)
-    products = models.ManyToManyField('BasicProduct')
-
-    def __str__(self):
-        return f'favorite list - {self.user}'
-
-
 class Comment(BaseModel):
     RATE_OPTIONS = (
         (1, '1'),
@@ -314,13 +308,13 @@ class ProductCart(BaseProduct):
         return f'{self.cart} - {self.product}'
 
 
-class ProductAttrCart(BaseProduct):
-    cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
+class ProductCartOption(BaseModel):
+    product_cart = models.ForeignKey('ProductCart', on_delete=models.CASCADE)
     group = models.ForeignKey('ProductAttrGroup', on_delete=models.SET_NULL, null=True)
     attr = models.ForeignKey('SimpleProductAttr', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f'{self.cart} - {self.group}|{self.attr}'
+        return f'{self.product_cart} - {self.group}|{self.attr}'
 
 
 class WishList(BaseModel):
@@ -329,4 +323,3 @@ class WishList(BaseModel):
 
     def __str__(self):
         return f'{self.user} - wishlist'
-

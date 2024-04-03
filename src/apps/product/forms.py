@@ -125,6 +125,8 @@ class DiscountCouponCreateForm(forms.ModelForm):
 
 
 class FactorCakeImageCreateForm(forms.ModelForm):
+    description = forms.CharField(max_length=300, required=False)
+
     class Meta:
         model = models.FactorCakeImage
         exclude = ('status',)
@@ -144,5 +146,15 @@ class FactorCakeImageCreateForm(forms.ModelForm):
             self.cleaned_data['images'] = images_obj
 
 
-class AddProductToCartForm(forms.ModelForm):
-    pass
+class ProductCartCreateForm(forms.ModelForm):
+    # TODO: should test and complete
+    class Meta:
+        model = models.ProductCart
+        fields = '__all__'
+
+
+class ProductOptionsCartCreateForm(forms.ModelForm):
+    # TODO: should test and complete
+    class Meta:
+        model = models.ProductCartOption
+        fields = '__all__'

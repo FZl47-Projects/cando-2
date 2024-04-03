@@ -1,5 +1,4 @@
-from django.shortcuts import render, HttpResponse
-from django.views.generic import View, TemplateView
+from django.views.generic import TemplateView
 from apps.core.auth.mixins import LoginRequiredMixinCustom
 
 

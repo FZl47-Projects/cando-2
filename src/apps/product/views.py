@@ -5,6 +5,7 @@ from django.views.generic import TemplateView, ListView, View
 from django.db.models import Min, Max, Count, Case, When, Value
 
 from apps.core.mixins.views import CreateViewMixin, FilterSimpleListViewMixin
+from apps.core.utils import create_form_messages
 from apps.product import models, forms
 
 
@@ -112,25 +113,88 @@ class CommentCreate(CreateViewMixin, View):
         pass
 
 
-class AddProductToCart(View):
+class ProductCartCreate(View):
+    # TODO: should test
     success_message = _('Product Has Been Successfully Added To The Cart')
+
+    def get_product(self):
+        request = self.request
+        data = request.POST
+        product_id = data.get('product_id')
+        product = get_object_or_404(models.BasicProduct, id=product_id)
+        return product
+
+    def get_request_data(self):
+        req = self.request
+        if req.method == 'GET':
+            return req.GET
+        elif req.method == 'POST':
+            return req.POST
+        # invalid method
+        return redirect('public:home')
+
+    def create_product_cart(self, cart):
+        request = self.request
+        data = self.get_request_data()
+        data.update({
+            'cart': cart.id
+        })
+        f = forms.ProductCartCreateForm(data=data)
+        referer_url = request.META.get('HTTP_REFERER')
+        if not f.is_valid():
+            create_form_messages(request, f)
+            return redirect(referer_url or 'public:home')
+        product_cart = f.save()
+        return product_cart
+
+    def create_product_options_cart(self, product_cart):
+        # TODO: should test
+        request = self.request
+        data = self.get_request_data()
+        data.update({
+            'product_cart': product_cart.id
+        })
+        f = forms.ProductOptionsCartCreateForm(data=data)
+        referer_url = request.META.get('HTTP_REFERER')
+        if not f.is_valid():
+            create_form_messages(request, f)
+            return redirect(referer_url or 'public:home')
+        f.save()
 
     def post(self, request):
         user = request.user
         if user.is_authenticated:
             cart = user.get_current_cart()
         else:
-            self.get_session_cart()
+            cart = self.get_session_cart()
+        product_cart = self.create_product_cart(cart)
+        self.create_product_options_cart(product_cart)
+        messages.success(request, self.success_message)
+        # redirect to referer url
+        referer_url = request.META.get('HTTP_REFERER')
+        return redirect(referer_url or 'public:home')
 
     def get_session_cart(self):
         request = self.request
-        if not 'cart' in request.session:
+        if not 'cart_id' in request.session:
             # create object cart
-            request.session['cart'] = models.Cart.objects.create()
-        return request.session['cart']
+            cart = self.create_cart()
+        else:
+            cart_id = request.session['cart_id']
+            try:
+                cart = models.Cart.objects.get(id=cart_id)
+            except models.Cart.DoesNotExist:
+                # invalid cart session
+                cart = self.create_cart()
+
+        request.session['cart_id'] = cart.id
+        return cart
+
+    def create_cart(self, *args, **kwargs):
+        return models.Cart.objects.create(*args, **kwargs)
 
 
-class WishListAdd(View):
+class WishListProductCreate(View):
     success_message = _('Product Has Been Successfully Added To The Wish List')
 
     def get(self, request, product_id):
@@ -148,16 +212,19 @@ class WishListAdd(View):
 
     def get_session_wishlist(self):
         request = self.request
-        if not 'wishlist' in request.session:
+        if not 'wishlist_id' in request.session:
             # create object wishlist
-            wishlist = models.WishList.objects.create()
+            wishlist = self.create_wishlist()
         else:
-            wishlist_id = request.session['wishlist']
+            wishlist_id = request.session['wishlist_id']
             try:
                 wishlist = models.WishList.objects.get(id=wishlist_id)
             except models.WishList.DoesNotExist:
                 # invalid wishlist session
-                wishlist = models.WishList.objects.create()
+                wishlist = self.create_wishlist()
 
-        request.session['wishlist'] = wishlist.id
+        request.session['wishlist_id'] = wishlist.id
         return wishlist
+
+    def create_wishlist(self, *args, **kwargs):
+        return models.WishList.objects.create(*args, **kwargs)
