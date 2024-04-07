@@ -36,6 +36,9 @@ class BaseProduct(BaseModel):
     title = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
 
+    class Meta:
+        abstract = True
+
     def __str__(self):
         return self.title
 
@@ -171,18 +174,48 @@ class BaseProductAttr(BaseModel):
 
 class SimpleProductAttr(RemovePastFileMixin, BaseProductAttr):
     FIELDS_REMOVE_FILES = ('picture',)
+
     additional_price = models.PositiveBigIntegerField(default=0)
     picture = models.ImageField(upload_to=utils.get_upload_src_product_attr_pic, null=True, blank=True)
 
     def get_picture_url(self):
-
         try:
             return self.picture.url
         except ValueError:
             pass
 
 
-class ProductView(BaseProduct):
+class CustomProduct(BaseModel):
+    TYPE_OPTIONS = (
+        ('picture_on', _('Picture On')),
+        ('model_on', _('Model On')),
+    )
+    user = models.ForeignKey('account.User', on_delete=models.SET_NULL, null=True)
+    type = models.CharField(max_length=12, choices=TYPE_OPTIONS)
+    receipt_date = models.DateTimeField()
+    images = models.ManyToManyField('core.Image')
+    writing_on = models.CharField(max_length=100)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return f"#{self.id} custom product | {self.user or '-'}"
+
+
+class CustomProductAttrCategory(BaseModel):
+    """
+        Singleton
+        TODO: should use SingletonModel
+    """
+    groups = models.ManyToManyField('ProductAttrGroup', blank=True)
+
+    def __str__(self):
+        return f'custom product attr category setting'
+
+    def get_groups(self):
+        return self.groups.all()
+
+
+class ProductView(BaseModel):
     user = models.ForeignKey('account.User', on_delete=models.CASCADE, null=True)
     product = models.ForeignKey('BasicProduct', on_delete=models.CASCADE)
 
@@ -296,10 +329,32 @@ class Cart(BaseModel):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.user
+        return self.user or 'session cart'
+
+    def get_products(self):
+        return self.productcart_set.all()
+
+    @classmethod
+    def get_session_cart(cls, request):
+        def create_cart(*args, **kwargs):
+            return Cart.objects.create(*args, **kwargs)
+
+        if not 'cart_id' in request.session:
+            # create object cart
+            cart = create_cart()
+        else:
+            cart_id = request.session['cart_id']
+            try:
+                cart = Cart.objects.get(id=cart_id)
+            except Cart.DoesNotExist:
+                # invalid cart session
+                cart = create_cart()
+
+        request.session['cart_id'] = cart.id
+        return cart
 
 
-class ProductCart(BaseProduct):
+class ProductCart(BaseModel):
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
     product = models.ForeignKey('BasicProduct', on_delete=models.SET_NULL, null=True)
     quantity = models.SmallIntegerField(default=1)
@@ -323,3 +378,25 @@ class WishList(BaseModel):
 
     def __str__(self):
         return f'{self.user} - wishlist'
+
+    def get_products(self):
+        return self.products.all()
+
+    @classmethod
+    def get_session_wishlist(cls, request):
+        def create_wishlist(*args, **kwargs):
+            return WishList.objects.create(*args, **kwargs)
+
+        if not 'wishlist_id' in request.session:
+            # create object wishlist
+            wishlist = create_wishlist()
+        else:
+            wishlist_id = request.session['wishlist_id']
+            try:
+                wishlist = WishList.objects.get(id=wishlist_id)
+            except WishList.DoesNotExist:
+                # invalid wishlist session
+                wishlist = create_wishlist()
+
+        request.session['wishlist_id'] = wishlist.id
+        return wishlist

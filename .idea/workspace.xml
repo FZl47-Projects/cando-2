@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3218dff5-1747-4748-95c5-4f5419735ae2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/confirm-phonenumber.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/templates/account/confirm-phonenumber.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/login-register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/templates/account/login-register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/reset-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/templates/account/reset-password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0002_rename_type_name_category_title.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0003_product_status.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0004_baseproduct_baseproductattr_productattrgroup_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0005_basicproduct_type.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0006_remove_category_title.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0007_basicproduct_attr_category.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0008_alter_basicproduct_options_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0009_rename_description_comment_text_remove_comment_title.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0010_alter_baseproduct_id_alter_baseproductattr_id_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0011_alter_baseproduct_id_alter_baseproductattr_id_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0012_category_default.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0013_alter_category_options.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0014_alter_productattrcategory_groups.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0015_remove_baseproductattr_group_productattrgroup_fields.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0016_alter_discountcoupon_count_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0017_alter_discountcoupon_expire_at.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0018_alter_discountcoupon_expire_at.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0019_alter_discountcoupon_code_factorcakeimage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0020_alter_factorcakeimage_status.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0021_alter_factorcakeimage_images.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0022_productview.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0023_alter_comment_status.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0024_cart_alter_productview_user_productcart_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0025_productattrcart_attr_productattrcart_group_wishlist.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/basic/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/basic/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/basic/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/basic/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/factor-cake-image.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/factor-cake-image.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/public/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/base_template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/base/components/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/components/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/base/components/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/components/header.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2ed7Z1tlHp5tuZUOVYbk4A9pq1o" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dev",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PythonContentEntriesConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3218dff5-1747-4748-95c5-4f5419735ae2" name="Changes" comment="" />
+      <created>1712222674848</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1712222674848</updated>
+      <workItem from="1712222698156" duration="818000" />
+      <workItem from="1712239447728" duration="3946000" />
+      <workItem from="1712414671917" duration="269000" />
+      <workItem from="1712438550479" duration="6058000" />
+      <workItem from="1712490880390" duration="590000" />
+      <workItem from="1712507143191" duration="5295000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

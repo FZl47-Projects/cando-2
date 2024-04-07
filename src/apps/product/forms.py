@@ -158,3 +158,26 @@ class ProductOptionsCartCreateForm(forms.ModelForm):
     class Meta:
         model = models.ProductCartOption
         fields = '__all__'
+
+
+class CustomProductCreateForm(forms.ModelForm):
+    # TODO: should test and complete
+    description = forms.CharField(max_length=300, required=False)
+
+    class Meta:
+        model = models.CustomProduct
+        fields = '__all__'
+
+    def clean(self):
+        super().clean()
+        files = self.files
+        if not self.is_valid():
+            return
+        # create image's obj
+        images = files.getlist('images', None)
+        images_obj = []
+        if images:
+            for image in images:
+                images_obj.append(Image(image=image))
+            images_obj = Image.objects.bulk_create(images_obj)
+            self.cleaned_data['images'] = images_obj

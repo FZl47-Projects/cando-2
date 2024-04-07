@@ -1,0 +1,24 @@
+.product-attr-group {
+    padding: 25px;
+    margin: 15px auto;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    background: #fff;
+    position: relative;
+}
+
+.product-attr-group-title {
+    position: absolute;
+    top: -12px;
+    right: 8px;
+    background: #fff;
+}
+
+.product-attr-fields select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #f0f0f0;
+    border-radius: 7px;
+    color: #132754;
+    font-size: 16px;
+}

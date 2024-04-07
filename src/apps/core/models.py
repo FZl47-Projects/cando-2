@@ -38,7 +38,7 @@ class BaseModel(models.Model):
         return get_timesince_persian(self.updated_at)
 
 
-class File(RemovePastFileMixin, models.Model):
+class FileAbstract(RemovePastFileMixin, models.Model):
     # TODO: add hashing and prevent duplicate file | feature
     FIELDS_REMOVE_FILES = ('file',)
     file = models.FileField(upload_to=upload_file_src, max_length=400)
@@ -57,7 +57,6 @@ class Image(RemovePastFileMixin, models.Model):
     image = models.ImageField(upload_to=upload_image_src, max_length=400, null=True)
 
     class Meta:
-        # abstract = True
         ordering = '-id',
 
     def __str__(self):

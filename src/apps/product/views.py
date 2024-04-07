@@ -2,11 +2,11 @@ from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import TemplateView, ListView, View
-from django.db.models import Min, Max, Count, Case, When, Value
+from django.db.models import Min, Max, Count, Case, When, Value, Sum
 
 from apps.core.mixins.views import CreateViewMixin, FilterSimpleListViewMixin
 from apps.core.utils import create_form_messages
-from apps.product import models, forms
+from apps.product import models, forms, utils
 
 
 class BasicProductList(FilterSimpleListViewMixin, ListView):
@@ -100,6 +100,21 @@ class FactorCakeImage(CreateViewMixin, TemplateView):
         pass
 
 
+class CustomProductCreate(CreateViewMixin, TemplateView):
+    form = forms.CustomProductCreateForm
+    success_message = _('Your Custom Product Has Been Created and Will Be Added to Your Shopping Cart After Checking')
+    template_name = 'product/custom-product-create.html'
+
+    def do_success(self):
+        # TODO: create notify for admins and user
+        pass
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['attr_category'] = models.CustomProductAttrCategory.objects.first()
+        return context
+
+
 class CommentCreate(CreateViewMixin, View):
     form = forms.CommentCreateForm
     success_message = _('Your Comment Has Been Successfully Registered And Will Be Displayed After Review')
@@ -127,71 +142,67 @@ class ProductCartCreate(View):
     def get_request_data(self):
         req = self.request
         if req.method == 'GET':
-            return req.GET
+            return req.GET.copy()
         elif req.method == 'POST':
-            return req.POST
+            return req.POST.copy()
         # invalid method
         return redirect('public:home')
 
-    def create_product_cart(self, cart):
+    def create_product_cart(self, cart, product):
         request = self.request
         data = self.get_request_data()
         data.update({
-            'cart': cart.id
+            'cart': cart.id,
+            'product': product,
         })
         f = forms.ProductCartCreateForm(data=data)
-        referer_url = request.META.get('HTTP_REFERER')
         if not f.is_valid():
             create_form_messages(request, f)
-            return redirect(referer_url or 'public:home')
+            return
         product_cart = f.save()
         return product_cart
 
     def create_product_options_cart(self, product_cart):
-        # TODO: should test
-        request = self.request
+        # TODO: should test and complete
         data = self.get_request_data()
         data.update({
             'product_cart': product_cart.id
         })
         f = forms.ProductOptionsCartCreateForm(data=data)
-        referer_url = request.META.get('HTTP_REFERER')
-        if not f.is_valid():
-            create_form_messages(request, f)
-            return redirect(referer_url or 'public:home')
-        f.save()
+        if f.is_valid():
+            f.save()
 
-    def post(self, request):
+    def get_referer_url(self):
+        return self.request.META.get('HTTP_REFERER', '/')
+
+    def check_stock_product_in_cart(self, product, cart):
+        product_cart = cart.productcart_set.filter(product=product, cart=cart)
+        if product_cart.exists():
+            product_cart_quantities = product_cart.aggregate(total_quantity=Sum('quantity'))['total_quantity'] or 0
+            data = self.get_request_data()
+            quantity = int(data['quantity'])
+            if (product_cart_quantities + quantity) > product.get_quantity():
+                return False
+        return True
+
+    def post(self, request, product_id):
         user = request.user
         if user.is_authenticated:
-            cart = user.get_current_cart()
+            cart = user.get_current_cart_or_create()
         else:
-            cart = self.get_session_cart()
-        product_cart = self.create_product_cart(cart)
+            cart = models.Cart.get_session_cart(request)
+        product = get_object_or_404(models.BasicProduct, id=product_id)
+        # check product stock and (stock cart)
+        if (not product.has_in_stock()) or (not self.check_stock_product_in_cart(product, cart)):
+            messages.warning(request, _('There Are Too Many Products In Your Shopping Cart'))
+            return redirect(self.get_referer_url())
+        product_cart = self.create_product_cart(cart, product)
+        if not product_cart:
+            return redirect(self.get_referer_url())
         self.create_product_options_cart(product_cart)
         messages.success(request, self.success_message)
         # redirect to referer url
-        referer_url = request.META.get('HTTP_REFERER')
-        return redirect(referer_url or 'public:home')
-
-    def get_session_cart(self):
-        request = self.request
-        if not 'cart_id' in request.session:
-            # create object cart
-            cart = self.create_cart()
-        else:
-            cart_id = request.session['cart_id']
-            try:
-                cart = models.Cart.objects.get(id=cart_id)
-            except models.Cart.DoesNotExist:
-                # invalid cart session
-                cart = self.create_cart()
-
-        request.session['cart_id'] = cart.id
-        return cart
-
-    def create_cart(self, *args, **kwargs):
-        return models.Cart.objects.create(*args, **kwargs)
+        return redirect(self.get_referer_url())
 
 
 class WishListProductCreate(View):
@@ -201,30 +212,11 @@ class WishListProductCreate(View):
         product = get_object_or_404(models.BasicProduct, id=product_id)
         user = request.user
         if user.is_authenticated:
-            wishlist = user.get_wishlist()
+            wishlist = user.get_or_create_wishlist()
         else:
-            wishlist = self.get_session_wishlist()
+            wishlist = models.WishList.get_session_wishlist(request)
         wishlist.products.add(product)
         messages.success(request, self.success_message)
         # redirect to referer url
         referer_url = request.META.get('HTTP_REFERER')
         return redirect(referer_url or 'public:home')
-
-    def get_session_wishlist(self):
-        request = self.request
-        if not 'wishlist_id' in request.session:
-            # create object wishlist
-            wishlist = self.create_wishlist()
-        else:
-            wishlist_id = request.session['wishlist_id']
-            try:
-                wishlist = models.WishList.objects.get(id=wishlist_id)
-            except models.WishList.DoesNotExist:
-                # invalid wishlist session
-                wishlist = self.create_wishlist()
-
-        request.session['wishlist_id'] = wishlist.id
-        return wishlist
-
-    def create_wishlist(self, *args, **kwargs):
-        return models.WishList.objects.create(*args, **kwargs)

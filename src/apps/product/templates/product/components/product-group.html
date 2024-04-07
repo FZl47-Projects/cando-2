@@ -1,0 +1,17 @@
+<div class="product-attr-group">
+    <label class="product-attr-group-title" for="#product-group-{{ group.id }}-id">{{ group.name }}</label>
+    <div class="product-attr-fields">
+        <select name="product_attr_group" id="product-group-{{ group.id }}-id">
+            {% for field in group.get_fields %}
+                <option value="{{ field.id }}" additional-price="{{ field.additional_price }}">
+                    {{ field.name }}
+                    {% if field.additional_price > 0 %}
+                        |
+                        {{ field.additional_price }}
+                        تومان
+                    {% endif %}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+</div>

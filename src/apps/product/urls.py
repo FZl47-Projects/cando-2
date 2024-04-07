@@ -13,4 +13,6 @@ urlpatterns = [
     path('comment/create', views.CommentCreate.as_view(), name='comment__create'),
 
     path('factor-cake-image', views.FactorCakeImage.as_view(), name='factor_cake_image__create'),
+
+    path('custom-product-create', views.CustomProductCreate.as_view(), name='custom_product__create'),
 ]

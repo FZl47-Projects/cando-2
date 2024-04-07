@@ -1,0 +1,99 @@
+{% extends 'base/base_template.html' %}
+{% load render_partial %}
+{% load static %}
+
+{% block Title %}
+    ایجاد محصول دلخواه
+{% endblock %}
+
+{% block Link %}
+    <link rel="stylesheet" href="{% static 'styles/product-attr.css' %}">
+{% endblock %}
+
+{% block Content %}
+    <!--offcanvas menu area start-->
+    <div class="body_overlay">
+
+    </div>
+    {% include 'base/components/menu-aside.html' %}
+    <!--offcanvas menu area end-->
+
+    <!--header area start-->
+    {% render_partial 'apps.public.components.HeaderComponentView' %}
+
+    <section class="breadcrumb">
+        <li>
+            <a href="{% url 'public:home' %}">خانه</a>
+        </li>
+        <li>صفحات</li>
+        <li>
+            <a href="">ایجاد محصول دلخواه</a>
+        </li>
+    </section>
+
+    <div class="contact_page_section mb-100">
+        <div class="container">
+            <div class="contact_details">
+                <div class="">
+                    <div class="col-12">
+                        <div class="contact_form col-12 col-md-8 col-lg-7 mx-auto"
+                             data-bgimg="{% static 'template/img/others/contact-form-bg-shape.png' %}">
+                            <h2>ایجاد محصول دلخواه</h2>
+                            <form id="contact-form" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form_input mb-4">
+                                    <select name="type" class="form-control" required>
+                                        <option value="picture_on">چاپ عکس از روی کیک</option>
+                                        <option value="model_on">چاپ عکس از روی مدل</option>
+                                    </select>
+                                </div>
+                                <div class="form_input">
+                                    <input name="writing_on" placeholder="نوشته روی محصول" type="text">
+                                </div>
+                                <div class="form_input">
+                                    <input name="receipt_date" class="datetime-picker" placeholder="تاریخ دریافت"
+                                           type="text" required>
+                                </div>
+                                <div class="form_input mb-4">
+                                    <input name="images" class="form-control p-2 mb-0" placeholder="تصویر" type="file"
+                                           required multiple=""
+                                           accept="image/*">
+                                    <span class="text-muted font-60">میتوانید چندین تصویر را انتخاب نمایید</span>
+                                </div>
+                                {% for group in attr_category.get_groups %}
+                                    {% include 'product/components/product-group.html' with group=group %}
+                                {% endfor %}
+                                <div class="form_textarea">
+                                    <textarea name="description" placeholder="توضیحات"></textarea>
+                                </div>
+                                <div class="my-2 d-flex justify-content-between align-items-center p-3 border-1-gray"
+                                     style="border-radius: 5px">
+                                    <span>قیمت تقریبی : </span>
+                                    <span id="price-el" data-price="0">0</span>
+                                </div>
+                                <div class="form_input_btn text-left">
+                                    <button type="submit" class="btn btn-link">ایجاد و ثبت درخواست</button>
+                                </div>
+                                <p class="form-message"></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer area start-->
+    {% include 'base/components/footer.html' %}
+    <!--footer area end-->
+
+
+{% endblock %}
+
+{% block Script %}
+    <script>
+        const PRICE_ELEMENT = document.getElementById('price-el')
+    </script>
+    <script src="{% static 'scripts/product-attr.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+{% endblock %}
+

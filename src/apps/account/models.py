@@ -120,13 +120,13 @@ class User(AbstractUser):
             return self.last_login.strftime('%Y-%m-%d %H:%M:%S')
         return '-'
 
-    def get_current_cart(self):
+    def get_current_cart_or_create(self):
         cart = Cart.objects.filter(is_active=True)
         if not cart.exists():
             cart = Cart.objects.create(user=self)
-        return cart
+        return cart.first()
 
-    def get_wishlist(self):
+    def get_or_create_wishlist(self):
         try:
             return self.wishlist
         except WishList.DoesNotExist:
