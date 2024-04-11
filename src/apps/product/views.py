@@ -1,12 +1,13 @@
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, View
-from django.db.models import Min, Max, Count, Case, When, Value, Sum
+from django.db.models import Min, Max, Count, Case, When, Value
+from django.core.exceptions import PermissionDenied
 
-from apps.core.mixins.views import CreateViewMixin, FilterSimpleListViewMixin
-from apps.core.utils import create_form_messages
-from apps.product import models, forms, utils
+from apps.core.mixins.views import CreateViewMixin, FilterSimpleListViewMixin, DeleteMixin
+from apps.product import models, forms
 
 
 class BasicProductList(FilterSimpleListViewMixin, ListView):
@@ -100,7 +101,7 @@ class FactorCakeImage(CreateViewMixin, TemplateView):
         pass
 
 
-class CustomProductCreate(CreateViewMixin, TemplateView):
+class CustomProductCreate(LoginRequiredMixin, CreateViewMixin, TemplateView):
     form = forms.CustomProductCreateForm
     success_message = _('Your Custom Product Has Been Created and Will Be Added to Your Shopping Cart After Checking')
     template_name = 'product/custom-product-create.html'
@@ -114,6 +115,26 @@ class CustomProductCreate(CreateViewMixin, TemplateView):
         context['attr_category'] = models.CustomProductAttrCategory.objects.first()
         return context
 
+    def add_additional_data(self, data):
+        data['user'] = self.request.user
+
+
+class CustomProductCartDelete(DeleteMixin, View):
+    success_message = _('Product Cart Successfully Deleted')
+
+    def get_object(self, request, *args, **kwargs):
+        custom_product_cart_id = kwargs.get('custom_product_cart_id')
+        custom_product_cart = get_object_or_404(models.CustomProductCart, id=custom_product_cart_id)
+        # check cart user
+        user = self.request.user
+        if user.is_authenticated:
+            cart = user.get_current_cart_or_create()
+        else:
+            cart = models.Cart.get_session_cart(self.request)
+        if custom_product_cart.cart != cart:
+            raise PermissionDenied
+        return custom_product_cart
+
 
 class CommentCreate(CreateViewMixin, View):
     form = forms.CommentCreateForm
@@ -123,86 +144,27 @@ class CommentCreate(CreateViewMixin, View):
         # add user to data
         data['user'] = self.request.user
 
-    def do_success(self):
-        # TODO: create notify for admins
-        pass
 
-
-class ProductCartCreate(View):
-    # TODO: should test
+class ProductCartCreate(CreateViewMixin, View):
+    form = forms.ProductCartCreateForm
     success_message = _('Product Has Been Successfully Added To The Cart')
 
-    def get_product(self):
-        request = self.request
-        data = request.POST
-        product_id = data.get('product_id')
-        product = get_object_or_404(models.BasicProduct, id=product_id)
-        return product
 
-    def get_request_data(self):
-        req = self.request
-        if req.method == 'GET':
-            return req.GET.copy()
-        elif req.method == 'POST':
-            return req.POST.copy()
-        # invalid method
-        return redirect('public:home')
+class ProductCartDelete(DeleteMixin, View):
+    success_message = _('Product Cart Successfully Deleted')
 
-    def create_product_cart(self, cart, product):
-        request = self.request
-        data = self.get_request_data()
-        data.update({
-            'cart': cart.id,
-            'product': product,
-        })
-        f = forms.ProductCartCreateForm(data=data)
-        if not f.is_valid():
-            create_form_messages(request, f)
-            return
-        product_cart = f.save()
-        return product_cart
-
-    def create_product_options_cart(self, product_cart):
-        # TODO: should test and complete
-        data = self.get_request_data()
-        data.update({
-            'product_cart': product_cart.id
-        })
-        f = forms.ProductOptionsCartCreateForm(data=data)
-        if f.is_valid():
-            f.save()
-
-    def get_referer_url(self):
-        return self.request.META.get('HTTP_REFERER', '/')
-
-    def check_stock_product_in_cart(self, product, cart):
-        product_cart = cart.productcart_set.filter(product=product, cart=cart)
-        if product_cart.exists():
-            product_cart_quantities = product_cart.aggregate(total_quantity=Sum('quantity'))['total_quantity'] or 0
-            data = self.get_request_data()
-            quantity = int(data['quantity'])
-            if (product_cart_quantities + quantity) > product.get_quantity():
-                return False
-        return True
-
-    def post(self, request, product_id):
-        user = request.user
+    def get_object(self, request, *args, **kwargs):
+        product_cart_id = kwargs.get('product_cart_id')
+        product_cart = get_object_or_404(models.ProductCart, id=product_cart_id)
+        # check cart user
+        user = self.request.user
         if user.is_authenticated:
             cart = user.get_current_cart_or_create()
         else:
-            cart = models.Cart.get_session_cart(request)
-        product = get_object_or_404(models.BasicProduct, id=product_id)
-        # check product stock and (stock cart)
-        if (not product.has_in_stock()) or (not self.check_stock_product_in_cart(product, cart)):
-            messages.warning(request, _('There Are Too Many Products In Your Shopping Cart'))
-            return redirect(self.get_referer_url())
-        product_cart = self.create_product_cart(cart, product)
-        if not product_cart:
-            return redirect(self.get_referer_url())
-        self.create_product_options_cart(product_cart)
-        messages.success(request, self.success_message)
-        # redirect to referer url
-        return redirect(self.get_referer_url())
+            cart = models.Cart.get_session_cart(self.request)
+        if product_cart.cart != cart:
+            raise PermissionDenied
+        return product_cart
 
 
 class WishListProductCreate(View):

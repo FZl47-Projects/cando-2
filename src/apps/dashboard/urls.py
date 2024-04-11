@@ -10,6 +10,10 @@ urlpatterns = [
     path('product/basic/list', views.product.BasicProductList.as_view(), name='basic_product__list'),
     path('product/basic/<int:product_id>/detail', views.product.BasicProductDetail.as_view(),
          name='basic_product__detail'),
+    path('custom-product/list', views.product.CustomProductList.as_view(), name='custom_product__list'),
+    path('custom-product/<int:custom_product_id>/detail', views.product.CustomProductDetail.as_view(), name='custom_product__detail'),
+    path('custom-product/<int:custom_product_id>/delete', views.product.CustomProductDelete.as_view(), name='custom_product__delete'),
+    path('custom-product/<int:custom_product_id>/status/manage', views.product.CustomProductManageStatus.as_view(), name='custom_product__manage_status'),
     # product attributes section
     # attr category
     path('product/attr/category/list', views.product.ProductAttrCategoryList.as_view(),
@@ -26,6 +30,8 @@ urlpatterns = [
          name='product_attr_field__create'),
     # comment
     path('product/comment/list', views.product.CommentList.as_view(), name='comment__list'),
+    path('product/comment/<int:comment_id>/detail', views.product.CommentDetail.as_view(), name='comment__detail'),
+    path('product/comment/<int:comment_id>/delete', views.product.CommentDelete.as_view(), name='comment__delete'),
     path('product/comment/manage/status', views.product.CommentManageStatus.as_view(), name='comment__manage_status'),
     # category
     path('product/category/create', views.product.CategoryCreate.as_view(), name='category__create'),
@@ -40,6 +46,8 @@ urlpatterns = [
     path('product/discount/coupon/list', views.product.DiscountCouponList.as_view(), name='discount_coupon__list'),
     # factor cake image
     path('product/factor-cake-image/list', views.product.FactorCakeImageList.as_view(), name='factor_cake_image__list'),
+    path('product/factor-cake-image/<int:factor_cake_image_id>/detail', views.product.FactorCakeImageDetail.as_view(), name='factor_cake_image__detail'),
+    path('product/factor-cake-image/<int:factor_cake_image_id>/delete', views.product.FactorCakeImageDelete.as_view(), name='factor_cake_image__delete'),
     # user
     path('user/list', views.user.UserList.as_view(), name='user__list'),
 

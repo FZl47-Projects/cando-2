@@ -80,18 +80,6 @@ class NotificationUser:
         })
 
 
-class Notification:
-
-    @classmethod
-    def handler_custom_notification(cls, phonenumber, instance, user):
-        values = {
-            'user_name': user.get_full_name(),
-            'notification_url': get_host_url(instance.get_absolute_url())
-        }
-        pattern = 'bctaipldk4ywqqt'
-        send_sms(phonenumber, pattern, values)
-
-
 NOTIFICATION_USER_HANDLERS = {
     'CUSTOM_NOTIFICATION': NotificationUser.handler_custom_notification,
     'TASK_REJECTED': NotificationUser.handler_task_rejected,

@@ -1,0 +1,160 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+{% load render_partial %}
+
+{% block Title %}سبد خرید{% endblock %}
+
+{% block Style %}
+    <style>
+        .product-attr-group {
+            font-size: 80%;
+            margin: 2px;
+            border-radius: 5px;
+            border: 1px solid #eee;
+            padding: 5px 10px;
+            background: #2cab7f;
+            color: #fff;
+        }
+
+        .product-attrs {
+            max-width: 200px;
+        }
+    </style>
+{% endblock %}
+
+{% block Content %}
+    {% render_partial 'apps.public.components.HeaderComponentView' %}
+    <section class="breadcrumb">
+        <li>
+            <a href="/">خانه</a>
+        </li>
+        <li>سبد خرید</li>
+    </section>
+    <div class="cart-area mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form action="#">
+                        <div class="table-content table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="product_remove">حذف</th>
+                                    <th class="cart-product-name">محصول</th>
+                                    <th class="cart-product-attrs">ویژگی ها</th>
+                                    <th class="product-price">قیمت</th>
+                                    <th class="product-quantity">تعداد</th>
+                                    <th class="product-subtotal">مجموع قیمت</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for product_cart in cart.get_products %}
+                                    <tr>
+                                        <td class="product_remove">
+                                            <a href="{% url 'product:product_cart__delete' product_cart_id=product_cart.id %}">
+                                                <em class="far fa-trash-alt text-danger"></em>
+                                            </a>
+                                        </td>
+                                        <td class="product-name">
+                                            <a href="{{ product_cart.product.get_absolute_url }}">
+                                                {{ product_cart.product.title|truncatechars:20 }}
+                                                <img src="{{ product_cart.product.get_image_cover }}"
+                                                     alt="{{ product_cart.product.title }}"
+                                                     style="width: 50px;border-radius: 10px">
+                                            </a>
+                                        </td>
+                                        <td class="product-attrs">
+                                            {% for attr_selected in product_cart.get_attrs %}
+                                                <span class="product-attr-group">
+                                                    {{ attr_selected.group.name|truncatechars:35 }}:
+                                                    {{ attr_selected.attr.name|truncatechars:35 }}
+                                                </span>
+                                            {% endfor %}
+                                        </td>
+                                        <td class="product-price">
+                                            <span class="price-el">{{ product_cart.product.get_price }}</span>
+                                        </td>
+                                        <td class="product_pro_button">
+                                            <div>
+                                                {{ product_cart.quantity }}
+                                            </div>
+                                        </td>
+                                        <td class="product-subtotal">
+                                            <span class="price-el">
+                                                {{ product_cart.get_total_price }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                <!-- custom products -->
+                                {% for custom_product_cart in cart.get_custom_products %}
+                                    <tr>
+                                        <td class="product_remove">
+                                            <a href="{% url 'product:custom_product_cart__delete' custom_product_cart_id=custom_product_cart.id %}">
+                                                <em class="far fa-trash-alt text-danger"></em>
+                                            </a>
+                                        </td>
+                                        <td class="product-name">
+                                            محصول دلخواه {{ forloop.counter }}
+                                            <img src="{{ custom_product_cart.custom_product.get_image_cover }}"
+                                                 alt="محصول دلخواه {{ forloop.counter }}"
+                                                 style="width: 50px;height:50px;border-radius: 10px">
+                                            <p class="font-70 m-0">
+                                                تاریخ تحویل : ({{ custom_product_cart.custom_product.receipt_date }})
+                                            </p>
+                                        </td>
+                                        <td class="product-attrs">
+                                            {% for attr_selected in custom_product_cart.custom_product.get_attributes %}
+                                                <span class="product-attr-group">
+                                                    {{ attr_selected.group.name|truncatechars:50 }}:
+                                                    {{ attr_selected.attr.name|truncatechars:50 }}
+                                                </span>
+                                            {% endfor %}
+                                        </td>
+                                        <td class="product-price">
+                                            <span class="price-el">{{ custom_product_cart.custom_product.get_price }}</span>
+                                        </td>
+                                        <td class="product_pro_button">
+                                            <div>
+                                                1
+                                            </div>
+                                        </td>
+                                        <td class="product-subtotal">
+                                            <span class="price-el">
+                                                {{ custom_product_cart.custom_product.get_total_price }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7 m-auto">
+                                <div class="cart-page-total">
+                                    <h2>مجموع سبد خرید</h2>
+                                    <ul dir="ltr">
+                                        <li dir="rtl">
+                                            <span>تخفیف</span>
+                                            <p class="price-el">0</p>
+                                        </li>
+                                        <li dir="rtl">
+                                            <span>ریز قیمت</span>
+                                            <p class="price-el">{{ cart.get_price }}</p>
+                                        </li>
+                                        <li dir="rtl">
+                                             <span>قیمت نهایی</span>
+                                            <p class="price-el">{{ cart.get_total_price }}</p>
+                                        </li>
+                                    </ul>
+                                    <a href="#">پرداخت سبد خرید</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

@@ -5,52 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3218dff5-1747-4748-95c5-4f5419735ae2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cando-2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cando-2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/confirm-phonenumber.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/templates/account/confirm-phonenumber.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/login-register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/templates/account/login-register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/reset-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/templates/account/reset-password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/mixins/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/mixins/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/comment/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/comment/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/factor-cake-image/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/factor-cake-image/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/sms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/sms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/product/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/product/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0002_rename_type_name_category_title.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0003_product_status.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0004_baseproduct_baseproductattr_productattrgroup_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0005_basicproduct_type.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0006_remove_category_title.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0007_basicproduct_attr_category.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0008_alter_basicproduct_options_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0009_rename_description_comment_text_remove_comment_title.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0010_alter_baseproduct_id_alter_baseproductattr_id_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0011_alter_baseproduct_id_alter_baseproductattr_id_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0012_category_default.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0013_alter_category_options.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0014_alter_productattrcategory_groups.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0015_remove_baseproductattr_group_productattrgroup_fields.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0016_alter_discountcoupon_count_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0017_alter_discountcoupon_expire_at.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0018_alter_discountcoupon_expire_at.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0019_alter_discountcoupon_code_factorcakeimage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0020_alter_factorcakeimage_status.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0021_alter_factorcakeimage_images.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0022_productview.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0023_alter_comment_status.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0024_cart_alter_productview_user_productcart_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/migrations/0025_productattrcart_attr_productattrcart_group_wishlist.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/basic/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/basic/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/basic/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/basic/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/factor-cake-image.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/factor-cake-image.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/components/product-group.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/components/product-group.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/custom-product-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/custom-product-create.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/product/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/public/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/public/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/dashboard/admin/css/dashlite.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/dashboard/admin/css/dashlite.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/scripts/base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/scripts/base.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/templates/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/base_template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/base/components/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/components/footer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/templates/base/components/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/components/header.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,9 +45,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="HTML File" />
         <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -82,20 +62,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dev",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PythonContentEntriesConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Project-Company/Smarten/cando-2/src/apps/dashboard/templates/dashboard/admin/product/custom-product&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PythonContentEntriesConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\custom-product" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -109,7 +95,9 @@
       <workItem from="1712414671917" duration="269000" />
       <workItem from="1712438550479" duration="6058000" />
       <workItem from="1712490880390" duration="590000" />
-      <workItem from="1712507143191" duration="5295000" />
+      <workItem from="1712507143191" duration="6136000" />
+      <workItem from="1712673249849" duration="27267000" />
+      <workItem from="1712783064320" duration="10061000" />
     </task>
     <servers />
   </component>

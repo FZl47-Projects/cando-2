@@ -38790,6 +38790,8 @@ h6 .badge,
 .data-value {
   color: #526484;
   font-size: 0.9375rem;
+    width: 50%;
+    text-align: center;
 }
 
 .data-more {

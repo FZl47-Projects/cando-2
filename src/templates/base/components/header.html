@@ -1,6 +1,12 @@
 {% load static %}
-<header class="header_section" dir="ltr">
 
+<div class="body_overlay">
+
+</div>
+
+{% include 'base/components/menu-aside.html' %}
+
+<header class="header_section" dir="ltr">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -70,8 +76,8 @@
                             <li class="header_wishlist"><a href="javascript:void(0)"><i class="fal fa-heart"></i></a>
                                 <span class="item_count">{{ wishlist.get_products.count }}</span>
                             </li>
-                            <li class="shopping_cart"><a href="javascript:void(0)"><i class="fal fa-shopping-cart"></i></a>
-                                <span class="item_count">{{ cart.get_products.count }}</span>
+                            <li class="shopping_cart2"><a href="{% url 'public:cart' %}"><i class="fal fa-shopping-cart"></i></a>
+                                <span class="item_count">{{ cart.get_all_products_count }}</span>
                             </li>
                         </ul>
 

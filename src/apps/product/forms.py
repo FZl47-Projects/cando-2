@@ -1,11 +1,42 @@
+from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from django.core.files.base import ContentFile
 from django import forms
 
 from apps.core.models import Image
 from apps.core import get_settings
-from apps.core.utils import now_shamsi_date, convert_str_to_shamsi_date
+from apps.core.utils import (now_shamsi_date,
+                             convert_str_to_shamsi_date,
+                             log_event,
+                             create_form_messages)
 from . import models
+
+settings = get_settings()
+
+
+class AttributesFieldUtil:
+
+    @classmethod
+    def create_attrs_by_groups(cls, data, groups):
+        attrs_selected = []
+        for group in groups:
+            """
+                product_group_{id} seted in template(product-)
+            """
+            attr_id = data.get('product_group_{}'.format(group.id))
+            if not attr_id:
+                continue
+            attr_selected_data = {
+                'group': group.id,
+                'attr': attr_id
+            }
+            f = ProductAttrSelectCreateForm(attr_selected_data)
+            if not f.is_valid():
+                log_event(_('Product Field DoesNotExist | There Is Some Problem In Selected Attributes'), 'ERROR')
+                raise ValueError(_('There Is Some Problem In Selected Attributes'))
+            attr_selected_obj = f.save()
+            attrs_selected.append(attr_selected_obj)
+        return attrs_selected
 
 
 class BasicProductCreateForm(forms.ModelForm):
@@ -48,13 +79,13 @@ class BasicProductCreateForm(forms.ModelForm):
         if not default_categories:
             # create default category
             default_categories = [models.Category.objects.create(
-                name=get_settings().OBJECTS['CATEGORY']['default_name'],
+                name=settings.OBJECTS['CATEGORY']['default_name'],
                 default=True  # default category
             )]
         self.cleaned_data['categories'] = default_categories
 
     def set_default_image_cover(self):
-        with open(get_settings().IMAGE['DEFAULT_IMAGE_PATH'], 'rb') as file:
+        with open(settings.IMAGE['DEFAULT_IMAGE_PATH'], 'rb') as file:
             default_image_data = file.read()
         default_image_file = ContentFile(default_image_data, name='default.png')
         image_cover_obj = Image.objects.create(image=default_image_file)
@@ -147,22 +178,70 @@ class FactorCakeImageCreateForm(forms.ModelForm):
 
 
 class ProductCartCreateForm(forms.ModelForm):
-    # TODO: should test and complete
+    # prevent check 'attr_selected' field
+    product = forms.CharField(max_length=10, required=False)
+    cart = forms.CharField(max_length=10, required=False)
+    attrs_selected = forms.CharField(max_length=10, required=False)
+
     class Meta:
         model = models.ProductCart
         fields = '__all__'
 
+    def get_request(self):
+        return self.data['request']
 
-class ProductOptionsCartCreateForm(forms.ModelForm):
-    # TODO: should test and complete
+    def get_product(self):
+        product_id = self.data['product_id']
+        product = get_object_or_404(models.BasicProduct, id=product_id)
+        return product
+
+    def check_stock_product_in_cart(self, product, cart):
+        product_cart = cart.productcart_set.filter(product=product, cart=cart)
+        if product_cart.exists():
+            product_cart_quantities = product_cart.aggregate(total_quantity=models.models.Sum('quantity'))[
+                                          'total_quantity'] or 0
+            quantity = int(self.data['quantity'])
+            if (product_cart_quantities + quantity) > product.get_quantity():
+                return False
+        return True
+
+    def clean(self):
+        product = self.get_product()
+        request = self.get_request()
+        user = request.user
+        if user.is_authenticated:
+            cart = user.get_current_cart_or_create()
+        else:
+            cart = models.Cart.get_session_cart(request)
+        # check product stock and (stock cart)
+        if (not product.has_in_stock()) or (not self.check_stock_product_in_cart(product, cart)):
+            self.add_error('quantity', _('There Are Too Many Products In Your Shopping Cart'))
+            return
+        try:
+            attrs_selected = AttributesFieldUtil.create_attrs_by_groups(self.data, product.get_attr_groups())
+            # add attrs to clean data
+            self.cleaned_data['attrs_selected'] = attrs_selected
+        except ValueError as e:
+            self.add_error('attrs_selected', e.__str__())
+
+        # add additional data
+        self.cleaned_data['product'] = product
+        self.cleaned_data['cart'] = cart
+        super().clean()
+
+
+class ProductAttrSelectCreateForm(forms.ModelForm):
     class Meta:
-        model = models.ProductCartOption
+        model = models.ProductAttrSelected
         fields = '__all__'
 
 
 class CustomProductCreateForm(forms.ModelForm):
-    # TODO: should test and complete
     description = forms.CharField(max_length=300, required=False)
+    writing_on = forms.CharField(max_length=100, required=False)
+    images = forms.ImageField(required=False)
+    # prevent check 'attr_selected' field
+    attrs_selected = forms.CharField(max_length=10, required=False)
 
     class Meta:
         model = models.CustomProduct
@@ -170,9 +249,23 @@ class CustomProductCreateForm(forms.ModelForm):
 
     def clean(self):
         super().clean()
+
         files = self.files
         if not self.is_valid():
             return
+
+        data = self.data
+        # create attributes selected
+        custom_pr_category = models.CustomProductAttrCategory.objects.first()
+        if custom_pr_category:
+            try:
+                attrs_selected = AttributesFieldUtil.create_attrs_by_groups(data, custom_pr_category.get_groups())
+                self.cleaned_data['attrs_selected'] = attrs_selected
+            except ValueError as e:
+                self.add_error('attrs_selected', e.__str__())
+        else:
+            log_event(_('You Should Create Custom Product Category Fields'), 'ERROR')
+
         # create image's obj
         images = files.getlist('images', None)
         images_obj = []
@@ -181,3 +274,15 @@ class CustomProductCreateForm(forms.ModelForm):
                 images_obj.append(Image(image=image))
             images_obj = Image.objects.bulk_create(images_obj)
             self.cleaned_data['images'] = images_obj
+
+
+class CustomProductRejectStatusForm(forms.ModelForm):
+    class Meta:
+        model = models.CustomProductStatus
+        fields = ('note', 'custom_product', 'status')
+
+
+class CustomProductAcceptStatusForm(forms.ModelForm):
+    class Meta:
+        model = models.CustomProductStatus
+        fields = ('note', 'custom_product', 'status', 'price')

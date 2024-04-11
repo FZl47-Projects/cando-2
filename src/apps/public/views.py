@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
-from apps.product.models import BasicProduct
+from apps.product import models as product_models
 
 
 def err_403_handler(request, exception):
@@ -20,8 +20,9 @@ class Index(TemplateView):
     template_name = 'public/index.html'
 
     def get_context_data(self, **kwargs):
-        context = super(Index, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         # products
+        BasicProduct = product_models.BasicProduct
         context['products__showcase'] = BasicProduct.objects.filter(categories__name='showcase')[:8]
         context['products__best_sellers'] = BasicProduct.objects.get_best_sellers()[:8]
         context['products__news'] = BasicProduct.objects.get_news()[:8]
@@ -29,4 +30,15 @@ class Index(TemplateView):
         return context
 
 
+class Cart(TemplateView):
+    template_name = 'public/cart.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated:
+            cart = user.get_current_cart_or_create()
+        else:
+            cart = product_models.Cart.get_session_cart(self.request)
+        context['cart'] = cart
+        return context

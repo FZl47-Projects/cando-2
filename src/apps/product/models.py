@@ -23,6 +23,9 @@ class ProductManager(models.Manager):
         return self.get_queryset()
 
     def get_list(self):
+        return self.get_queryset().all()
+
+    def get_active_list(self):
         return self.get_queryset().filter(status='active')
 
     def get_inactive_list(self):
@@ -185,6 +188,14 @@ class SimpleProductAttr(RemovePastFileMixin, BaseProductAttr):
             pass
 
 
+class ProductAttrSelected(BaseModel):
+    group = models.ForeignKey('ProductAttrGroup', on_delete=models.CASCADE)
+    attr = models.ForeignKey('SimpleProductAttr', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.group} - {self.attr}'
+
+
 class CustomProduct(BaseModel):
     TYPE_OPTIONS = (
         ('picture_on', _('Picture On')),
@@ -194,11 +205,68 @@ class CustomProduct(BaseModel):
     type = models.CharField(max_length=12, choices=TYPE_OPTIONS)
     receipt_date = models.DateTimeField()
     images = models.ManyToManyField('core.Image')
-    writing_on = models.CharField(max_length=100)
+    writing_on = models.CharField(max_length=100, null=True)
     description = models.TextField(null=True, blank=True)
+    attrs_selected = models.ManyToManyField('ProductAttrSelected')
+
+    class Meta:
+        ordering = ('-id',)
 
     def __str__(self):
         return f"#{self.id} custom product | {self.user or '-'}"
+
+    def get_dashboard_absolute_url(self):
+        return reverse('dashboard:custom_product__detail', args=(self.id,))
+
+    def get_attributes(self):
+        return self.attrs_selected.all()
+
+    def get_attributes_price(self):
+        attributes = self.get_attributes()
+        price = attributes.aggregate(price_total=models.Sum('attr__additional_price'))['price_total'] or 0
+        return price
+
+    def get_images(self):
+        return self.images.all()
+
+    def get_image_cover(self):
+        try:
+            return self.get_images().first().image.url
+        except ValueError:
+            pass
+
+    def get_price(self):
+        try:
+            return self.status.price
+        except AttributeError:
+            return None
+
+    def get_total_price(self):
+        # return self.get_price() * 1 // quantity
+        return self.get_price()
+
+
+class CustomProductStatus(BaseModel):
+    STATUS_OPTIONS = (
+        ('pending', _('Pending')),
+        ('accepted', _('Accepted')),
+        ('rejected', _('Rejected')),
+    )
+    status = models.CharField(max_length=12, choices=STATUS_OPTIONS, default='pending')
+    custom_product = models.OneToOneField('CustomProduct', on_delete=models.CASCADE, related_name='status')
+    note = models.TextField(null=True, blank=True)
+    price = models.PositiveBigIntegerField(null=True)
+
+    def __str__(self):
+        return f'{self.status} - {self.custom_product}'
+
+
+class CustomProductCart(BaseModel):
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
+    custom_product = models.OneToOneField('CustomProduct', on_delete=models.CASCADE, related_name='cart_item')
+
+    def __str__(self):
+        return f'{self.cart} - {self.custom_product}'
 
 
 class CustomProductAttrCategory(BaseModel):
@@ -285,9 +353,9 @@ class Comment(BaseModel):
         (5, '5'),
     )
     STATUS_OPTIONS = (
-        ('accepted', _('accepted')),
-        ('rejected', _('rejected')),
-        ('pending', _('pending')),
+        ('accepted', _('Accepted')),
+        ('rejected', _('Rejected')),
+        ('pending', _('Pending')),
     )
 
     product = models.ForeignKey('BasicProduct', on_delete=models.CASCADE)
@@ -301,6 +369,9 @@ class Comment(BaseModel):
 
     def __str__(self):
         return f'{self.text[:20]} - {self.product}'
+
+    def get_dashboard_absolute_url(self):
+        return reverse('dashboard:comment__detail', args=(self.id,))
 
 
 class FactorCakeImage(BaseModel):
@@ -320,6 +391,9 @@ class FactorCakeImage(BaseModel):
     def __str__(self):
         return self.user_name
 
+    def get_dashboard_absolute_url(self):
+        return reverse('dashboard:factor_cake_image__detail', args=(self.id,))
+
     def get_images(self):
         return self.images.all()
 
@@ -333,6 +407,29 @@ class Cart(BaseModel):
 
     def get_products(self):
         return self.productcart_set.all()
+
+    def get_custom_products(self):
+        return self.customproductcart_set.all()
+
+    def get_all_products_count(self):
+        return self.get_custom_products().count() + self.get_products().count()
+
+    def get_price(self):
+        # basic product price
+        products = self.get_products()
+        basic_product_price = 0
+        for product in products:
+            basic_product_price += product.get_total_price()
+        # custom product price
+        custom_products = self.get_custom_products()
+        custom_product_price = 0
+        for product in custom_products:
+            custom_product_price += product.custom_product.get_total_price()
+        return basic_product_price + custom_product_price
+
+    def get_total_price(self):
+        # TODO: count discount and ..
+        return self.get_price()
 
     @classmethod
     def get_session_cart(cls, request):
@@ -357,19 +454,17 @@ class Cart(BaseModel):
 class ProductCart(BaseModel):
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
     product = models.ForeignKey('BasicProduct', on_delete=models.SET_NULL, null=True)
+    attrs_selected = models.ManyToManyField('ProductAttrSelected')
     quantity = models.SmallIntegerField(default=1)
 
     def __str__(self):
         return f'{self.cart} - {self.product}'
 
+    def get_attrs(self):
+        return self.attrs_selected.all()
 
-class ProductCartOption(BaseModel):
-    product_cart = models.ForeignKey('ProductCart', on_delete=models.CASCADE)
-    group = models.ForeignKey('ProductAttrGroup', on_delete=models.SET_NULL, null=True)
-    attr = models.ForeignKey('SimpleProductAttr', on_delete=models.SET_NULL, null=True)
-
-    def __str__(self):
-        return f'{self.product_cart} - {self.group}|{self.attr}'
+    def get_total_price(self):
+        return self.product.get_price() * self.quantity
 
 
 class WishList(BaseModel):

@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
@@ -6,7 +6,10 @@ from django.db.models import Q
 from django.views.generic import TemplateView, ListView, View
 
 from apps.core.utils import now_shamsi_date
-from apps.core.mixins.views import CreateViewMixin, UpdateMultipleObjViewMixin, FilterSimpleListViewMixin
+from apps.core.mixins.views import (
+    CreateViewMixin, UpdateViewMixin, UpdateMultipleObjViewMixin,
+    FilterSimpleListViewMixin, DeleteMixin
+)
 from apps.product import models, forms
 
 
@@ -33,7 +36,7 @@ class BasicProductList(FilterSimpleListViewMixin, ListView):
     template_name = 'dashboard/admin/product/product/basic/list.html'
 
     def get_queryset(self):
-        objects = models.BasicProduct.objects.all()
+        objects = models.BasicProduct.objects.get_list()
         objects = self.search(objects)
         objects = self.filter(objects)
         return objects
@@ -68,6 +71,66 @@ class BasicProductDetail(TemplateView):
             'product': product
         }
         return context
+
+
+class CustomProductList(FilterSimpleListViewMixin, ListView):
+    paginate_by = 20
+    search_fields = ('user__phonenumber__icontains',)
+    filter_fields = ('type', 'status__status')
+    template_name = 'dashboard/admin/product/custom-product/list.html'
+
+    def get_queryset(self):
+        objects = models.CustomProduct.objects.all()
+        objects = self.search(objects)
+        objects = self.filter(objects)
+        return objects
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_count'] = self.get_queryset().count()
+        return context
+
+
+class CustomProductDetail(TemplateView):
+    template_name = 'dashboard/admin/product/custom-product/detail.html'
+
+    def get_context_data(self, **kwargs):
+        custom_product_id = kwargs.get('custom_product_id')
+        custom_product = get_object_or_404(models.CustomProduct, id=custom_product_id)
+        context = {
+            'custom_product': custom_product
+        }
+        return context
+
+
+class CustomProductDelete(DeleteMixin, View):
+    success_message = _('Operation Successfully Completed')
+    redirect_url = reverse_lazy('dashboard:custom_product__list')
+
+    def get_object(self, request, *args, **kwargs):
+        custom_product_id = kwargs.get('custom_product_id')
+        return get_object_or_404(models.CustomProduct, id=custom_product_id)
+
+
+class CustomProductManageStatus(UpdateViewMixin, View):
+    success_message = _('Operation Successfully Completed')
+
+    def get_object(self):
+        custom_product_id = self.kwargs['custom_product_id']
+        return get_object_or_404(models.CustomProduct, id=custom_product_id).status
+
+    def get_form(self):
+        data = self.get_data()
+        status = data.get('status')
+        if status == 'accepted':
+            return forms.CustomProductAcceptStatusForm
+        else:
+            return forms.CustomProductRejectStatusForm
+
+    def get_redirect_url(self):
+        if self.is_success:
+            return self.obj.custom_product.get_dashboard_absolute_url()
+        return super().get_redirect_url()
 
 
 class CategoryList(FilterSimpleListViewMixin, ListView):
@@ -205,6 +268,26 @@ class CommentList(FilterSimpleListViewMixin, ListView):
         return context
 
 
+class CommentDetail(TemplateView):
+    template_name = 'dashboard/admin/product/comment/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        comment_id = kwargs['comment_id']
+        comment = get_object_or_404(models.Comment, id=comment_id)
+        context['comment'] = comment
+        return context
+
+
+class CommentDelete(DeleteMixin, View):
+    success_message = _('Operation Successfully Completed')
+    redirect_url = reverse_lazy('dashboard:comment__list')
+
+    def get_object(self, request, *args, **kwargs):
+        comment_id = kwargs.get('comment_id')
+        return get_object_or_404(models.Comment, id=comment_id)
+
+
 class CommentManageStatus(UpdateMultipleObjViewMixin, View):
     """
         group actions
@@ -285,3 +368,26 @@ class FactorCakeImageList(FilterSimpleListViewMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['total_count'] = self.get_queryset().count()
         return context
+
+
+class FactorCakeImageDetail(TemplateView):
+    template_name = 'dashboard/admin/product/factor-cake-image/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        factor_cake_image_id = kwargs['factor_cake_image_id']
+        factor_cake_image = get_object_or_404(models.FactorCakeImage, id=factor_cake_image_id)
+        # seen
+        factor_cake_image.status = 'seen'
+        factor_cake_image.save()
+        context['factor_cake_image'] = factor_cake_image
+        return context
+
+
+class FactorCakeImageDelete(DeleteMixin, View):
+    success_message = _('Operation Successfully Completed')
+    redirect_url = reverse_lazy('dashboard:factor_cake_image__list')
+
+    def get_object(self, request, *args, **kwargs):
+        factor_cake_image_id = kwargs.get('factor_cake_image_id')
+        return get_object_or_404(models.FactorCakeImage, id=factor_cake_image_id)

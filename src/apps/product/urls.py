@@ -7,6 +7,7 @@ urlpatterns = [
     path('basic/<int:product_id>/detail', views.BasicProductDetail.as_view(), name='basic_product__detail'),
 
     path('cart/product/<int:product_id>/create', views.ProductCartCreate.as_view(), name='product_cart__create'),
+    path('cart/product/<int:product_cart_id>/delete', views.ProductCartDelete.as_view(), name='product_cart__delete'),
 
     path('wishlist/<int:product_id>/create', views.WishListProductCreate.as_view(), name='wishlist__create'),
 
@@ -15,4 +16,5 @@ urlpatterns = [
     path('factor-cake-image', views.FactorCakeImage.as_view(), name='factor_cake_image__create'),
 
     path('custom-product-create', views.CustomProductCreate.as_view(), name='custom_product__create'),
+    path('custom-product-cart/<int:custom_product_cart_id>/delete', views.CustomProductCartDelete.as_view(), name='custom_product_cart__delete'),
 ]

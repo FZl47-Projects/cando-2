@@ -13,3 +13,38 @@ def create_basic_product_inventory(sender, instance, created, **kwargs):
             quantity=0,
             price=0
         )
+
+
+@receiver(post_save, sender=models.BasicProduct)
+def create_comment_notify_status(sender, instance, created, **kwargs):
+    if created:
+        # TODO: create notify when comment submited
+        pass
+    else:
+        if instance.status == 'accepted':
+            # TODO :create notify when status changed to accepted
+            pass
+
+
+@receiver(post_save, sender=models.CustomProduct)
+def create_custom_product_status(sender, instance, created, **kwargs):
+    if created:
+        # create custom product status
+        models.CustomProductStatus.objects.create(
+            custom_product=instance,
+        )
+
+
+@receiver(post_save, sender=models.CustomProductStatus)
+def create_custom_product_cart_item(sender, instance, created, **kwargs):
+    # create custom product cart item
+    if instance.status == 'accepted':
+        cart_item = getattr(instance.custom_product, 'cart_item', None)
+        if not cart_item:
+            # create cart item
+            custom_product = instance.custom_product
+            models.CustomProductCart.objects.create(
+                cart=custom_product.user.get_current_cart_or_create(),
+                custom_product=custom_product
+            )
+            # TODO: should send notify for user

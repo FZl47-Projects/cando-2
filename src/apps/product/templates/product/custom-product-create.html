@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="form_input">
                                     <input name="receipt_date" class="datetime-picker" placeholder="تاریخ دریافت"
-                                           type="text" required>
+                                           type="datetime-local" required>
                                 </div>
                                 <div class="form_input mb-4">
                                     <input name="images" class="form-control p-2 mb-0" placeholder="تصویر" type="file"
@@ -94,6 +94,8 @@
         const PRICE_ELEMENT = document.getElementById('price-el')
     </script>
     <script src="{% static 'scripts/product-attr.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <script src="{% static 'scripts/jquery.mpdatepicker.min.js' %}"></script>
+    <script src="{% static 'scripts/datetime-picker-persian.js' %}"></script>
 {% endblock %}
 

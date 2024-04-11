@@ -272,6 +272,8 @@
                                                                            for="cid"></label>
                                                                 </div>
                                                             </div>
+                                                            <div class="nk-tb-col"><span class="sub-text">#</span>
+                                                            </div>
                                                             <div class="nk-tb-col"><span class="sub-text">کاربر</span>
                                                             </div>
                                                             <div class="nk-tb-col tb-col-sm"><span
@@ -298,6 +300,11 @@
                                                                         <label class="custom-control-label"
                                                                                for="cid-{{ forloop.counter }}"></label>
                                                                     </div>
+                                                                </div>
+                                                                <div class="nk-tb-col">
+                                                                    <a href="{{ comment.get_dashboard_absolute_url }}">
+                                                                        # {{ comment.id }}
+                                                                    </a>
                                                                 </div>
                                                                 <div class="nk-tb-col">
                                                                     <a href="{{ comment.user.get_dashboard_absolute_url }}">

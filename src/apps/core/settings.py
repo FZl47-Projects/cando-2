@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 OBJECTS = {
     'CATEGORY': {
         'default_name': _('without category')
-    }
+    },
 }
 
 IMAGE = {

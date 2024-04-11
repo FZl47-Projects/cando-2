@@ -297,3 +297,10 @@ function setPriceSpreadInput(input_selector, field_selector, default_val = '0') 
         field.innerText = `${numberWithCommas(default_val)} ${SYMBOL_CURRENCY} `
     }
 }
+
+// full size element
+document.querySelectorAll('.click-full-size').forEach(function (el) {
+    el.addEventListener('click', function () {
+        this.requestFullscreen()
+    })
+})

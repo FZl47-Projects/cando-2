@@ -28,20 +28,26 @@ class BaseCUViewMixin(abc.ABC):
     def set_success_message(self):
         messages.success(self.request, self.success_message)
 
-    def get_data(self):
+    def get_data(self, **kwargs):
         data = self.request.POST.copy()
+        # add request to data
+        data['request'] = self.request
+        data.update(**kwargs)
         self.add_additional_data(data)
         return data
 
-    def add_additional_data(self, data):
+    def add_additional_data(self, data, obj=None):
         pass
+
+    def get_form(self):
+        return self.form
 
 
 class CreateViewMixin(BaseCUViewMixin):
 
-    def post(self, request):
-        data = self.get_data()
-        f = self.form(data=data, files=request.FILES)
+    def post(self, request, *args, **kwargs):
+        data = self.get_data(**kwargs)
+        f = self.get_form()(data=data, files=request.FILES)
         if not f.is_valid():
             # create error message's
             create_form_messages(request, f)
@@ -60,13 +66,14 @@ class UpdateViewMixin(BaseCUViewMixin):
     def get_object(self):
         pass
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         data = self.get_data()
-        f = self.form(instance=self.get_object(), data=data, files=request.FILES)
+        obj = self.get_object()
+        f = self.get_form()(instance=obj, data=data, files=request.FILES)
         if not f.is_valid():
             # create error message's
             create_form_messages(request, f)
-            self.do_error()
+            self.do_fail()
             return redirect(self.get_redirect_url())
         self.obj = f.save()
         self.is_success = True
@@ -146,3 +153,34 @@ class FilterSimpleListViewMixin(abc.ABC):
             filter_fields_kw[field] = field_value
         objects = objects.filter(**filter_fields_kw)
         return objects
+
+
+class DeleteMixin(abc.ABC):
+    success_message = None
+    is_success = False
+    redirect_url = None
+
+    def do_success(self):
+        pass
+
+    def do_fail(self):
+        pass
+
+    def get_redirect_url(self):
+        if not self.redirect_url:
+            self.redirect_url = self.request.META.get('HTTP_REFERER', '/')  # referrer url
+        return self.redirect_url
+
+    @abc.abstractmethod
+    def get_object(self, request, *args, **kwargs):
+        pass
+
+    def set_success_message(self):
+        messages.success(self.request, self.success_message)
+
+    def dispatch(self, request, *args, **kwargs):
+        self.get_object(request, *args, **kwargs).delete()
+        self.is_success = True
+        self.do_success()
+        self.set_success_message()
+        return redirect(self.get_redirect_url())

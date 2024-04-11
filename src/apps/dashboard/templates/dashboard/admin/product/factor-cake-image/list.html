@@ -243,6 +243,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="nk-tb-col"><span
+                                                                    class="sub-text">#</span></div>
+                                                            <div class="nk-tb-col"><span
                                                                     class="sub-text">نام کاربر</span></div>
                                                             <div class="nk-tb-col"><span
                                                                     class="sub-text">کد فاکتور</span></div>
@@ -270,7 +272,7 @@
                                                                 </div>
                                                                 <div class="nk-tb-col">
                                                                     <a href="{{ factor_cake_image.get_dashboard_absolute_url }}">
-                                                                        {{ factor_cake_image.user_name }}
+                                                                        # {{ factor_cake_image.id }}
                                                                         <span class="tb-lead">
                                                                                 {% if factor_cake_image.status == 'seen' %}
                                                                                     <span class="dot dot-success d-xl-none ms-1"></span>
@@ -279,6 +281,9 @@
                                                                                 {% endif %}
                                                                         </span>
                                                                     </a>
+                                                                </div>
+                                                                <div class="nk-tb-col">
+                                                                    {{ factor_cake_image.user_name }}
                                                                 </div>
                                                                 <div class="nk-tb-col">
                                                                     <span class="sub-text">
