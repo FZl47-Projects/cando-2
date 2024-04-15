@@ -165,23 +165,23 @@ msgstr "عدم بازدید"
 
 #: .\apps\product\views.py:95
 msgid "Your Cake Receipt Image Has Been Saved Successfully"
-msgstr ""
+msgstr "عکس فاکتور کیک شما با موفقیت ثبت شد"
 
 #: .\apps\product\views.py:106
 msgid ""
 "Your Custom Product Has Been Created and Will Be Added to Your Shopping Cart "
 "After Checking"
-msgstr ""
+msgstr "محصول دلخواه شما با موفقیت ایجاد شد و پس از بررسی به سبد خرید شما اضافه خواهد شد"
 
 #: .\apps\product\views.py:123 .\apps\product\views.py:154
 msgid "Product Cart Successfully Deleted"
-msgstr ""
+msgstr "محصول سبد خرید با موفقیت حذف شد"
 
 #: .\apps\product\views.py:141
 msgid ""
 "Your Comment Has Been Successfully Registered And Will Be Displayed After "
 "Review"
-msgstr ""
+msgstr "نظر شما با موفقیت ثبت شد و پس از بررسی و تایید نمایش داده خواهد شد"
 
 #: .\apps\product\views.py:150
 msgid "Product Has Been Successfully Added To The Cart"
@@ -189,7 +189,7 @@ msgstr "محصول با موفیت به سبد خرید اضافه شد"
 
 #: .\apps\product\views.py:171
 msgid "Product Has Been Successfully Added To The Wish List"
-msgstr ""
+msgstr "محصول با موفقیت به لیست مورد علاقه مندی های شما اضافه شد"
 
 #: .\config\settings\base.py:104
 msgid "Persian"
