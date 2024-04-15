@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from apps.product import models as product_models
 
@@ -42,3 +43,23 @@ class Cart(TemplateView):
             cart = product_models.Cart.get_session_cart(self.request)
         context['cart'] = cart
         return context
+
+
+class CartCheckout(LoginRequiredMixin, View):
+    template_name = 'public/checkout.html'
+
+    def get(self, request):
+        context = {}
+        user = self.request.user
+        cart = user.get_current_cart_or_create()
+        if cart.has_empty():
+            return redirect('public:cart')
+        context['cart'] = cart
+        # delivery time
+        delivery_time = self.request.GET.get('delivery_time')
+        if not delivery_time:
+            return redirect('public:cart')
+        context['delivery_time'] = delivery_time
+        cart.delivery_time = delivery_time
+        return render(request, self.template_name, context)
+

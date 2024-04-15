@@ -5,33 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3218dff5-1747-4748-95c5-4f5419735ae2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/cando-2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cando-2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements/development.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements/development.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/core/mixins/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/mixins/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/comment/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/comment/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/factor-cake-image/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/factor-cake-image/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/notification/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/signals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/notification/sms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/sms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/signals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/components/product-group.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/components/product-group.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/custom-product-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/custom-product-create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/cart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/public/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/public/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/dashboard/admin/css/dashlite.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/dashboard/admin/css/dashlite.rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/scripts/base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/scripts/base.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/base_template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/base/components/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/components/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/settings/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,10 +27,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="CSS File" />
         <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -81,6 +64,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\custom-product" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -98,6 +84,9 @@
       <workItem from="1712507143191" duration="6136000" />
       <workItem from="1712673249849" duration="27267000" />
       <workItem from="1712783064320" duration="10061000" />
+      <workItem from="1712794932823" duration="40000" />
+      <workItem from="1712998113293" duration="1341000" />
+      <workItem from="1713098786575" duration="29410000" />
     </task>
     <servers />
   </component>

@@ -4,6 +4,7 @@
 
 import os
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse_lazy
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -14,6 +15,8 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
+
+HOST_ADDRESS = 'http://127.0.0.1:8000' # without slash
 
 ALLOWED_HOSTS = []
 
@@ -35,8 +38,10 @@ INSTALLED_APPS = [
     'apps.core',
     'apps.account',
     'apps.notification',
+    'apps.navigation',
     'apps.dashboard',
     'apps.product',
+    'apps.payment',
 ]
 
 MIDDLEWARE = [
@@ -171,4 +176,10 @@ SMS_CONFIG = {
     'ORIGINATOR': '983000505'
 }
 
-
+GATEWAYS_BANK = {
+    'ZARINPAL': {
+        'SANDBOX': True,
+        'MERCHANT_CODE': os.environ.get('ZARINPAL_MERCHANT'),
+        'DESCRIPTION': 'خرید از مجموعه کندو',
+    }
+}

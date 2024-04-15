@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', include('apps.public.urls', namespace='public')),
     path('p/', include('apps.product.urls', namespace='product')),
+    path('payment/', include('apps.payment.urls', namespace='payment')),
+    path('navigation/', include('apps.navigation.urls', namespace='nav')),
     path('', include('apps.notification.urls', namespace='notification')),
     path('d/', include('apps.dashboard.urls', namespace='dashboard')),
     path('u/', include('apps.account.urls', namespace='account')),

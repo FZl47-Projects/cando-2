@@ -126,6 +126,16 @@ class BasicProduct(BaseProduct):
         return []
 
 
+class ProductSold(BaseModel):
+    user = models.ForeignKey('account.User', on_delete=models.SET_NULL, null=True, blank=True)
+    product = models.ForeignKey('BasicProduct', on_delete=models.CASCADE)
+    count = models.IntegerField()
+    details = models.TextField()
+
+    def __str__(self):
+        return f'{self.count} => {self.product}'
+
+
 class ProductInventory(BaseModel):
     product = models.OneToOneField('BasicProduct', on_delete=models.CASCADE)
     quantity = models.SmallIntegerField()
@@ -344,6 +354,14 @@ class DiscountCoupon(BaseModel):
         return False
 
 
+class DiscountCouponSelected(BaseModel):
+    discount = models.ForeignKey('DiscountCoupon', on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey('account.User', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user} - {self.discount}'
+
+
 class Comment(BaseModel):
     RATE_OPTIONS = (
         (1, '1'),
@@ -399,17 +417,38 @@ class FactorCakeImage(BaseModel):
 
 
 class Cart(BaseModel):
+    delivery_time = None
+
     user = models.ForeignKey('account.User', on_delete=models.SET_NULL, null=True)  # user or session cart
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.user or 'session cart'
 
+    def has_empty(self):
+        return True if self.get_all_products_count() < 1 else False
+
+    def has_products_in_stock(self):
+        products_cart = self.get_products()
+        for product_cart in products_cart:
+            if product_cart.product.get_quantity() < product_cart.quantity:
+                return False
+        return True
+
+    def has_custom_products(self):
+        return False if self.get_custom_products().count() < 1 else True
+
     def get_products(self):
         return self.productcart_set.all()
 
     def get_custom_products(self):
-        return self.customproductcart_set.all()
+        objs = self.customproductcart_set.all()
+        if self.delivery_time and self.delivery_time == 'fastest':
+            objs = objs.filter(custom_product__receipt_date__lte=str(now_shamsi_date()))
+        return objs
+
+    def get_custom_products_progress(self):
+        return self.customproductcart_set.filter(custom_product__receipt_date__gt=str(now_shamsi_date()))
 
     def get_all_products_count(self):
         return self.get_custom_products().count() + self.get_products().count()
@@ -428,7 +467,6 @@ class Cart(BaseModel):
         return basic_product_price + custom_product_price
 
     def get_total_price(self):
-        # TODO: count discount and ..
         return self.get_price()
 
     @classmethod
@@ -450,6 +488,21 @@ class Cart(BaseModel):
         request.session['cart_id'] = cart.id
         return cart
 
+    def products_sold(self, user):
+        products = self.get_products()
+        for product_cart in products:
+            # decrease quantity
+            product_inventory = product_cart.product.productinventory
+            product_inventory.quantity -= product_cart.quantity
+            product_inventory.save()
+            # create sold object
+            ProductSold.objects.create(
+                user=user,
+                product=product_cart.product,
+                count=product_cart.quantity,
+                details=product_cart.get_detail()
+            )
+
 
 class ProductCart(BaseModel):
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
@@ -465,6 +518,15 @@ class ProductCart(BaseModel):
 
     def get_total_price(self):
         return self.product.get_price() * self.quantity
+
+    def get_detail(self):
+        return f"""
+            cart_id: {self.cart.id}
+            {self.product.title}(*{self.quantity})
+            |
+                {('{group_name}:{attr_name}'.format(group_name=attr.group.name, attr_name=attr.attr.name) for attr in self.get_attrs())}
+            |
+        """
 
 
 class WishList(BaseModel):

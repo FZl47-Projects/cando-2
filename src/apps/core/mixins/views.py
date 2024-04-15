@@ -20,13 +20,17 @@ class BaseCUViewMixin(abc.ABC):
     def do_fail(self):
         pass
 
+    def do_before_form_check(self):
+        pass
+
     def get_redirect_url(self):
         if not self.redirect_url:
             self.redirect_url = self.request.META.get('HTTP_REFERER', '/')  # referrer url
         return self.redirect_url
 
     def set_success_message(self):
-        messages.success(self.request, self.success_message)
+        if self.success_message:
+            messages.success(self.request, self.success_message)
 
     def get_data(self, **kwargs):
         data = self.request.POST.copy()
@@ -34,6 +38,7 @@ class BaseCUViewMixin(abc.ABC):
         data['request'] = self.request
         data.update(**kwargs)
         self.add_additional_data(data)
+        self.data = data
         return data
 
     def add_additional_data(self, data, obj=None):
@@ -45,14 +50,19 @@ class BaseCUViewMixin(abc.ABC):
 
 class CreateViewMixin(BaseCUViewMixin):
 
+    def do_before_create(self):
+        pass
+
     def post(self, request, *args, **kwargs):
         data = self.get_data(**kwargs)
         f = self.get_form()(data=data, files=request.FILES)
+        self.do_before_form_check()
         if not f.is_valid():
             # create error message's
             create_form_messages(request, f)
             self.do_fail()
             return redirect(self.get_redirect_url())
+        self.do_before_create()
         self.obj = f.save()
         self.is_success = True
         self.do_success()
@@ -70,6 +80,7 @@ class UpdateViewMixin(BaseCUViewMixin):
         data = self.get_data()
         obj = self.get_object()
         f = self.get_form()(instance=obj, data=data, files=request.FILES)
+        self.do_before_form_check()
         if not f.is_valid():
             # create error message's
             create_form_messages(request, f)

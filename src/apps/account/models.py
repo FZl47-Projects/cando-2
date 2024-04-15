@@ -131,3 +131,6 @@ class User(AbstractUser):
             return self.wishlist
         except WishList.DoesNotExist:
             return WishList.objects.create(user=self)
+
+    def get_addresses(self):
+        return self.address_set.all()
