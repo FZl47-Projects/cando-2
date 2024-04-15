@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-05 19:15+0330\n"
+"POT-Creation-Date: 2024-04-15 16:47+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,180 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\config\settings\base.py:99
+#: .\apps\core\settings.py:6
+msgid "without category"
+msgstr "بدون دسته بندی"
+
+#: .\apps\core\utils.py:137
+msgid "Incorrect Data"
+msgstr "دیتای وارد شده نامعتبر است"
+
+#: .\apps\dashboard\views\product.py:18
+msgid "Product Created Successfully"
+msgstr "محصول با موفقیت ایجاد شد"
+
+#: .\apps\dashboard\views\product.py:107 .\apps\dashboard\views\product.py:116
+#: .\apps\dashboard\views\product.py:283 .\apps\dashboard\views\product.py:388
+msgid "Operation Successfully Completed"
+msgstr "عملیات با موفقیت انجام شد"
+
+#: .\apps\dashboard\views\product.py:155
+msgid "Category Created Successfully"
+msgstr "دسته بندی با موفقیت ایجاد شد"
+
+#: .\apps\dashboard\views\product.py:178
+msgid "Tag Created Successfully"
+msgstr "تگ با موفقیت ایجاد شد"
+
+#: .\apps\dashboard\views\product.py:202
+msgid "Product Attribute Category Created Successfully"
+msgstr "دسته بندی فیلد ویژگی محصول با موفقیت ایجاد شد"
+
+#: .\apps\dashboard\views\product.py:226
+msgid "Product Attribute Group Created Successfully"
+msgstr "گروه فیلد ویژگی محصول با موفقیت ایجاد شد"
+
+#: .\apps\dashboard\views\product.py:249
+msgid "Product Attribute Field Created Successfully"
+msgstr " فیلد ویژگی محصول با موفقیت ایجاد شد"
+
+#: .\apps\dashboard\views\product.py:309
+msgid "Product Comment Has Been Successfully Rejected"
+msgstr "نظر محصول رد شد"
+
+#: .\apps\dashboard\views\product.py:311
+msgid "Product Comment Has Been Successfully Approved"
+msgstr "نظر محصول تایید شد"
+
+#: .\apps\dashboard\views\product.py:313
+msgid "Product Comment Has Been Processed"
+msgstr "نظر محصول بررسی شد"
+
+#: .\apps\dashboard\views\product.py:351
+msgid "Discount Coupon Created Successfully"
+msgstr "کد تخفیف با موفقیت ایجاد شد"
+
+#: .\apps\navigation\enums.py:6
+msgid "Fastest"
+msgstr "سریعترین زمان ممکن"
+
+#: .\apps\navigation\enums.py:7
+msgid "Until completed"
+msgstr "تا زمان تکمیل تمام محصولات"
+
+#: .\apps\payment\views.py:22
+msgid "Products Not In Stock"
+msgstr "محصول در انبار وجود ندارد"
+
+#: .\apps\payment\views.py:89
+msgid "There Is Some Problem, Invoice Object DoesNotExist"
+msgstr "مشکلی در دریافت فاکتور وجود دارد"
+
+#: .\apps\payment\views.py:94
+msgid "Cancel Request By User"
+msgstr "درخواست توسط کاربر لغو شد"
+
+#: .\apps\payment\views.py:132
+msgid "Payment Was Successful"
+msgstr "پرداخت با موفقیت انجام شد"
+
+#: .\apps\product\forms.py:35
+msgid ""
+"Product Field DoesNotExist | There Is Some Problem In Selected Attributes"
+msgstr "فیلد محصول وجود ندارد. مشکلی در فیلد های انتخاب شده پیش امده است"
+
+#: .\apps\product\forms.py:36
+msgid "There Is Some Problem In Selected Attributes"
+msgstr "مشکلی در فیلد های انتخاب شده محصول پیش امده است"
+
+#: .\apps\product\forms.py:155
+msgid "You Should Set A Time In The Future, Not In The Past"
+msgstr "شما باید یک زمان در اینده مشخص کنید"
+
+#: .\apps\product\forms.py:218
+msgid "There Are Too Many Products In Your Shopping Cart"
+msgstr "محصولات سبد خرید شما بیش از حد مجاز است"
+
+#: .\apps\product\forms.py:267
+msgid "You Should Create Custom Product Category Fields"
+msgstr "شما باید دسته بندی فیلد محصولات دلخواه را ایجاد کنید"
+
+#: .\apps\product\models.py:51
+msgid "active"
+msgstr "فعال"
+
+#: .\apps\product\models.py:52
+msgid "inactive"
+msgstr "غیر فعال"
+
+#: .\apps\product\models.py:53
+msgid "archived"
+msgstr "ارشیو شده"
+
+#: .\apps\product\models.py:56
+msgid "simple"
+msgstr "ساده"
+
+#: .\apps\product\models.py:57
+msgid "showcase"
+msgstr "ویترین"
+
+#: .\apps\product\models.py:211
+msgid "Picture On"
+msgstr "عکس کیک"
+
+#: .\apps\product\models.py:212
+msgid "Model On"
+msgstr "مدل کیک"
+
+#: .\apps\product\models.py:261 .\apps\product\models.py:376
+msgid "Pending"
+msgstr "در حال بررسی"
+
+#: .\apps\product\models.py:262 .\apps\product\models.py:374
+msgid "Accepted"
+msgstr "تایید شده"
+
+#: .\apps\product\models.py:263 .\apps\product\models.py:375
+msgid "Rejected"
+msgstr "رد شده"
+
+#: .\apps\product\models.py:397
+msgid "Seen"
+msgstr "بازدید"
+
+#: .\apps\product\models.py:398
+msgid "Unseen"
+msgstr "عدم بازدید"
+
+#: .\apps\product\views.py:95
+msgid "Your Cake Receipt Image Has Been Saved Successfully"
+msgstr ""
+
+#: .\apps\product\views.py:106
+msgid ""
+"Your Custom Product Has Been Created and Will Be Added to Your Shopping Cart "
+"After Checking"
+msgstr ""
+
+#: .\apps\product\views.py:123 .\apps\product\views.py:154
+msgid "Product Cart Successfully Deleted"
+msgstr ""
+
+#: .\apps\product\views.py:141
+msgid ""
+"Your Comment Has Been Successfully Registered And Will Be Displayed After "
+"Review"
+msgstr ""
+
+#: .\apps\product\views.py:150
+msgid "Product Has Been Successfully Added To The Cart"
+msgstr "محصول با موفیت به سبد خرید اضافه شد"
+
+#: .\apps\product\views.py:171
+msgid "Product Has Been Successfully Added To The Wish List"
+msgstr ""
+
+#: .\config\settings\base.py:104
 msgid "Persian"
 msgstr "فارسی"
-  

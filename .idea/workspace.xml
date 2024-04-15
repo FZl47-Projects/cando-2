@@ -6,15 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="3218dff5-1747-4748-95c5-4f5419735ae2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements/development.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements/development.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/core/mixins/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/mixins/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/public/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/public/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/settings/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/custom-product-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/custom-product-create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locale/fa_IR/LC_MESSAGES/django.po" beforeDir="false" afterPath="$PROJECT_DIR$/src/locale/fa_IR/LC_MESSAGES/django.po" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/scripts/datetime-picker-persian.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/scripts/datetime-picker-persian.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/base/components/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/components/header.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +82,8 @@
       <workItem from="1712783064320" duration="10061000" />
       <workItem from="1712794932823" duration="40000" />
       <workItem from="1712998113293" duration="1341000" />
-      <workItem from="1713098786575" duration="29410000" />
+      <workItem from="1713098786575" duration="29485000" />
+      <workItem from="1713183663244" duration="3429000" />
     </task>
     <servers />
   </component>

@@ -8,6 +8,7 @@
 
 {% block Link %}
     <link rel="stylesheet" href="{% static 'styles/product-attr.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/persian-datepicker.min.css' %}">
 {% endblock %}
 
 {% block Content %}
@@ -43,16 +44,13 @@
                                 {% csrf_token %}
                                 <div class="form_input mb-4">
                                     <select name="type" class="form-control" required>
-                                        <option value="picture_on">چاپ عکس از روی کیک</option>
                                         <option value="model_on">چاپ عکس از روی مدل</option>
+                                        <option value="picture_on">چاپ عکس روی کیک</option>
                                     </select>
                                 </div>
                                 <div class="form_input">
-                                    <input name="writing_on" placeholder="نوشته روی محصول" type="text">
-                                </div>
-                                <div class="form_input">
-                                    <input name="receipt_date" class="datetime-picker" placeholder="تاریخ دریافت"
-                                           type="datetime-local" required>
+                                    <input name="receipt_date" id="persianDatapicker" class="datetime-picker" placeholder="تاریخ دریافت"
+                                           type="text" required>
                                 </div>
                                 <div class="form_input mb-4">
                                     <input name="images" class="form-control p-2 mb-0" placeholder="تصویر" type="file"
@@ -63,10 +61,13 @@
                                 {% for group in attr_category.get_groups %}
                                     {% include 'product/components/product-group.html' with group=group %}
                                 {% endfor %}
+                                <div class="form_input">
+                                    <input name="writing_on" placeholder="نوشته روی کیک" type="text">
+                                </div>
                                 <div class="form_textarea">
                                     <textarea name="description" placeholder="توضیحات"></textarea>
                                 </div>
-                                <div class="my-2 d-flex justify-content-between align-items-center p-3 border-1-gray"
+                                <div class="my-2 d-flex justify-content-between align-items-center p-3 border-1-gray d-none"
                                      style="border-radius: 5px">
                                     <span>قیمت تقریبی : </span>
                                     <span id="price-el" data-price="0">0</span>
@@ -94,8 +95,10 @@
         const PRICE_ELEMENT = document.getElementById('price-el')
     </script>
     <script src="{% static 'scripts/product-attr.js' %}"></script>
-
     <script src="{% static 'scripts/jquery.mpdatepicker.min.js' %}"></script>
     <script src="{% static 'scripts/datetime-picker-persian.js' %}"></script>
+    <script  src="{% static 'scripts/persian-datepicker.min.js' %}"></script>
+    <script  src="{% static 'scripts/persian-date.min.js' %}"></script>
+
 {% endblock %}
 
