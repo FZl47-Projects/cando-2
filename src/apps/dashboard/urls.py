@@ -6,14 +6,25 @@ urlpatterns = [
     # main
     path('', views.Index.as_view(), name='index'),
     # product
+    path('order/list', views.product.OrderList.as_view(), name='order__list'),
+    path('order/<int:order_id>/detail', views.product.OrderDetail.as_view(), name='order__detail'),
+    path('order/<int:order_id>/delete', views.product.OrderDelete.as_view(), name='order__delete'),
+    path('order/<int:order_status_id>/manage/status', views.product.OrderManageStatus.as_view(),
+         name='order__manage_status'),
+
     path('product/basic/create', views.product.BasicProductCreate.as_view(), name='basic_product__create'),
     path('product/basic/list', views.product.BasicProductList.as_view(), name='basic_product__list'),
     path('product/basic/<int:product_id>/detail', views.product.BasicProductDetail.as_view(),
          name='basic_product__detail'),
     path('custom-product/list', views.product.CustomProductList.as_view(), name='custom_product__list'),
-    path('custom-product/<int:custom_product_id>/detail', views.product.CustomProductDetail.as_view(), name='custom_product__detail'),
-    path('custom-product/<int:custom_product_id>/delete', views.product.CustomProductDelete.as_view(), name='custom_product__delete'),
-    path('custom-product/<int:custom_product_id>/status/manage', views.product.CustomProductManageStatus.as_view(), name='custom_product__manage_status'),
+    path('custom-product/<int:custom_product_id>/detail', views.product.CustomProductDetail.as_view(),
+         name='custom_product__detail'),
+    path('custom-product/<int:custom_product_id>/delete', views.product.CustomProductDelete.as_view(),
+         name='custom_product__delete'),
+    path('custom-product/<int:custom_product_id>/status/manage', views.product.CustomProductManageStatus.as_view(),
+         name='custom_product__manage_status'),
+    path('custom-product/attr/field/category', views.product.CustomProductAttrCategoryManage.as_view(),
+         name='custom_product_attr_category__manage'),
     # product attributes section
     # attr category
     path('product/attr/category/list', views.product.ProductAttrCategoryList.as_view(),
@@ -46,9 +57,15 @@ urlpatterns = [
     path('product/discount/coupon/list', views.product.DiscountCouponList.as_view(), name='discount_coupon__list'),
     # factor cake image
     path('product/factor-cake-image/list', views.product.FactorCakeImageList.as_view(), name='factor_cake_image__list'),
-    path('product/factor-cake-image/<int:factor_cake_image_id>/detail', views.product.FactorCakeImageDetail.as_view(), name='factor_cake_image__detail'),
-    path('product/factor-cake-image/<int:factor_cake_image_id>/delete', views.product.FactorCakeImageDelete.as_view(), name='factor_cake_image__delete'),
+    path('product/factor-cake-image/<int:factor_cake_image_id>/detail', views.product.FactorCakeImageDetail.as_view(),
+         name='factor_cake_image__detail'),
+    path('product/factor-cake-image/<int:factor_cake_image_id>/delete', views.product.FactorCakeImageDelete.as_view(),
+         name='factor_cake_image__delete'),
     # user
-    path('user/list', views.user.UserList.as_view(), name='user__list'),
+    path('user/list', views.account.UserList.as_view(), name='user__list'),
+
+    # storage
+    path('storage/gallery/list', views.storage.GalleryImageList.as_view(), name='gallery__list'),
+    path('storage/gallery/<int:image_id>/delete', views.storage.GalleryImageDelete.as_view(), name='gallery__delete'),
 
 ]

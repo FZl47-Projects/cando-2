@@ -14,11 +14,29 @@
     background: #fff;
 }
 
-.product-attr-fields select {
-    width: 100%;
+
+.product-attr-group img {
+    width: 70px;
+    height: 70px;
+    border-radius: 22px;
+    object-fit: cover;
+}
+
+.product-attr-field {
+    margin: 13px 0;
+    border: 1px solid rgba(238, 238, 238, 0.8);
+    border-radius: 6px;
     padding: 10px;
-    border: 1px solid #f0f0f0;
-    border-radius: 7px;
-    color: #132754;
+    color: #1b204b;
     font-size: 16px;
+}
+
+.product-attr-field label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-attr-field .additional-price{
+    font-size: 12px;
 }

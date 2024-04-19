@@ -8,7 +8,8 @@ from django.views.generic import TemplateView, ListView, View
 from apps.core.utils import now_shamsi_date
 from apps.core.mixins.views import (
     CreateViewMixin, UpdateViewMixin, UpdateMultipleObjViewMixin,
-    FilterSimpleListViewMixin, DeleteMixin
+    CreateOrUpdateViewMixin,
+    FilterSimpleListViewMixin, DeleteMixin,
 )
 from apps.product import models, forms
 
@@ -131,6 +132,28 @@ class CustomProductManageStatus(UpdateViewMixin, View):
         if self.is_success:
             return self.obj.custom_product.get_dashboard_absolute_url()
         return super().get_redirect_url()
+
+
+class CustomProductAttrCategoryManage(CreateOrUpdateViewMixin, TemplateView):
+    template_name = 'dashboard/admin/product/custom-product/settings/attr-category.html'
+    form = forms.CustomProductAttrCategoryManageForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['custom_product_attr_category'] = self.get_object()
+        context['groups'] = models.ProductAttrGroup.objects.all()
+        return context
+
+    def get_object(self):
+        custom_product_attr_category = models.CustomProductAttrCategory.objects.first()
+        return custom_product_attr_category  # return object or None
+
+    def set_success_message(self):
+        if self.is_create_state():
+            self.success_message = _('Custom Product Attr Category Created Successfully')
+        else:
+            self.success_message = _('Custom Product Attr Category Updated Successfully')
+        super().set_success_message()
 
 
 class CategoryList(FilterSimpleListViewMixin, ListView):
@@ -391,3 +414,53 @@ class FactorCakeImageDelete(DeleteMixin, View):
     def get_object(self, request, *args, **kwargs):
         factor_cake_image_id = kwargs.get('factor_cake_image_id')
         return get_object_or_404(models.FactorCakeImage, id=factor_cake_image_id)
+
+
+class OrderList(FilterSimpleListViewMixin, ListView):
+    paginate_by = 20
+    search_fields = ('user__phonenumber__icontains', 'tc__icontains', 'invoice__purchase__price_paid__icontains')
+    filter_fields = ('status__status',)
+    template_name = 'dashboard/admin/product/order/list.html'
+
+    def get_queryset(self):
+        objects = models.Cart.objects.exclude(invoice__purchase=None)
+        objects = self.search(objects)
+        objects = self.filter(objects)
+        return objects
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_count'] = self.get_queryset().count()
+        return context
+
+
+class OrderDetail(TemplateView):
+    template_name = 'dashboard/admin/product/order/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        order_id = kwargs['order_id']
+        order = get_object_or_404(models.Cart, id=order_id)
+        context['order'] = order
+        return context
+
+
+class OrderDelete(DeleteMixin, View):
+    success_message = _('Operation Successfully Completed')
+    redirect_url = reverse_lazy('dashboard:order__list')
+
+    def get_object(self, request, *args, **kwargs):
+        order_id = kwargs.get('order_id')
+        return get_object_or_404(models.Cart, id=order_id)
+
+
+class OrderManageStatus(UpdateViewMixin, View):
+    success_message = _('Operation Successfully Completed')
+    form = forms.CartStatusManageStatusForm
+
+    def get_object(self):
+        order_status_id = self.kwargs['order_status_id']
+        return get_object_or_404(models.CartStatus, id=order_status_id)
+
+    def add_additional_data(self, data, obj=None):
+        data['cart'] = obj.cart

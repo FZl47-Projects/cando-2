@@ -24,10 +24,7 @@ class Index(TemplateView):
         context = super().get_context_data(**kwargs)
         # products
         BasicProduct = product_models.BasicProduct
-        context['products__showcase'] = BasicProduct.objects.filter(categories__name='showcase')[:8]
-        context['products__best_sellers'] = BasicProduct.objects.get_best_sellers()[:8]
-        context['products__news'] = BasicProduct.objects.get_news()[:8]
-        context['products__suggested'] = BasicProduct.objects.get_suggested()[:8]
+        context['products__showcase'] = BasicProduct.objects.get_showcases()
         return context
 
 
@@ -62,4 +59,3 @@ class CartCheckout(LoginRequiredMixin, View):
         context['delivery_time'] = delivery_time
         cart.delivery_time = delivery_time
         return render(request, self.template_name, context)
-

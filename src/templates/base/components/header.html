@@ -1,92 +1,113 @@
 {% load static %}
 
-<div class="body_overlay">
 
-</div>
-
-{% include 'base/components/menu-aside.html' %}
-
-<header class="header_section" dir="ltr">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="main_header d-flex justify-content-between align-items-center">
-                    <div class="header_logo">
-                        <a class="sticky_none" href="index.html"><img src="{% static 'images/logo-gold.png' %}"
-                                                                      alt=""></a>
-                    </div>
-                    <!--main menu start-->
-                    <div class="main_menu d-none d-lg-block" >
-                        <nav dir="rtl">
-                            <ul class="d-flex">
-                                <li>
-                                    <a class="active" href="{% url 'public:home' %}">خانه</a>
-                                </li>
-                                <li><a href="{% url 'product:basic_product__list' %}">محصولات</a></li>
-                                <li><a href="about.html">درباره ما</a></li>
-                                <li><a href="#">صفحات</a>
-                                    <ul class="bucker-dropdown">
-                                        <li><a href="{% url 'product:factor_cake_image__create' %}">بارگذاری تصویر کیک</a></li>
-                                        <li><a href="404.html">Error 404</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{% url 'product:custom_product__create' %}">محصول دلخواه</a></li>
-                                <li><a href="blog-left-sidebar.html">بلاگ</a>
-                                    <ul class="bucker-dropdown">
-                                        <li class="submenu-holder"><a href="#">Blog Holder</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                                <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                                <li><a href="blog-fullwidth.html">Blog Fullwidth</a></li>
-                                                <li><a href="blog-list-left-sidebar.html">Blog List Left Sidebar</a>
-                                                </li>
-                                                <li><a href="blog-list-right-sidebar.html">Blog List Right
-                                                    Sidebar</a>
-                                                </li>
-                                                <li><a href="blog-list-fullwidth.html">Blog List Fullwidth</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="submenu-holder"><a href="#">Blog Details Holder</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog-detail-fullwidth.html">Blog Detail Fullwidth</a>
-                                                </li>
-                                                <li><a href="blog-detail-left-sidebar.html">Blog Detail Left
-                                                    Sidebar</a></li>
-                                                <li><a href="blog-detail-right-sidebar.html">Blog Detail Right
-                                                    Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">تماس با ما</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <!--main menu end-->
-                    <div class="header_account">
-                        <ul class="d-flex">
-
-                            {% if user.is_authenticated %}
-                                <li ><a href="{% url 'dashboard:index' %}"><i
-                                        class="fal fa-user"></i></a></li>
-                            {% else %}
-                                <li><a href="{% url 'account:login_register' %}"><i
-                                        class="fal fa-sign-in-alt"></i></a></li>
-                            {% endif %}
-                            <li class="header_wishlist"><a href="javascript:void(0)"><i class="fal fa-heart"></i></a>
-                                <span class="item_count">{{ wishlist.get_products.count }}</span>
-                            </li>
-                            <li class="shopping_cart2"><a href="{% url 'public:cart' %}"><i class="fal fa-shopping-cart"></i></a>
-                                <span class="item_count">{{ cart.get_all_products_count }}</span>
-                            </li>
-                        </ul>
-
-                        <div class="canvas_open">
-                            <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
-                        </div>
+<header class="p-2">
+    <nav class="navbar d-flex  container-lg">
+        <div class="col-2 p-1">
+            <img src="{% static 'images/candoo-logo.png' %}" alt="" style="width:40px;">
+        </div>
+        <div class="col-2 col-md-6 p-1 ">
+            <div class="d-flex justify-content-end hamburger-menu">
+                <span><i class="fa fa-bars d-md-none"></i></span>
+            </div>
+            <ul class="menu-list d-none d-md-flex">
+                <li><a href="{% url 'public:home' %}">خانه</a></li>
+                <li><a href="{% url 'public:cart' %}">سبد خرید</a></li>
+                <li><a href="#">مورد علاقه ها</a></li>
+                <li><a href="{% url 'product:basic_product__list' %}">محصولات</a></li>
+                <li><a href="{% url 'product:custom_product__create' %}">محصول دلخواه</a></li>
+                <li><a href="{% url 'product:factor_cake_image__create' %}">اپلود تصویر فاکتور </a></li>
+            </ul>
+        </div>
+        <div class="col-8 col-md-3 p-1 d-flex justify-content-around align-items-center d-none d-md-flex">
+            <a href="#" class="cart-shopping"><i class="fa-solid fa-cart-shopping"></i></a>
+            <div><i class="fa-solid fa-magnifying-glass "></i></div>
+            <div class="sign-up-in d-flex justify-content-between  px-3 py-1 rounded">
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'account:login_register' %}"> <span class="sign-in p-1">ورود و ثبت نام</span></a>
+                {% else %}
+                    <a href="{% url 'dashboard:index' %}"> <span class="sign-in p-1">حساب کاربری</span></a>
+                {% endif %}
+            </div>
+        </div>
+        <!-- منو فیکس در حالت موبایل  -->
+        <div class="menu-fixed-mobile d-md-none">
+            <div class="container">
+                <div class="inner-menu-fixed ">
+                    <div class="row g-0">
+                        {% if not user.is_authenticated %}
+                            <a href="{% url 'account:login_register' %}" class="col-3 centering">
+                                <div><i class="fa fa-sign-in-alt"></i></div>
+                                <span class="title">ورود و ثبت نام</span>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'dashboard:index' %}" class="col-3 centering">
+                                <div><i class="fa fa-user"></i></div>
+                                <span class="title">حساب کاربری</span>
+                            </a>
+                        {% endif %}
+                        {# TODO: add wishlist address #}
+                        <a href="#" class="col-3 centering">
+                            <div><i class="fa fa-heart"></i></div>
+                            <span class="title">علاقه مندی</span>
+                            <span class="count-menu-fixed">{{ wishlist.get_products.count }}</span>
+                        </a>
+                        <a href="{% url 'public:cart' %}" class="col-3 centering cart" id="cart">
+                            <div><i class="fa fa-shopping-cart"></i></div>
+                            <span class="title">سبد خرید</span>
+                            <span class="count-menu-fixed">{{ cart.get_all_products_count }}</span>
+                        </a>
+                        <a href="{% url 'public:home' %}" class="col-3 centering">
+                            <div><i class="fa fa-home"></i></div>
+                            <span class="title">خانه</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <!-- منو فیکس در حالت موبایل  -->
+
+        <!-- منو همرگر درحالت موبایل -->
+        <div class="menu-mobile">
+            <div class="overlay-menu-mobile"></div>
+            <div class="inner-menu-mobile">
+                <a href="#" class="header-menu-mobile">
+                    <!-- <div class="avatar">
+                      <img src="./assets/images/avatar.png" alt="avatar-image" />
+                    </div> -->
+                    <div class="name">
+                        <span>نام و نام خانوادگی</span>
+                        <span>اعتبار <span>0</span> تومان</span>
+                    </div>
+                </a>
+                <ul class="list-menu-mobile">
+                    <li class="item-list">
+                        <a href="{% url 'public:home' %}" class="">
+                            <span><i class="fa fa-home"></i></span>
+                            <span>خانه</span>
+                        </a>
+                    </li>
+                    <li class="item-list">
+                        <a href="{% url 'product:basic_product__list' %}">
+                            <span><i class="fa fa-store"></i></span>
+                            <span>محصولات</span>
+                        </a>
+                    </li>
+                    <li class="item-list">
+                        <a href="{% url 'product:custom_product__create' %}">
+                            <span><i class="fa fa-birthday-cake"></i></span>
+                            <span>محصول دلخواه</span>
+                        </a>
+                    </li>
+                    <li class="item-list">
+                        <a href="{% url 'product:factor_cake_image__create' %}">
+                            <span><i class="fa fa-image"></i></span>
+                            <span>اپلود تصویر فاکتور</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- منو همرگر درحالت موبایل -->
+    </nav>
 </header>

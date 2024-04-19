@@ -18,6 +18,10 @@ class ProductManager(models.Manager):
         # TODO: must be completed
         return self.get_queryset()
 
+    def get_showcases(self):
+        # TODO: must be completed
+        return self.get_queryset().filter(type='showcase')
+
     def get_suggested(self):
         # TODO: must be completed
         return self.get_queryset()
@@ -58,9 +62,9 @@ class BasicProduct(BaseProduct):
     )
     categories = models.ManyToManyField('Category', blank=True)
     tags = models.ManyToManyField('Tag', blank=True)
-    image_cover = models.ForeignKey('core.Image', on_delete=models.SET_NULL, null=True, blank=True,
+    image_cover = models.ForeignKey('storage.Image', on_delete=models.SET_NULL, null=True, blank=True,
                                     related_name='product_cover')
-    images = models.ManyToManyField('core.Image', blank=True)
+    images = models.ManyToManyField('storage.Image', blank=True)
     attr_category = models.ForeignKey('ProductAttrCategory', on_delete=models.SET_NULL, null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_OPTIONS, default='active')
     type = models.CharField(max_length=12, choices=TYPE_OPTIONS)
@@ -115,7 +119,7 @@ class BasicProduct(BaseProduct):
             return self.image_cover.image.url
         except Exception as e:
             # TODO: must be completed
-            return '/static/images/logo.png'
+            return '/static/images/product-default-img.png'
 
     def get_images(self):
         return self.images.all()
@@ -214,7 +218,7 @@ class CustomProduct(BaseModel):
     user = models.ForeignKey('account.User', on_delete=models.SET_NULL, null=True)
     type = models.CharField(max_length=12, choices=TYPE_OPTIONS)
     receipt_date = models.DateTimeField()
-    images = models.ManyToManyField('core.Image')
+    images = models.ManyToManyField('storage.Image')
     writing_on = models.CharField(max_length=100, null=True)
     description = models.TextField(null=True, blank=True)
     attrs_selected = models.ManyToManyField('ProductAttrSelected')
@@ -254,6 +258,12 @@ class CustomProduct(BaseModel):
     def get_total_price(self):
         # return self.get_price() * 1 // quantity
         return self.get_price()
+
+    def get_invoice_purchase(self):
+        try:
+            return self.cart_item.cart.invoice.purchase
+        except AttributeError:
+            return None
 
 
 class CustomProductStatus(BaseModel):
@@ -401,7 +411,7 @@ class FactorCakeImage(BaseModel):
     factor_code = models.CharField(max_length=100)
     description = models.TextField(null=True)
     status = models.CharField(max_length=8, choices=STATUS_OPTIONS, default='unseen')
-    images = models.ManyToManyField('core.Image', blank=True)
+    images = models.ManyToManyField('storage.Image', blank=True)
 
     class Meta:
         ordering = '-id',
@@ -416,14 +426,26 @@ class FactorCakeImage(BaseModel):
         return self.images.all()
 
 
+def cart_tc_code():
+    return utils.random_str(10)
+
+
 class Cart(BaseModel):
     delivery_time = None
 
-    user = models.ForeignKey('account.User', on_delete=models.SET_NULL, null=True)  # user or session cart
+    # tc = models.CharField(max_length=14, default=cart_tc_code, unique=True) # TODO: use this when db is cleaned
+    tc = models.CharField(max_length=14, default=cart_tc_code)
+    user = models.ForeignKey('account.User', on_delete=models.SET_NULL, null=True)  # user or session cart in creation
     is_active = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ('-id',)
+
     def __str__(self):
-        return self.user or 'session cart'
+        return self.user.__str__() or 'session cart'
+
+    def get_dashboard_absolute_url(self):
+        return reverse('dashboard:order__detail', args=(self.id,))
 
     def has_empty(self):
         return True if self.get_all_products_count() < 1 else False
@@ -469,6 +491,18 @@ class Cart(BaseModel):
     def get_total_price(self):
         return self.get_price()
 
+    def get_price_paid(self):
+        try:
+            return self.invoice.purchase.price_paid
+        except AttributeError:
+            return None
+
+    def get_invoice_purchase(self):
+        try:
+            return self.invoice.purchase
+        except AttributeError:
+            return None
+
     @classmethod
     def get_session_cart(cls, request):
         def create_cart(*args, **kwargs):
@@ -504,6 +538,22 @@ class Cart(BaseModel):
             )
 
 
+class CartStatus(BaseModel):
+    STATUS_OPTIONS = (
+        ('pending', _('Pending')),
+        ('cancelled', _('Cancelled')),
+        ('in_progress', _('In_progress')),
+        ('shipped', _('Shipped')),
+        ('delivered', _('Delivered')),
+    )
+
+    status = models.CharField(max_length=14, choices=STATUS_OPTIONS, default='pending')
+    cart = models.OneToOneField('Cart', on_delete=models.CASCADE, related_name='status')
+
+    def __str__(self):
+        return f'{self.cart.tc} - {self.status}'
+
+
 class ProductCart(BaseModel):
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
     product = models.ForeignKey('BasicProduct', on_delete=models.SET_NULL, null=True)
@@ -516,8 +566,11 @@ class ProductCart(BaseModel):
     def get_attrs(self):
         return self.attrs_selected.all()
 
+    def get_attrs_price(self):
+        return self.get_attrs().aggregate(total=models.Sum('attr__additional_price'))['total'] or 0
+
     def get_total_price(self):
-        return self.product.get_price() * self.quantity
+        return (self.product.get_price() + self.get_attrs_price()) * self.quantity
 
     def get_detail(self):
         return f"""

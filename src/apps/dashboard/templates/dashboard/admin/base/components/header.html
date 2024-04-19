@@ -1,19 +1,23 @@
+{% load static %}
 <div class="nk-header nk-header-fixed is-light">
     <div class="container-lg wide-xl">
         <div class="nk-header-wrap">
             <div class="nk-header-brand">
-                <a href="html/index.html" class="logo-link">
-                    <img class="logo-light logo-img" src="./images/logo.png"
-                         srcset="./images/logo2x.png 2x" alt="لوگو"/>
-                    <img class="logo-dark logo-img" src="./images/logo-dark.png"
-                         srcset="./images/logo-dark2x.png 2x" alt="لوگوی تاریک"/>
+                <a href="{% url 'dashboard:index' %}" class="logo-link">
+
+                    <img class="logo-light logo-img" src="{% static 'images/candoo-logo.png' %}"
+                         srcset="{% static 'images/logo-gold.png' %}"  alt="لوگو"/>
+
+                    <img class="logo-dark logo-img" src="{% static 'images/candoo-logo.png' %}"
+                         srcset="{% static 'images/candoo-logo.png' %}" alt="لوگوی تاریک"/>
+
                 </a>
             </div>
             <!-- .nk-header-brand -->
             <div class="nk-header-menu">
                 <ul class="nk-menu nk-menu-main">
                     <li class="nk-menu-item">
-                        <a href="html/index.html" class="nk-menu-link">
+                        <a href="{% url 'dashboard:index' %}" class="nk-menu-link">
                             <span class="nk-menu-text">صفحه اصلی</span>
                         </a>
                     </li>
@@ -24,27 +28,23 @@
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="html/apps-messages.html" class="nk-menu-link"><span
+                                <a href="{% url 'dashboard:basic_product__create' %}" class="nk-menu-link"><span
                                         class="nk-menu-text">ایجاد محصول</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="html/apps-inbox.html" class="nk-menu-link"><span
+                                <a href="{% url 'dashboard:order__list' %}" class="nk-menu-link"><span
                                         class="nk-menu-text">لیست سفارشات</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="html/apps-file-manager.html" class="nk-menu-link"><span
+                                <a href="{% url 'dashboard:custom_product__list' %}" class="nk-menu-link"><span
                                         class="nk-menu-text">لیست سفارشات دلخواه</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="html/apps-chats.html" class="nk-menu-link"><span
+                                <a href="{% url 'dashboard:factor_cake_image__list' %}" class="nk-menu-link"><span
                                         class="nk-menu-text"> لیست عکس های فاکتور</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="html/apps-calendar.html" class="nk-menu-link"><span
-                                        class="nk-menu-text">تیکت ها</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/apps-kanban.html" class="nk-menu-link"><span
+                                <a href="{% url 'dashboard:user__list' %}" class="nk-menu-link"><span
                                         class="nk-menu-text">لیست کاربران</span></a>
                             </li>
                         </ul>

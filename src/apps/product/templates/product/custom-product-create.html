@@ -8,16 +8,32 @@
 
 {% block Link %}
     <link rel="stylesheet" href="{% static 'styles/product-attr.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/persian-datepicker.min.css' %}">
+    <link href="{% static 'styles/date-picker/mds.bs.datetimepicker.style.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block Style %}
+    <style>
+        .container-field-image-additional {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin: 10px;
+        }
+
+        .container-field-image-additional .btn-delete-image-field {
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .container-field-image-additional input {
+            padding: 8px;
+        }
+
+    </style>
 {% endblock %}
 
 {% block Content %}
-    <!--offcanvas menu area start-->
-    <div class="body_overlay">
-
-    </div>
-    {% include 'base/components/menu-aside.html' %}
-    <!--offcanvas menu area end-->
 
     <!--header area start-->
     {% render_partial 'apps.public.components.HeaderComponentView' %}
@@ -48,15 +64,25 @@
                                         <option value="picture_on">چاپ عکس روی کیک</option>
                                     </select>
                                 </div>
-                                <div class="form_input">
-                                    <input name="receipt_date" id="persianDatapicker" class="datetime-picker" placeholder="تاریخ دریافت"
-                                           type="text" required>
+                                <div class="form_input d-flex justify-content-between align-items-center"
+                                     style="gap: 10px">
+                                    <input name="receipt_date" placeholder="تاریخ دریافت" type="text"
+                                           data-name="dtp1-text"
+                                           class="form-control" required>
+                                    <span id="dtp1" class="mb-4"
+                                          data-bs-original-title="" title="" data-mds-dtp-group="group1"
+                                          data-from-date="true">📅</span>
                                 </div>
-                                <div class="form_input mb-4">
-                                    <input name="images" class="form-control p-2 mb-0" placeholder="تصویر" type="file"
-                                           required multiple=""
-                                           accept="image/*">
-                                    <span class="text-muted font-60">میتوانید چندین تصویر را انتخاب نمایید</span>
+                                <div class="form_input mb-4 container-image-fields">
+                                    <span class="font-80">تصویر</span>
+                                    <div class="d-flex justify-content-between">
+                                        <input name="images" class="form-control p-2 mb-0"
+                                               type="file"
+                                               required accept="image/*">
+                                        <div id="btn-add-image-field" class="p-2 text-success" style="cursor: pointer">
+                                            <i class="fa fa-plus"></i>
+                                        </div>
+                                    </div>
                                 </div>
                                 {% for group in attr_category.get_groups %}
                                     {% include 'product/components/product-group.html' with group=group %}
@@ -95,10 +121,45 @@
         const PRICE_ELEMENT = document.getElementById('price-el')
     </script>
     <script src="{% static 'scripts/product-attr.js' %}"></script>
-    <script src="{% static 'scripts/jquery.mpdatepicker.min.js' %}"></script>
-    <script src="{% static 'scripts/datetime-picker-persian.js' %}"></script>
-    <script  src="{% static 'scripts/persian-datepicker.min.js' %}"></script>
-    <script  src="{% static 'scripts/persian-date.min.js' %}"></script>
+    <!-- Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- End -->
+    <script src="{% static 'scripts/date-picker/mds.bs.datetimepicker.js' %}"></script>
+    <script>
+        const dtp1Instance = new mds.MdsPersianDateTimePicker(document.getElementById('dtp1'), {
+            targetTextSelector: '[name="receipt_date"]',
+            enableTimePicker: true,
+            textFormat: 'yyyy-MM-dd HH:mm'
+        });
+        let input_receipt_date = document.querySelector('[name="receipt_date"]')
+        input_receipt_date.addEventListener('focus', function () {
+            dtp1Instance.show()
+        })
 
+        let btn_add_image_field = document.querySelector('#btn-add-image-field')
+        let container_image_fields = document.querySelector('.container-image-fields')
+        btn_add_image_field.addEventListener('click', function () {
+            let cnt_field = document.createElement('div')
+            cnt_field.className = 'container-field-image-additional form_input'
+            cnt_field.innerHTML = `
+                        <input type="file" class="m-0 form-control" name="images" required>
+                        <i class="btn-delete-image-field fa fa-trash text-danger"></i>
+                    `
+            container_image_fields.appendChild(cnt_field)
+            cnt_field.querySelector('.btn-delete-image-field').addEventListener('click', function () {
+                this.parentElement.remove()
+            })
+
+        })
+
+        let _user = '{{ user.is_authenticated }}'
+        if (_user != 'True') {
+            document.addEventListener('click', function () {
+                window.location.href = '/u/login-register?next=/p/custom-product-create'
+            })
+        }
+
+
+    </script>
 {% endblock %}
 

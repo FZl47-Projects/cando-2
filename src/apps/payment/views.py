@@ -5,8 +5,9 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import View
 
+
 from apps.core.utils import log_event, create_form_messages, get_host_url
-from apps.product.models import Cart
+from apps.product.models import Cart, CartStatus
 from . import forms, models
 from .gateways.zarinpal import Zarinpal
 
@@ -105,7 +106,7 @@ class InvoicePurchaseCallBack(LoginRequiredMixin, View):
         purchase_invoice = models.PurchaseInvoice.objects.create(
             user=request.user,
             tracking_code=ref_id,
-            bank_name='-',
+            bank_name=_('ZarinPal'),
             price_paid=amount
         )
         # set purchase object

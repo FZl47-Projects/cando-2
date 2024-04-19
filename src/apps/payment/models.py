@@ -43,6 +43,9 @@ class Invoice(InvoiceBase):
     delivery_time = models.CharField(max_length=20, choices=DeliveryTime.choices)
     note = models.TextField(null=True, blank=True)
 
+    class Meta:
+        ordering = ('-id',)
+
     def get_total_price(self):
         self.cart.delivery_time = self.delivery_time
         return self.cart.get_total_price()
@@ -56,6 +59,9 @@ class PurchaseInvoice(BaseModel):
     tracking_code = models.CharField(max_length=40)
     bank_name = models.CharField(max_length=20)
     price_paid = models.PositiveBigIntegerField()
+
+    class Meta:
+        ordering = ('-id',)
 
     def __str__(self):
         return self.tracking_code

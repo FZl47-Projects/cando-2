@@ -101,7 +101,7 @@ class FactorCakeImage(CreateViewMixin, TemplateView):
         pass
 
 
-class CustomProductCreate(LoginRequiredMixin, CreateViewMixin, TemplateView):
+class CustomProductCreate(CreateViewMixin, TemplateView):
     form = forms.CustomProductCreateForm
     success_message = _('Your Custom Product Has Been Created and Will Be Added to Your Shopping Cart After Checking')
     template_name = 'product/custom-product-create.html'
@@ -116,7 +116,10 @@ class CustomProductCreate(LoginRequiredMixin, CreateViewMixin, TemplateView):
         return context
 
     def add_additional_data(self, data):
-        data['user'] = self.request.user
+        user = self.request.user
+        if not user.is_authenticated:
+            raise PermissionDenied
+        data['user'] = user
 
 
 class CustomProductCartDelete(DeleteMixin, View):

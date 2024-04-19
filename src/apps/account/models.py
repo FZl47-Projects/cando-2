@@ -124,6 +124,7 @@ class User(AbstractUser):
         cart = Cart.objects.filter(is_active=True)
         if not cart.exists():
             cart = Cart.objects.create(user=self)
+            return cart
         return cart.first()
 
     def get_or_create_wishlist(self):

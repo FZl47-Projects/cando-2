@@ -6,17 +6,33 @@
     بارگذاری تصاویر فاکتور
 {% endblock %}
 
+{% block Style %}
+    <style>
+        .container-field-image-additional{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin: 10px;
+        }
+
+        .container-field-image-additional .btn-delete-image-field{
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .container-field-image-additional input{
+            padding: 8px;
+        }
+
+    </style>
+{% endblock %}
+
 
 {% block Content %}
-    <!--offcanvas menu area start-->
-    <div class="body_overlay">
-
-    </div>
-    {% include 'base/components/menu-aside.html' %}
-    <!--offcanvas menu area end-->
 
     <!--header area start-->
-     {% render_partial 'apps.public.components.HeaderComponentView' %}
+    {% render_partial 'apps.public.components.HeaderComponentView' %}
 
     <section class="breadcrumb">
         <li>
@@ -44,10 +60,16 @@
                                 <div class="form_input">
                                     <input name="factor_code" placeholder="کد فاکتور*" type="text" required>
                                 </div>
-                                <div class="form_input mb-4">
-                                    <input name="images" class="form-control p-2 mb-0" placeholder="تصویر" type="file" required multiple=""
-                                           accept="image/*">
-                                    <span class="text-muted font-60">میتوانید چندین تصویر را انتخاب نمایید</span>
+                                <div class="form_input mb-4 container-image-fields">
+                                    <span class="font-80">تصویر</span>
+                                    <div class="d-flex justify-content-between">
+                                        <input name="images" class="form-control p-2 mb-0"
+                                               type="file"
+                                               required accept="image/*">
+                                        <div id="btn-add-image-field" class="p-2 text-success" style="cursor: pointer">
+                                            <i class="fa fa-plus"></i>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form_textarea">
                                     <textarea name="description" placeholder="توضیحات"></textarea>
@@ -70,4 +92,21 @@
 
 {% endblock %}
 
-
+{% block Script %}
+    <script>
+        let btn_add_image_field = document.querySelector('#btn-add-image-field')
+        let container_image_fields = document.querySelector('.container-image-fields')
+        btn_add_image_field.addEventListener('click', function () {
+            let cnt_field = document.createElement('div')
+            cnt_field.className = 'container-field-image-additional form_input'
+            cnt_field.innerHTML = `
+                        <input type="file" class="m-0 form-control" name="images" required>
+                        <i class="btn-delete-image-field fa fa-trash text-danger"></i>
+                    `
+            container_image_fields.appendChild(cnt_field)
+            cnt_field.querySelector('.btn-delete-image-field').addEventListener('click', function () {
+                this.parentElement.remove()
+            })
+        })
+    </script>
+{% endblock %}

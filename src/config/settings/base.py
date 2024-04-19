@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.dashboard',
     'apps.product',
     'apps.payment',
+    'apps.storage',
 ]
 
 MIDDLEWARE = [
@@ -113,11 +114,14 @@ LANGUAGE_CODE = "fa-ir"
 
 TIME_ZONE = 'Asia/Tehran'
 
-DATE_FORMAT = "Y-m-d"
+DATE_FORMAT = 'Y-m-d'
+DATETIME_FORMAT = 'Y-m-d H:i'
 
 USE_I18N = True
 
 USE_TZ = False
+
+USE_L10N = False
 
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'

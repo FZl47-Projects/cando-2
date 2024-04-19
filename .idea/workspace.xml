@@ -6,7 +6,51 @@
   <component name="ChangeListManager">
     <list default="true" id="3218dff5-1747-4748-95c5-4f5419735ae2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locale/fa_IR/LC_MESSAGES/django.po" beforeDir="false" afterPath="$PROJECT_DIR$/src/locale/fa_IR/LC_MESSAGES/django.po" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/mixins/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/mixins/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/base_template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/custom-product/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/custom-product/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/user/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/account/user/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/account.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/payment/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/payment/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/payment/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/payment/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/payment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/payment/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/basic/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/basic/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/basic/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/basic/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/components/product-group.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/components/product-group.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/custom-product-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/custom-product-create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/factor-cake-image.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/factor-cake-image.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/public/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/settings/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/scripts/base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/scripts/base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/scripts/datetime-picker-persian.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/scripts/jquery.mpdatepicker.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/scripts/persian-date.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/scripts/persian-datepicker.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/styles/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/styles/date-picker.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/styles/persian-datepicker.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/styles/product-attr.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/styles/product-attr.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/base_template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/base/components/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/components/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/base/components/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/components/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/base/components/menu-aside.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,26 +81,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Project-Company/Smarten/cando-2/src/apps/dashboard/templates/dashboard/admin/product/custom-product&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PythonContentEntriesConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "F:/Project-Company/Smarten/cando-2/src/apps/dashboard/templates/dashboard/admin/product/order",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PythonContentEntriesConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\order" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\payment\invoice" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\storage\templates\storage" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\custom-product" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\account\user" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\storage\templates\storage\gallery" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps" />
     </key>
   </component>
@@ -79,7 +129,12 @@
       <workItem from="1712794932823" duration="40000" />
       <workItem from="1712998113293" duration="1341000" />
       <workItem from="1713098786575" duration="29485000" />
-      <workItem from="1713183663244" duration="4211000" />
+      <workItem from="1713183663244" duration="4357000" />
+      <workItem from="1713279931445" duration="20195000" />
+      <workItem from="1713361382787" duration="11565000" />
+      <workItem from="1713387855690" duration="1000" />
+      <workItem from="1713471770094" duration="8380000" />
+      <workItem from="1713538469798" duration="6424000" />
     </task>
     <servers />
   </component>

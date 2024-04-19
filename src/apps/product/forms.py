@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from django.core.files.base import ContentFile
 from django import forms
 
-from apps.core.models import Image
+from apps.storage.models import Image
 from apps.core import get_settings
 from apps.core.utils import (now_shamsi_date,
                              convert_str_to_shamsi_date,
@@ -32,6 +32,7 @@ class AttributesFieldUtil:
             }
             f = ProductAttrSelectCreateForm(attr_selected_data)
             if not f.is_valid():
+                print(f.errors)
                 log_event(_('Product Field DoesNotExist | There Is Some Problem In Selected Attributes'), 'ERROR')
                 raise ValueError(_('There Is Some Problem In Selected Attributes'))
             attr_selected_obj = f.save()
@@ -286,3 +287,15 @@ class CustomProductAcceptStatusForm(forms.ModelForm):
     class Meta:
         model = models.CustomProductStatus
         fields = ('note', 'custom_product', 'status', 'price')
+
+
+class CustomProductAttrCategoryManageForm(forms.ModelForm):
+    class Meta:
+        model = models.CustomProductAttrCategory
+        fields = '__all__'
+
+
+class CartStatusManageStatusForm(forms.ModelForm):
+    class Meta:
+        model = models.CartStatus
+        fields = '__all__'

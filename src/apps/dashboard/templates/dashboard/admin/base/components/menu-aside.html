@@ -1,7 +1,7 @@
 <div class="nk-aside" data-content="sideNav" data-toggle-overlay="true"
      data-toggle-screen="lg" data-toggle-body="true">
     <div class="nk-sidebar-menu" data-simplebar>
-        <ul class="nk-menu nk-menu-main">
+        <ul class="nk-menu nk-menu-main d-none">
             <li class="nk-menu-item">
                 <a href="html/index.html" class="nk-menu-link">
                     <span class="nk-menu-text">نمای کلی</span>
@@ -83,14 +83,6 @@
                                 class="nk-menu-text">لیست محصولات</span></a>
                     </li>
                     <li class="nk-menu-item">
-                        <a href="{% url 'dashboard:custom_product__list' %}" class="nk-menu-link"><span
-                                class="nk-menu-text">لیست محصولات دلخواه</span></a>
-                    </li>
-                    <li class="nk-menu-item">
-                        <a href="{% url 'dashboard:factor_cake_image__list' %}" class="nk-menu-link"><span
-                                class="nk-menu-text">لیست عکس های فاکتور کیک</span></a>
-                    </li>
-                    <li class="nk-menu-item">
                         <a href="{% url 'dashboard:comment__list' %}" class="nk-menu-link"><span
                                 class="nk-menu-text">مدیریت نظرات</span></a>
                     </li>
@@ -123,6 +115,16 @@
                 </ul>
                 <!-- .nk-menu-sub -->
             </li>
+            <li class="nk-menu-item">
+                <a href="{% url 'dashboard:custom_product__list' %}" class="nk-menu-link">
+                    <span class="nk-menu-icon"><em class="icon ni  ni-property-alt"></em></span>
+                    <span class="nk-menu-text">لیست محصولات دلخواه</span></a>
+            </li>
+            <li class="nk-menu-item">
+                <a href="{% url 'dashboard:factor_cake_image__list' %}" class="nk-menu-link">
+                    <span class="nk-menu-icon"><em class="icon ni ni-text-rich"></em></span>
+                    <span class="nk-menu-text">لیست عکس های فاکتور کیک</span></a>
+            </li>
 
             <!-- .nk-menu-item -->
             <li class="nk-menu-item has-sub">
@@ -150,7 +152,7 @@
                 </a>
                 <ul class="nk-menu-sub">
                     <li class="nk-menu-item">
-                        <a href="html/history-payment.html" class="nk-menu-link"><span
+                        <a href="{% url 'dashboard:order__list' %}" class="nk-menu-link"><span
                                 class="nk-menu-text">لیست سفارشات</span></a>
                     </li>
                     <li class="nk-menu-item">
@@ -161,16 +163,12 @@
                         <a href="html/history-invoice-list.html" class="nk-menu-link"><span
                                 class="nk-menu-text">لیست سبد های خرید</span></a>
                     </li>
-                    <li class="nk-menu-item">
-                        <a href="html/history-payment.html" class="nk-menu-link"><span
-                                class="nk-menu-text">تاریخچه پرداخت ها</span></a>
-                    </li>
                 </ul>
                 <!-- .nk-menu-sub -->
             </li>
             <!-- .nk-menu-item -->
             <li class="nk-menu-item">
-                <a href="html/gallery.html" class="nk-menu-link">
+                <a href="{% url 'dashboard:gallery__list' %}" class="nk-menu-link">
                     <span class="nk-menu-icon"><em class="icon ni ni-img"></em></span>
                     <span class="nk-menu-text">گالری تصاویر</span>
                 </a>
@@ -244,7 +242,7 @@
                                 class="nk-menu-text"> محصولات دلخواه</span></a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="#"
+                                <a href="{% url 'dashboard:custom_product_attr_category__manage' %}"
                                    class="nk-menu-link"><span
                                         class="nk-menu-text">تنظیم فیلد ها</span></a>
                             </li>

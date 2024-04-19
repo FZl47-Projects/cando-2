@@ -68,7 +68,7 @@
                                                     <a href="#"
                                                        class="dropdown-toggle btn btn-icon btn-secondary px-2 text-center"
                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        تنظیمات
+                                                        عملیات
                                                         <em class="icon ni ni-setting"></em>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-end">
@@ -259,6 +259,56 @@
                                                         <!-- data-item -->
                                                     </div>
                                                     <!-- data-list -->
+                                                    {% with purchase=custom_product.get_invoice_purchase %}
+                                                        {% if purchase %}
+                                                            <!-- data-list -->
+                                                            <div class="nk-data data-list data-list-s2">
+                                                                <div class="data-head">
+                                                                    <h6 class="overline-title">جزئیات وضعیت پرداخت</h6>
+                                                                </div>
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">تاریخ پرداخت</span>
+                                                                        <span class="data-value">
+                                                                            <span class="datetime-convert">
+                                                                                {{ purchase.created_at }}
+                                                                            </span>
+                                                                            <span class="fs-14px text-muted">
+                                                                                ({{ purchase.get_created_at_timepast }})
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">کد رهگیری</span>
+                                                                        <span class="data-value">
+                                                                            {{ purchase.tracking_code }}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">نام بانک</span>
+                                                                        <span class="data-value">
+                                                                            {{ purchase.bank_name }}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- data-item -->
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">قیمت پرداخت شده</span>
+                                                                        <span class="data-value">
+                                                                        <span class="price-el">{{ purchase.price_paid }}</span>
+                                                                    </span>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- data-item -->
+                                                            </div>
+                                                            <!-- data-list -->
+                                                        {% endif %}
+                                                    {% endwith %}
                                                 </div>
                                                 <!-- .nk-block -->
                                             </div>

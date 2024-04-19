@@ -1,0 +1,294 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %}گالری تصاویر{% endblock %}
+
+{% block Styles %}
+    <style>
+        .cnt-file-obj {
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+        }
+
+        .cnt-file-obj img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .cnt-file-tools {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            font-size: 18px;
+            padding: 3px 6px;
+            height: 30px;
+            border-radius: 10px;
+            background: rgba(247, 239, 255, 0.15);
+        }
+
+        .cnt-file-tools > span {
+            cursor: pointer;
+            color: #f50505;
+        }
+
+        .cnt-file-info {
+            position: absolute;
+            top: 10px;
+            right: 5px;
+            color: #eee;
+        }
+
+        .cnt-file-info .size {
+            display: block;
+            font-size: 14px;
+            background: rgba(247, 239, 255, 0.15);
+            padding: 2px 3px;
+            border-radius: 7px;
+            margin-bottom: 2px;
+        }
+
+        .cnt-file-info .screen-size {
+            font-size: 10px;
+            background: rgba(247, 239, 255, 0.15);
+            padding: 2px;
+            border-radius: 7px;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block Content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                {% include 'dashboard/admin/base/components/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            {% include 'dashboard/admin/base/components/menu-aside.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">گالری تصاویر</h3>
+                                                <nav>
+                                                    <ul class="breadcrumb breadcrumb-arrow">
+                                                        <li class="breadcrumb-item"><a
+                                                                href="{% url 'dashboard:index' %}">صفحه اصلی</a></li>
+                                                        <li class="breadcrumb-item"><a>گالری تصاویر</a></li>
+                                                        <li class="breadcrumb-item active">لیست تصاویر</li>
+                                                    </ul>
+                                                </nav>
+                                                <div class="nk-block-des text-soft mt-2">
+                                                    <p>شما
+                                                        <span class="separate-el">{{ total_count }}</span>
+                                                        تصویر دارید.</p>
+                                                </div>
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                            <div class="nk-block-head-content">
+                                                <div class="toggle-wrap nk-block-tools-toggle">
+                                                    <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1"
+                                                       data-target="pageMenu"><em
+                                                            class="icon ni ni-menu-alt-r"></em></a>
+                                                    <div class="toggle-expand-content" data-content="pageMenu">
+                                                        <ul class="nk-block-tools g-3">
+                                                            <li class="nk-block-tools-opt">
+                                                                <div class="drodown">
+                                                                    <a href="#"
+                                                                       class="dropdown-toggle btn btn-white btn-outline-light"
+                                                                       data-bs-toggle="dropdown">
+                                                                        <em
+                                                                                class="icon ni ni-download-cloud"></em>
+                                                                        <span>خروجی گرفتن</span>
+                                                                    </a>
+                                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                                        <ul class="link-list-opt no-bdr">
+                                                                            <li>
+                                                                                <a href="#"><span>خروجی اکسل</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!-- .toggle-wrap -->
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                        </div>
+                                        <!-- .nk-block-between -->
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered card-stretch">
+                                            <div class="card-inner-group">
+                                                <div class="card-inner position-relative card-tools-toggle">
+                                                    <div class="card-title-group">
+                                                        <div class="card-tools">
+                                                            <div class="form-inline flex-nowrap gx-3">
+                                                                <div class="form-wrap w-200px">
+                                                                    <select class="form-select js-select2"
+                                                                            data-search="off"
+                                                                            data-placeholder="عمل دسته جمعی">
+                                                                        <option value="">عمل دسته جمعی</option>
+                                                                        <option value="delete"> حذف</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="btn-wrap">
+                                                                    <span class="d-none d-md-block"><button
+                                                                            class="btn btn-dim btn-outline-light disabled">اعمال</button></span>
+                                                                    <span class="d-md-none">
+                                                                            <button class="btn btn-dim btn-outline-light btn-icon disabled"><em
+                                                                                    class="icon ni ni-arrow-right"></em></button>
+                                                                        </span>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .form-inline -->
+                                                        </div>
+                                                    </div>
+                                                    <!-- .card-title-group -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                                <div class="card-inner p-4">
+                                                    {% for object in object_list %}
+                                                        <div class="card-bordered cnt-file-obj">
+                                                            <div class="position-relative">
+                                                                <div class="cnt-file-tools">
+                                                                    <span>
+                                                                        <em class="icon ni ni-trash-empty" type="button"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#modal-delete-obj"></em>
+                                                                    </span>
+                                                                </div>
+                                                                <img src="{{ object.get_image_url }}"
+                                                                     class="click-full-size" loading="lazy">
+                                                                <div class="cnt-file-info">
+                                                                    <span class="size convert-file-size">{{ object.image.size }}</span>
+                                                                    <span class="screen-size">{{ object.image.width }}X{{ object.image.height }}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {% empty %}
+                                                        <div class="container-not-found-base">
+                                                            <p>گالری خالی است</p>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <!-- .card-inner -->
+                                                <div class="card-inner">
+                                                    <div class="nk-block-between-md">
+                                                        <div class="g">
+                                                            <ul class="pagination justify-content-center justify-content-md-start">
+                                                                {% if page_obj.has_previous %}
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page=1">اول</a>
+                                                                    </li>
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+                                                                    </li>
+                                                                {% endif %}
+
+                                                                <span class="fs-13px mt-1 mx-2">
+                                                                        صفحه {{ page_obj.number }} از {{ page_obj.paginator.num_pages }}.
+                                                                </span>
+
+                                                                {% if page_obj.has_next %}
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.next_page_number }}">بعدی</a>
+                                                                    </li>
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.paginator.num_pages }}">اخرین</a>
+                                                                    </li>
+                                                                {% endif %}
+                                                            </ul>
+                                                            <!-- .pagination -->
+                                                        </div>
+
+                                                        <!-- .pagination-goto -->
+                                                    </div>
+                                                    <!-- .nk-block-between -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                            </div>
+                                            <!-- .card-inner-group -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                {% include 'dashboard/admin/base/components/footer.html' %}
+                                <!-- footer @e -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        {% for object in object_list %}
+            <div class="modal fade" tabindex="-1" id="modal-delete-obj">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                حذف تصویر
+                            </h5>
+                            <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                                <em class="icon ni ni-cross"></em>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post"
+                                  action="{% url 'dashboard:gallery__delete' image_id=object.id %}"
+                                  class="form-validate is-alter" novalidate="novalidate">
+                                {% csrf_token %}
+                                <div class="badge-dim bg-gray fs-17px p-2" style="border-radius: 10px">
+                                    <p>ایا از حذف تصویر انتخاب شده اطمینان دارید ؟ ممکن است تصویر مربوط به یک محتوا
+                                        باشد .</p>
+                                </div>
+                                <div class="form-group text-left mt-4">
+                                    <button type="submit" class="btn btn-lg btn-danger p-1 px-2">
+                                        بله حذف تصویر
+                                        <em class="icon icon-circle ni ni-trash bg-danger"></em>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+{% endblock %}
+
+{% block Scripts %}
+    <script>
+        document.querySelectorAll('.bg-active').forEach(function (el) {
+            el.classList.add('bg-success')
+        })
+        document.querySelectorAll('.bg-inactive').forEach(function (el) {
+            el.classList.add('bg-danger')
+        })
+        document.querySelectorAll('.bg-archived').forEach(function (el) {
+            el.classList.add('bg-warning')
+        })
+    </script>
+{% endblock %}

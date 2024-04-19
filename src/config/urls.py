@@ -10,6 +10,7 @@ urlpatterns = [
     path('navigation/', include('apps.navigation.urls', namespace='nav')),
     path('', include('apps.notification.urls', namespace='notification')),
     path('d/', include('apps.dashboard.urls', namespace='dashboard')),
+    path('storage/', include('apps.storage.urls', namespace='storage')),
     path('u/', include('apps.account.urls', namespace='account')),
     path('admin/', admin.site.urls),
 ]

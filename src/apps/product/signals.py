@@ -1,5 +1,7 @@
 from django.db.models.signals import post_save
+from django.db import IntegrityError
 from django.dispatch import receiver
+
 from . import models
 
 
@@ -48,3 +50,23 @@ def create_custom_product_cart_item(sender, instance, created, **kwargs):
                 custom_product=custom_product
             )
             # TODO: should send notify for user
+
+
+@receiver(post_save, sender=models.Cart)
+def create_cart_status(sender, instance, created, **kwargs):
+    # create cart status after payment
+    if instance.get_invoice_purchase():
+        # create cart status(order)
+        try:
+            models.CartStatus.objects.create(
+                cart=instance
+            )
+        except (IntegrityError,):
+            pass
+
+
+@receiver(post_save, sender=models.CartStatus)
+def create_notification_change_cart_status(sender, instance, created, **kwargs):
+    # create notification after change order start(cart status)
+    # TODO: should send notify for user
+    pass

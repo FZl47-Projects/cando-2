@@ -76,9 +76,18 @@ class UpdateViewMixin(BaseCUViewMixin):
     def get_object(self):
         pass
 
+    def get_data(self, obj, **kwargs):
+        data = self.request.POST.copy()
+        # add request to data
+        data['request'] = self.request
+        data.update(**kwargs)
+        self.add_additional_data(data, obj)
+        self.data = data
+        return data
+
     def post(self, request, *args, **kwargs):
-        data = self.get_data()
         obj = self.get_object()
+        data = self.get_data(obj)
         f = self.get_form()(instance=obj, data=data, files=request.FILES)
         self.do_before_form_check()
         if not f.is_valid():
@@ -91,6 +100,15 @@ class UpdateViewMixin(BaseCUViewMixin):
         self.do_success()
         self.set_success_message()
         return redirect(self.get_redirect_url())
+
+
+class CreateOrUpdateViewMixin(UpdateViewMixin, abc.ABC):
+
+    def is_create_state(self):
+        obj = self.get_object()
+        if obj:
+            return True
+        return False
 
 
 class UpdateMultipleObjViewMixin(BaseCUViewMixin):

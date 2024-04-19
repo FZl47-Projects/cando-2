@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.db.models import Value, Q
 from django.db.models.functions import Concat
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseBadRequest, Http404, HttpResponse
 from django.views.decorators.http import require_POST
 from django.views.generic import View
@@ -11,12 +11,13 @@ from django.core import serializers
 from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, get_user_model, logout as logout_handler
-from apps.core.auth.mixins import LoginRequiredMixinCustom
-from apps.core.utils import add_prefix_phonenum, random_num, form_validate_err
+
+from apps.core.utils import add_prefix_phonenum, random_num
 from apps.core.auth.decorators import admin_required_cbv
 from apps.core.redis_py import set_value_expire, remove_key, get_value
 from apps.notification.models import NotificationUser
 from apps.account import forms
+from apps.product.models import Cart, WishList
 
 User = get_user_model()
 RESET_PASSWORD_CONFIG = settings.RESET_PASSWORD_CONFIG
@@ -25,6 +26,17 @@ CONFIRM_PHONENUMBER_CONFIG = settings.CONFIRM_PHONENUMBER_CONFIG
 
 def login_register(request):
     # TODO: need to refactor
+
+    def set_cart_on_user(user):
+        cart = Cart.get_session_cart(request)
+        cart.user = user
+        cart.save()
+
+    def set_wishlist_on_user(user):
+        wishlist = WishList.get_session_wishlist(request)
+        wishlist.user = user
+        wishlist.save()
+
     def login_perform(data):
         phonenumber = data.get('phonenumber', None)
         password = data.get('password', None)
@@ -41,6 +53,10 @@ def login_register(request):
             return redirect('account:login_register')
         login(request, user)
         messages.success(request, 'خوش امدید')
+        # set session cart and wishlist on user
+        set_cart_on_user(user)
+        set_wishlist_on_user(user)
+
         # redirect to url or dashboard
         next_url = request.GET.get('next')
         try:
@@ -76,6 +92,10 @@ def login_register(request):
         # login
         login(request, user)
         messages.success(request, 'حساب شما با موفقیت ایجاد شد پس از تایید شماره همراه حساب شما فعال میشود')
+        # set session cart and wishlist on user
+        set_cart_on_user(user)
+        set_wishlist_on_user(user)
+
         return redirect('account:confirm_phonenumber')
 
     if request.method == 'GET':

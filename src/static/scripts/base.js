@@ -1,5 +1,3 @@
-
-
 function redirect(url) {
     window.location.href = url
 }
@@ -269,7 +267,6 @@ document.querySelectorAll('.select-by-value').forEach(function (select) {
 })
 
 
-
 // view files
 let view_file_elements = document.getElementsByClassName("view-file");
 
@@ -304,3 +301,21 @@ document.querySelectorAll('.click-full-size').forEach(function (el) {
         this.requestFullscreen()
     })
 })
+
+
+document.querySelectorAll('.convert-file-size').forEach(function (el){
+    let size_byte = el.innerText
+    el.innerHTML = formatBytes(size_byte)
+})
+
+function formatBytes(bytes, decimals = 2) {
+    if (!+bytes) return '0 Bytes'
+
+    const k = 1024
+    const dm = decimals < 0 ? 0 : decimals
+    const sizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+
+    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+}
