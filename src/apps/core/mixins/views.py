@@ -76,7 +76,7 @@ class UpdateViewMixin(BaseCUViewMixin):
     def get_object(self):
         pass
 
-    def get_data(self, obj, **kwargs):
+    def get_data(self, obj=None, **kwargs):
         data = self.request.POST.copy()
         # add request to data
         data['request'] = self.request
