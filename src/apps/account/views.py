@@ -55,7 +55,8 @@ def login_register(request):
         messages.success(request, 'خوش امدید')
         # set session cart and wishlist on user
         set_cart_on_user(user)
-        set_wishlist_on_user(user)
+
+        # set_wishlist_on_user(user) # TODO: need to fix
 
         # redirect to url or dashboard
         next_url = request.GET.get('next')
@@ -94,7 +95,8 @@ def login_register(request):
         messages.success(request, 'حساب شما با موفقیت ایجاد شد پس از تایید شماره همراه حساب شما فعال میشود')
         # set session cart and wishlist on user
         set_cart_on_user(user)
-        set_wishlist_on_user(user)
+
+        #set_wishlist_on_user(user) # TODO: need to fix
 
         return redirect('account:confirm_phonenumber')
 
