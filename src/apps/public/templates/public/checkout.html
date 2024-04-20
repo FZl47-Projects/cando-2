@@ -131,7 +131,7 @@
                                         <li dir="rtl">
                                             <span>انتخاب ادرس</span>
                                             <select name="address" class="col-6 form-select">
-                                                {% for address in user.get_addresses %}
+                                                {% for address in addresses %}
                                                     <option value="{{ address.id }}">
                                                         {{ address.address|truncatechars:25 }}
                                                     </option>

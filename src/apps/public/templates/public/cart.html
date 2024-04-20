@@ -52,7 +52,7 @@
                                     {% for product_cart in cart.get_products %}
                                         <tr>
                                             <td class="product_remove">
-                                                <a href="{% url 'product:product_cart__delete' product_cart_id=product_cart.id %}">
+                                                <a class="font-80" href="{% url 'product:product_cart__delete' product_cart_id=product_cart.id %}">
                                                     <em class="far fa-trash-alt text-danger"></em>
                                                 </a>
                                             </td>
@@ -91,7 +91,7 @@
                                     {% for custom_product_cart in cart.get_custom_products %}
                                         <tr>
                                             <td class="product_remove">
-                                                <a href="{% url 'product:custom_product_cart__delete' custom_product_cart_id=custom_product_cart.id %}">
+                                                <a class="font-80" href="{% url 'product:custom_product_cart__delete' custom_product_cart_id=custom_product_cart.id %}">
                                                     <em class="far fa-trash-alt text-danger"></em>
                                                 </a>
                                             </td>

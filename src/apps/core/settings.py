@@ -10,3 +10,9 @@ OBJECTS = {
 IMAGE = {
     'DEFAULT_IMAGE_PATH': settings.BASE_DIR / 'static/images/product-default-img.png'
 }
+
+
+def get_default_address():
+    from apps.navigation.models import Address
+
+    return Address.objects.filter(defaultstoreaddress__isnull=False)

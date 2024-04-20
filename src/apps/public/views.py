@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from apps.core.settings import get_default_address
 from apps.product import models as product_models
 
 
@@ -52,6 +53,7 @@ class CartCheckout(LoginRequiredMixin, View):
         if cart.has_empty():
             return redirect('public:cart')
         context['cart'] = cart
+        context['addresses'] = user.get_addresses() | get_default_address()
         # delivery time
         delivery_time = self.request.GET.get('delivery_time')
         if not delivery_time:
