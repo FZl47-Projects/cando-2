@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3218dff5-1747-4748-95c5-4f5419735ae2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/core/mixins/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/mixins/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/payment/invoice/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/payment/invoice/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/order/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/order/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/payment/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/payment/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/storage/templates/storage/gallery/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/storage/gallery/list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,29 +44,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Project-Company/Smarten/cando-2/src/apps/dashboard/templates/dashboard/admin/product/order&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PythonContentEntriesConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "django.template.preview.state": "SHOW_EDITOR",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "C:/Users/ehyasystem/Desktop/web-projects/cando-2/src/apps/dashboard/templates/dashboard/admin/payment/invoice",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "editing.templates",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ehyasystem\Desktop\web-projects\cando-2\src\apps\dashboard\templates\dashboard\admin\payment\invoice" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\order" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\payment\invoice" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\storage\templates\storage" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\custom-product" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ehyasystem\Desktop\web-projects\cando-2\src\apps\dashboard\templates\dashboard\admin" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\account\user" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\storage\templates\storage\gallery" />

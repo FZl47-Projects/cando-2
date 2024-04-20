@@ -5,13 +5,19 @@ app_name = 'apps.dashboard'
 urlpatterns = [
     # main
     path('', views.Index.as_view(), name='index'),
-    # product
+    # order
     path('order/list', views.product.OrderList.as_view(), name='order__list'),
     path('order/<int:order_id>/detail', views.product.OrderDetail.as_view(), name='order__detail'),
     path('order/<int:order_id>/delete', views.product.OrderDelete.as_view(), name='order__delete'),
     path('order/<int:order_status_id>/manage/status', views.product.OrderManageStatus.as_view(),
          name='order__manage_status'),
-
+    # invoice
+    path('invoice/list', views.payment.InvoiceList.as_view(), name='invoice__list'),
+    path('invoice/<int:invoice_id>/detail', views.payment.InvoiceDetail.as_view(), name='invoice__detail'),
+    path('invoice/<int:invoice_id>/detail/export', views.payment.InvoiceDetailExport.as_view(),
+         name='invoice__detail_export'),
+    path('invoice/<int:invoice_id>/delete', views.payment.InvoiceDelete.as_view(), name='invoice__delete'),
+    # product
     path('product/basic/create', views.product.BasicProductCreate.as_view(), name='basic_product__create'),
     path('product/basic/list', views.product.BasicProductList.as_view(), name='basic_product__list'),
     path('product/basic/<int:product_id>/detail', views.product.BasicProductDetail.as_view(),

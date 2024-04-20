@@ -154,6 +154,13 @@ class FilterSimpleListViewMixin(abc.ABC):
     filter_fields: list | tuple = None
     filter_param_all: str = 'all'
 
+    def normalize_field_value(self, field_value):
+        if field_value == 'true':
+            field_value = True
+        elif field_value == 'false':
+            field_value = False
+        return field_value
+
     def search(self, objects):
         if not self.search_fields:
             return objects
@@ -179,6 +186,7 @@ class FilterSimpleListViewMixin(abc.ABC):
             field_value = self.request.GET.get(field)
             if (not field_value) or (field_value == self.filter_param_all):
                 continue
+            field_value = self.normalize_field_value(field_value)
             filter_fields_kw[field] = field_value
         objects = objects.filter(**filter_fields_kw)
         return objects
