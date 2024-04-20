@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3218dff5-1747-4748-95c5-4f5419735ae2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/navigation/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/navigation/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/navigation/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/navigation/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/checkout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/public/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/base/components/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/components/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
