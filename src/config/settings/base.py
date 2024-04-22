@@ -182,7 +182,7 @@ SMS_CONFIG = {
 
 GATEWAYS_BANK = {
     'ZARINPAL': {
-        'SANDBOX': True,
+        'SANDBOX': False,
         'MERCHANT_CODE': os.environ.get('ZARINPAL_MERCHANT'),
         'DESCRIPTION': 'خرید از مجموعه کندو',
     }
