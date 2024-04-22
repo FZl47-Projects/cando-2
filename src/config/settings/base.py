@@ -16,7 +16,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
-HOST_ADDRESS = 'http://127.0.0.1:8000' # without slash
+HOST_ADDRESS = 'http://127.0.0.1:8000'  # without slash
 
 ALLOWED_HOSTS = ['*']
 

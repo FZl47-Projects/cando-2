@@ -71,7 +71,7 @@ class BasicProductCreateForm(forms.ModelForm):
             # set default category
             self.set_default_categories()
 
-        if not self.cleaned_data.get('image_cover'):
+        if not self.cleaned_data.get('image_cover') and not self.instance:
             # set default image
             self.set_default_image_cover()
 
@@ -93,10 +93,16 @@ class BasicProductCreateForm(forms.ModelForm):
         self.cleaned_data['image_cover'] = image_cover_obj
 
 
-class BasicProductUpdateForm(forms.ModelForm):
+class BasicProductUpdateForm(BasicProductCreateForm):
     class Meta:
         model = models.BasicProduct
-        fields = '__all__'
+        exclude = ('image_cover', 'images')
+
+
+class BasicProductImagesUpdateForm(BasicProductCreateForm):
+    class Meta:
+        model = models.BasicProduct
+        fields = ('image_cover', 'images')
 
 
 class ProductAttrCategoryCreateForm(forms.ModelForm):
@@ -166,8 +172,13 @@ class FactorCakeImageCreateForm(forms.ModelForm):
     def clean(self):
         super().clean()
         files = self.files
+        request = self.data['request']
+        user = request.user
         if not self.is_valid():
             return
+        # add user if exist
+        self.cleaned_data['user'] = user if user.is_authenticated == True else None
+
         # create image's obj
         images = files.getlist('images', None)
         images_obj = []
@@ -298,4 +309,16 @@ class CustomProductAttrCategoryManageForm(forms.ModelForm):
 class CartStatusManageStatusForm(forms.ModelForm):
     class Meta:
         model = models.CartStatus
+        fields = '__all__'
+
+
+class ProductInventoryUpdateForm(forms.ModelForm):
+    class Meta:
+        model = models.ProductInventory
+        fields = '__all__'
+
+
+class ProductInventoryDefaultManageForm(forms.ModelForm):
+    class Meta:
+        model = models.ProductInventoryDefault
         fields = '__all__'

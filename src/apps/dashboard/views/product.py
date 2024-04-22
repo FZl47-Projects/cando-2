@@ -9,7 +9,7 @@ from apps.core.utils import now_shamsi_date
 from apps.core.mixins.views import (
     CreateViewMixin, UpdateViewMixin, UpdateMultipleObjViewMixin,
     CreateOrUpdateViewMixin,
-    FilterSimpleListViewMixin, DeleteMixin,
+    FilterSimpleListViewMixin, DeleteViewMixin,
 )
 from apps.product import models, forms
 
@@ -69,9 +69,31 @@ class BasicProductDetail(TemplateView):
         product_id = kwargs.get('product_id')
         product = get_object_or_404(models.BasicProduct, id=product_id)
         context = {
-            'product': product
+            'product': product,
+            # additional objects
+            'categories': models.Category.objects.all(),
+            'tags': models.Tag.objects.all(),
+            'attr_categories': models.ProductAttrCategory.objects.all()
         }
         return context
+
+
+class BasicProductUpdate(UpdateViewMixin, View):
+    form = forms.BasicProductUpdateForm
+    success_message = _('Operation Successfully Completed')
+
+    def get_object(self):
+        product_id = self.kwargs['product_id']
+        return get_object_or_404(models.BasicProduct, id=product_id)
+
+
+class BasicProductDelete(DeleteViewMixin, View):
+    success_message = _('Operation Successfully Completed')
+    redirect_url = reverse_lazy('dashboard:basic_product__list')
+
+    def get_object(self, request, *args, **kwargs):
+        product_id = kwargs.get('product_id')
+        return get_object_or_404(models.BasicProduct, id=product_id)
 
 
 class CustomProductList(FilterSimpleListViewMixin, ListView):
@@ -104,7 +126,7 @@ class CustomProductDetail(TemplateView):
         return context
 
 
-class CustomProductDelete(DeleteMixin, View):
+class CustomProductDelete(DeleteViewMixin, View):
     success_message = _('Operation Successfully Completed')
     redirect_url = reverse_lazy('dashboard:custom_product__list')
 
@@ -153,6 +175,35 @@ class CustomProductAttrCategoryManage(CreateOrUpdateViewMixin, TemplateView):
             self.success_message = _('Custom Product Attr Category Created Successfully')
         else:
             self.success_message = _('Custom Product Attr Category Updated Successfully')
+        super().set_success_message()
+
+
+class ProductInventoryUpdate(UpdateViewMixin, View):
+    success_message = _('Operation Successfully Completed')
+    form = forms.ProductInventoryUpdateForm
+
+    def get_object(self):
+        inventory_id = self.kwargs['inventory_id']
+        return get_object_or_404(models.ProductInventory, id=inventory_id)
+
+
+class ProductInventoryDefaultManage(CreateOrUpdateViewMixin, TemplateView):
+    template_name = 'dashboard/admin/product/inventory/settings/manage.html'
+    form = forms.ProductInventoryDefaultManageForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['default_inventory'] = self.get_object()
+        return context
+
+    def get_object(self):
+        return models.ProductInventoryDefault.objects.first()  # return object or None
+
+    def set_success_message(self):
+        if self.is_create_state():
+            self.success_message = _('Default Inventory Created Successfully')
+        else:
+            self.success_message = _('Default Inventory Updated Successfully')
         super().set_success_message()
 
 
@@ -302,7 +353,7 @@ class CommentDetail(TemplateView):
         return context
 
 
-class CommentDelete(DeleteMixin, View):
+class CommentDelete(DeleteViewMixin, View):
     success_message = _('Operation Successfully Completed')
     redirect_url = reverse_lazy('dashboard:comment__list')
 
@@ -400,14 +451,15 @@ class FactorCakeImageDetail(TemplateView):
         context = super().get_context_data()
         factor_cake_image_id = kwargs['factor_cake_image_id']
         factor_cake_image = get_object_or_404(models.FactorCakeImage, id=factor_cake_image_id)
-        # seen
-        factor_cake_image.status = 'seen'
-        factor_cake_image.save()
+        if factor_cake_image.status != 'seen':
+            # seen
+            factor_cake_image.status = 'seen'
+            factor_cake_image.save()
         context['factor_cake_image'] = factor_cake_image
         return context
 
 
-class FactorCakeImageDelete(DeleteMixin, View):
+class FactorCakeImageDelete(DeleteViewMixin, View):
     success_message = _('Operation Successfully Completed')
     redirect_url = reverse_lazy('dashboard:factor_cake_image__list')
 
@@ -418,7 +470,7 @@ class FactorCakeImageDelete(DeleteMixin, View):
 
 class OrderList(FilterSimpleListViewMixin, ListView):
     paginate_by = 20
-    search_fields = ('user__phonenumber__icontains', 'tc__icontains', 'invoice__purchase__price_paid__icontains')
+    search_fields = ('user__phonenumber__icontains', 'tc__icontains', 'invoice__purchase__price_paid__icontains',)
     filter_fields = ('status__status',)
     template_name = 'dashboard/admin/product/order/list.html'
 
@@ -433,6 +485,15 @@ class OrderList(FilterSimpleListViewMixin, ListView):
         context['total_count'] = self.get_queryset().count()
         return context
 
+    def search(self, objects):
+        objects = super().search(objects)
+        # advance search(product,)
+        spr = self.request.GET.get('spr')
+        if not spr:
+            return objects
+        objects = objects.filter(productcart__product__id=spr)
+        return objects
+
 
 class OrderDetail(TemplateView):
     template_name = 'dashboard/admin/product/order/detail.html'
@@ -445,7 +506,7 @@ class OrderDetail(TemplateView):
         return context
 
 
-class OrderDelete(DeleteMixin, View):
+class OrderDelete(DeleteViewMixin, View):
     success_message = _('Operation Successfully Completed')
     redirect_url = reverse_lazy('dashboard:order__list')
 

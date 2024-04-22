@@ -2,7 +2,7 @@ from django.views.generic import ListView, View
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 
-from apps.core.mixins.views import FilterSimpleListViewMixin, DeleteMixin
+from apps.core.mixins.views import FilterSimpleListViewMixin, DeleteViewMixin
 from apps.storage import models
 
 
@@ -22,7 +22,7 @@ class GalleryImageList(FilterSimpleListViewMixin, ListView):
         return context
 
 
-class GalleryImageDelete(DeleteMixin, View):
+class GalleryImageDelete(DeleteViewMixin, View):
     success_message = _('Image Deleted Successfully')
 
     def get_object(self, request, *args, **kwargs):

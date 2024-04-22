@@ -192,7 +192,7 @@ class FilterSimpleListViewMixin(abc.ABC):
         return objects
 
 
-class DeleteMixin(abc.ABC):
+class DeleteViewMixin(abc.ABC):
     success_message = None
     is_success = False
     redirect_url = None

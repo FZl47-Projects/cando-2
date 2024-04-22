@@ -67,7 +67,9 @@ def get_timesince_persian(time):
     return result
 
 
-def send_sms(phonenumber, pattern_code, values={}):
+def send_sms(phonenumber, pattern_code, values=None):
+    if not values:
+        values = {}
     phonenumber = str(phonenumber).replace('+', '')
     payload = json.dumps({
         "pattern_code": pattern_code,

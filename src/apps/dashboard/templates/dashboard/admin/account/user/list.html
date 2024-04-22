@@ -84,16 +84,9 @@
                                                                             data-search="off"
                                                                             data-placeholder="عمل دسته جمعی">
                                                                         <option value="">عمل دسته جمعی</option>
-                                                                        <option value="to_available_stock">افزایش موجودی
-                                                                            پیشفرض
-                                                                        </option>
-                                                                        <option value="to_available_stock">
-                                                                            تنظیم تخفیف پیشفرض
-                                                                        </option>
-                                                                        <option value="to_out_of_stock">عدم موجودی
-                                                                        </option>
-                                                                        <option value="to_inactive"> غیر فعال</option>
-                                                                        <option value="to_archive"> آرشیو</option>
+                                                                        <option value="active"> فعال</option>
+                                                                        <option value="inactive">غیر فعال</option>
+                                                                        <option value="delete">حذف</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="btn-wrap">
@@ -165,26 +158,7 @@
                                                                                                                 <label class="overline-title overline-title-alt">وضعیت
                                                                                                                     حساب</label>
                                                                                                                 <select class="form-select js-select2 select-by-filter"
-                                                                                                                        name="stock_status">
-                                                                                                                    <option value="all">
-                                                                                                                        همه
-                                                                                                                    </option>
-                                                                                                                    <option value="true">
-                                                                                                                        فعال
-                                                                                                                    </option>
-                                                                                                                    <option value="false">
-                                                                                                                        غیر فعال
-                                                                                                                    </option>
-                                                                                                                </select>
-                                                                                                            </div>
-                                                                                                        </div>
-
-                                                                                                        <div class="col-6">
-                                                                                                            <div class="form-group">
-                                                                                                                <label class="overline-title overline-title-alt">وضعیت
-                                                                                                                    کاربر</label>
-                                                                                                                <select class="form-select js-select2 select-by-filter"
-                                                                                                                        name="status">
+                                                                                                                        name="is_active">
                                                                                                                     <option value="all">
                                                                                                                         همه
                                                                                                                     </option>
@@ -192,10 +166,32 @@
                                                                                                                         فعال
                                                                                                                     </option>
                                                                                                                     <option value="inactive">
-                                                                                                                        غیر فعال
+                                                                                                                        غیر
+                                                                                                                        فعال
                                                                                                                     </option>
-                                                                                                                    <option value="archived">
-                                                                                                                        آرشیو شده
+                                                                                                                </select>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-6">
+                                                                                                            <div class="form-group">
+                                                                                                                <label class="overline-title overline-title-alt">نوع
+                                                                                                                    کاربر</label>
+                                                                                                                <select class="form-select js-select2 select-by-filter"
+                                                                                                                        name="role">
+                                                                                                                    <option value="all">
+                                                                                                                        همه
+                                                                                                                    </option>
+                                                                                                                    <option value="super_user">
+                                                                                                                        ادمین
+                                                                                                                        ویژه
+                                                                                                                    </option>
+                                                                                                                    <option value="operator_user">
+                                                                                                                        ادمین
+                                                                                                                        اپراتور
+                                                                                                                    </option>
+                                                                                                                    <option value="normal_user">
+                                                                                                                        کاربر
+                                                                                                                        عادی
                                                                                                                     </option>
                                                                                                                 </select>
                                                                                                             </div>
@@ -258,7 +254,7 @@
                                                     <!-- .card-search -->
                                                 </div>
                                                 <!-- .card-inner -->
-                                                <div class="card-inner p-0">
+                                                <div class="card-inner p-0 text-center">
                                                     <div class="nk-tb-list nk-tb-ulist">
                                                         <div class="nk-tb-item nk-tb-head">
                                                             <div class="nk-tb-col nk-tb-col-check">
@@ -269,85 +265,76 @@
                                                                            for="cid"></label>
                                                                 </div>
                                                             </div>
-                                                            <div class="nk-tb-col"><span class="sub-text">عنوان</span>
+                                                            <div class="nk-tb-col"><span class="sub-text">نام و نام خانوادگی</span>
                                                             </div>
-                                                            <div class="nk-tb-col tb-col-sm"><span
-                                                                    class="sub-text">قیمت</span></div>
-                                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">موجودی</span>
+                                                            <div class="nk-tb-col"><span
+                                                                    class="sub-text">شماره همراه</span></div>
+                                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">نوع کاربر</span>
                                                             </div>
                                                             <div class="nk-tb-col tb-col-xl"><span
-                                                                    class="sub-text">نوع</span></div>
-                                                            <div class="nk-tb-col tb-col-xl"><span
-                                                                    class="sub-text">دسته بندی</span></div>
-                                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">تعداد فروش</span>
-                                                            </div>
-                                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">وضعیت</span>
+                                                                    class="sub-text">تعداد سفارشات</span></div>
+
+                                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">وضعیت حساب</span>
                                                             </div>
                                                             <div class="nk-tb-col text-end"><span class="sub-text">اقدامات</span>
                                                             </div>
                                                         </div>
-                                                        {% for product in object_list %}
+                                                        {% for user in object_list %}
                                                             <!-- .nk-tb-item -->
                                                             <div class="nk-tb-item">
                                                                 <div class="nk-tb-col nk-tb-col-check">
                                                                     <div class="custom-control custom-control-sm custom-checkbox notext">
                                                                         <input type="checkbox"
                                                                                class="custom-control-input action-checkbox"
-                                                                               data-product-id="{{ product.id }}"
+                                                                               data-user-id="{{ user.id }}"
                                                                                id="cid-{{ forloop.counter }}"/>
                                                                         <label class="custom-control-label"
                                                                                for="cid-{{ forloop.counter }}"></label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="nk-tb-col">
-                                                                    <a href="{{ product.get_dashboard_absolute_url }}">
+                                                                    <a href="{{ user.get_dashboard_absolute_url }}">
                                                                         <div class="user-card">
                                                                             <div class="user-avatar xs bg-primary">
-                                                                                <img src="{{ product.get_image_cover }}"
-                                                                                     alt="{{ product.title }}"
+                                                                                <img src="{{ user.get_image_url }}"
+                                                                                     alt="{{ user.get_full_name }}"
                                                                                      style="object-fit: cover">
                                                                             </div>
                                                                             <div class="user-name">
-                                                                            <span class="tb-lead">{{ product.title|truncatechars:20 }}
-                                                                                {% if product.get_quantity > 0 %}
-                                                                                    <span class="dot dot-success d-xl-none ms-1"></span>
-                                                                                {% else %}
-                                                                                    <span class="dot dot-danger d-xl-none ms-1"></span>
-                                                                                {% endif %}
+                                                                            <span class="tb-lead">
+                                                                                {{ user.get_full_name|truncatechars:20 }}
                                                                             </span>
                                                                             </div>
                                                                         </div>
                                                                     </a>
                                                                 </div>
-                                                                <div class="nk-tb-col tb-col-sm">
+                                                                <div class="nk-tb-col">
                                                                     <span class="sub-text">
-                                                                        <span class="price-el">{{ product.get_price }}</span>
+                                                                        <span>{{ user.get_raw_phonenumber }}</span>
                                                                     </span>
                                                                 </div>
                                                                 <div class="nk-tb-col tb-col-md">
-                                                                    <span class="sub-text {% if product.get_quantity > 0 %}text-success{% else %}text-danger{% endif %}">
-                                                                        <span class="separate-el">{{ product.get_quantity }}</span>
+                                                                    <span class="sub-text">
+                                                                        <span class="badge badge-dim bg-secondary">{{ user.get_role_display }}</span>
                                                                     </span>
                                                                 </div>
                                                                 <div class="nk-tb-col tb-col-xl">
-                                                                    <span class="sub-text">{{ product.get_type_display }}</span>
+                                                                    <span class="sub-text">
+                                                                        <span class="separate-el">{{ user.get_orders.count }}</span>
+                                                                    </span>
                                                                 </div>
                                                                 <div class="nk-tb-col tb-col-xl">
                                                                     <span class="sub-text">
-                                                                        {% for category in product.get_categories|slice:':3' %}
-                                                                            <a href="{{ category.get_dashboard_absolute_url }}">{{ category.name|truncatechars:10 }}</a>
-                                                                        {% endfor %}
-                                                                        {% if product.get_categories.count > 3 %}
-                                                                            <span class="fs-18px">...</span>
+                                                                        {% if user.is_active %}
+                                                                            <span><em
+                                                                                    class="icon ni ni-check text-success"></em></span>
+                                                                        {% else %}
+                                                                            <span> <em
+                                                                                    class="icon ni ni-cross text-danger"></em></span>
                                                                         {% endif %}
                                                                     </span>
                                                                 </div>
-                                                                <div class="nk-tb-col tb-col-md">
-                                                                    <span class="tb-status">{{ product.get_total_sales_count }}</span>
-                                                                </div>
-                                                                <div class="nk-tb-col tb-col-md">
-                                                                    <span class="tb-status badge badge-dim bg-{{ product.status }} fs-11px">{{ product.get_status_display }}</span>
-                                                                </div>
+
                                                                 <div class="nk-tb-col nk-tb-col-tools">
                                                                     <ul class="nk-tb-actions gx-1">
                                                                         <li>
@@ -377,10 +364,10 @@
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                        {% empty %}
+                                                            {% empty %}
                                                             <div class="container-not-found-base nk-tb-item">
-                                                                 <div class="nk-tb-col">
-                                                                 <p>چیزی یافت نشد</p>
+                                                                <div class="nk-tb-col">
+                                                                    <p>چیزی یافت نشد</p>
                                                                 </div>
                                                             </div>
                                                             <!-- .nk-tb-item -->
@@ -435,7 +422,7 @@
                                     <!-- .nk-block -->
                                 </div>
                                 <!-- footer @s -->
-                                   {% include 'dashboard/admin/base/components/footer.html' %}
+                                {% include 'dashboard/admin/base/components/footer.html' %}
                                 <!-- footer @e -->
                             </div>
 
@@ -453,13 +440,13 @@
 
 {% block Scripts %}
     <script>
-        document.querySelectorAll('.bg-active').forEach(function (el){
+        document.querySelectorAll('.bg-active').forEach(function (el) {
             el.classList.add('bg-success')
         })
-        document.querySelectorAll('.bg-inactive').forEach(function (el){
+        document.querySelectorAll('.bg-inactive').forEach(function (el) {
             el.classList.add('bg-danger')
         })
-        document.querySelectorAll('.bg-archived').forEach(function (el){
+        document.querySelectorAll('.bg-archived').forEach(function (el) {
             el.classList.add('bg-warning')
         })
     </script>

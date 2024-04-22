@@ -11,15 +11,13 @@ from . import utils
 class ProductManager(models.Manager):
 
     def get_best_sellers(self):
-        # TODO: must be completed
-        return self.get_queryset()
+        return self.get_queryset().order_by('-productcart__productsold__count').distinct()
 
     def get_news(self):
         # TODO: must be completed
         return self.get_queryset()
 
     def get_showcases(self):
-        # TODO: must be completed
         return self.get_queryset().filter(type='showcase')
 
     def get_suggested(self):
@@ -86,7 +84,7 @@ class BasicProduct(BaseProduct):
         return reverse('dashboard:basic_product__detail', args=(self.id,))
 
     def get_similar_products(self):
-        return BasicProduct.objects.filter(categories__in=self.get_categories()).all()
+        return BasicProduct.objects.get_active_list().filter(categories__in=self.get_categories()).all()
 
     def get_comments(self):
         return self.comment_set.filter(status='accepted')
@@ -105,8 +103,14 @@ class BasicProduct(BaseProduct):
     def get_quantity(self):
         return self.productinventory.quantity
 
+    def get_sales(self):
+        return ProductSold.objects.filter(product_selected__product=self)
+
     def get_total_sales_count(self):
-        pass
+        return self.get_sales().count()
+
+    def get_total_sales_price(self):
+        return self.get_sales().aggregate(total=models.Sum('price'))['total'] or 0
 
     def get_categories(self):
         return self.categories.all()
@@ -117,8 +121,7 @@ class BasicProduct(BaseProduct):
     def get_image_cover(self):
         try:
             return self.image_cover.image.url
-        except Exception as e:
-            # TODO: must be completed
+        except AttributeError:
             return '/static/images/product-default-img.png'
 
     def get_images(self):
@@ -129,15 +132,19 @@ class BasicProduct(BaseProduct):
             return self.attr_category.get_groups()
         return []
 
+    def get_orders(self):
+        return Cart.objects.filter(invoice__purchase__isnull=False, productcart__product=self)
+
 
 class ProductSold(BaseModel):
     user = models.ForeignKey('account.User', on_delete=models.SET_NULL, null=True, blank=True)
-    product = models.ForeignKey('BasicProduct', on_delete=models.CASCADE)
+    product_selected = models.ForeignKey('ProductCart', on_delete=models.CASCADE)
+    price = models.PositiveBigIntegerField()
     count = models.IntegerField()
     details = models.TextField()
 
     def __str__(self):
-        return f'{self.count} => {self.product}'
+        return f'{self.count} => {self.product_selected}'
 
 
 class ProductInventory(BaseModel):
@@ -147,6 +154,17 @@ class ProductInventory(BaseModel):
 
     def __str__(self):
         return f'{self.product} - {self.quantity}:{self.price}'
+
+
+class ProductInventoryDefault(BaseModel):
+    """
+        TODO: should be Singleton Model
+    """
+    price = models.PositiveBigIntegerField()
+    quantity = models.PositiveBigIntegerField()
+
+    def __str__(self):
+        return f'settings {self.price} - {self.quantity} default product inventory'
 
 
 class ProductAttrCategory(BaseModel):
@@ -407,6 +425,7 @@ class FactorCakeImage(BaseModel):
         ('seen', _('Seen')),
         ('unseen', _('Unseen')),
     )
+    user = models.ForeignKey('account.User', on_delete=models.SET_NULL, null=True, blank=True)
     user_name = models.CharField(max_length=200)
     factor_code = models.CharField(max_length=100)
     description = models.TextField(null=True)
@@ -446,6 +465,10 @@ class Cart(BaseModel):
 
     def get_dashboard_absolute_url(self):
         return reverse('dashboard:order__detail', args=(self.id,))
+
+    def get_absolute_url(self):
+        # TODO: need to complete
+        pass
 
     def has_empty(self):
         return True if self.get_all_products_count() < 1 else False
@@ -532,8 +555,9 @@ class Cart(BaseModel):
             # create sold object
             ProductSold.objects.create(
                 user=user,
-                product=product_cart.product,
+                product_selected=product_cart,
                 count=product_cart.quantity,
+                price=product_cart.product.get_price(),
                 details=product_cart.get_detail()
             )
 

@@ -1,0 +1,627 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %}جزئیات کاربر - {{ user.get_full_name }}{% endblock %}
+
+{% block Content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                {% include 'dashboard/admin/base/components/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            {% include 'dashboard/admin/base/components/menu-aside.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between g-3">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">مشخصات کاربر</h3>
+                                                <div class="nk-block-des text-soft">
+                                                    <nav>
+                                                        <ul class="breadcrumb breadcrumb-arrow">
+                                                            <li class="breadcrumb-item"><a
+                                                                    href="{% url 'dashboard:index' %}">صفحه اصلی</a>
+                                                            </li>
+                                                            <li class="breadcrumb-item"><a>کاربران</a></li>
+                                                            <li class="breadcrumb-item"><a
+                                                                    href="{% url 'dashboard:user__list' %}">لیست
+                                                                کاربران </a></li>
+                                                            <li class="breadcrumb-item active">
+                                                                {{ user.get_full_name|truncatechars:30 }}</li>
+                                                        </ul>
+                                                    </nav>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="row g-gs">
+                                            <div class="col-xl-4">
+                                                <div class="card card-bordered">
+                                                    <div class="card-inner-group">
+                                                        <div class="card-inner">
+                                                            <div class="user-card user-card-s2">
+                                                                <div class="user-avatar lg bg-primary">
+                                                                    <img src="{{ user.get_image_url }}"
+                                                                         alt="{{ user.get_full_name }}"/>
+                                                                </div>
+                                                                <div class="user-info">
+                                                                    <div class="badge bg-light rounded-pill ucap">
+                                                                        {{ user.get_role_display }}
+                                                                    </div>
+                                                                    <h6>{{ user.get_full_name }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-inner card-inner-sm">
+                                                            <ul class="btn-toolbar justify-center gx-1">
+                                                                <li data-bs-toggle="modal"
+                                                                    data-bs-target="#modal-delete">
+                                                                    <a href="#" data-bs-toggle="tooltip"
+                                                                       data-bs-placement="top" title="حذف کاربر"
+                                                                       class="btn btn-trigger btn-icon text-danger"><em
+                                                                            class="icon ni ni-trash"></em></a>
+                                                                </li>
+                                                                <li data-bs-toggle="modal"
+                                                                    data-bs-target="#modal-edit">
+                                                                    <a href="#"
+                                                                       class="btn btn-trigger btn-icon text-info"
+                                                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                       title="ویرایش کاربر"><em
+                                                                            class="icon ni ni-pen"></em></a>
+                                                                </li>
+                                                                <li data-bs-toggle="modal"
+                                                                    data-bs-target="#modal-phonenumber-accept">
+                                                                    <a href="#" data-bs-toggle="tooltip"
+                                                                       data-bs-placement="top"
+                                                                       title="تایید شماره همراه کاربر"
+                                                                       class="btn btn-trigger btn-icon text-success"><em
+                                                                            class="icon ni ni-mobile"></em></a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="card-inner">
+                                                            <div class="row text-center">
+                                                                <div class="col-6">
+                                                                    <div class="profile-stats">
+                                                                        <span class="amount separate-el">{{ user.get_orders.count }}</span>
+                                                                        <span class="sub-text fs-12px">تعداد سفارشات</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="profile-stats">
+                                                                        <span class="amount fs-13px">
+                                                                            {% with orders=user.get_orders %}
+                                                                                {% if orders %}
+                                                                                    <a href="{{ orders.first.get_dashboard_absolute_url }}">مشاهده</a>
+                                                                                {% else %}
+                                                                                    -
+                                                                                {% endif %}
+                                                                            {% endwith %}
+                                                                        </span>
+                                                                        <span class="sub-text">اخرین سفارش</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 mt-3">
+                                                                    <div class="profile-stats">
+                                                                        <span class="amount price-el fs-15px">{{ user.get_total_paid }}</span>
+                                                                        <span class="sub-text">مبلغ پرداخت شده کل</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- .card-inner -->
+                                                        <div class="card-inner">
+                                                            <h6 class="overline-title mb-2">اطلاعات کوتاه</h6>
+                                                            <div class="row g-3">
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">تعداد فاکتور ها:</span>
+                                                                    <span>
+                                                                        {{ user.get_invoices.count }}
+                                                                        (<span
+                                                                            class="text-danger">{{ user.get_invoices_np.count }}</span>)
+                                                                    </span>
+                                                                </div>
+
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">تعداد محصولات دلخواه:</span>
+                                                                    <span>
+                                                                        {{ user.get_custom_products.count }}
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">تعداد تصاویر اپلود شده فاکتور کیک:</span>
+                                                                    <span>
+                                                                        {{ user.get_factor_cake_images.count }}
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">تعداد کامنت ها:</span>
+                                                                    <span>
+                                                                        {{ user.get_all_comments.count }}
+                                                                       <span class="text-success">({{ user.get_comments.count }})</span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">ایجاد شده در:</span>
+                                                                    <span>
+                                                                        <span class="datetime-convert">{{ user.get_created_at }}</span>
+                                                                        <span class="fs-11px">({{ user.get_created_at_timepast }})</span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-sm-6 col-xl-12">
+                                                                    <span class="sub-text">ویرایش شده در:</span>
+                                                                    <span>
+                                                                        <span class="datetime-convert">{{ user.get_updated_at }}</span>
+                                                                        <span class="fs-11px">({{ user.get_updated_at_timepast }})</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- .card-inner -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- .col -->
+                                            <div class="col-xl-8">
+                                                <div class="card card-bordered">
+                                                    <div class="card-inner">
+                                                        <div class="nk-block">
+                                                            <div class="nk-block-head d-flex justify-content-between align-items-start">
+                                                                <h5 class="title">اطلاعات کاربر</h5>
+                                                                <div class="text-center">
+                                                                    <div class="mb-1">
+                                                                        {% if user.is_active %}
+                                                                            <span class="badge badge-dim bg-success p-1">حساب کاربر فعال است</span>
+                                                                        {% else %}
+                                                                            <span class="badge badge-dim bg-danger p-1">حساب کاربر غیرفعال است</span>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                    <div>
+                                                                        {% if user.is_phonenumber_confirmed %}
+                                                                            <span class="badge badge-dim bg-success p-1">شماره همراه تایید شده است</span>
+                                                                        {% else %}
+                                                                            <span class="badge badge-dim bg-danger p-1">شماره همراه تایید نشده است</span>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .nk-block-head -->
+                                                            <div class="profile-ud-list">
+                                                                <div class="profile-ud-item w-100">
+                                                                    <div class="profile-ud wider">
+                                                                        <span class="profile-ud-label fs-15px">نام و نام خانوادگی</span>
+                                                                        <span class="profile-ud-value">{{ user.get_full_name }}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-ud-item w-100">
+                                                                    <div class="profile-ud wider">
+                                                                        <span class="profile-ud-label">شماره همراه</span>
+                                                                        <span class="profile-ud-value">
+                                                                            {{ user.get_raw_phonenumber }}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-ud-item w-100">
+                                                                    <div class="profile-ud wider">
+                                                                        <span class="profile-ud-label">نوع کاربر</span>
+                                                                        <span class="profile-ud-value">
+                                                                            <span class="badge badge-dim bg-info">{{ user.get_role_display }}</span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .profile-ud-list -->
+                                                        </div>
+                                                        <div class="nk-divider divider md"></div>
+                                                        <div class="nk-block">
+                                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                                <h6 class="lead-text mb-3">سفارشات اخیر</h6>
+                                                                <a href="{% url 'dashboard:order__list' %}?search={{ user.get_raw_phonenumber }}"
+                                                                   class="fs-12px">
+                                                                    مشاهده همه
+                                                                </a>
+                                                            </div>
+                                                            <div class="nk-tb-list nk-tb-ulist is-compact border round-sm text-center">
+                                                                <div class="nk-tb-item nk-tb-head">
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="sub-text">شناسه سفارش</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-xxl">
+                                                                        <span class="sub-text">قیمت کل</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="sub-text">وضعیت</span>
+                                                                    </div>
+                                                                </div>
+                                                                {% for order in user.get_orders|slice:':6' %}
+                                                                    <div class="nk-tb-item">
+                                                                        <div class="nk-tb-col">
+                                                                            <a href="#"><span
+                                                                                    class="fw-bold">{{ order.tc }}
+                                                                            </span></a>
+                                                                        </div>
+                                                                        <div class="nk-tb-col tb-col-xxl">
+                                                                            <span class="amount price-el">{{ order.get_total_price }}</span>
+                                                                        </div>
+                                                                        <div class="nk-tb-col">
+                                                                            <span class="lead-text">
+                                                                                <span class="text-{{ order.status.status }}">{{ order.status.get_status_display }}</span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    {% empty %}
+                                                                    <div class="container-not-found-base">
+                                                                        <p class="fs-19px">تاکنون سفارشی از این کاربر
+                                                                            صورت نگرفته است</p>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                            <!-- .nk-tb-list -->
+                                                        </div>
+                                                        <div class="nk-block">
+                                                            <div class="d-flex justify-content-between align-items-start mb-2 ">
+                                                                <h6 class="lead-text mb-3">فاکتور های اخیر</h6>
+                                                                <a href="{% url 'dashboard:invoice__list' %}?search={{ user.get_raw_phonenumber }}"
+                                                                   class="fs-12px">
+                                                                    مشاهده همه
+                                                                </a>
+                                                            </div>
+                                                            <div class="nk-tb-list nk-tb-ulist is-compact border round-sm text-center">
+                                                                <div class="nk-tb-item nk-tb-head">
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="sub-text">شناسه سفارش</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-xxl">
+                                                                        <span class="sub-text">قیمت کل</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="sub-text">وضعیت پرداخت</span>
+                                                                    </div>
+                                                                </div>
+                                                                {% for invoice in user.get_invoices|slice:':4' %}
+                                                                    <div class="nk-tb-item">
+                                                                        <div class="nk-tb-col">
+                                                                            <a href="#"><span
+                                                                                    class="fw-bold">{{ invoice.cart.tc }}
+                                                                            </span></a>
+                                                                        </div>
+                                                                        <div class="nk-tb-col tb-col-xxl">
+                                                                            <span class="amount price-el">{{ invoice.get_total_price }}</span>
+                                                                        </div>
+                                                                        <div class="nk-tb-col">
+                                                                            <span class="lead-text">
+                                                                                {% if invoice.purchase %}
+                                                                                    <span class="badge badge-dim badge-dot text-success">پرداخت شده است</span>
+                                                                                {% else %}
+                                                                                    <span class="badge badge-dim badge-dot text-danger">پرداخت نشده است</span>
+                                                                                {% endif %}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    {% empty %}
+                                                                    <div class="container-not-found-base">
+                                                                        <p class="fs-19px">تاکنون فاکتوری برای این کاربر
+                                                                            ایجاد نشده است</p>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                            <!-- .nk-tb-list -->
+                                                        </div>
+                                                        <div class="nk-block">
+                                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                                <h6 class="lead-text mb-3">ادرس های ثبت شده</h6>
+                                                                <a href="#"
+                                                                   class="fs-12px d-none">
+                                                                    مشاهده همه
+                                                                </a>
+                                                            </div>
+                                                            <div class="nk-tb-list nk-tb-ulist is-compact border round-sm text-center">
+                                                                <div class="nk-tb-item nk-tb-head">
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="sub-text">نام ادرس</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-xl">
+                                                                        <span class="sub-text">ادرس</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-xxl">
+                                                                        <span class="sub-text">پلاک</span>
+                                                                    </div>
+                                                                </div>
+                                                                {% for address in user.get_addresses|slice:':4' %}
+                                                                    <div class="nk-tb-item">
+                                                                        <div class="nk-tb-col">
+                                                                            <a href="#"><span
+                                                                                    class="fw-bold">{{ address.name }}
+                                                                            </span></a>
+                                                                        </div>
+                                                                        <div class="nk-tb-col tb-col-xl">
+                                                                            <span>{{ address.address|truncatechars:15 }}</span>
+                                                                        </div>
+                                                                        <div class="nk-tb-col">
+                                                                            <span class="lead-text">
+                                                                                <span class="badge badge-dim bg-info">{{ address.plate|default:'-' }}</span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    {% empty %}
+                                                                    <div class="container-not-found-base">
+                                                                        <p class="fs-19px">تاکنون ادرسی از سمت این کاربر
+                                                                            ثبت نشده است</p>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                            <!-- .nk-tb-list -->
+                                                        </div>
+                                                        <div class="nk-block">
+                                                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                                                <div>
+                                                                    <h6 class="lead-text ">برخی از نظرات</h6>
+                                                                    <p class="text-soft fs-11px">شامل تمامی نظرات از
+                                                                        جمله
+                                                                        نظرات تایید نشده</p>
+                                                                </div>
+                                                                <a href="{% url 'dashboard:comment__list' %}?search={{ user.get_raw_phonenumber }}"
+                                                                   class="fs-12px">
+                                                                    مشاهده همه
+                                                                </a>
+                                                            </div>
+                                                            <div class="row g-3">
+                                                                {% for comment in user.get_all_comments|slice:':6' %}
+                                                                    <div class="col-12">
+                                                                        <div class="card card-bordered comment-status-{{ comment.status }}">
+                                                                            <div class="card-inner">
+                                                                                <div class="d-flex align-items-center justify-content-between">
+                                                                                    <div class="d-flex align-items-center">
+                                                                                        <a href="{{ comment.user.get_dashboard_absolute_url }}">
+                                                                                            <div class="icon-circle icon-circle-lg">
+                                                                                                <img src="{{ comment.user.get_image_url }}"
+                                                                                                     alt="{{ comment.user.get_full_name }}">
+                                                                                            </div>
+                                                                                        </a>
+                                                                                        <div class="ms-3">
+                                                                                            <a href="{{ comment.user.get_dashboard_absolute_url }}">
+                                                                                                <h6 class="lead-text">
+                                                                                                    {{ comment.user.get_full_name|truncatechars:10 }}
+                                                                                                    <span class="text-soft ml-1">{{ comment.user.get_raw_phonenumber }}</span>
+                                                                                                </h6>
+                                                                                            </a>
+                                                                                            <span class="sub-text mt-1">{{ comment.text }}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <ul class="btn-toolbar justify-center gx-1 me-n1 flex-nowrap">
+                                                                                        <li>
+                                                                                            <span
+                                                                                                    class="btn btn-icon text-warning"
+                                                                                                    style="cursor: text">
+                                                                                                <span class="fs-16px">{{ comment.rate }}</span>
+                                                                                                &nbsp;
+                                                                                                &nbsp;
+                                                                                                <em
+                                                                                                        class="fs-16px ni ni-star">
+                                                                                                </em>
+                                                                                            </span>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a href="{{ comment.get_dashboard_absolute_url }}"
+                                                                                               class="btn btn-trigger btn-icon"><em
+                                                                                                    class="icon ni ni-eye"></em></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- .col -->
+                                                                    {% empty %}
+                                                                    <div class="container-not-found-base">
+                                                                        <p class="fs-19px">تاکنون نظری از این کاربر
+                                                                            ثبت نشده است</p>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                            <!-- .row -->
+                                                        </div>
+                                                    </div>
+                                                    <!-- .card-inner -->
+                                                </div>
+                                                <!-- .card -->
+                                            </div>
+                                            <!-- .col -->
+                                        </div>
+                                        <!-- .row -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                {% include 'dashboard/admin/base/components/footer.html' %}
+                                <!-- footer @e -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+        <!-- modals -->
+        <div class="modal fade" tabindex="-1" id="modal-edit">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            ویرایش کاربر
+                        </h5>
+                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              action="{% url 'dashboard:user__update' user_id=user.id %}"
+                              class="form-validate is-alter" novalidate="novalidate">
+                            {% csrf_token %}
+                            <input type="hidden" name="is_phonenumber_confirmed"
+                                   value="{% if user.is_phonenumber_confirmed %}true{% else %}false{% endif %}">
+                            <div class="form-group">
+                                <label class="form-label" for="first_name">نام</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" name="first_name" class="form-control" id="first_name"
+                                           required=""
+                                           placeholder="نام کاربر" value="{{ user.first_name }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="last_name">نام خانوادگی</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" name="last_name" class="form-control" id="last_name"
+                                           placeholder="نام خانوادگی کاربر" value="{{ user.last_name }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="phonenumber">شماره همراه</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" name="phonenumber" class="form-control" id="phonenumber"
+                                           required=""
+                                           placeholder="شماره همراه کاربر" value="{{ user.get_raw_phonenumber }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="role">نوع کاربر</label>
+                                <div class="form-control-wrap">
+                                    <select name="role" id="role" class="js-select2 select-by-value"
+                                            value="{{ user.role }}">
+                                        {% for ROLE_USER_OPTION in user.ROLE_USER_OPTIONS %}
+                                            <option value="{{ ROLE_USER_OPTION.0 }}">{{ ROLE_USER_OPTION.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="status">وضعیت حساب</label>
+                                <div class="form-control-wrap">
+                                    <select name="is_active" id="status" class="js-select2 select-by-value"
+                                            value="{{ user.is_active }}">
+                                        <option value="true"> فعال</option>
+                                        <option value="false">غیر فعال</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group text-left mt-5">
+                                <button type="submit" class="btn btn-lg btn-success p-1 px-2">
+                                    ویرایش کاربر
+                                    <em class="icon icon-circle ni ni-pen bg-success"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" tabindex="-1" id="modal-delete">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            حذف کاربر
+                        </h5>
+                        <a href="{% url 'dashboard:user__delete' user_id=user.id %}" class="close"
+                           data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              action="#"
+                              class="form-validate is-alter" novalidate="novalidate">
+                            {% csrf_token %}
+                            <div class="badge-dim bg-danger fs-17px p-2" style="border-radius: 10px">
+                                <p>ایا از حذف کاربر با نام
+                                    <b>{{ user.get_full_name }}</b>
+                                    اطمینان دارید؟
+                                    پس از حذف امکان بازگشت وجود نخواهد داشت و تمام امورات مربوط به ان ممکن است حذف شوند.
+                                </p>
+                            </div>
+                            <div class="form-group text-left mt-4">
+                                <button type="submit" class="btn btn-sm btn-danger p-1 px-2">
+                                    بله اطمینان دارم ! حذف کاربر
+                                    <em class="icon icon-circle ni ni-trash-empty bg-danger"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" tabindex="-1" id="modal-phonenumber-accept">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            تایید شماره همراه
+                        </h5>
+                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              action="{% url 'dashboard:user__update' user_id=user.id %}"
+                              class="form-validate is-alter" novalidate="novalidate">
+                            {% csrf_token %}
+                            <input type="hidden" name="is_phonenumber_confirmed" value="true">
+                            <input type="hidden" name="phonenumber" value="{{ user.get_raw_phonenumber }}">
+                            <input type="hidden" name="first_name" value="{{ user.first_name }}">
+                            <input type="hidden" name="last_name" value="{{ user.last_name }}">
+                            <input type="hidden" name="role" value="{{ user.role }}">
+                            <input type="hidden" name="is_active"
+                                   value="{% if user.is_active %}true{% else %}false{% endif %}">
+                            <div class="badge-dim bg-secondary fs-17px p-2" style="border-radius: 10px">
+                                <p>ایا از تایید شماره همراه کاربر
+                                    <b>{{ user.get_full_name }}</b>
+                                    اطمینان دارید ؟
+                                </p>
+                            </div>
+                            <div class="form-group text-left mt-4">
+                                <button type="submit" class="btn btn-lg btn-success p-1 px-2">
+                                    بله اطمینان دارم ! تایید شماره همراه
+                                    <em class="icon icon-circle ni ni-check bg-success"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- app-root @e -->
+{% endblock %}
+
+{% block Scripts %}
+    <script>
+        document.querySelectorAll('.text-pending').forEach(function (el) {
+            el.classList.add('text-warning')
+        })
+        document.querySelectorAll('.text-cancelled').forEach(function (el) {
+            el.classList.add('text-danger')
+        })
+        document.querySelectorAll('.text-in_progress').forEach(function (el) {
+            el.classList.add('text-info')
+        })
+        document.querySelectorAll('.text-shipped').forEach(function (el) {
+            el.classList.add('text-primary')
+        })
+        document.querySelectorAll('.text-delivered').forEach(function (el) {
+            el.classList.add('text-success')
+        })
+    </script>
+{% endblock %}

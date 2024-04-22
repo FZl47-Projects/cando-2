@@ -1,18 +1,10 @@
 from django.contrib import admin
 from . import models
 
-# admin.site.register(models.CustomOrderProduct)
-# admin.site.register(models.Order)
-# admin.site.register(models.Category)
-# admin.site.register(models.Cart)
-# admin.site.register(models.CartStatus)
-# admin.site.register(models.ShowCase)
-# admin.site.register(models.Factor)
-# admin.site.register(models.FactorPayment)
-
 
 admin.site.register(models.BasicProduct)
 admin.site.register(models.ProductInventory)
+admin.site.register(models.ProductInventoryDefault)
 admin.site.register(models.ProductAttrGroup)
 admin.site.register(models.ProductAttrCategory)
 admin.site.register(models.SimpleProductAttr)

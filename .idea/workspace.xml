@@ -6,7 +6,211 @@
   <component name="ChangeListManager">
     <list default="true" id="3218dff5-1747-4748-95c5-4f5419735ae2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/admin/add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/admin/detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/admin/list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/components/base/base_template.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/components/base/footer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/components/base/header.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/components/base/nav.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/information/change-password.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/information/detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/main/admin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/main/user.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/user/add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/user/components/list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/user/detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/templates/account/dashboard/user/list.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/mixins/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/mixins/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/account/user/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/account/user/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/payment/invoice/detail-export.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/payment/invoice/detail-export.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/payment/invoice/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/payment/invoice/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/factor-cake-image/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/factor-cake-image/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/product/basic/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/product/basic/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/product/basic/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/product/basic/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/storage/gallery/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/storage/gallery/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/_blank.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/apps-calendar.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/apps-chats.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/apps-file-manager.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/apps-inbox.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/apps-kanban.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/apps-messages.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/charts/chartjs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/charts/knob.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/accordions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/alerts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/avatar.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/badges.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/breadcrumb.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/buttons-group.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/buttons.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/cards.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/carousel.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/list-dropdown.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/modals.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/pagination.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/placeholders.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/popover.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/preloader.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/progress.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/spinner.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/tabs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/toast.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/tooltip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/typography.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/util-border.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/util-colors.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/util-display.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/util-embeded.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/util-flex.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/util-others.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/util-sizing.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/util-spacing.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/elements/util-text.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/advanced-controls.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/checkbox-radio.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/datetime-picker.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/form-elements.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/form-layouts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/form-quill.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/form-summernote.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/form-tinymce.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/form-upload.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/form-validation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/form-wizard.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/input-group.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/nouislider.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/number-spinner.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/wizard/create-profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/wizard/create-project.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/wizard/survey-v1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/wizard/survey-v2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/forms/wizard/two-factor-auth.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/misc/dragula.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/misc/dual-listbox.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/misc/icons.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/misc/js-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/misc/map.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/misc/nioicon.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/misc/slick-sliders.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/misc/svg-icons.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/misc/sweet-alert.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/misc/toastr.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/tables/table-basic.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/tables/table-datatable.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/tables/table-special.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/widgets/cards.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/widgets/charts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/components/widgets/ratings.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/customer-details.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/customer-list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/email-templates.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/gallery.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/history-invoice-list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/history-invoice.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/history-payment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/index-analytics.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/auths/auth-login-v2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/auths/auth-login-v3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/auths/auth-login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/auths/auth-register-v2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/auths/auth-register-v3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/auths/auth-register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/auths/auth-reset-v2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/auths/auth-reset-v3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/auths/auth-reset.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/auths/auth-success-v2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/auths/auth-success-v3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/auths/auth-success.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/contact.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/errors/404-classic.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/errors/404-s1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/errors/504-classic.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/errors/504-s1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/faqs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/pricing.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/regular-v1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/regular-v2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pages/terms-policy.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/pricing-table.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/product-card.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/product-details.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/product-list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/project-card.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/project-list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/_blank.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/contact.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/downloads.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/faqs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/invoice-details.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/invoice-print.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/invoices.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/payments.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/pricing.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/profile-activity.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/profile-billing.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/profile-notify.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/profile-setting.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/subscriptions-detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/subscriptions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/support-topic-detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/support-topics.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/support.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/team-access.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/ticket-details.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/subscription/tickets.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/support-kb-details.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/support-kb-topics.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/support-kb.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/ticket-details.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/ticket-list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/user-card.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/user-details-regular.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/user-list-compact.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/user-list-regular.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/user-profile-activity.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/user-profile-notification.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/user-profile-regular.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/uncompleted/user-profile-setting.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/account.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/account.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/payment.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/payment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/storage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/messages.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/sms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/sms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/templates/notification/dashboard/add-user.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/templates/notification/dashboard/add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/templates/notification/dashboard/detail-user.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/templates/notification/dashboard/detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/templates/notification/dashboard/list-user.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/templates/notification/dashboard/list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/templates/notification/dashboard/personal-list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/views/dashboard.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/payment/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/payment/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/payment/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/payment/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/settings/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/settings/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/settings/base.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,29 +241,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ehyasystem/Desktop/web-projects/cando-2/src/apps/dashboard/templates/dashboard/admin/payment/invoice&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "django.template.preview.state": "SHOW_EDITOR",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "F:/Project-Company/Smarten/cando-2/src/apps/dashboard/templates/dashboard/admin/product/inventory",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "editing.templates",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\inventory" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\account\user" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\payment\invoice\purchase" />
       <recent name="C:\Users\ehyasystem\Desktop\web-projects\cando-2\src\apps\dashboard\templates\dashboard\admin\payment\invoice" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\order" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\payment\invoice" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\storage\templates\storage" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\custom-product" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ehyasystem\Desktop\web-projects\cando-2\src\apps\dashboard\templates\dashboard\admin" />
@@ -94,6 +298,7 @@
       <workItem from="1713387855690" duration="1000" />
       <workItem from="1713471770094" duration="8380000" />
       <workItem from="1713538469798" duration="6424000" />
+      <workItem from="1713706864528" duration="30887000" />
     </task>
     <servers />
   </component>

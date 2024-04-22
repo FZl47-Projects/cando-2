@@ -194,10 +194,12 @@
                                                                                                                         فعال
                                                                                                                     </option>
                                                                                                                     <option value="inactive">
-                                                                                                                        غیر فعال
+                                                                                                                        غیر
+                                                                                                                        فعال
                                                                                                                     </option>
                                                                                                                     <option value="archived">
-                                                                                                                        آرشیو شده
+                                                                                                                        آرشیو
+                                                                                                                        شده
                                                                                                                     </option>
                                                                                                                 </select>
                                                                                                             </div>
@@ -299,7 +301,7 @@
                                                     <!-- .card-search -->
                                                 </div>
                                                 <!-- .card-inner -->
-                                                <div class="card-inner p-0">
+                                                <div class="card-inner p-0 text-center">
                                                     <div class="nk-tb-list nk-tb-ulist">
                                                         <div class="nk-tb-item nk-tb-head">
                                                             <div class="nk-tb-col nk-tb-col-check">
@@ -418,10 +420,10 @@
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                        {% empty %}
+                                                            {% empty %}
                                                             <div class="container-not-found-base nk-tb-item">
-                                                                 <div class="nk-tb-col">
-                                                                 <p>چیزی یافت نشد</p>
+                                                                <div class="nk-tb-col">
+                                                                    <p>چیزی یافت نشد</p>
                                                                 </div>
                                                             </div>
                                                             <!-- .nk-tb-item -->
@@ -476,7 +478,7 @@
                                     <!-- .nk-block -->
                                 </div>
                                 <!-- footer @s -->
-                                   {% include 'dashboard/admin/base/components/footer.html' %}
+                                {% include 'dashboard/admin/base/components/footer.html' %}
                                 <!-- footer @e -->
                             </div>
 
@@ -494,13 +496,13 @@
 
 {% block Scripts %}
     <script>
-        document.querySelectorAll('.bg-active').forEach(function (el){
+        document.querySelectorAll('.bg-active').forEach(function (el) {
             el.classList.add('bg-success')
         })
-        document.querySelectorAll('.bg-inactive').forEach(function (el){
+        document.querySelectorAll('.bg-inactive').forEach(function (el) {
             el.classList.add('bg-danger')
         })
-        document.querySelectorAll('.bg-archived').forEach(function (el){
+        document.querySelectorAll('.bg-archived').forEach(function (el) {
             el.classList.add('bg-warning')
         })
     </script>

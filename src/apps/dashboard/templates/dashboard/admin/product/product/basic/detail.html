@@ -32,7 +32,8 @@
                                                             <li class="breadcrumb-item"><a
                                                                     href="{% url 'dashboard:basic_product__list' %}">لیست
                                                                 محصولات </a></li>
-                                                            <li class="breadcrumb-item active">{{ product.title|truncatechars:30 }}</li>
+                                                            <li class="breadcrumb-item active">
+                                                                {{ product.title|truncatechars:30 }}</li>
                                                         </ul>
                                                     </nav>
                                                 </div>
@@ -61,13 +62,15 @@
                                                         </div>
                                                         <div class="card-inner card-inner-sm">
                                                             <ul class="btn-toolbar justify-center gx-1">
-                                                                <li>
+                                                                <li data-bs-toggle="modal"
+                                                                    data-bs-target="#modal-delete">
                                                                     <a href="#" data-bs-toggle="tooltip"
                                                                        data-bs-placement="top" title="حذف محصول"
                                                                        class="btn btn-trigger btn-icon text-danger"><em
                                                                             class="icon ni ni-trash"></em></a>
                                                                 </li>
-                                                                <li>
+                                                                <li data-bs-toggle="modal"
+                                                                    data-bs-target="#modal-edit">
                                                                     <a href="#"
                                                                        class="btn btn-trigger btn-icon text-info"
                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
@@ -88,12 +91,13 @@
                                                                        title="تنظیم تخفیف"><em
                                                                             class="icon ni ni-percent"></em></a>
                                                                 </li>
-                                                                <li>
+                                                                <li data-bs-toggle="modal"
+                                                                    data-bs-target="#modal-add-inventory">
                                                                     <a href="#"
                                                                        class="btn btn-trigger btn-icon text-success"
                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                       title="افزایش موجودی"><em
-                                                                            class="icon ni ni-plus"></em></a>
+                                                                       title="مدیریت موجودی"><em
+                                                                            class="icon ni ni-book"></em></a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -101,8 +105,8 @@
                                                             <div class="row text-center">
                                                                 <div class="col-4">
                                                                     <div class="profile-stats">
-                                                                        <span class="amount separate-el">-</span>
-                                                                        <span class="sub-text">کل سفارش</span>
+                                                                        <span class="amount separate-el">{{ product.get_orders.count }}</span>
+                                                                        <span class="sub-text fs-11px">کل سفارشات</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-4">
@@ -141,7 +145,7 @@
                                                                         <a href="{{ category.get_dashboard_absolute_url }}">
                                                                             <span class="badge bg-secondary rounded-pill m-1">{{ category.name }}</span>
                                                                         </a>
-                                                                    {% empty %}
+                                                                        {% empty %}
                                                                         <span class="text-orange fs-13px">بدون دسته بندی</span>
                                                                     {% endfor %}
                                                                 </div>
@@ -149,7 +153,7 @@
                                                                     <span class="sub-text">تگ ها:</span>
                                                                     {% for tag in product.get_tags %}
                                                                         <span class="badge bg-secondary rounded-pill m-1">{{ tag.name }}</span>
-                                                                    {% empty %}
+                                                                        {% empty %}
                                                                         <span class="text-orange fs-13px">بدون تگ</span>
                                                                     {% endfor %}
                                                                 </div>
@@ -168,7 +172,7 @@
                                                                 </div>
                                                                 <div class="col-sm-6 col-xl-12">
                                                                     <span class="sub-text">مبلغ فروش از این محصول:</span>
-                                                                    <span>-</span>
+                                                                    <span class="price-el">{{ product.get_total_sales_price }}</span>
                                                                 </div>
                                                                 <div class="col-sm-6 col-xl-12">
                                                                     <span class="sub-text">ایجاد شده در:</span>
@@ -256,55 +260,43 @@
                                                         <div class="nk-block">
                                                             <div class="d-flex justify-content-between align-items-start mb-2">
                                                                 <h6 class="lead-text mb-3">سفارشات اخیر</h6>
-                                                                <a href="#" class="fs-12px">
+                                                                <a href="{% url 'dashboard:order__list' %}?spr={{ product.id }}"
+                                                                   class="fs-12px">
                                                                     مشاهده همه
                                                                 </a>
                                                             </div>
-                                                            <div class="nk-tb-list nk-tb-ulist is-compact border round-sm">
+                                                            <div class="nk-tb-list nk-tb-ulist is-compact border round-sm text-center">
                                                                 <div class="nk-tb-item nk-tb-head">
                                                                     <div class="nk-tb-col">
                                                                         <span class="sub-text">شناسه سفارش</span>
                                                                     </div>
                                                                     <div class="nk-tb-col tb-col-sm">
-                                                                        <span class="sub-text">نام کاربر</span>
-                                                                    </div>
-                                                                    <div class="nk-tb-col tb-col-xxl">
-                                                                        <span class="sub-text">تعداد</span>
-                                                                    </div>
-                                                                    <div class="nk-tb-col tb-col-xxl">
-                                                                        <span class="sub-text">قیمت کل</span>
+                                                                        <span class="sub-text"> کاربر</span>
                                                                     </div>
                                                                     <div class="nk-tb-col">
                                                                         <span class="sub-text">وضعیت</span>
                                                                     </div>
                                                                 </div>
-                                                                {% for order in product_orders|slice:':6' %}
+                                                                {% for order in product.get_orders|slice:':6' %}
                                                                     <div class="nk-tb-item">
                                                                         <div class="nk-tb-col">
-                                                                            <a href="#"><span
+                                                                            <a href="{{ order.get_dashboard_absolute_url }}"><span
                                                                                     class="fw-bold">
-                                                                                #
-                                                                                {{ order.id }}
+                                                                                {{ order.tc }}
                                                                             </span></a>
                                                                         </div>
                                                                         <div class="nk-tb-col tb-col-sm">
                                                                             <span class="tb-product">
-                                                                                <span class="title">{{ order.user.get_full_name|truncatechars:10 }}</span>
+                                                                                <a href="{{ order.user.get_dashboard_absolute_url }}">{{ order.user.get_full_name|truncatechars:10|default:'-' }}</a>
                                                                             </span>
                                                                         </div>
-                                                                        <div class="nk-tb-col tb-col-xxl">
-                                                                            <span class="amount separate-el">{{ order.product_count }}</span>
-                                                                        </div>
-                                                                        <div class="nk-tb-col tb-col-xxl">
-                                                                            <span class="amount price-el">{{ order.product_total_price }}</span>
-                                                                        </div>
                                                                         <div class="nk-tb-col">
-                                                                            <span class="lead-text text-warning">
-                                                                                {{ order.get_status_label }}
+                                                                            <span class="lead-text text-{{ order.status.status }}">
+                                                                                {{ order.status.get_status_display }}
                                                                             </span>
                                                                         </div>
                                                                     </div>
-                                                                {% empty %}
+                                                                    {% empty %}
                                                                     <div class="container-not-found-base">
                                                                         <p class="fs-19px">تاکنون سفارشی از این محصول
                                                                             صورت نگرفته است</p>
@@ -321,7 +313,8 @@
                                                                         جمله
                                                                         نظرات تایید نشده</p>
                                                                 </div>
-                                                                <a href="{% url 'dashboard:comment__list' %}?filter=true&product={{ product.id }}" class="fs-12px">
+                                                                <a href="{% url 'dashboard:comment__list' %}?filter=true&product={{ product.id }}"
+                                                                   class="fs-12px">
                                                                     مشاهده همه
                                                                 </a>
                                                             </div>
@@ -340,7 +333,8 @@
                                                                                         </a>
                                                                                         <div class="ms-3">
                                                                                             <a href="{{ comment.user.get_dashboard_absolute_url }}">
-                                                                                                <h6 class="lead-text">{{ comment.user.get_full_name|truncatechars:10 }}
+                                                                                                <h6 class="lead-text">
+                                                                                                    {{ comment.user.get_full_name|truncatechars:10 }}
                                                                                                     <span class="text-soft ml-1">{{ comment.user.get_raw_phonenumber }}</span>
                                                                                                 </h6>
                                                                                             </a>
@@ -371,7 +365,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <!-- .col -->
-                                                                {% empty %}
+                                                                    {% empty %}
                                                                     <div class="container-not-found-base">
                                                                         <p class="fs-19px">تاکنون نظری برای این محصول
                                                                             ثبت نشده است</p>
@@ -404,6 +398,249 @@
             <!-- wrap @e -->
         </div>
         <!-- main @e -->
+        <!-- modals -->
+        <div class="modal fade" tabindex="-1" id="modal-add-inventory">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            مدیریت موجودی
+                        </h5>
+                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              action="{% url 'dashboard:product_inventory__update' inventory_id=product.productinventory.id %}"
+                              class="form-validate is-alter" novalidate="novalidate">
+                            {% csrf_token %}
+                            <input type="hidden" name="product" value="{{ product.id }}">
+                            <div class="form-group">
+                                <label class="form-label" for="quantity">تعداد</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" name="quantity" class="form-control" id="first_name"
+                                           required=""
+                                           placeholder="تعداد" value="{{ product.productinventory.quantity }}" min="0">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="price">تعداد</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" name="price" class="form-control" id="price"
+                                           required=""
+                                           placeholder="قیمت" value="{{ product.productinventory.price }}" min="0">
+                                    <div class="text-left fs-12px mt-1" id="label-inventory-price-update">
+                                        <p>0</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group text-left mt-5">
+                                <button type="submit" class="btn btn-lg btn-success p-1 px-2">
+                                    بروزرسانی موجودی
+                                    <em class="icon icon-circle ni ni-book bg-success"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" tabindex="-1" id="modal-edit">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            ویرایش محصول
+                        </h5>
+                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              action="{% url 'dashboard:basic_product__update' product_id=product.id %}"
+                              class="form-validate is-alter" novalidate="novalidate" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="image_cover" value="{{ product.image_cover.id }}">
+                            <div class="form-group">
+                                <label class="form-label" for="title">عنوان</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" name="title" class="form-control" id="title"
+                                           required=""
+                                           placeholder="عنوان" value="{{ product.title }}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="type">نوع محصول</label>
+                                <div class="form-control-wrap">
+                                    <select name="type" id="type" required class="js-select2 select-by-value"
+                                            value="{{ product.type }}">
+                                        {% for TYPE_OPTION in product.TYPE_OPTIONS %}
+                                            <option value="{{ TYPE_OPTION.0 }}">{{ TYPE_OPTION.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="pr-status">وضعیت محصول</label>
+                                <div class="form-control-wrap">
+                                    <select name="status" id="pr-status" class="js-select2 select-by-value"
+                                            value="{{ product.status }}">
+                                        {% for STATUS_OPTION in product.STATUS_OPTIONS %}
+                                            <option value="{{ STATUS_OPTION.0 }}">{{ STATUS_OPTION.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="pr-category">دسته بندی</label>
+                                <div class="form-control-wrap">
+                                    <select name="categories" id="pr-category" class="js-select2" multiple>
+                                        {% for category in categories %}
+                                            <option value="{{ category.id }}"
+                                                    {% if category in product.get_categories %}selected{% endif %}>{{ category.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="pr-tag">تگ ها</label>
+                                <div class="form-control-wrap">
+                                    <select name="tags" id="pr-tag" class="js-select2" multiple>
+                                        {% for tag in tags %}
+                                            <option value="{{ tag.id }}"
+                                                    {% if tag in product.get_tags %}selected{% endif %}>{{ tag.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="pr-attr-category">دسته بندی فیلد ها</label>
+                                <div class="form-control-wrap">
+                                    <select name="attr_category" id="pr-attrc-ategory"
+                                            class="js-select2 select-by-value" value="{{ product.attr_category }}">
+                                        {% for attr_category in attr_categories %}
+                                            <option value="{{ attr_category.id }}">{{ attr_category.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            {#                            <div class="form-group">#}
+                            {#                                <label class="form-label" for="images">تصویر کاور</label>#}
+                            {#                                <div class="form-control-wrap">#}
+                            {#                                    <div class="form-file">#}
+                            {#                                        <input type="file" accept="image/*" name="image_cover_file"#}
+                            {#                                               class="form-file-input"#}
+                            {#                                               id="customFiles">#}
+                            {#                                        <label class="form-file-label" for="customFiles">انتخاب فایل</label>#}
+                            {##}
+                            {#                                    </div>#}
+                            {#                                    {% if product.image_cover %}#}
+                            {#                                        <div class="text-end mt-2">#}
+                            {#                                            <img src="{{ product.image_cover.get_image_url }}" class="click-full-size"#}
+                            {#                                                 style="width: 40px;height: 40px;border-radius: 5px">#}
+                            {#                                        </div>#}
+                            {#                                    {% endif %}#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {#                            <div class="form-group">#}
+                            {#                                <label class="form-label" for="images">تصاویر</label>#}
+                            {#                                <div class="form-control-wrap">#}
+                            {#                                    <div class="form-file">#}
+                            {#                                        <input type="file" accept="image/*" name="images_file" multiple#}
+                            {#                                               class="form-file-input"#}
+                            {#                                               id="customMultipleFiles">#}
+                            {#                                        <label class="form-file-label" for="customMultipleFiles">انتخاب فایل#}
+                            {#                                            ها</label>#}
+                            {#                                    </div>#}
+                            {#                                    {% if product.get_images %}#}
+                            {#                                        <div class="text-end mt-2">#}
+                            {#                                            {% for image in product.get_images %}#}
+                            {#                                                <img src="{{ image.get_image_url }}" class="click-full-size"#}
+                            {#                                                     style="width: 40px;height: 40px;border-radius: 5px;margin: 4px;object-fit: cover">#}
+                            {#                                            {% endfor %}#}
+                            {#                                        </div>#}
+                            {#                                    {% endif %}#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            <div class="form-group">
+                                <label class="form-label" for="description">توضیحات</label>
+                                <div class="form-control-wrap">
+                                    <textarea name="description" id="description"
+                                              class="form-control">{{ product.description }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group text-left mt-5">
+                                <button type="submit" class="btn btn-lg btn-success p-1 px-2">
+                                    ویرایش محصول
+                                    <em class="icon icon-circle ni ni-pen bg-success"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" tabindex="-1" id="modal-delete">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            حذف کاربر
+                        </h5>
+                        <a href="{% url 'dashboard:basic_product__delete' product_id=product.id %}" class="close"
+                           data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              action="#"
+                              class="form-validate is-alter" novalidate="novalidate">
+                            {% csrf_token %}
+                            <div class="badge-dim bg-danger fs-17px p-2" style="border-radius: 10px">
+                                <p>ایا از حذف محصول با نام
+                                    <b>{{ product.title|truncatechars:15 }}</b>
+                                    اطمینان دارید؟
+                                    پس از حذف امکان بازگشت وجود نخواهد داشت و تمام امورات مربوط به ان حذف خواهند شد.
+                                </p>
+                            </div>
+                            <div class="form-group text-left mt-4">
+                                <button type="submit" class="btn btn-sm btn-danger p-1 px-2">
+                                    بله اطمینان دارم ! حذف محصول
+                                    <em class="icon icon-circle ni ni-trash-empty bg-danger"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- app-root @e -->
+{% endblock %}
+
+
+{% block Scripts %}
+    <script>
+        setPriceSpreadInput('#price', '#label-inventory-price-update', document.getElementById('price').value)
+
+        document.querySelectorAll('.text-pending').forEach(function (el) {
+            el.classList.add('text-warning')
+        })
+        document.querySelectorAll('.text-cancelled').forEach(function (el) {
+            el.classList.add('text-danger')
+        })
+        document.querySelectorAll('.text-in_progress').forEach(function (el) {
+            el.classList.add('text-info')
+        })
+        document.querySelectorAll('.text-shipped').forEach(function (el) {
+            el.classList.add('text-primary')
+        })
+        document.querySelectorAll('.text-delivered').forEach(function (el) {
+            el.classList.add('text-success')
+        })
+    </script>
 {% endblock %}

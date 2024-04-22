@@ -2,6 +2,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
 from django.contrib.auth import get_user_model
+
 from apps.core.utils import send_email
 from .models import NotificationUser
 from . import sms
@@ -27,9 +28,3 @@ def handle_notification_user_notify(sender, instance, **kwargs):
         if email:
             subject = settings.EMAIL_SUBJECT.format(instance.title)
             send_email(email, subject, instance.get_content())
-
-
-
-
-
-
