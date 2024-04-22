@@ -48,3 +48,15 @@ class Image(RemovePastFileMixin, BaseModel):
             return self.image.url
         except AttributeError:
             pass
+
+    def get_size(self):
+        try:
+            return self.image.size
+        except (AttributeError, FileNotFoundError):
+            return '-'
+
+    def get_res_size(self):
+        try:
+            return f'{self.image.width}X{self.image.height}'
+        except (AttributeError, FileNotFoundError):
+            return '-'
