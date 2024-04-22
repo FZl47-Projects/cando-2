@@ -1,12 +1,11 @@
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import get_object_or_404, redirect
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, View
 from django.db.models import Min, Max, Count, Case, When, Value
 from django.core.exceptions import PermissionDenied
 
-from apps.core.mixins.views import CreateViewMixin, FilterSimpleListViewMixin, DeleteMixin
+from apps.core.mixins.views import CreateViewMixin, FilterSimpleListViewMixin, DeleteViewMixin
 from apps.product import models, forms
 
 
@@ -16,7 +15,7 @@ class BasicProductList(FilterSimpleListViewMixin, ListView):
     template_name = 'product/basic/list.html'
 
     def get_queryset(self):
-        objects = models.BasicProduct.objects.all()
+        objects = models.BasicProduct.objects.get_active_list()
         return objects
 
     def get_context_data(self, **kwargs):
@@ -48,6 +47,7 @@ class BasicProductList(FilterSimpleListViewMixin, ListView):
             objects = objects.filter(productinventory__price__gte=min_price)
         if max_price:
             objects = objects.filter(productinventory__price__lte=max_price)
+
         return objects
 
     def order_by(self, objects):
@@ -82,7 +82,7 @@ class BasicProductDetail(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product_id = kwargs.get('product_id')
-        product = get_object_or_404(models.BasicProduct, id=product_id)
+        product = get_object_or_404(models.BasicProduct, id=product_id, status='active')
         context['product'] = product
         # create product view
         user = self.request.user
@@ -96,19 +96,11 @@ class FactorCakeImage(CreateViewMixin, TemplateView):
     # redirect_url = None => redirect to success page (redirect to referer for now)
     template_name = 'product/factor-cake-image.html'
 
-    def do_success(self):
-        # TODO: create notify for admins
-        pass
-
 
 class CustomProductCreate(CreateViewMixin, TemplateView):
     form = forms.CustomProductCreateForm
     success_message = _('Your Custom Product Has Been Created and Will Be Added to Your Shopping Cart After Checking')
     template_name = 'product/custom-product-create.html'
-
-    def do_success(self):
-        # TODO: create notify for admins and user
-        pass
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -122,7 +114,7 @@ class CustomProductCreate(CreateViewMixin, TemplateView):
         data['user'] = user
 
 
-class CustomProductCartDelete(DeleteMixin, View):
+class CustomProductCartDelete(DeleteViewMixin, View):
     success_message = _('Product Cart Successfully Deleted')
 
     def get_object(self, request, *args, **kwargs):
@@ -153,7 +145,7 @@ class ProductCartCreate(CreateViewMixin, View):
     success_message = _('Product Has Been Successfully Added To The Cart')
 
 
-class ProductCartDelete(DeleteMixin, View):
+class ProductCartDelete(DeleteViewMixin, View):
     success_message = _('Product Cart Successfully Deleted')
 
     def get_object(self, request, *args, **kwargs):

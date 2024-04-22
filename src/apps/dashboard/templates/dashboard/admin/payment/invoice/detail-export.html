@@ -6,22 +6,27 @@
 {% block Styles %}
     <style>
         @media print {
-            .nk-aside{
+            .nk-aside {
                 display: none;
             }
-            .nk-block-head{
+
+            .nk-block-head {
                 display: none;
             }
-            .nk-header{
+
+            .nk-header {
                 display: none;
             }
-            .nk-footer{
+
+            .nk-footer {
                 display: none;
             }
-            .invoice-action{
+
+            .invoice-action {
                 display: none;
             }
-            .order-link{
+
+            .order-link {
                 display: none;
             }
         }
@@ -92,22 +97,40 @@
                                                             <h4 class="title">{{ invoice.cart.user.get_full_name }}</h4>
                                                             <ul class="list-plain">
                                                                 <li>
+                                                                    {% if invoice.purchase %}
+                                                                        <em class="icon ni ni-check-circle-fill"></em>
+                                                                        <span>
+                                                                            <span class="badge bg-success">پرداخت شده</span>
+                                                                        </span>
+                                                                    {% else %}
+                                                                        <em class="icon ni ni-cross-circle-fill"></em>
+                                                                        <span>
+                                                                            <span class="badge bg-danger">پرداخت نشده</span>
+                                                                        </span>
+                                                                    {% endif %}
+                                                                </li>
+                                                                <li>
                                                                     <em class="icon ni ni-map-pin-fill"></em>
                                                                     <span>
                                                                         {{ invoice.address.address }}
-                                                                        <span class="badge badge-dim bg-info">{{ invoice.address.plate }}</span>
+                                                                        <span class="badge badge-dim bg-info">{{ invoice.address.plate|default:'-' }}</span>
                                                                     </span>
                                                                 </li>
                                                                 <li>
                                                                     <em class="icon ni ni-call-fill"></em><span>{{ invoice.cart.user.get_raw_phonenumber }}</span>
                                                                 </li>
-
-                                                                <li class="order-link">
+                                                                <li>
                                                                     <a href="{{ invoice.cart.get_dashboard_absolute_url }}">
-                                                                        <em class="icon ni ni-file-fill"></em><span>
+                                                                        <em class="icon ni ni-cart-fill"></em><span>
                                                                         <span class="fs-13px">مشاهده سفارش</span>
                                                                     </span>
                                                                     </a>
+                                                                </li>
+                                                                <li>
+                                                                    <em class="icon ni ni-file-text-fill"></em>
+                                                                    <span>
+                                                                        <span class="fs-13px">{{ invoice.note|default:'-' }}</span>
+                                                                    </span>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -180,7 +203,7 @@
                                                             {% for custom_product in invoice.cart.get_custom_products %}
                                                                 <tr>
                                                                     <td>
-                                                                        <a href="{{ custom_product.get_dashboard_absolute_url }}">
+                                                                        <a href="{{ custom_product.custom_product.get_dashboard_absolute_url }}">
                                                                             محصول دلخواه {{ forloop.counter }}
                                                                         </a>
                                                                     </td>

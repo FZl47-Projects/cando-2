@@ -1,11 +1,14 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 
 from phonenumber_field.modelfields import PhoneNumberField
+from apps.core.models import BaseModel
 from apps.product.models import WishList, Cart
+from apps.payment.models import Invoice
 
 
 class CustomBaseUserManager(BaseUserManager):
@@ -57,11 +60,11 @@ class SuperUserManager(models.Manager):
         return super().get_queryset().filter(role='super_user')
 
 
-class User(AbstractUser):
+class User(BaseModel, AbstractUser):
     ROLE_USER_OPTIONS = (
-        ('normal_user', 'کاربر عادی'),
-        ('operator_user', 'ادمین اپراتور'),
-        ('super_user', 'ادمین وِیژه'),
+        ('normal_user', _('Normal User')),
+        ('operator_user', _('Operator Admin')),
+        ('super_user', _('Super Admin')),
     )
 
     first_name = models.CharField("first name", max_length=150, blank=True, default="بدون نام")
@@ -97,6 +100,9 @@ class User(AbstractUser):
 
     def __str__(self):
         return f'{self.role} - {self.phonenumber}'
+
+    def get_dashboard_absolute_url(self):
+        return reverse('dashboard:user__detail', args=(self.id,))
 
     def get_role_label(self):
         return self.get_role_display()
@@ -135,3 +141,31 @@ class User(AbstractUser):
 
     def get_addresses(self):
         return self.address_set.all()
+
+    def get_orders(self):
+        return self.cart_set.filter(invoice__purchase__isnull=False)
+
+    def get_invoices(self):
+        return Invoice.objects.filter(cart__user=self)
+
+    def get_invoices_np(self):
+        # get invoices need to be paid
+        return self.get_invoices().exclude(purchase=None)
+
+    def get_purchase_invoice(self):
+        return self.purchaseinvoice_set.all()
+
+    def get_total_paid(self):
+        return self.get_purchase_invoice().aggregate(total=models.Sum('price_paid'))['total'] or 0
+
+    def get_all_comments(self):
+        return self.comment_set.all()
+
+    def get_comments(self):
+        return self.get_all_comments().filter(status='accepted')
+
+    def get_custom_products(self):
+        return self.customproduct_set.all()
+
+    def get_factor_cake_images(self):
+        return self.factorcakeimage_set.all()

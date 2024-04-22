@@ -77,13 +77,13 @@ class ResetPasswordSetForm(forms.Form):
         return p2
 
 
-class UserUpdateByAdmin(forms.ModelForm):
+class UserUpdateByAdminForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('is_active', 'is_phonenumber_confirmed', 'phonenumber', 'first_name', 'last_name')
 
 
-class UpdateUserPassword(forms.Form):
+class UpdateUserPasswordForm(forms.Form):
     current_password = forms.CharField(max_length=64, min_length=8, required=True, widget=forms.PasswordInput())
     new_password = forms.CharField(max_length=64, min_length=8, required=True, widget=forms.PasswordInput())
     new_password2 = forms.CharField(max_length=64, min_length=8, required=True, widget=forms.PasswordInput())

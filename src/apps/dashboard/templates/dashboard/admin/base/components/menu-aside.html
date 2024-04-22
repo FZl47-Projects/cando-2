@@ -134,10 +134,6 @@
                 </a>
                 <ul class="nk-menu-sub">
                     <li class="nk-menu-item">
-                        <a href="html/user-list-regular.html" class="nk-menu-link"><span
-                                class="nk-menu-text">ایجاد کاربر</span></a>
-                    </li>
-                    <li class="nk-menu-item">
                         <a href="{% url 'dashboard:user__list' %}" class="nk-menu-link"><span
                                 class="nk-menu-text">لیست کاربران </span></a>
                     </li>
@@ -160,8 +156,8 @@
                                 class="nk-menu-text">لیست فاکتورها</span></a>
                     </li>
                     <li class="nk-menu-item">
-                        <a href="html/history-invoice-list.html" class="nk-menu-link"><span
-                                class="nk-menu-text">لیست سبد های خرید</span></a>
+                        <a href="{% url 'dashboard:purchase_invoice__list' %}" class="nk-menu-link"><span
+                                class="nk-menu-text">لیست پرداختی ها</span></a>
                     </li>
                 </ul>
                 <!-- .nk-menu-sub -->
@@ -221,19 +217,30 @@
                                 class="nk-menu-text">محصولات</span></a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="{% url 'dashboard:product_attr_field__list' %}"
-                                   class="nk-menu-link"><span
-                                        class="nk-menu-text">مدیریت فیلد ها</span></a>
+                                <a href="#" class="nk-menu-link nk-menu-toggle"><span
+                                        class="nk-menu-text">فیلد ها</span></a>
+                                <ul class="nk-menu-sub">
+                                    <li class="nk-menu-item">
+                                        <a href="{% url 'dashboard:product_attr_field__list' %}"
+                                           class="nk-menu-link"><span
+                                                class="nk-menu-text">مدیریت فیلد ها</span></a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="{% url 'dashboard:product_attr_group__list' %}"
+                                           class="nk-menu-link"><span
+                                                class="nk-menu-text">مدیریت گروه های فیلد</span></a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="{% url 'dashboard:product_attr_category__list' %}"
+                                           class="nk-menu-link"><span
+                                                class="nk-menu-text">مدیریت دسته بندی فیلد ها</span></a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="{% url 'dashboard:product_attr_group__list' %}"
+                                <a href="{% url 'dashboard:inventory_default__manage' %}"
                                    class="nk-menu-link"><span
-                                        class="nk-menu-text">مدیریت گروه های فیلد</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="{% url 'dashboard:product_attr_category__list' %}"
-                                   class="nk-menu-link"><span
-                                        class="nk-menu-text">مدیریت دسته بندی فیلد ها</span></a>
+                                        class="nk-menu-text">تنظیم موجودی پیشفرض</span></a>
                             </li>
                         </ul>
                     </li>

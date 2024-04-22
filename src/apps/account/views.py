@@ -28,14 +28,21 @@ def login_register(request):
     # TODO: need to refactor
 
     def set_cart_on_user(user):
-        cart = Cart.get_session_cart(request)
-        cart.user = user
-        cart.save()
+        cart_user = user.get_current_cart_or_create()
+        cart_session = Cart.get_session_cart(request)
+        cart_session.get_products().update(cart=cart_user)
+        cart_session.get_custom_products().update(cart=cart_user)
+        cart_session.delete()
 
     def set_wishlist_on_user(user):
-        wishlist = WishList.get_session_wishlist(request)
-        wishlist.user = user
-        wishlist.save()
+        wishlist_user = getattr(user, 'wishlist', None)
+        wishlist_session = WishList.get_session_wishlist(request)
+        if wishlist_user:
+            wishlist_user.products.add(*wishlist_session.products.all())
+            wishlist_session.delete()
+            return
+        wishlist_session.user = user
+        wishlist_session.save()
 
     def login_perform(data):
         phonenumber = data.get('phonenumber', None)
@@ -55,8 +62,7 @@ def login_register(request):
         messages.success(request, 'خوش امدید')
         # set session cart and wishlist on user
         set_cart_on_user(user)
-
-        # set_wishlist_on_user(user) # TODO: need to fix
+        set_wishlist_on_user(user)
 
         # redirect to url or dashboard
         next_url = request.GET.get('next')
@@ -95,8 +101,7 @@ def login_register(request):
         messages.success(request, 'حساب شما با موفقیت ایجاد شد پس از تایید شماره همراه حساب شما فعال میشود')
         # set session cart and wishlist on user
         set_cart_on_user(user)
-
-        #set_wishlist_on_user(user) # TODO: need to fix
+        set_wishlist_on_user(user)
 
         return redirect('account:confirm_phonenumber')
 

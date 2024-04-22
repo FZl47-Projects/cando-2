@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, View
 
 from apps.core.mixins.views import (
-    FilterSimpleListViewMixin, DeleteMixin,
+    FilterSimpleListViewMixin, DeleteViewMixin,
 )
 from apps.payment import models
 
@@ -25,12 +25,6 @@ class InvoiceList(FilterSimpleListViewMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['total_count'] = self.get_queryset().count()
         return context
-
-    def filter(self, objects):
-        objects = super().filter(objects)
-        # advance filter
-        purchase_status = self.request.GET.get('purchase')
-        return objects
 
 
 class InvoiceDetail(TemplateView):
@@ -56,10 +50,48 @@ class InvoiceDetailExport(TemplateView):
         return context
 
 
-class InvoiceDelete(DeleteMixin, View):
+class InvoiceDelete(DeleteViewMixin, View):
     success_message = _('Operation Successfully Completed')
     redirect_url = reverse_lazy('dashboard:invoice__list')
 
     def get_object(self, request, *args, **kwargs):
         invoice_id = kwargs.get('invoice_id')
         return get_object_or_404(models.Invoice, id=invoice_id)
+
+
+class PurchaseInvoiceList(FilterSimpleListViewMixin, ListView):
+    paginate_by = 20
+    search_fields = (
+    'invoice__cart__user__phonenumber__icontains', 'invoice__cart__tc__icontains', 'price_paid__icontains')
+    template_name = 'dashboard/admin/payment/invoice/purchase/list.html'
+
+    def get_queryset(self):
+        objects = models.PurchaseInvoice.objects.all()
+        objects = self.search(objects)
+        objects = self.filter(objects)
+        return objects
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_count'] = self.get_queryset().count()
+        return context
+
+
+class PurchaseInvoiceDetail(TemplateView):
+    template_name = 'dashboard/admin/payment/invoice/purchase/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        purchase_invoice_id = kwargs['purchase_invoice_id']
+        purchase_invoice = get_object_or_404(models.PurchaseInvoice, id=purchase_invoice_id)
+        context['purchase_invoice'] = purchase_invoice
+        return context
+
+
+class PurchaseInvoiceDelete(DeleteViewMixin, View):
+    success_message = _('Operation Successfully Completed')
+    redirect_url = reverse_lazy('dashboard:purchase_invoice__list')
+
+    def get_object(self, request, *args, **kwargs):
+        purchase_invoice_id = kwargs.get('purchase_invoice_id')
+        return get_object_or_404(models.PurchaseInvoice, id=purchase_invoice_id)

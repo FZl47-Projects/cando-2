@@ -1,0 +1,268 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %}تنظیمات موجودی پیشفرض{% endblock %}
+
+{% block Styles %}
+    <style>
+        .data-attr {
+            padding: 13px;
+            margin: 13px;
+        }
+
+        .data-attr .data-col {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .data-attr .data-label {
+            width: auto;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block Content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                {% include 'dashboard/admin/base/components/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            {% include 'dashboard/admin/base/components/menu-aside.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between g-3">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">تنظیمات موجودی پیشفرض</h3>
+                                                <div class="nk-block-des text-soft">
+                                                    <nav>
+                                                        <ul class="breadcrumb breadcrumb-arrow">
+                                                            <li class="breadcrumb-item"><a
+                                                                    href="{% url 'dashboard:index' %}">صفحه اصلی</a>
+                                                            </li>
+                                                            <li class="breadcrumb-item"><a>تنظیمات </a></li>
+                                                            <li class="breadcrumb-item"><a>محصولات </a></li>
+                                                            <li class="breadcrumb-item active">
+                                                                تنظیمات موجودی پیشفرض
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
+                                                </div>
+                                            </div>
+                                            <div class="nk-block-head-content">
+                                                <div class="drodown">
+                                                    <a href="#"
+                                                       class="dropdown-toggle btn btn-icon btn-secondary px-2 text-center"
+                                                       data-bs-toggle="dropdown" aria-expanded="false">
+                                                        عملیات
+                                                        <em class="icon ni ni-setting"></em>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <ul class="link-list-opt no-bdr">
+                                                            {% if not default_inventory %}
+                                                                <li>
+                                                                    <button type="button" class="btn text-success"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#modal-create">ایجاد تنظیمات
+                                                                    </button>
+                                                                </li>
+                                                            {% else %}
+                                                                <li>
+                                                                    <button type="button" class="btn text-success"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#modal-update">بروزرسانی
+                                                                        تنظیمات
+                                                                    </button>
+                                                                </li>
+                                                            {% endif %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    {% if default_inventory %}
+                                        <div class="nk-block">
+                                            <div class="card card-bordered">
+                                                <!-- .nav-tabs -->
+                                                <div class="card-inner card-inner-lg">
+                                                    <!-- .nk-block-head -->
+                                                    <div class="nk-block">
+                                                        <div class="nk-data data-list data-list-s2">
+                                                            <!-- data-item -->
+                                                            <div class="data-item">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">تعداد پیشفرض</span>
+                                                                    <span class="data-value">
+                                                                        {{ default_inventory.quantity }}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="data-item">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">قیمت پیشفرض</span>
+                                                                    <span class="data-value">
+                                                                        <span class="price-el">{{ default_inventory.price }}</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <!-- data-item -->
+                                                            <div class="data-item">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">زمان ایجاد</span>
+                                                                    <span class="data-value">
+                                                                    {{ default_inventory.get_created_at_timepast }}
+                                                                </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="data-item">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">زمان بروزرسانی</span>
+                                                                    <span class="data-value">
+                                                                    {{ default_inventory.get_updated_at_timepast }}
+                                                                </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .nk-block -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                            </div>
+                                            <!-- .card -->
+                                        </div>
+                                    {% else %}
+                                        <div class="p-5 mt-5 text-center">
+                                            <h4 class="p-3 badge-dim bg-warning">شما باید تنظیمات را
+                                                <button type="button" class="btn text-success fs-20px p-0"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modal-create">
+                                                    ایجاد
+                                                </button>
+                                                کنید
+                                            </h4>
+                                        </div>
+                                    {% endif %}
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                {% include 'dashboard/admin/base/components/footer.html' %}
+                                <!-- footer @e -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- modals -->
+        <div class="modal fade" tabindex="-1" id="modal-create">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            ایجاد تنظیمات
+                        </h5>
+                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              class="form-validate is-alter" novalidate="novalidate">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="form-label">تعداد پیشفرض</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" name="quantity" class="form-control" placeholder="تعداد پیشفرض"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">قیمت پیشفرض</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" name="price" id="default-price" class="form-control"
+                                           placeholder="قیمت پیشفرض" required>
+                                </div>
+                                <div class="text-end fs-13px">
+                                    <p class="mt-1 ml-3" id="label-default-price">0</p>
+                                </div>
+                            </div>
+                            <div class="form-group text-left">
+                                <button type="submit" class="btn btn-lg btn-success p-1 px-2">
+                                    ایجاد تنظیمات
+                                    <em class="icon icon-circle ni ni-check bg-success"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" tabindex="-1" id="modal-update">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            بروزرسانی تنظیمات
+                        </h5>
+                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              class="form-validate is-alter" novalidate="novalidate">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="form-label">تعداد پیشفرض</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" name="quantity" class="form-control" placeholder="تعداد پیشفرض"
+                                           required
+                                           value="{{ default_inventory.quantity }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">قیمت پیشفرض</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" name="price" id="default-price-update" class="form-control"
+                                           placeholder="قیمت پیشفرض" required value="{{ default_inventory.price }}">
+                                </div>
+                                <div class="text-end fs-13px">
+                                    <p class="mt-1 ml-3" id="label-default-price-update">0</p>
+                                </div>
+                            </div>
+                            <div class="form-group text-left">
+                                <button type="submit" class="btn btn-lg btn-success p-1 px-2">
+                                    بروزرسانی تنظیمات
+                                    <em class="icon icon-circle ni ni-check bg-success"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+{% endblock %}
+
+{% block Scripts %}
+    <script>
+        setPriceSpreadInput('#default-price', '#label-default-price', 0)
+        setPriceSpreadInput('#default-price-update', '#label-default-price-update', document.getElementById('default-price-update').value)
+    </script>
+{% endblock %}

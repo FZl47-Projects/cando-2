@@ -1,4 +1,5 @@
 import abc
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.shortcuts import reverse
 
@@ -47,8 +48,10 @@ class Invoice(InvoiceBase):
         ordering = ('-id',)
 
     def get_total_price(self):
-        self.cart.delivery_time = self.delivery_time
-        return self.cart.get_total_price()
+        if self.cart:
+            self.cart.delivery_time = self.delivery_time
+            return self.cart.get_total_price()
+        return _('Unspecified Price')
 
     def get_absolute_url(self):
         return reverse('public:cart')
@@ -68,3 +71,10 @@ class PurchaseInvoice(BaseModel):
 
     def __str__(self):
         return self.tracking_code
+
+    def get_dashboard_absolute_url(self):
+        return reverse('dashboard:purchase_invoice__detail', args=(self.id,))
+
+    def get_absolute_url(self):
+        # TODO: need to complete
+        pass
