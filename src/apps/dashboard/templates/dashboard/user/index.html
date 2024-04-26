@@ -321,60 +321,26 @@
                                                                 <h6 class="title">برخی از اعلانات</h6>
                                                             </div>
                                                             <div class="card-tools">
-                                                                <a href="#" class="link">مشاهده همه</a>
+                                                                <a href="{% url 'dashboard:notification_user_personal__list' %}"
+                                                                   class="link">مشاهده همه</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <ul class="nk-activity is-scrollable h-325px">
-                                                        <li class="nk-activity-item">
-                                                            <div class="nk-activity-media user-avatar bg-success"><img
-                                                                    src="./images/avatar/c-sm.jpg" alt=""/></div>
-                                                            <div class="nk-activity-data">
-                                                                <div class="label">سوسن آبتین درخواست برداشت کرد.</div>
-                                                                <span class="time">2 ساعت پیش</span>
-                                                            </div>
-                                                        </li>
-                                                        <li class="nk-activity-item">
-                                                            <div class="nk-activity-media user-avatar bg-warning">م‌ن
-                                                            </div>
-                                                            <div class="nk-activity-data">
-                                                                <div class="label">مصطفی نوروزی سفارش داد.</div>
-                                                                <span class="time">2 ساعت پیش</span>
-                                                            </div>
-                                                        </li>
-                                                        <li class="nk-activity-item">
-                                                            <div class="nk-activity-media user-avatar bg-azure">د‌ف
-                                                            </div>
-                                                            <div class="nk-activity-data">
-                                                                <div class="label">دنیا فراهانی پاداش بزرگی دریافت
-                                                                    کرد.
+                                                        {% for notification in user.get_unread_notifications|slice:':8' %}
+                                                            <li class="nk-activity-item">
+                                                                <div class="nk-activity-data">
+                                                                    <div class="label">
+                                                                        <a href="{{ notification.get_dashboard_absolute_url }}">{{ notification.title|truncatechars:35 }}</a>
+                                                                    </div>
+                                                                    <span class="time">{{ notification.get_created_at_timepast }}</span>
                                                                 </div>
-                                                                <span class="time">2 ساعت پیش</span>
+                                                            </li>
+                                                            {% empty %}
+                                                            <div class="container-not-found-base">
+                                                                <p>چیزی یافت نشد</p>
                                                             </div>
-                                                        </li>
-                                                        <li class="nk-activity-item">
-                                                            <div class="nk-activity-media user-avatar bg-purple"><img
-                                                                    src="./images/avatar/d-sm.jpg" alt=""/></div>
-                                                            <div class="nk-activity-data">
-                                                                <div class="label">میلاد فتحی پول را واریز کرد.</div>
-                                                                <span class="time">2 ساعت پیش</span>
-                                                            </div>
-                                                        </li>
-                                                        <li class="nk-activity-item">
-                                                            <div class="nk-activity-media user-avatar bg-pink">ح‌ر</div>
-                                                            <div class="nk-activity-data">
-                                                                <div class="label">حامد رضازاده سفارش داد.</div>
-                                                                <span class="time">2 ساعت پیش</span>
-                                                            </div>
-                                                        </li>
-                                                        <li class="nk-activity-item">
-                                                            <div class="nk-activity-media user-avatar bg-warning">م‌ن
-                                                            </div>
-                                                            <div class="nk-activity-data">
-                                                                <div class="label">مصطفی نوروزی سفارش داد.</div>
-                                                                <span class="time">2 ساعت پیش</span>
-                                                            </div>
-                                                        </li>
+                                                        {% endfor %}
                                                     </ul>
                                                 </div>
                                                 <!-- .card -->

@@ -78,25 +78,6 @@
                                                 <div class="card-inner position-relative card-tools-toggle">
                                                     <div class="card-title-group">
                                                         <div class="card-tools">
-                                                            <div class="form-inline flex-nowrap gx-3">
-                                                                <div class="form-wrap w-200px">
-                                                                    <select class="form-select js-select2"
-                                                                            data-search="off"
-                                                                            data-placeholder="عمل دسته جمعی">
-                                                                        <option value="">عمل دسته جمعی</option>
-                                                                        <option value="reject"> رد وضعیت</option>
-                                                                        <option value="delete">حذف</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="btn-wrap">
-                                                                    <span class="d-none d-md-block"><button
-                                                                            class="btn btn-dim btn-outline-light disabled">اعمال</button></span>
-                                                                    <span class="d-md-none">
-                                                                            <button class="btn btn-dim btn-outline-light btn-icon disabled"><em
-                                                                                    class="icon ni ni-arrow-right"></em></button>
-                                                                        </span>
-                                                                </div>
-                                                            </div>
                                                             <!-- .form-inline -->
                                                         </div>
                                                         <!-- .card-tools -->
@@ -245,7 +226,7 @@
                                                                     <input type="text" name="search"
                                                                            class="form-control border-transparent form-focus-none"
                                                                            value="{{ request.GET.search }}"
-                                                                           placeholder="جستجو بر اساس شماره همراه کاربر"/>
+                                                                           placeholder="جستجو"/>
                                                                     <button class="search-submit btn btn-icon"><em
                                                                             class="icon ni ni-search"></em></button>
                                                                 </div>
@@ -267,8 +248,6 @@
                                                                 </div>
                                                             </div>
                                                             <div class="nk-tb-col"><span class="sub-text">#</span></div>
-                                                            <div class="nk-tb-col"><span class="sub-text">کاربر</span>
-                                                            </div>
                                                             <div class="nk-tb-col tb-col-sm"><span
                                                                     class="sub-text">نوع</span></div>
                                                             <div class="nk-tb-col tb-col-md"><span class="sub-text">تاریخ دریافت</span>
@@ -296,23 +275,6 @@
                                                                 <div class="nk-tb-col">
                                                                     <a href="{{ custom_product.get_dashboard_absolute_url }}">
                                                                         #{{ custom_product.id }}
-                                                                    </a>
-                                                                </div>
-                                                                <div class="nk-tb-col">
-                                                                    <a href="{{ custom_product.user.get_dashboard_absolute_url }}">
-                                                                        <div class="user-card">
-                                                                            <div class="user-avatar xs bg-primary">
-                                                                                <img src="{{ custom_product.user.get_image_url }}"
-                                                                                     alt="{{ custom_product.user.get_full_name }}"
-                                                                                     style="object-fit: cover">
-                                                                            </div>
-                                                                            <div class="user-name">
-                                                                            <span class="tb-lead">
-                                                                                {{ custom_product.user.get_full_name|truncatechars:10 }}
-                                                                                <span class="font-70">({{ custom_product.user.get_raw_phonenumber }})</span>
-                                                                            </span>
-                                                                            </div>
-                                                                        </div>
                                                                     </a>
                                                                 </div>
                                                                 <div class="nk-tb-col tb-col-sm">

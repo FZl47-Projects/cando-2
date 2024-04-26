@@ -18,15 +18,13 @@ class ProductManager(models.Manager):
         return self.get_queryset().order_by('-productcart__productsold__count').distinct()
 
     def get_news(self):
-        # TODO: must be completed
-        return self.get_queryset()
+        return self.get_queryset().order_by('-id')
 
     def get_showcases(self):
         return self.get_nr_user_qs().filter(type='showcase')
 
     def get_suggested(self):
-        # TODO: must be completed
-        return self.get_queryset()
+        return self.get_queryset().annotate(visit=models.Count('productview')).order_by('-visit')
 
     def get_list(self):
         return self.get_queryset().all()
@@ -489,8 +487,7 @@ class Cart(BaseModel):
         return reverse('dashboard:order__detail', args=(self.id,))
 
     def get_absolute_url(self):
-        # TODO: need to complete
-        pass
+        return self.get_dashboard_absolute_url()
 
     def has_empty(self):
         return True if self.get_all_products_count() < 1 else False

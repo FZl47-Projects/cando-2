@@ -38,7 +38,7 @@ class BasicProductList(UserRoleViewMixin, FilterSimpleListViewMixin, ListView):
     paginate_by = 20
     search_fields = ('title__icontains',)
     filter_fields = ('type', 'status', 'categories')
-    super_user_template = 'dashboard/admin/product/product/basic/list.html'
+    template_name = 'dashboard/admin/product/product/basic/list.html'
 
     def get_queryset(self):
         objects = models.BasicProduct.objects.get_list()

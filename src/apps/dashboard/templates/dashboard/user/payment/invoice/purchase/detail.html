@@ -44,7 +44,7 @@
                                     <div class="nk-block-head nk-block-head-sm">
                                         <div class="nk-block-between g-3">
                                             <div class="nk-block-head-content">
-                                                <h3 class="nk-block-title page-title">جزئیات سفارش</h3>
+                                                <h3 class="nk-block-title page-title">جزئیات پرداخت</h3>
                                                 <div class="nk-block-des text-soft">
                                                     <nav>
                                                         <ul class="breadcrumb breadcrumb-arrow">
@@ -62,7 +62,7 @@
                                                     </nav>
                                                 </div>
                                             </div>
-                                            <div class="nk-block-head-content">
+                                            <div class="nk-block-head-content d-none">
                                                 <div class="drodown">
                                                     <a href="#"
                                                        class="dropdown-toggle btn btn-icon btn-secondary px-2 text-center"
@@ -97,18 +97,6 @@
                                                                 <span class="data-label">کد رهگیری</span>
                                                                 <span class="data-value">
                                                                     {{ purchase_invoice.tracking_code }}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <!-- data-item -->
-                                                        <div class="data-item">
-                                                            <div class="data-col">
-                                                                <span class="data-label">کاربر</span>
-                                                                <span class="data-value">
-                                                                    <a href="{{ purchase_invoice.user.get_dashboard_absolute_url }}">
-                                                                        {{ purchase_invoice.user.get_full_name|default:'session user' }}
-                                                                        {{ purchase_invoice.user.get_raw_phonenumber|default:'' }}
-                                                                    </a>
                                                                 </span>
                                                             </div>
                                                         </div>

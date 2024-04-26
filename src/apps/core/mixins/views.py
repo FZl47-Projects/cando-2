@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.core.exceptions import PermissionDenied
 from django.views.generic.base import TemplateResponseMixin
 
-from apps.core.utils import create_form_messages
+from apps.core.utils import create_form_messages, log_event
 
 
 class BaseCUViewMixin(abc.ABC):
@@ -29,6 +29,15 @@ class BaseCUViewMixin(abc.ABC):
     def get_redirect_url(self):
         if not self.redirect_url:
             self.redirect_url = self.request.META.get('HTTP_REFERER', '/')  # referrer url
+
+        # add object url to redirect url
+        obj = getattr(self, 'obj', None)
+        if obj:
+            try:
+                self.redirect_url += f"?next_url={obj.get_dashboard_absolute_url()}"
+            except (TypeError, ValueError, AttributeError):
+                log_event('There is Some issue in add next_url(object dashboard absolute url) to redirect url',
+                          'WARNING', exc_info=True)
         return self.redirect_url
 
     def set_success_message(self):

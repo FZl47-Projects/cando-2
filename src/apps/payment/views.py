@@ -93,7 +93,7 @@ class InvoicePurchaseCallBack(LoginRequiredMixin, View):
         status = request.GET.get('Status')
         if status == 'NOK':
             messages.error(request, _('Cancel Request By User'))
-            return redirect('public:cart')
+            return redirect('public:fail')
 
         zp = Zarinpal()
         amount = invoice.get_total_price()

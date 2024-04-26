@@ -236,7 +236,7 @@
                                                                     <input type="text" name="search"
                                                                            class="form-control border-transparent form-focus-none"
                                                                            value="{{ request.GET.search }}"
-                                                                           placeholder="جستجو بر اساس کد رهگیری ، شماره همراه کاربر ، قیمت"/>
+                                                                           placeholder="جستجو بر اساس کد رهگیری ، قیمت"/>
                                                                     <button class="search-submit btn btn-icon"><em
                                                                             class="icon ni ni-search"></em></button>
                                                                 </div>
@@ -260,8 +260,6 @@
                                                             <div class="nk-tb-col"><span
                                                                     class="sub-text">کد رهگیری</span>
                                                             </div>
-                                                            <div class="nk-tb-col tb-col-sm"><span
-                                                                    class="sub-text">کاربر</span></div>
                                                             <div class="nk-tb-col tb-col-md"><span
                                                                     class="sub-text">قیمت</span>
                                                             </div>
@@ -288,11 +286,6 @@
                                                                         {{ purchase_invoice.tracking_code }}
                                                                     </a>
                                                                 </div>
-                                                                <div class="nk-tb-col tb-col-sm">
-                                                                    <span class="sub-text">
-                                                                        <a href="{{ purchase_invoice.user.get_dashboard_absolute_url }}">{{ purchase_invoice.user.get_full_name|default:'-' }}</a>
-                                                                    </span>
-                                                                </div>
                                                                 <div class="nk-tb-col tb-col-md">
                                                                     <span class="sub-text">
                                                                         <span class="price-el">{{ purchase_invoice.price_paid }}</span>
@@ -314,10 +307,6 @@
                                                                                         <li>
                                                                                             <a href="{{ purchase_invoice.get_dashboard_absolute_url }}"><em
                                                                                                     class="icon ni ni-eye"></em><span>مشاهده جزئیات</span></a>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <a href="{{ purchase_invoice.user.get_dashboard_absolute_url }}"><em
-                                                                                                    class="icon ni ni-user"></em><span>مشاهده کاربر</span></a>
                                                                                         </li>
                                                                                     </ul>
                                                                                 </div>

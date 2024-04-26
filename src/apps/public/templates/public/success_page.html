@@ -1,0 +1,113 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+{% load render_partial %}
+
+{% block Title %}عملیات موفق{% endblock %}
+
+{% block Style %}
+    <style>
+        #card {
+            background: #fff;
+            box-shadow: 0 15px 50px #ddd;
+            border: 1px solid #eee;
+            margin: 200px auto;
+            text-align: center;
+            width: 400px;
+            height: 450px;
+            border-radius: 12px;
+
+            transform: translateY(-70px);
+            opacity: 0;
+            animation: card-animation 1s forwards;
+        }
+
+        @keyframes card-animation {
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .card-header {
+            height: 180px;
+            background: #69faa9;
+            border-radius: 10px 10px 0 0 !important;
+        }
+
+        .card-header i {
+            color: #03492c;
+            margin-top: 35px;
+            font-size: 100px;
+        }
+
+        .card-main {
+            padding: 20px 30px;
+            position: relative;
+            height: 270px;
+            border-radius: 0 0 10px 10px !important;
+        }
+
+        .card-message {
+            font-size: 32px;
+            line-height: 38px;
+            font-family: KalamehBlack;
+        }
+
+        .card-btn {
+            position: absolute;
+            inset: 0;
+            top: auto;
+            font-size: 20px;
+            margin: auto;
+            bottom: 50px;
+            width: 200px;
+            padding: 10px;
+            border-radius: 40px;
+            background: #19e563;
+            color: #ffffff;
+            box-shadow: 0 2px 2px #10ad6d;
+        }
+
+        .card-btn:hover {
+            color: #fff;
+            box-shadow: 0 4px 1px #10ad6d;
+        }
+
+    </style>
+{% endblock %}
+
+{% block Content %}
+    {% render_partial 'apps.public.components.HeaderComponentView' %}
+    <section class="breadcrumb">
+        <li>
+            <a href="/">خانه</a>
+        </li>
+        <li>عملیات موفق</li>
+    </section>
+    <div class="mt-5">
+        <div id="card">
+            <div class="card-header">
+                <i class="fa fa-check-circle"></i>
+            </div>
+            <div class="card-main">
+                <p class="card-message">{{ request.GET.message|default:'عملیات با موفقیت انجام شد' }}</p>
+                {% if request.GET.next_url %}
+                    <a class="card-btn" href="{{ request.GET.next_url }}">ادامه</a>
+                {% else %}
+                    <a class="card-btn" href="{% url 'public:home' %}">خانه</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!--footer area start-->
+    {% include 'base/components/footer.html' %}
+    <!--footer area end-->
+{% endblock %}
+
+{% block Script %}
+    <script>
+        {% for message in messages %}
+            document.querySelector('.card-message').innerHTML = '{{ message }}'
+        {% endfor %}
+    </script>
+{% endblock %}

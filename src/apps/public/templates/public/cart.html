@@ -52,7 +52,8 @@
                                     {% for product_cart in cart.get_products %}
                                         <tr>
                                             <td class="product_remove">
-                                                <a class="font-80" href="{% url 'product:product_cart__delete' product_cart_id=product_cart.id %}">
+                                                <a class="font-80"
+                                                   href="{% url 'product:product_cart__delete' product_cart_id=product_cart.id %}">
                                                     <em class="far fa-trash-alt text-danger"></em>
                                                 </a>
                                             </td>
@@ -91,7 +92,8 @@
                                     {% for custom_product_cart in cart.get_custom_products %}
                                         <tr>
                                             <td class="product_remove">
-                                                <a class="font-80" href="{% url 'product:custom_product_cart__delete' custom_product_cart_id=custom_product_cart.id %}">
+                                                <a class="font-80"
+                                                   href="{% url 'product:custom_product_cart__delete' custom_product_cart_id=custom_product_cart.id %}">
                                                     <em class="far fa-trash-alt text-danger"></em>
                                                 </a>
                                             </td>
@@ -171,7 +173,8 @@
                                             </li>
                                         </ul>
                                         {% if user.is_authenticated %}
-                                            <button class="btn btn-success my-2" type="submit">ادامه پرداخت سبد خرید</button>
+                                            <button class="btn btn-success my-2" type="submit">ادامه پرداخت سبد خرید
+                                            </button>
                                         {% else %}
                                             <span class="d-block font-70">برای ادامه خرید باید وارد حساب کاربری خود شوید</span>
                                             <a href="{% url 'account:login_register' %}">ورود به حساب و ادامه پرداخت سبد
@@ -193,5 +196,8 @@
             {% endif %}
         </div>
     </div>
+    <!--footer area start-->
+    {% include 'base/components/footer.html' %}
+    <!--footer area end-->
 {% endblock %}
 

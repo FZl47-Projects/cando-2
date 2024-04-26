@@ -79,5 +79,4 @@ class PurchaseInvoice(BaseModel):
         return reverse('dashboard:purchase_invoice__detail', args=(self.id,))
 
     def get_absolute_url(self):
-        # TODO: need to complete
-        pass
+        return self.get_dashboard_absolute_url()

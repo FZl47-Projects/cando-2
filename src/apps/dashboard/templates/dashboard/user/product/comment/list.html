@@ -26,7 +26,6 @@
                                                     <ul class="breadcrumb breadcrumb-arrow">
                                                         <li class="breadcrumb-item"><a
                                                                 href="{% url 'dashboard:index' %}">صفحه اصلی</a></li>
-                                                        <li class="breadcrumb-item"><a>محصولات</a></li>
                                                         <li class="breadcrumb-item active">مدیریت نظرات</li>
                                                     </ul>
                                                 </nav>
@@ -78,25 +77,6 @@
                                                 <div class="card-inner position-relative card-tools-toggle">
                                                     <div class="card-title-group">
                                                         <div class="card-tools">
-                                                            <div class="form-inline flex-nowrap gx-3">
-                                                                <div class="form-wrap w-200px">
-                                                                    <select class="form-select js-select2"
-                                                                            data-search="off"
-                                                                            data-placeholder="عمل دسته جمعی">
-                                                                        <option value="">عمل دسته جمعی</option>
-                                                                        <option value="approve"> تایید</option>
-                                                                        <option value="reject"> رد کردن</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="btn-wrap">
-                                                                    <span class="d-none d-md-block"><button
-                                                                            class="btn btn-dim btn-outline-light disabled">اعمال</button></span>
-                                                                    <span class="d-md-none">
-                                                                            <button class="btn btn-dim btn-outline-light btn-icon disabled"><em
-                                                                                    class="icon ni ni-arrow-right"></em></button>
-                                                                        </span>
-                                                                </div>
-                                                            </div>
                                                             <!-- .form-inline -->
                                                         </div>
                                                         <!-- .card-tools -->
@@ -251,7 +231,7 @@
                                                                     <input type="text" name="search"
                                                                            class="form-control border-transparent form-focus-none"
                                                                            value="{{ request.GET.search }}"
-                                                                           placeholder="جستجو بر اساس بخشی از نظر ، شماره همراه کاربر ، نام محصول"/>
+                                                                           placeholder="جستجو بر اساس بخشی از نظر ، نام محصول"/>
                                                                     <button class="search-submit btn btn-icon"><em
                                                                             class="icon ni ni-search"></em></button>
                                                                 </div>
@@ -273,8 +253,6 @@
                                                                 </div>
                                                             </div>
                                                             <div class="nk-tb-col"><span class="sub-text">#</span>
-                                                            </div>
-                                                            <div class="nk-tb-col"><span class="sub-text">کاربر</span>
                                                             </div>
                                                             <div class="nk-tb-col tb-col-sm"><span
                                                                     class="sub-text">محصول</span></div>
@@ -304,22 +282,6 @@
                                                                 <div class="nk-tb-col">
                                                                     <a href="{{ comment.get_dashboard_absolute_url }}">
                                                                         # {{ comment.id }}
-                                                                    </a>
-                                                                </div>
-                                                                <div class="nk-tb-col">
-                                                                    <a href="{{ comment.user.get_dashboard_absolute_url }}">
-                                                                        <div class="user-card">
-                                                                            <div class="user-avatar xs bg-primary">
-                                                                                <img src="{{ comment.user.get_image_url }}"
-                                                                                     alt="{{ comment.user.get_full_name }}"
-                                                                                     style="object-fit: cover">
-                                                                            </div>
-                                                                            <div class="user-name">
-                                                                            <span class="tb-lead">
-                                                                                {{ comment.user.get_full_name|truncatechars:20 }}
-                                                                            </span>
-                                                                            </div>
-                                                                        </div>
                                                                     </a>
                                                                 </div>
                                                                 <div class="nk-tb-col tb-col-sm">
@@ -359,39 +321,6 @@
                                                                                             <a href="{{ comment.product.get_dashboard_absolute_url }}"><em
                                                                                                     class="icon ni ni-eye"></em><span>مشاهده محصول</span></a>
                                                                                         </li>
-                                                                                        {% if comment.status == 'accepted' %}
-                                                                                            <li>
-                                                                                                <form action="{% url 'dashboard:comment__manage_status' %}" method="post">
-                                                                                                    {% csrf_token %}
-                                                                                                    <input type="hidden"
-                                                                                                           name="comments"
-                                                                                                           value="{{ comment.id }}">
-                                                                                                    <input type="hidden"
-                                                                                                           name="status"
-                                                                                                           value="rejected">
-                                                                                                    <button class="btn text-danger"
-                                                                                                            type="submit">
-                                                                                                        <em class="icon ni ni-na"></em><span>رد نظر</span>
-                                                                                                    </button>
-                                                                                                </form>
-                                                                                            </li>
-                                                                                        {% else %}
-                                                                                            <li>
-                                                                                                <form action="{% url 'dashboard:comment__manage_status' %}" method="post">
-                                                                                                    {% csrf_token %}
-                                                                                                    <input type="hidden"
-                                                                                                           name="comments"
-                                                                                                           value="{{ comment.id }}">
-                                                                                                    <input type="hidden"
-                                                                                                           name="status"
-                                                                                                           value="accepted">
-                                                                                                    <button class="btn text-success"
-                                                                                                            type="submit">
-                                                                                                        <em class="icon ni ni-check-circle"></em><span>تایید نظر</span>
-                                                                                                    </button>
-                                                                                                </form>
-                                                                                            </li>
-                                                                                        {% endif %}
                                                                                     </ul>
                                                                                 </div>
                                                                             </div>

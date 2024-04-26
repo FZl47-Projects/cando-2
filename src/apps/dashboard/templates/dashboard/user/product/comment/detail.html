@@ -53,18 +53,6 @@
                                                     <div class="dropdown-menu dropdown-menu-end">
                                                         <ul class="link-list-opt no-bdr">
                                                             <li>
-                                                                <button type="button" class="btn text-success"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#modal-accept">تایید نظر
-                                                                </button>
-                                                            </li>
-                                                            <li>
-                                                                <button type="button" class="btn text-warning"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#modal-reject">رد نظر
-                                                                </button>
-                                                            </li>
-                                                            <li>
                                                                 <button type="button" class="btn text-danger"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#modal-delete">حذف
@@ -84,14 +72,6 @@
                                                 <!-- .nk-block-head -->
                                                 <div class="nk-block">
                                                     <div class="nk-data data-list data-list-s2">
-                                                        <div class="data-item">
-                                                            <div class="data-col">
-                                                                <span class="data-label">کاربر</span>
-                                                                <span class="data-value">
-                                                                    <a href="{{ comment.user.get_dashboard_absolute_url }}">{{ comment.user.get_full_name }}</a>
-                                                                </span>
-                                                            </div>
-                                                        </div>
                                                         <!-- data-item -->
                                                         <div class="data-item">
                                                             <div class="data-col">
@@ -170,70 +150,6 @@
             <!-- wrap @e -->
         </div>
         <!-- modals -->
-        <div class="modal fade" tabindex="-1" id="modal-reject">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">
-                            رد نظر
-                        </h5>
-                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
-                            <em class="icon ni ni-cross"></em>
-                        </a>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post"
-                              action="{% url 'dashboard:comment__manage_status' %}"
-                              class="form-validate is-alter" novalidate="novalidate">
-                            {% csrf_token %}
-                            <input type="hidden" name="status" value="rejected">
-                            <input type="hidden" name="comments" value="{{ comment.id }}">
-                            <div class="badge-dim bg-gray fs-17px p-2" style="border-radius: 10px">
-                                <p>ایا از انجام این عملیات اطمینان دارید ؟</p>
-                            </div>
-                            <div class="form-group text-left mt-4">
-                                <button type="submit" class="btn btn-lg btn-danger p-1 px-2">
-                                    رد نظر
-                                    <em class="icon icon-circle ni ni-cross bg-danger"></em>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" tabindex="-1" id="modal-accept">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">
-                            تایید نظر
-                        </h5>
-                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
-                            <em class="icon ni ni-cross"></em>
-                        </a>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post"
-                              action="{% url 'dashboard:comment__manage_status' %}"
-                              class="form-validate is-alter" novalidate="novalidate">
-                            {% csrf_token %}
-                            <input type="hidden" name="status" value="accepted">
-                            <input type="hidden" name="comments" value="{{ comment.id }}">
-                            <div class="badge-dim bg-gray fs-17px p-2" style="border-radius: 10px">
-                                <p>ایا از انجام این عملیات اطمینان دارید ؟</p>
-                            </div>
-                            <div class="form-group text-left mt-4">
-                                <button type="submit" class="btn btn-lg btn-success p-1 px-2">
-                                    تایید نظر
-                                    <em class="icon icon-circle ni ni-check bg-success"></em>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="modal fade" tabindex="-1" id="modal-delete">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

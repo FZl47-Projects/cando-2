@@ -62,7 +62,7 @@
                                                     </nav>
                                                 </div>
                                             </div>
-                                            <div class="nk-block-head-content">
+                                            <div class="nk-block-head-content d-none">
                                                 <div class="drodown">
                                                     <a href="#"
                                                        class="dropdown-toggle btn btn-icon btn-secondary px-2 text-center"
@@ -104,18 +104,6 @@
                                                                 <span class="data-label">کد رهگیری</span>
                                                                 <span class="data-value">
                                                                     {{ order.tc }}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <!-- data-item -->
-                                                        <div class="data-item">
-                                                            <div class="data-col">
-                                                                <span class="data-label">کاربر</span>
-                                                                <span class="data-value">
-                                                                    <a href="{{ order.user.get_dashboard_absolute_url }}">
-                                                                        {{ order.user.get_full_name|default:'session user' }}
-                                                                        {{ order.user.get_raw_phonenumber|default:'' }}
-                                                                    </a>
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -304,14 +292,14 @@
                                                     <div class="nk-data">
                                                         {% for product in order.get_products %}
                                                             <div class="card card-bordered my-3 col-12 col-sm-3 col-md-4">
-                                                                <a href="{{ product.product.get_dashboard_absolute_url }}">
+                                                                <a href="{{ product.product.get_absolute_url }}">
                                                                     <img src="{{ product.product.get_image_cover }}"
                                                                          class="card-img-top" alt=""
                                                                          style="width: 100%;height: 180px;object-fit: cover">
                                                                 </a>
                                                                 <div class="card-inner">
                                                                     <h5 class="card-title">
-                                                                        <a href="{{ product.product.get_dashboard_absolute_url }}">
+                                                                        <a href="{{ product.product.get_absolute_url }}">
                                                                             {{ product.product.title|truncatechars:20 }}
                                                                             ({{ product.quantity }}x)
                                                                         </a>
@@ -327,7 +315,7 @@
                                                                                 </span>
                                                                                     <span class="data-value">
                                                                                     <span>
-                                                                                        <a href="{{ attr.attr.get_dashboard_absolute_url }}">{{ attr.attr.name }}</a>
+                                                                                      {{ attr.attr.name }}
                                                                                         <span class="price-el font-70 text-muted">({{ attr.attr.additional_price|default:'0' }})</span>
                                                                                     </span>
                                                                                 </span>
@@ -364,7 +352,7 @@
                                                                                 </span>
                                                                                     <span class="data-value">
                                                                                     <span>
-                                                                                        <a href="{{ attr.attr.get_dashboard_absolute_url }}">{{ attr.attr.name }}</a>
+                                                                                       {{ attr.attr.name }}
                                                                                         <span class="price-el font-70 text-muted">({{ attr.attr.additional_price|default:'0' }})</span>
                                                                                     </span>
                                                                                 </span>
@@ -400,44 +388,6 @@
             <!-- wrap @e -->
         </div>
         <!-- modals -->
-        <div class="modal fade" tabindex="-1" id="modal-manage-status">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">
-                            تغییر وضعیت
-                        </h5>
-                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
-                            <em class="icon ni ni-cross"></em>
-                        </a>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post"
-                              action="{% url 'dashboard:order__manage_status' order_status_id=order.status.id %}"
-                              class="form-validate is-alter" novalidate="novalidate">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label class="form-label" for="status">وضعیت</label>
-                                <div class="form-control-wrap">
-                                    <select name="status" id="status" value="{{ order.status.status }}"
-                                            class="js-select2 select-by-value">
-                                        {% for STATUS_OPTION in order.status.STATUS_OPTIONS %}
-                                            <option value="{{ STATUS_OPTION.0 }}">{{ STATUS_OPTION.1 }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group text-left">
-                                <button type="submit" class="btn btn-lg btn-success p-1 px-2">
-                                    تغییر وضعیت سفارش
-                                    <em class="icon icon-circle ni ni-check bg-success"></em>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="modal fade" tabindex="-1" id="modal-delete">
             <div class="modal-dialog" role="document">
