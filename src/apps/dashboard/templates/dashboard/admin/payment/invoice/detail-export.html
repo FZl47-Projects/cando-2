@@ -146,6 +146,11 @@
                                                                 <p class="badge badge-dim bg-secondary">{{ invoice.get_created_at_timepast }}</p>
                                                             </span>
                                                             </li>
+                                                            <li class="invoice-date"><span>زمان ارسال</span>:
+                                                                <span>
+                                                                    {{ invoice.get_delivery_time_display }}
+                                                                </span>
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -166,7 +171,7 @@
                                                             {% for product in invoice.cart.get_products %}
                                                                 <tr>
                                                                     <td>
-                                                                        <a href="{{ product.get_dashboard_absolute_url }}">
+                                                                        <a href="{{ product.product.get_dashboard_absolute_url }}">
                                                                             {{ product.product.title|truncatechars:15 }}
                                                                         </a>
                                                                     </td>

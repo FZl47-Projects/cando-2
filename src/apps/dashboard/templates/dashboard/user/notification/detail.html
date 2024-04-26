@@ -1,0 +1,231 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %}جزئیات اعلان - {{ notification.title }}{% endblock %}
+
+
+{% block Content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                {% include 'dashboard/user/base/components/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            {% include 'dashboard/user/base/components/menu-aside.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between g-3">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">جزئیات اعلان</h3>
+                                                <div class="nk-block-des text-soft">
+                                                    <nav>
+                                                        <ul class="breadcrumb breadcrumb-arrow">
+                                                            <li class="breadcrumb-item"><a
+                                                                    href="{% url 'dashboard:index' %}">صفحه اصلی</a>
+                                                            </li>
+                                                            <li class="breadcrumb-item"><a>اعلانات</a></li>
+                                                            <li class="breadcrumb-item active">
+                                                                {{ notification.title }}
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
+                                                </div>
+                                            </div>
+                                            <div class="nk-block-head-content">
+                                                <div class="drodown">
+                                                    <a href="#"
+                                                       class="dropdown-toggle btn btn-icon btn-secondary px-2 text-center"
+                                                       data-bs-toggle="dropdown" aria-expanded="false">
+                                                        عملیات
+                                                        <em class="icon ni ni-setting"></em>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <ul class="link-list-opt no-bdr">
+                                                            <li>
+                                                                <button type="button" class="btn text-danger"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#modal-delete">حذف
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered">
+                                            <!-- .nav-tabs -->
+                                            <div class="card-inner card-inner-lg">
+                                                <!-- .nk-block-head -->
+                                                <div class="nk-block">
+                                                    <div class="nk-data data-list data-list-s2">
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">عنوان</span>
+                                                                <span class="data-value">
+                                                                    {{ notification.title }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">کاربر</span>
+                                                                <span class="data-value">
+                                                                    <a href="{{ notification.to_user.get_dashboard_absolute_url }}">
+                                                                        {{ notification.to_user.get_full_name }}
+                                                                    </a>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">توضیحات</span>
+                                                                <span class="data-value">
+                                                                    {{ notification.description|default:'-' }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">تصویر پیوست</span>
+                                                                <span class="data-value">
+                                                                    {% if notification.get_image %}
+                                                                        <img src="{{ notification.get_image }}"
+                                                                             style="width: 200px;height: 200px;border-radius: 5px"
+                                                                             class="click-full-size">
+                                                                    {% else %}
+                                                                        <em class="icon ni ni-cross-circle text-warning"></em>
+                                                                    {% endif %}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">لینک پیوست</span>
+                                                                <span class="data-value">
+                                                                    {% if notification.kwargs.link %}
+                                                                        <a href="{{ notification.kwargs.link }}">مشاهده</a>
+                                                                    {% else %}
+                                                                        <em class="icon ni ni-cross-circle text-warning"></em>
+                                                                    {% endif %}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">دیتای پیوست</span>
+                                                                <span class="data-value">
+                                                                    {{ notification.kwargs }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">ارسال اعلان</span>
+                                                                <span class="data-value">
+                                                                    {% if notification.send_notify %}
+                                                                        <em class="icon ni ni-check-circle text-success"></em>
+                                                                        {% else %}
+                                                                        <em class="icon ni ni-cross-circle text-warning"></em>
+                                                                    {% endif %}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">تاریخ ایجاد</span>
+                                                                <span class="data-value">
+                                                                    <span class="datetime-convert">{{ notification.get_created_at }}</span>
+                                                                    <span class="badge badge-dim bg-gray">{{ notification.get_created_at_timepast }}</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">زمان بروزرسانی</span>
+                                                                <span class="data-value">
+                                                                    {{ notification.get_updated_at_timepast }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- .nk-block -->
+                                            </div>
+                                            <!-- .card-inner -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                {% include 'dashboard/user/base/components/footer.html' %}
+                                <!-- footer @e -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- modals -->
+
+
+        <div class="modal fade" tabindex="-1" id="modal-delete">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            حذف اعلان
+                        </h5>
+                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              action="{% url 'dashboard:notification_user__delete' notification_id=notification.id %}"
+                              class="form-validate is-alter" novalidate="novalidate">
+                            {% csrf_token %}
+                            <div class="badge-dim bg-danger fs-17px p-2" style="border-radius: 10px">
+                                <p>ایا از حذف اعلان
+                                    {{ notification.title }}
+                                    اطمینان دارید؟
+                                    پس از حذف امکان بازگشت وجود نخواهد داشت.</p>
+                            </div>
+                            <div class="form-group text-left mt-4">
+                                <button type="submit" class="btn btn-lg btn-danger p-1 px-2">
+                                    بله اطمینان دارم ! حذف
+                                    <em class="icon icon-circle ni ni-trash-empty bg-danger"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+{% endblock %}
+
+

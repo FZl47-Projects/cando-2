@@ -104,6 +104,25 @@
                                                         <!-- data-item -->
                                                         <div class="data-item">
                                                             <div class="data-col">
+                                                                <span class="data-label">وضعیت بازدید</span>
+                                                                <span class="data-value">
+                                                                    {% if factor_cake_image.seen %}
+                                                                        <span class="badge badge-dim bg-success">
+                                                                            دیده شده
+                                                                            <em class="icon ni ni-check-circle-fill text-success"></em>
+                                                                         </span>
+                                                                    {% else %}
+                                                                        <span class="badge badge-dim bg-danger">
+                                                                            دیده نشده
+                                                                             <em class="icon ni ni-cross-circle-fill text-danger"></em>
+                                                                        </span>
+                                                                    {% endif %}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
                                                                 <span class="data-label">توضیحات</span>
                                                                 <span class="data-value">
                                                                     {{ factor_cake_image.description|default:'-' }}

@@ -5,7 +5,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3218dff5-1747-4748-95c5-4f5419735ae2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/account/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/auth/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/auth/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/mixins/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/mixins/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/core/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/account/user/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/account/user/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/payment/invoice/detail-export.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/payment/invoice/detail-export.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/payment/invoice/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/payment/invoice/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/payment/invoice/purchase/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/payment/invoice/purchase/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/attributes/category/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/attributes/category/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/attributes/field/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/attributes/field/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/attributes/group/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/attributes/group/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/comment/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/comment/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/factor-cake-image/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/factor-cake-image/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/factor-cake-image/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/factor-cake-image/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/order/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/order/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/product/basic/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/product/basic/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/product/basic/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/product/basic/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/account.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/payment.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/product.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/storage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/navigation/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/navigation/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/sms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/sms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/payment/gateways/zarinpal.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/payment/gateways/zarinpal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/payment/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/payment/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/payment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/payment/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/media/images/product-attr/2024-04-19/wTQesdCmLUAuhe4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/dashboard/admin/css/dashlite.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/dashboard/admin/css/dashlite.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/scripts/base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/scripts/base.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,36 +81,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Project-Company/Smarten/cando-2/src/apps/dashboard/templates/dashboard/admin/product/inventory&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "django.template.preview.state": "SHOW_EDITOR",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "F:/Project-Company/Smarten/cando-2/src/apps/dashboard/templates/dashboard/user/navigation/address",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "editing.templates",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\inventory" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\account\user" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\payment\invoice\purchase" />
-      <recent name="C:\Users\ehyasystem\Desktop\web-projects\cando-2\src\apps\dashboard\templates\dashboard\admin\payment\invoice" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\order" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\user\navigation\address" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\user" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\navigation\address" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\navigation" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\notification" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\navigation\address" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\urls\shared" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\views\dashboard\admin" />
       <recent name="C:\Users\ehyasystem\Desktop\web-projects\cando-2\src\apps\dashboard\templates\dashboard\admin" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\account\user" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\storage\templates\storage\gallery" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -94,7 +140,10 @@
       <workItem from="1713471770094" duration="8380000" />
       <workItem from="1713538469798" duration="6424000" />
       <workItem from="1713706864528" duration="31117000" />
-      <workItem from="1713759800343" duration="253000" />
+      <workItem from="1713759800343" duration="282000" />
+      <workItem from="1713817401337" duration="6748000" />
+      <workItem from="1713889059297" duration="12832000" />
+      <workItem from="1714063688160" duration="30830000" />
     </task>
     <servers />
   </component>

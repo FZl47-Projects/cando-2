@@ -28,6 +28,7 @@
                                                                 href="{% url 'dashboard:index' %}">صفحه اصلی</a></li>
                                                         <li class="breadcrumb-item"><a>تنظیمات</a></li>
                                                         <li class="breadcrumb-item"><a>محصولات</a></li>
+                                                        <li class="breadcrumb-item"><a>فیلد ها</a></li>
                                                         <li class="breadcrumb-item active">مدیریت گروه فیلد</li>
                                                     </ul>
                                                 </nav>
@@ -132,8 +133,9 @@
                                                                 <div class="nk-tb-col text-center">
                                                                     <span class="sub-text">
                                                                         {% for field in pr_group.get_fields|slice:':4' %}
-                                                                            <a class="badge badge-dim bg-info" href="{{ field.get_dashboard_absolute_url }}">{{ field.name|truncatechars:10 }}</a>
-                                                                        {% empty %}
+                                                                            <a class="badge badge-dim bg-info"
+                                                                               href="{{ field.get_dashboard_absolute_url }}">{{ field.name|truncatechars:10 }}</a>
+                                                                            {% empty %}
                                                                             -
                                                                         {% endfor %}
                                                                         {% if pr_group.get_fields.count > 4 %}
@@ -162,7 +164,7 @@
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                        {% empty %}
+                                                            {% empty %}
                                                             <div class="container-not-found-base">
                                                                 <p>چیزی یافت نشد</p>
                                                             </div>

@@ -1,0 +1,390 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %}لیست فاکتور ها{% endblock %}
+
+{% block Content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                {% include 'dashboard/user/base/components/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            {% include 'dashboard/user/base/components/menu-aside.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">لیست فاکتور ها</h3>
+                                                <nav>
+                                                    <ul class="breadcrumb breadcrumb-arrow">
+                                                        <li class="breadcrumb-item"><a
+                                                                href="{% url 'dashboard:index' %}">صفحه اصلی</a></li>
+                                                        <li class="breadcrumb-item"><a>فاکتور ها و فاکتور ها</a></li>
+                                                        <li class="breadcrumb-item active">لیست فاکتور ها</li>
+                                                    </ul>
+                                                </nav>
+                                                <div class="nk-block-des text-soft mt-2">
+                                                    <p>شما
+                                                        <span class="separate-el">{{ total_count }}</span>
+                                                        فاکتور دارید.</p>
+                                                </div>
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                            <div class="nk-block-head-content">
+                                                <div class="toggle-wrap nk-block-tools-toggle">
+                                                    <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1"
+                                                       data-target="pageMenu"><em
+                                                            class="icon ni ni-menu-alt-r"></em></a>
+                                                    <div class="toggle-expand-content" data-content="pageMenu">
+                                                        <ul class="nk-block-tools g-3">
+                                                            <li class="nk-block-tools-opt">
+                                                                <div class="drodown">
+                                                                    <a href="#"
+                                                                       class="dropdown-toggle btn btn-white btn-outline-light"
+                                                                       data-bs-toggle="dropdown">
+                                                                        <em
+                                                                                class="icon ni ni-download-cloud"></em>
+                                                                        <span>خروجی گرفتن</span>
+                                                                    </a>
+                                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                                        <ul class="link-list-opt no-bdr">
+                                                                            <li>
+                                                                                <a href="#"><span>خروجی اکسل</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!-- .toggle-wrap -->
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                        </div>
+                                        <!-- .nk-block-between -->
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered card-stretch">
+                                            <div class="card-inner-group">
+                                                <div class="card-inner position-relative card-tools-toggle">
+                                                    <div class="card-title-group">
+                                                        <div class="card-tools">
+                                                            <div class="form-inline flex-nowrap gx-3">
+                                                                <div class="form-wrap w-200px">
+                                                                    <select class="form-select js-select2"
+                                                                            data-search="off"
+                                                                            data-placeholder="عمل دسته جمعی">
+                                                                        <option value="">عمل دسته جمعی</option>
+                                                                        <option value="cancelled"> تغییر وضعیت به لغو
+                                                                            شده
+                                                                        </option>
+                                                                        <option value="in_progress"> تغییر وضعیت به در
+                                                                            حال انجام
+                                                                        </option>
+                                                                        <option value="shipped">تغییر وضعیت به ارسال
+                                                                            شده
+                                                                        </option>
+                                                                        <option value="delivered">تغییر وضعیت به تحویل
+                                                                            گرفته شده
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="btn-wrap">
+                                                                    <span class="d-none d-md-block"><button
+                                                                            class="btn btn-dim btn-outline-light disabled">اعمال</button></span>
+                                                                    <span class="d-md-none">
+                                                                            <button class="btn btn-dim btn-outline-light btn-icon disabled"><em
+                                                                                    class="icon ni ni-arrow-right"></em></button>
+                                                                        </span>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .form-inline -->
+                                                        </div>
+                                                        <!-- .card-tools -->
+                                                        <div class="card-tools me-n1">
+                                                            <ul class="btn-toolbar gx-1">
+                                                                <li>
+                                                                    <a href="#"
+                                                                       class="btn btn-icon search-toggle toggle-search"
+                                                                       data-target="search"><em
+                                                                            class="icon ni ni-search"></em>
+                                                                        {% if request.GET.search %}
+                                                                            <div class="dot dot-primary"></div>
+                                                                        {% endif %}
+                                                                    </a>
+                                                                </li>
+                                                                <!-- li -->
+                                                                <li class="btn-toolbar-sep"></li>
+                                                                <!-- li -->
+                                                                <li>
+                                                                    <div class="toggle-wrap">
+                                                                        <a href="#"
+                                                                           class="btn btn-icon btn-trigger toggle"
+                                                                           data-target="cardTools"><em
+                                                                                class="icon ni ni-menu-right"></em></a>
+                                                                        <div class="toggle-content"
+                                                                             data-content="cardTools">
+                                                                            <ul class="btn-toolbar gx-1">
+                                                                                <li class="toggle-close">
+                                                                                    <a href="#"
+                                                                                       class="btn btn-icon btn-trigger toggle"
+                                                                                       data-target="cardTools"><em
+                                                                                            class="icon ni ni-arrow-left"></em></a>
+                                                                                </li>
+                                                                                <!-- li -->
+                                                                                <li>
+                                                                                    <div class="dropdown">
+                                                                                        <a href="#"
+                                                                                           class="btn btn-trigger btn-icon dropdown-toggle"
+                                                                                           data-bs-toggle="dropdown">
+                                                                                            {% if request.GET.filter %}
+                                                                                                <div class="dot dot-primary"></div>
+                                                                                            {% endif %}
+                                                                                            <em class="icon ni ni-filter-alt"></em>
+                                                                                        </a>
+
+                                                                                        <div class="filter-wg dropdown-menu dropdown-menu-xl dropdown-menu-end">
+                                                                                            <div class="dropdown-head">
+                                                                                                <span class="sub-title dropdown-title">فیلتر فاکتور ها</span>
+                                                                                            </div>
+                                                                                            <div class="dropdown-body dropdown-body-rg">
+                                                                                                <form>
+                                                                                                    <input type="hidden"
+                                                                                                           name="filter"
+                                                                                                           value="true">
+                                                                                                    <div class="row gx-6 gy-3">
+                                                                                                        <div class="col-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <label class="overline-title overline-title-alt">وضعیت
+                                                                                                                    پرداخت</label>
+                                                                                                                <select class="form-select js-select2 select-by-filter"
+                                                                                                                        name="purchase__isnull">
+                                                                                                                    <option value="all">
+                                                                                                                        همه
+                                                                                                                    </option>
+                                                                                                                    <option value="false">
+                                                                                                                        پرداخت
+                                                                                                                        شده
+                                                                                                                    </option>
+                                                                                                                    <option value="true">
+                                                                                                                        پرداخت
+                                                                                                                        نشده
+                                                                                                                    </option>
+                                                                                                                </select>
+                                                                                                            </div>
+                                                                                                        </div>
+
+                                                                                                        <div class="col-12">
+                                                                                                            <div class="form-group text-end">
+                                                                                                                <button type="submit"
+                                                                                                                        class="btn btn-secondary">
+                                                                                                                    فیلتر
+                                                                                                                </button>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </form>
+                                                                                            </div>
+                                                                                            <div class="dropdown-foot between">
+                                                                                                <a class="clickable"
+                                                                                                   href="{% url 'dashboard:invoice__list' %}">بازنشانی
+                                                                                                    فیلتر</a>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <!-- .filter-wg -->
+                                                                                    </div>
+                                                                                    <!-- .dropdown -->
+                                                                                </li>
+                                                                            </ul>
+                                                                            <!-- .btn-toolbar -->
+                                                                        </div>
+                                                                        <!-- .toggle-content -->
+                                                                    </div>
+                                                                    <!-- .toggle-wrap -->
+                                                                </li>
+                                                                <!-- li -->
+                                                            </ul>
+                                                            <!-- .btn-toolbar -->
+                                                        </div>
+                                                        <!-- .card-tools -->
+                                                    </div>
+                                                    <!-- .card-title-group -->
+                                                    <form>
+                                                        <div class="card-search search-wrap" data-search="search">
+
+                                                            <div class="card-body">
+                                                                <div class="search-content">
+                                                                    <a href="#"
+                                                                       class="search-back btn btn-icon toggle-search"
+                                                                       data-target="search"><em
+                                                                            class="icon ni ni-arrow-left"></em></a>
+                                                                    <input type="text" name="search"
+                                                                           class="form-control border-transparent form-focus-none"
+                                                                           value="{{ request.GET.search }}"
+                                                                           placeholder="جستجو بر اساس کد رهگیری ، شماره همراه کاربر ، قیمت"/>
+                                                                    <button class="search-submit btn btn-icon"><em
+                                                                            class="icon ni ni-search"></em></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <!-- .card-search -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                                <div class="card-inner p-0">
+                                                    <table class="table table-orders">
+                                                        <thead class="tb-odr-head">
+                                                        <tr class="tb-odr-item">
+                                                            <th class="tb-odr-info">
+                                                                <span class="tb-odr-id">شناسه سفارش</span>
+                                                                <span class="tb-odr-date d-none d-md-inline-block">تاریخ ایجاد</span>
+                                                            </th>
+                                                            <th class="tb-odr-amount">
+                                                                <span class="tb-odr-total">مبلغ</span>
+                                                                <span class="tb-odr-status d-none d-md-inline-block">وضعیت</span>
+                                                            </th>
+                                                            <th class="tb-odr-action">&nbsp;</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody class="tb-odr-body">
+                                                        {% for invoice in object_list %}
+                                                            <tr class="tb-odr-item">
+                                                                <td class="tb-odr-info">
+                                                                <span class="tb-odr-id"><a
+                                                                        href="{{ invoice.get_dashboard_absolute_url }}">#{{ invoice.cart.tc }}</a></span>
+                                                                    <span class="tb-odr-date">
+                                                                        <span class="datetime-convert">{{ invoice.get_created_at }}</span>
+                                                                        <span class="badge badge-dim bg-info">{{ invoice.get_created_at_timepast }}</span>
+                                                                    </span>
+                                                                </td>
+                                                                <td class="tb-odr-amount">
+
+                                                                    <span class="tb-odr-total">
+                                                                        <span class="price-el">{{ invoice.get_total_price }}</span>
+                                                                    </span>
+                                                                    <span class="tb-odr-status">
+                                                                            {% if invoice.purchase %}
+                                                                                <span class="badge badge-dot bg-success">پرداخت شده</span>
+                                                                            {% else %}
+                                                                                <span class="badge badge-dot bg-danger">پرداخت نشده</span>
+                                                                            {% endif %}
+                                                                    </span>
+                                                                </td>
+
+                                                                <td class="tb-odr-action">
+                                                                    <a class="btn btn-icon btn-lg btn-white btn-dim"
+                                                                       href="{% url 'dashboard:invoice__detail_export' invoice_id=invoice.id %}"
+                                                                       target="_blank"><em
+                                                                            class="icon ni ni-printer-fill"></em></a>
+                                                                    <div class="tb-odr-btns d-none d-sm-inline">
+                                                                        <a href="{{ invoice.get_dashboard_absolute_url }}"
+                                                                           class="btn btn-dim btn-sm btn-primary">مشاهده</a>
+                                                                    </div>
+                                                                    <a href="{{ invoice.get_dashboard_absolute_url }}"
+                                                                       class="btn btn-pd-auto d-sm-none"><em
+                                                                            class="icon ni ni-chevron-right"></em></a>
+                                                                </td>
+                                                            </tr>
+                                                            <!-- .tb-odr-item -->
+                                                            {% empty %}
+                                                            <td class="tb-odr-item">
+                                                                <div class="container-not-found-base">
+                                                                    <p>چیزی یافت نشد</p>
+                                                                </div>
+                                                            </td>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- .card-inner -->
+                                                <div class="card-inner">
+                                                    <div class="nk-block-between-md">
+                                                        <div class="g">
+                                                            <ul class="pagination justify-content-center justify-content-md-start">
+                                                                {% if page_obj.has_previous %}
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page=1">اول</a>
+                                                                    </li>
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+                                                                    </li>
+                                                                {% endif %}
+
+                                                                <span class="fs-13px mt-1 mx-2">
+                                                                        صفحه {{ page_obj.number }} از {{ page_obj.paginator.num_pages }}.
+                                                                </span>
+
+                                                                {% if page_obj.has_next %}
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.next_page_number }}">بعدی</a>
+                                                                    </li>
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.paginator.num_pages }}">اخرین</a>
+                                                                    </li>
+                                                                {% endif %}
+                                                            </ul>
+                                                            <!-- .pagination -->
+                                                        </div>
+
+                                                        <!-- .pagination-goto -->
+                                                    </div>
+                                                    <!-- .nk-block-between -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                            </div>
+                                            <!-- .card-inner-group -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                {% include 'dashboard/user/base/components/footer.html' %}
+                                <!-- footer @e -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+{% endblock %}
+
+{% block Scripts %}
+    <script>
+        document.querySelectorAll('.bg-in_progress').forEach(function (el) {
+            el.classList.add('bg-info')
+        })
+        document.querySelectorAll('.bg-cancelled').forEach(function (el) {
+            el.classList.add('bg-danger')
+        })
+        document.querySelectorAll('.bg-delivered').forEach(function (el) {
+            el.classList.add('bg-success')
+        })
+        document.querySelectorAll('.bg-shipped').forEach(function (el) {
+            el.classList.add('bg-primary')
+        })
+        document.querySelectorAll('.bg-pending').forEach(function (el) {
+            el.classList.add('bg-warning')
+        })
+    </script>
+{% endblock %}

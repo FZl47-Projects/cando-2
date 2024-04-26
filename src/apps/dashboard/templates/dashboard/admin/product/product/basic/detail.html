@@ -2,6 +2,40 @@
 
 {% block Title %}جزئیات محصول - {{ product.title }}{% endblock %}
 
+{% block Styles %}
+    <style>
+        .pr-gallery-item{
+            display: inline-block;
+            margin: 4px;
+            border-radius: 5px;
+            border: 1px solid rgba(238, 238, 238, 0.4);
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .pr-gallery-item img{
+            width: 100px;
+            height: 100%;
+            border-radius: inherit;
+            object-fit: fill;
+        }
+
+        .pr-gallery-item em{
+            cursor: pointer;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 17px;
+            padding: 5px;
+            background: rgba(227, 227, 227, 0.9);
+            border: 1px solid rgba(234,35,26,0.6);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+    </style>
+{% endblock %}
+
 {% block Content %}
     <div class="nk-app-root">
         <!-- main @s -->
@@ -50,7 +84,7 @@
                                                             <div class="user-card user-card-s2">
                                                                 <div class="user-avatar lg bg-primary">
                                                                     <img src="{{ product.get_image_cover }}"
-                                                                         alt="{{ product.title }}"/>
+                                                                         alt="{{ product.title }}" style="border-radius: 17px"/>
                                                                 </div>
                                                                 <div class="user-info">
                                                                     <div class="badge bg-light rounded-pill ucap">
@@ -77,19 +111,13 @@
                                                                        title="ویرایش محصول"><em
                                                                             class="icon ni ni-pen"></em></a>
                                                                 </li>
-                                                                <li>
+                                                                <li data-bs-toggle="modal"
+                                                                    data-bs-target="#modal-gallery">
                                                                     <a href="#"
-                                                                       class="btn btn-trigger btn-icon text-primary"
+                                                                       class="btn btn-trigger btn-icon text-orange"
                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
                                                                        title="تصاویر"><em
                                                                             class="icon ni ni-img"></em></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#"
-                                                                       class="btn btn-trigger btn-icon text-warning"
-                                                                       data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                       title="تنظیم تخفیف"><em
-                                                                            class="icon ni ni-percent"></em></a>
                                                                 </li>
                                                                 <li data-bs-toggle="modal"
                                                                     data-bs-target="#modal-add-inventory">
@@ -98,6 +126,20 @@
                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
                                                                        title="مدیریت موجودی"><em
                                                                             class="icon ni ni-book"></em></a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#"
+                                                                       class="btn btn-trigger btn-icon text-warning"
+                                                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                       title="تنظیم تخفیف"><em
+                                                                            class="icon ni ni-percent"></em></a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="{% url 'product:basic_product__detail' product_id=product.id %}"
+                                                                       class="btn btn-trigger btn-icon text-primary"
+                                                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                       title="مشاهده در سایت"><em
+                                                                            class="icon ni ni-eye"></em></a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -446,6 +488,77 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" tabindex="-1" id="modal-gallery">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            تصاویر محصول
+                        </h5>
+                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              action="{% url 'dashboard:basic_product_images__update' product_id=product.id %}"
+                              class="form-validate is-alter" novalidate="novalidate" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="image_cover" value="{{ product.image_cover.id }}">
+
+                            <div class="form-group">
+                                <label class="form-label" for="images">تصویر کاور</label>
+                                <div class="form-control-wrap">
+                                    <div class="form-file">
+                                        <input type="file" accept="image/*" name="image_cover_file"
+                                               class="form-file-input"
+                                               id="customFiles">
+                                        <label class="form-file-label" for="customFiles">انتخاب فایل</label>
+
+                                    </div>
+                                    {% if product.image_cover %}
+                                        <div class="pr-gallery-item mt-2">
+                                            <img src="{{ product.image_cover.get_image_url }}" class="click-full-size">
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="images">تصاویر</label>
+                                <div class="form-control-wrap">
+                                    <div class="form-file">
+                                        <input type="file" accept="image/*" name="images_file" multiple
+                                               class="form-file-input"
+                                               id="customMultipleFiles">
+                                        <label class="form-file-label" for="customMultipleFiles">انتخاب فایل
+                                            ها</label>
+                                    </div>
+                                    {% if product.get_images %}
+                                        <div class="text-center mt-2">
+                                            {% for image in product.get_images %}
+                                                <div class="pr-gallery-item">
+                                                    <em class="icon ni ni-trash-empty text-danger"></em>
+                                                    <input type="hidden" name="images" value="{{ image.id }}">
+                                                    <img src="{{ image.get_image_url }}" class="click-full-size">
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group text-left mt-5">
+                                <button type="submit" class="btn btn-lg btn-success p-1 px-2">
+                                    ویرایش تصاویر
+                                    <em class="icon icon-circle ni ni-pen bg-success"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade" tabindex="-1" id="modal-edit">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -527,44 +640,6 @@
                                     </select>
                                 </div>
                             </div>
-                            {#                            <div class="form-group">#}
-                            {#                                <label class="form-label" for="images">تصویر کاور</label>#}
-                            {#                                <div class="form-control-wrap">#}
-                            {#                                    <div class="form-file">#}
-                            {#                                        <input type="file" accept="image/*" name="image_cover_file"#}
-                            {#                                               class="form-file-input"#}
-                            {#                                               id="customFiles">#}
-                            {#                                        <label class="form-file-label" for="customFiles">انتخاب فایل</label>#}
-                            {##}
-                            {#                                    </div>#}
-                            {#                                    {% if product.image_cover %}#}
-                            {#                                        <div class="text-end mt-2">#}
-                            {#                                            <img src="{{ product.image_cover.get_image_url }}" class="click-full-size"#}
-                            {#                                                 style="width: 40px;height: 40px;border-radius: 5px">#}
-                            {#                                        </div>#}
-                            {#                                    {% endif %}#}
-                            {#                                </div>#}
-                            {#                            </div>#}
-                            {#                            <div class="form-group">#}
-                            {#                                <label class="form-label" for="images">تصاویر</label>#}
-                            {#                                <div class="form-control-wrap">#}
-                            {#                                    <div class="form-file">#}
-                            {#                                        <input type="file" accept="image/*" name="images_file" multiple#}
-                            {#                                               class="form-file-input"#}
-                            {#                                               id="customMultipleFiles">#}
-                            {#                                        <label class="form-file-label" for="customMultipleFiles">انتخاب فایل#}
-                            {#                                            ها</label>#}
-                            {#                                    </div>#}
-                            {#                                    {% if product.get_images %}#}
-                            {#                                        <div class="text-end mt-2">#}
-                            {#                                            {% for image in product.get_images %}#}
-                            {#                                                <img src="{{ image.get_image_url }}" class="click-full-size"#}
-                            {#                                                     style="width: 40px;height: 40px;border-radius: 5px;margin: 4px;object-fit: cover">#}
-                            {#                                            {% endfor %}#}
-                            {#                                        </div>#}
-                            {#                                    {% endif %}#}
-                            {#                                </div>#}
-                            {#                            </div>#}
                             <div class="form-group">
                                 <label class="form-label" for="description">توضیحات</label>
                                 <div class="form-control-wrap">
@@ -627,6 +702,15 @@
     <script>
         setPriceSpreadInput('#price', '#label-inventory-price-update', document.getElementById('price').value)
 
+        document.querySelectorAll('.pr-gallery-item').forEach(function (el){
+            let btn_delete = el.querySelector('em')
+            if (btn_delete){
+                btn_delete.addEventListener('click',function (){
+                    this.parentElement.remove()
+                })
+            }
+        })
+
         document.querySelectorAll('.text-pending').forEach(function (el) {
             el.classList.add('text-warning')
         })
@@ -642,5 +726,6 @@
         document.querySelectorAll('.text-delivered').forEach(function (el) {
             el.classList.add('text-success')
         })
+
     </script>
 {% endblock %}

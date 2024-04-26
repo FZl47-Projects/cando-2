@@ -278,7 +278,7 @@ for (var i = 0; i < view_file_elements.length; i++) {
 }
 
 
-function setPriceSpreadInput(input_selector, field_selector, default_val = '0') {
+function setPriceSpreadInput(input_selector, field_selector, default_val = '0', empty_val = '0') {
     let field = document.querySelector(field_selector)
     let input = document.querySelector(input_selector)
     set_default(field)
@@ -286,12 +286,16 @@ function setPriceSpreadInput(input_selector, field_selector, default_val = '0') 
         if (input.value) {
             field.innerText = `${numberWithCommas(input.value)} ${SYMBOL_CURRENCY} `
         } else {
-            set_default(field)
+            set_empty(field)
         }
     })
 
     function set_default(field) {
         field.innerText = `${numberWithCommas(default_val)} ${SYMBOL_CURRENCY} `
+    }
+
+    function set_empty(field) {
+        field.innerText = `${numberWithCommas(empty_val)} ${SYMBOL_CURRENCY} `
     }
 }
 
@@ -303,7 +307,7 @@ document.querySelectorAll('.click-full-size').forEach(function (el) {
 })
 
 
-document.querySelectorAll('.convert-file-size').forEach(function (el){
+document.querySelectorAll('.convert-file-size').forEach(function (el) {
     let size_byte = el.innerText
     el.innerHTML = formatBytes(size_byte)
 })

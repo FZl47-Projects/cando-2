@@ -26,6 +26,7 @@ class NotificationUser(BaseModel):
 
     send_notify = models.BooleanField(default=True)
     to_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    seen = models.BooleanField(default=False)
     # show for user or not
     is_showing = models.BooleanField(default=True)
 
@@ -34,6 +35,9 @@ class NotificationUser(BaseModel):
 
     def __str__(self):
         return f'notification for {self.to_user}'
+
+    def get_dashboard_absolute_url(self):
+        return reverse('dashboard:notification_user__detail', args=(self.id,))
 
     def get_title(self):
         return self.title or 'notification'
@@ -46,12 +50,15 @@ class NotificationUser(BaseModel):
 
     def get_link(self):
         try:
-            return self.kwargs['link']
-        except KeyError:
-            pass
+            link = self.kwargs['link']
+            if not link:
+                raise ValueError
+            return link
+        except (KeyError, ValueError):
+            return ''
 
     def get_image(self):
         try:
             return self.image.url
-        except AttributeError:
+        except (AttributeError, ValueError):
             return None

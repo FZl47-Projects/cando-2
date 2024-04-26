@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from apps.core.models import BaseModel
 
@@ -22,3 +23,6 @@ class Address(BaseModel):
 
     def __str__(self):
         return f'{self.name} - {self.user}'
+
+    def get_dashboard_absolute_url(self):
+        return reverse('dashboard:address__detail', args=(self.id,))

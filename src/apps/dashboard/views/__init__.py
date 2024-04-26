@@ -1,2 +1,1 @@
-from .main import *
-from . import product, account, storage, payment
+from .dashboard import shared

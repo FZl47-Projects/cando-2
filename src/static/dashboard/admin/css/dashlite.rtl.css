@@ -446,6 +446,10 @@ optgroup,
 	letter-spacing: 0 !important;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 pre > span, code > span {
   font-family: var(--bs-font-monospace) !important;
 }
@@ -52473,5 +52477,7 @@ em.icon.ni.ni-comments {
 .comment-status-rejected{
     border: 1px solid #c4617f;
 }
+
+
 
 /*! END @iO */

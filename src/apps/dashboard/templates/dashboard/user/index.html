@@ -1,0 +1,430 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %} داشبورد کاربر{% endblock %}
+
+{% block Content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                {% include 'dashboard/user/base/components/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            {% include 'dashboard/user/base/components/menu-aside.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">نمای کلی</h3>
+                                                <div class="nk-block-des text-soft">
+                                                    <p> {{ user.get_full_name }} خوش امدید.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- .nk-block-between -->
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="row g-gs">
+                                            <div class="col-sm-6">
+                                                <div class="card card-bordered">
+                                                    <div class="card-inner">
+                                                        <div class="card-title-group align-start mb-2">
+                                                            <div class="card-title">
+                                                                <h6 class="title">تعداد سفارشات</h6>
+                                                            </div>
+                                                            <div class="card-tools">
+                                                                <a href="{% url 'dashboard:order__list' %}">
+                                                                    <em class="card-hint icon ni ni-arrow-right"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-placement="right"
+                                                                        title="سفارشات ثبت شده توسط شما"></em>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="align-end flex-sm-wrap g-4 flex-md-nowrap">
+                                                            <div class="nk-sale-data">
+                                                                <span class="amount separate-el">
+                                                                    {{ user.get_orders.count }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- .card -->
+                                            </div>
+                                            <!-- .col -->
+                                            <div class="col-sm-6">
+                                                <div class="card card-bordered">
+                                                    <div class="card-inner">
+                                                        <div class="card-title-group align-start mb-2">
+                                                            <div class="card-title">
+                                                                <h6 class="title">تعداد فاکتور ها</h6>
+                                                            </div>
+                                                            <div class="card-tools">
+                                                                <a href="{% url 'dashboard:invoice__list' %}">
+                                                                    <em class="card-hint icon ni ni-arrow-right"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-placement="right"
+                                                                        title="فاکتور های شما"></em>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="align-end flex-sm-wrap g-4 flex-md-nowrap">
+                                                            <div class="nk-sale-data">
+                                                                <span class="amount separate-el">
+                                                                    {{ user.get_invoices_np.count }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- .card -->
+                                            </div>
+                                            <!-- .col -->
+                                            <div class="col-sm-6">
+                                                <div class="card card-bordered">
+                                                    <div class="card-inner">
+                                                        <div class="card-title-group align-start mb-2">
+                                                            <div class="card-title">
+                                                                <h6 class="title">تعداد نظرات</h6>
+                                                            </div>
+                                                            <div class="card-tools">
+                                                                <a href="{% url 'dashboard:comment__list' %}">
+                                                                    <em class="card-hint icon ni ni-arrow-right"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-placement="right"
+                                                                        title="نظرات شما"></em>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="align-end flex-sm-wrap g-4 flex-md-nowrap">
+                                                            <div class="nk-sale-data">
+                                                                <span class="amount separate-el d-inline-block">
+                                                                    {{ user.get_all_comments.count }}
+                                                                </span>
+                                                                <span class="fs-14px text-success">({{ user.get_comments.count }})</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- .card -->
+                                            </div>
+                                            <!-- .col -->
+                                            <div class="col-sm-6">
+                                                <div class="card card-bordered">
+                                                    <div class="card-inner">
+                                                        <div class="card-title-group align-start mb-2">
+                                                            <div class="card-title">
+                                                                <h6 class="title">تعداد محصولات دلخواه</h6>
+                                                            </div>
+                                                            <div class="card-tools">
+                                                                <a href="{% url 'dashboard:custom_product__list' %}">
+                                                                    <em class="card-hint icon ni ni-arrow-right"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-placement="right"
+                                                                        title="محصولات دلخواه شما"></em>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="align-end flex-sm-wrap g-4 flex-md-nowrap">
+                                                            <div class="nk-sale-data">
+                                                                <span class="amount separate-el d-inline-block">
+                                                                    {{ user.get_custom_products.count }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- .card -->
+                                            </div>
+                                            <!-- .col -->
+                                            <div class="col-12">
+                                                <div class="card card-bordered card-full">
+                                                    <div class="card-inner">
+                                                        <div class="card-title-group">
+                                                            <div class="card-title">
+                                                                <h6 class="title"><span class="me-2">سفارشات</span></h6>
+                                                            </div>
+                                                            <div class="card-tools">
+                                                                <a href="{% url 'dashboard:order__list' %}"
+                                                                   class="link">مشاهده همه</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-inner p-0 border-top text-center">
+                                                        <div class="nk-tb-list nk-tb-orders">
+                                                            <div class="nk-tb-item nk-tb-head">
+                                                                <div class="nk-tb-col"><span>شماره سفارش</span></div>
+                                                                <div class="nk-tb-col tb-col-md"><span>تاریخ</span>
+                                                                </div>
+                                                                <div class="nk-tb-col"><span>مبلغ</span></div>
+                                                                <div class="nk-tb-col"><span class="d-none d-sm-inline">وضعیت</span>
+                                                                </div>
+                                                                <div class="nk-tb-col"><span>&nbsp;</span></div>
+                                                            </div>
+                                                            {% for order in user.get_orders|slice:':6' %}
+                                                                <div class="nk-tb-item">
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="tb-lead"><a
+                                                                                href="{{ order.get_dashboard_absolute_url }}">#{{ order.tc }}</a></span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-md">
+                                                                            <span class="tb-lead">
+                                                                                <span class="datetime-convert">{{ order.get_created_at }}</span>
+                                                                            </span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-md">
+                                                                        <span class="tb-sub">
+                                                                            <span class="price-el">{{ order.get_price_paid }}</span>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col">
+                                                                        <span class="badge badge-dot badge-dot-xs bg-{{ order.status.status }}">
+                                                                            {{ order.status.get_status_display }}
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col nk-tb-col-action">
+                                                                        <div class="dropdown">
+                                                                            <a class="text-soft dropdown-toggle btn btn-icon btn-trigger"
+                                                                               data-bs-toggle="dropdown"><em
+                                                                                    class="icon ni ni-more-h"></em></a>
+                                                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
+                                                                                <ul class="link-list-plain">
+                                                                                    <li>
+                                                                                        <a href="{{ order.get_dashboard_absolute_url }}">مشاهده</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="{{ order.invoice.get_dashboard_absolute_url }}">فاکتور</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="{{ order.invoice.purchase.get_dashboard_absolute_url }}">فاکتور
+                                                                                            پرداخت</a></li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                {% empty %}
+                                                                <div class="container-not-found-base">
+                                                                    <p>شما تا به حال سفارشی انجام نداده اید.</p>
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- .card -->
+                                            </div>
+                                            <!-- .col -->
+                                            <div class="col-lg-6">
+                                                <div class="card card-bordered h-100">
+                                                    <div class="card-inner border-bottom">
+                                                        <div class="card-title-group">
+                                                            <div class="card-title">
+                                                                <h6 class="title">تصاویر فاکتور کیک</h6>
+                                                            </div>
+                                                            <div class="card-tools">
+                                                                <a class="link"
+                                                                   href="{% url 'dashboard:factor_cake_image__list' %}">مشاهده
+                                                                    همه</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <ul class="nk-support">
+                                                        {% for factor_cake_image in user.get_factor_cake_images|slice:':5' %}
+                                                            <a href="{{ factor_cake_image.get_dashboard_absolute_url }}">
+                                                                <li class="nk-support-item">
+                                                                    <div>
+                                                                        <img style="width: 50px;height: 50px;border-radius: 50%;object-fit: cover"
+                                                                             src="{{ factor_cake_image.get_images.first.get_image_url }}"/>
+                                                                    </div>
+                                                                    <div class="nk-support-content">
+                                                                        <div class="title">
+                                                                            <span>
+                                                                                {{ factor_cake_image.user_name }}
+                                                                                ({{ factor_cake_image.factor_code }})
+                                                                            </span>
+                                                                            {% if factor_cake_image.seen %}
+                                                                                <span class="badge badge-dot badge-dot-xs bg-success ms-1">دیده شده</span>
+                                                                            {% else %}
+                                                                                <span class="badge badge-dot badge-dot-xs bg-warning ms-1">دیده نشده</span>
+                                                                            {% endif %}
+                                                                        </div>
+                                                                        <span class="time">{{ factor_cake_image.get_created_at_timepast }}</span>
+                                                                    </div>
+                                                                </li>
+                                                            </a>
+                                                            {% empty %}
+                                                            <div class="container-not-found-base">
+                                                                <p>تصویری ثبت نشده است</p>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                                <!-- .card -->
+                                            </div>
+                                            <!-- .col -->
+                                            <div class="col-lg-6">
+                                                <div class="card card-bordered h-100">
+                                                    <div class="card-inner border-bottom">
+                                                        <div class="card-title-group">
+                                                            <div class="card-title">
+                                                                <h6 class="title">محصولات دلخواه</h6>
+                                                            </div>
+                                                            <div class="card-tools">
+                                                                <a class="link"
+                                                                   href="{% url 'dashboard:custom_product__list' %}">مشاهده
+                                                                    همه</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <ul class="nk-support">
+                                                        {% for custom_product in user.get_custom_products|slice:':5' %}
+                                                            <a href="{{ custom_product.get_dashboard_absolute_url }}">
+                                                                <li class="nk-support-item">
+                                                                    <div>
+                                                                        <img style="width: 50px;height: 50px;border-radius: 50%;object-fit: cover"
+                                                                             src="{{ custom_product.get_image_cover }}"/>
+                                                                    </div>
+                                                                    <div class="nk-support-content">
+                                                                        <div class="title">
+                                                                            <span>
+                                                                                محصول دلخواه {{ forloop.counter }}
+                                                                            </span>
+                                                                            <span class="badge badge-dot badge-dot-xs bg-{{ custom_product.status.status }} ms-1">{{ custom_product.status.get_status_display }}</span>
+                                                                        </div>
+                                                                        <span class="time">{{ custom_product.get_created_at_timepast }}</span>
+                                                                    </div>
+                                                                </li>
+                                                            </a>
+                                                            {% empty %}
+                                                            <div class="container-not-found-base">
+                                                                <p>محصول دلخواهی ایجاد نشده است</p>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                                <!-- .card -->
+                                            </div>
+                                            <!-- .col -->
+                                            <div class="col-lg-12">
+                                                <div class="card card-bordered card-full">
+                                                    <div class="card-inner border-bottom">
+                                                        <div class="card-title-group">
+                                                            <div class="card-title">
+                                                                <h6 class="title">برخی از اعلانات</h6>
+                                                            </div>
+                                                            <div class="card-tools">
+                                                                <a href="#" class="link">مشاهده همه</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <ul class="nk-activity is-scrollable h-325px">
+                                                        <li class="nk-activity-item">
+                                                            <div class="nk-activity-media user-avatar bg-success"><img
+                                                                    src="./images/avatar/c-sm.jpg" alt=""/></div>
+                                                            <div class="nk-activity-data">
+                                                                <div class="label">سوسن آبتین درخواست برداشت کرد.</div>
+                                                                <span class="time">2 ساعت پیش</span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="nk-activity-item">
+                                                            <div class="nk-activity-media user-avatar bg-warning">م‌ن
+                                                            </div>
+                                                            <div class="nk-activity-data">
+                                                                <div class="label">مصطفی نوروزی سفارش داد.</div>
+                                                                <span class="time">2 ساعت پیش</span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="nk-activity-item">
+                                                            <div class="nk-activity-media user-avatar bg-azure">د‌ف
+                                                            </div>
+                                                            <div class="nk-activity-data">
+                                                                <div class="label">دنیا فراهانی پاداش بزرگی دریافت
+                                                                    کرد.
+                                                                </div>
+                                                                <span class="time">2 ساعت پیش</span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="nk-activity-item">
+                                                            <div class="nk-activity-media user-avatar bg-purple"><img
+                                                                    src="./images/avatar/d-sm.jpg" alt=""/></div>
+                                                            <div class="nk-activity-data">
+                                                                <div class="label">میلاد فتحی پول را واریز کرد.</div>
+                                                                <span class="time">2 ساعت پیش</span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="nk-activity-item">
+                                                            <div class="nk-activity-media user-avatar bg-pink">ح‌ر</div>
+                                                            <div class="nk-activity-data">
+                                                                <div class="label">حامد رضازاده سفارش داد.</div>
+                                                                <span class="time">2 ساعت پیش</span>
+                                                            </div>
+                                                        </li>
+                                                        <li class="nk-activity-item">
+                                                            <div class="nk-activity-media user-avatar bg-warning">م‌ن
+                                                            </div>
+                                                            <div class="nk-activity-data">
+                                                                <div class="label">مصطفی نوروزی سفارش داد.</div>
+                                                                <span class="time">2 ساعت پیش</span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- .card -->
+                                            </div>
+                                        </div>
+                                        <!-- .row -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                {% include 'dashboard/admin/base/components/footer.html' %}
+                                <!-- footer @e -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+{% endblock %}
+
+{% block Scripts %}
+    <script>
+        document.querySelectorAll('.bg-in_progress').forEach(function (el) {
+            el.classList.add('bg-info')
+        })
+        document.querySelectorAll('.bg-cancelled').forEach(function (el) {
+            el.classList.add('bg-danger')
+        })
+        document.querySelectorAll('.bg-delivered').forEach(function (el) {
+            el.classList.add('bg-success')
+        })
+        document.querySelectorAll('.bg-shipped').forEach(function (el) {
+            el.classList.add('bg-primary')
+        })
+        document.querySelectorAll('.bg-pending').forEach(function (el) {
+            el.classList.add('bg-warning')
+        })
+        document.querySelectorAll('.bg-accepted').forEach(function (el) {
+            el.classList.add('bg-success')
+        })
+        document.querySelectorAll('.bg-rejected').forEach(function (el) {
+            el.classList.add('bg-danger')
+        })
+        document.querySelectorAll('.bg-pending').forEach(function (el) {
+            el.classList.add('bg-warning')
+        })
+    </script>
+{% endblock %}

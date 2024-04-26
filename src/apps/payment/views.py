@@ -7,7 +7,7 @@ from django.views.generic import View
 
 
 from apps.core.utils import log_event, create_form_messages, get_host_url
-from apps.product.models import Cart, CartStatus
+from apps.product.models import Cart
 from . import forms, models
 from .gateways.zarinpal import Zarinpal
 
@@ -34,7 +34,7 @@ class InvoiceCreate(LoginRequiredMixin, View):
         return redirect(self.get_success_redirect_url(invoice))
 
     def get_success_redirect_url(self, invoice):
-        return reverse('payment:invoice__purchase', args=(invoice.id,))
+        return invoice.get_purchase_url()
 
     def get_fail_redirect_url(self):
         return self.request.META.get('HTTP_REFERER', '/')

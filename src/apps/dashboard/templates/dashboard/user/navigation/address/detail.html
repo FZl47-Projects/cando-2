@@ -1,0 +1,206 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %}جزئیات ادرس  - {{ address.name }}{% endblock %}
+
+{% block Styles %}
+    <style>
+        .data-attr {
+            padding: 13px;
+            margin: 13px;
+        }
+
+        .data-attr .data-col {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .data-attr .data-label {
+            width: auto;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block Content %}
+<div class="nk-app-root">
+    <!-- main @s -->
+    <div class="nk-main">
+        <!-- wrap @s -->
+        <div class="nk-wrap">
+            {% include 'dashboard/user/base/components/header.html' %}
+            <!-- main header @e -->
+            <!-- content @s -->
+            <div class="nk-content">
+                <div class="container wide-xl">
+                    <div class="nk-content-inner">
+                        {% include 'dashboard/user/base/components/menu-aside.html' %}
+                        <!-- .nk-aside -->
+                        <div class="nk-content-body">
+                            <div class="nk-content-wrap">
+                                <div class="nk-block-head nk-block-head-sm">
+                                    <div class="nk-block-between g-3">
+                                        <div class="nk-block-head-content">
+                                            <h3 class="nk-block-title page-title">جزئیات ادرس </h3>
+                                            <div class="nk-block-des text-soft">
+                                                <nav>
+                                                    <ul class="breadcrumb breadcrumb-arrow">
+                                                        <li class="breadcrumb-item"><a
+                                                                href="{% url 'dashboard:index' %}">صفحه اصلی</a>
+                                                        </li>
+                                                        <li class="breadcrumb-item"><a>ادرس ها </a></li>
+                                                        <li class="breadcrumb-item active">
+                                                            {{ address.name }}
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        </div>
+                                        <div class="nk-block-head-content">
+                                            <div class="drodown">
+                                                <a href="#"
+                                                   class="dropdown-toggle btn btn-icon btn-secondary px-2 text-center"
+                                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                                    عملیات
+                                                    <em class="icon ni ni-setting"></em>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <ul class="link-list-opt no-bdr">
+                                                        <li>
+                                                            <button type="button" class="btn text-success"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#modal-update">ویرایش
+                                                                ادرس
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- .nk-block-head -->
+                                <div class="nk-block">
+                                    <div class="card card-bordered">
+                                        <!-- .nav-tabs -->
+                                        <div class="card-inner card-inner-lg">
+                                            <!-- .nk-block-head -->
+                                            <div class="nk-block">
+                                                <div class="nk-data data-list data-list-s2">
+                                                    <!-- data-item -->
+                                                    <div class="data-item">
+                                                        <div class="data-col">
+                                                            <span class="data-label">عنوان</span>
+                                                            <span class="data-value">
+                                                                        {{ address.name }}
+                                                                    </span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- data-item -->
+                                                    <div class="data-item">
+                                                        <div class="data-col">
+                                                            <span class="data-label">پلاک</span>
+                                                            <span class="data-value">
+                                                                        {{ address.plate|default:'-' }}
+                                                                    </span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- data-item -->
+                                                    <div class="data-item">
+                                                        <div class="data-col">
+                                                            <span class="data-label">ادرس</span>
+                                                            <span class="data-value">
+                                                                {{ address.address }}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- data-item -->
+                                                    <div class="data-item">
+                                                        <div class="data-col">
+                                                            <span class="data-label">زمان ایجاد</span>
+                                                            <span class="data-value">
+                                                                    {{ address.get_created_at_timepast }}
+                                                                </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="data-item">
+                                                        <div class="data-col">
+                                                            <span class="data-label">زمان بروزرسانی</span>
+                                                            <span class="data-value">
+                                                                    {{ address.get_updated_at_timepast }}
+                                                                </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- .nk-block -->
+                                        </div>
+                                        <!-- .card-inner -->
+                                    </div>
+                                    <!-- .card -->
+                                </div>
+                                <!-- .nk-block -->
+                            </div>
+                            <!-- footer @s -->
+                            {% include 'dashboard/user/base/components/footer.html' %}
+                            <!-- footer @e -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content @e -->
+        </div>
+        <!-- wrap @e -->
+    </div>
+    <!-- modals -->
+    <div class="modal fade" tabindex="-1" id="modal-update">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        بروزرسانی ادرس
+                    </h5>
+                    <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                        <em class="icon ni ni-cross"></em>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'dashboard:address__update' address_id=address.id %}"
+                          class="form-validate is-alter" novalidate="novalidate">
+                        {% csrf_token %}
+                        <input type="hidden" name="user" value="{{ user.id }}">
+                        <div class="form-group">
+                            <label class="form-label">عنوان</label>
+                            <div class="form-control-wrap">
+                                <input type="text" name="name" class="form-control" required value="{{ address.name }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">پلاک</label>
+                            <div class="form-control-wrap">
+                                <input type="text" name="plate" class="form-control" value="{{ address.plate|default:'' }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">ادرس</label>
+                            <div class="form-control-wrap">
+                                <textarea name="address" class="form-control" required>{{ address.address }}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group text-left">
+                            <button type="submit" class="btn btn-lg btn-success p-1 px-2">
+                                بروزرسانی ادرس
+                                <em class="icon icon-circle ni ni-pen bg-success"></em>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main @e -->
+</div>
+<!-- app-root @e -->
+{% endblock %}

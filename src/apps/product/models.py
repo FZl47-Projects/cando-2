@@ -10,6 +10,10 @@ from . import utils
 
 class ProductManager(models.Manager):
 
+    def get_nr_user_qs(self):
+        #  return querySet for (normal user)
+        return self.get_queryset().filter(status='active')
+
     def get_best_sellers(self):
         return self.get_queryset().order_by('-productcart__productsold__count').distinct()
 
@@ -18,7 +22,7 @@ class ProductManager(models.Manager):
         return self.get_queryset()
 
     def get_showcases(self):
-        return self.get_queryset().filter(type='showcase')
+        return self.get_nr_user_qs().filter(type='showcase')
 
     def get_suggested(self):
         # TODO: must be completed
@@ -177,6 +181,9 @@ class ProductAttrCategory(BaseModel):
     def __str__(self):
         return self.name
 
+    def get_dashboard_absolute_url(self):
+        return reverse('dashboard:product_attr_category__detail', args=(self.id,))
+
     def get_groups(self):
         return self.groups.all()
 
@@ -191,6 +198,9 @@ class ProductAttrGroup(BaseModel):
 
     def __str__(self):
         return self.name
+
+    def get_dashboard_absolute_url(self):
+        return reverse('dashboard:product_attr_group__detail', args=(self.id,))
 
     def get_fields(self):
         return self.fields.all()
@@ -213,11 +223,17 @@ class SimpleProductAttr(RemovePastFileMixin, BaseProductAttr):
     additional_price = models.PositiveBigIntegerField(default=0)
     picture = models.ImageField(upload_to=utils.get_upload_src_product_attr_pic, null=True, blank=True)
 
+    def get_dashboard_absolute_url(self):
+        return reverse('dashboard:product_attr_field__detail', args=(self.id,))
+
     def get_picture_url(self):
         try:
             return self.picture.url
         except ValueError:
             pass
+
+    def get_groups(self):
+        return self.productattrgroup_set.all()
 
 
 class ProductAttrSelected(BaseModel):
@@ -346,6 +362,9 @@ class Category(BaseModel):
     def get_products(self):
         return self.basicproduct_set.all()
 
+    def get_dashboard_absolute_url(self):
+        return reverse('dashboard:category__detail', args=(self.id,))
+
 
 class Tag(BaseModel):
     name = models.CharField(max_length=100)
@@ -355,6 +374,9 @@ class Tag(BaseModel):
 
     def get_products(self):
         return self.basicproduct_set.all()
+
+    def get_dashboard_absolute_url(self):
+        return reverse('dashboard:tag__detail', args=(self.id,))
 
 
 class DiscountCoupon(BaseModel):

@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" class="js">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="https://fzlm.ir"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, "/>
+    <meta name="description" content="Dashboard"/>
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="{% static 'dashboard/admin/images/favicon.png' %}"/>
+    <!-- Page Title  -->
+    <title>{% block Title %}{% endblock %} | کندو</title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet" href="{% static 'dashboard/admin/css/dashlite.rtl.css' %}"/>
+    <link id="skin-default" rel="stylesheet" href="{% static 'dashboard/admin/css/theme.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}"/>
+    <link rel="stylesheet" href="{% static 'styles/notify.css' %}"/>
+
+    {% block Styles %}{% endblock %}
+</head>
+
+<body class="has-rtl nk-body bg-white npc-default has-aside {% block BodyClass %}{% endblock %}" dir="rtl">
+
+{% block Content %}{% endblock %}
+
+<script src="{% static 'dashboard/admin/js/bundle.js' %}"></script>
+<script src="{% static 'dashboard/admin/js/scripts.js' %}"></script>
+<script src="{% static 'dashboard/admin/js/charts/gd-default.js' %}"></script>
+{#<script src="{% static 'dashboard/admin/js/jdate.js' %}"></script>#}
+
+<script src="{% static 'scripts/var.js' %}"></script>
+<script src="{% static 'scripts/base.js' %}"></script>
+<script src="{% static 'scripts/notify.js' %}"></script>
+
+<script>
+    window.CSRF_TOKEN = '{{ csrf_token }}'
+    {% for message in messages %}
+        createNotify({
+            title: '{{ message.tags }}' == 'success' ? 'موفق' : 'خطا',
+            message: '{{ message }}',
+            theme: '{{ message.tags }}'
+        })
+    {% endfor %}
+</script>
+
+<script>
+    // theme(dark mode)
+
+    let _btn_switch_theme = document.querySelector('.dark-switch')
+    try {
+        _btn_switch_theme.addEventListener('click', function (el) {
+            el.preventDefault()
+            if (_btn_switch_theme.classList.contains('active')) {
+                setThemeMode('light')
+
+            } else {
+                setThemeMode('dark')
+            }
+        })
+    } catch (e) {
+    }
+
+    function setThemeMode(theme) {
+        if (theme === 'dark') {
+            _btn_switch_theme.classList.add('active')
+            document.body.classList.add('dark-mode')
+            setCookie('theme-mode', 'dark')
+        } else {
+            _btn_switch_theme.classList.remove('active')
+            document.body.classList.remove('dark-mode')
+            setCookie('theme-mode', 'light')
+        }
+    }
+
+    // initial theme
+    setThemeMode(getCookie('theme-mode') || 'light')
+</script>
+
+{% block Scripts %}{% endblock %}
+</body>
+</html>

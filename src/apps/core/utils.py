@@ -158,3 +158,8 @@ def log_event(msg, level='info', exc_info=False, **kwargs):
         'CRITICAL': 50,
     }
     logging.log(levels[level], msg=msg, exc_info=exc_info, **kwargs)
+
+
+def add_urls_module(urlpatterns, *modules):
+    for module in modules:
+        urlpatterns.extend(getattr(module, 'urlpatterns'))
