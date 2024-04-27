@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3218dff5-1747-4748-95c5-4f5419735ae2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/base_template.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/user/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/user/base/base_template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/dashboard/shared/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/dashboard/shared/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/dashboard/admin/js/charts/gd-default.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/dashboard/admin/js/charts/gd-default.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/base_template.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +100,7 @@
       <workItem from="1713817401337" duration="6748000" />
       <workItem from="1713889059297" duration="12832000" />
       <workItem from="1714063688160" duration="31035000" />
-      <workItem from="1714161965958" duration="18031000" />
+      <workItem from="1714161965958" duration="18305000" />
     </task>
     <servers />
   </component>
