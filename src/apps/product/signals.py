@@ -50,6 +50,15 @@ def create_comment_notify_status(sender, instance, created, **kwargs):
             )
 
 
+@receiver(post_save, sender=models.FactorCakeImage)
+def create_factor_cake_image(sender, instance, created, **kwargs):
+    if created:
+        # create notification for admins
+        create_notify_admins('FACTOR_CAKE_IMAGE_CREATED', _('Factor Cake Image Created'), kwargs={
+            'link': instance.get_dashboard_absolute_url(),
+        })
+
+
 @receiver(post_save, sender=models.CustomProduct)
 def create_custom_product_status(sender, instance, created, **kwargs):
     if created:
@@ -100,15 +109,13 @@ def create_custom_product_cart_item(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=models.Cart)
 def create_cart_status(sender, instance, created, **kwargs):
-    # create cart status after payment
-    if instance.get_invoice_purchase():
-        # create cart status(order)
-        try:
-            models.CartStatus.objects.create(
-                cart=instance
-            )
-        except (IntegrityError,):
-            log_event(_('There Is Some Issue In Cart Status Creation'), 'ERROR', exc_info=True)
+    # create cart status(order)
+    try:
+        models.CartStatus.objects.create(
+            cart=instance
+        )
+    except (IntegrityError,):
+        log_event(_('There Is Some Issue In Cart Status Creation'), 'ERROR', exc_info=True)
 
 
 @receiver(post_save, sender=models.CartStatus)
