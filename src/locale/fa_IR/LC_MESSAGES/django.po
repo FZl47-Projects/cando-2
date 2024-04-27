@@ -264,11 +264,11 @@ msgstr "رد شده"
 
 #: .\apps\product\models.py:445
 msgid "Seen"
-msgstr "بازدید"
+msgstr "دیده شده"
 
 #: .\apps\product\models.py:446
 msgid "Unseen"
-msgstr "عدم بازدید"
+msgstr "دیده نشده"
 
 #: .\apps\product\models.py:587
 msgid "Cancelled"

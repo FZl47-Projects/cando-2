@@ -250,10 +250,10 @@
                                                                                 {{ factor_cake_image.user_name }}
                                                                                 ({{ factor_cake_image.factor_code }})
                                                                             </span>
-                                                                            {% if factor_cake_image.seen %}
-                                                                                <span class="badge badge-dot badge-dot-xs bg-success ms-1">دیده شده</span>
+                                                                             {% if factor_cake_image.status == 'seen' %}
+                                                                                <span class="badge badge-dot badge-dot-xs bg-success ms-1">{{ factor_cake_image.get_status_display }}</span>
                                                                             {% else %}
-                                                                                <span class="badge badge-dot badge-dot-xs bg-warning ms-1">دیده نشده</span>
+                                                                                <span class="badge badge-dot badge-dot-xs bg-warning ms-1">{{ factor_cake_image.get_status_display }}</span>
                                                                             {% endif %}
                                                                         </div>
                                                                         <span class="time">{{ factor_cake_image.get_created_at_timepast }}</span>

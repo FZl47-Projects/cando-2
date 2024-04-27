@@ -64,7 +64,6 @@ class Index(MultipleUserViewMixin, TemplateView):
         # (invoice)
         invoices = Invoice.objects.all()
         invoices.need_to_pay = invoices.filter(purchase=None)
-        invoices.paid = invoices.exclude(purchase=None)
         context['invoices'] = invoices
 
     def get_super_user_context(self):
