@@ -6,7 +6,7 @@
                 <a href="{% url 'dashboard:index' %}" class="logo-link">
 
                     <img class="logo-light logo-img" src="{% static 'images/candoo-logo.png' %}"
-                         srcset="{% static 'images/logo-gold.png' %}"  alt="لوگو"/>
+                         srcset="{% static 'images/logo-gold.png' %}" alt="لوگو"/>
 
                     <img class="logo-dark logo-img" src="{% static 'images/candoo-logo.png' %}"
                          srcset="{% static 'images/candoo-logo.png' %}" alt="لوگوی تاریک"/>
@@ -60,88 +60,39 @@
                     <!-- .dropdown -->
                     <li class="dropdown notification-dropdown">
                         <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
-                            <div class="icon-status icon-status-info"><em class="icon ni ni-bell"></em>
+                            <div class="icon-status {% if user.have_unread_notification %}icon-status-info{% endif %}">
+                                <em class="icon ni ni-bell"></em>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-xl dropdown-menu-end dropdown-menu-s1">
                             <div class="dropdown-head">
-                                <span class="sub-title nk-dropdown-title">اطلاع رسانی ها</span>
-                                <a href="#">علامت گذاری همه به عنوان خوانده شده</a>
+                                <span class="sub-title nk-dropdown-title">اعلانات</span>
                             </div>
                             <div class="dropdown-body">
                                 <div class="nk-notification">
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
+                                    {% for notificaiton in user.get_unread_notifications|slice:':8' %}
+                                        <div class="nk-notification-item dropdown-inner">
+                                            <a href="{{ notificaiton.get_dashboard_absolute_url }}">
+                                                <div class="nk-notification-content">
+                                                    <div class="nk-notification-text">
+                                                        {{ notificaiton.title|truncatechars:20 }}
+                                                    </div>
+                                                    <div class="nk-notification-time">{{ notificaiton.get_created_at_timepast }}</div>
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">شما درخواست
-                                                <span>برداشت</span> کردید
-                                            </div>
-                                            <div class="nk-notification-time">2 ساعت پیش</div>
+                                        {% empty %}
+                                        <div class="m-3 my-5 text-center text-gray">
+                                            <h6>شما اعلان نخوانده ای ندارید</h6>
                                         </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text"><span>سفارش واریز</span>
-                                                شما ثبت شد
-                                            </div>
-                                            <div class="nk-notification-time">2 ساعت پیش</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">شما درخواست
-                                                <span>برداشت</span> کردید
-                                            </div>
-                                            <div class="nk-notification-time">2 ساعت پیش</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text"><span>سفارش واریز</span>
-                                                شما ثبت شد
-                                            </div>
-                                            <div class="nk-notification-time">2 ساعت پیش</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">شما درخواست
-                                                <span>برداشت</span> کردید
-                                            </div>
-                                            <div class="nk-notification-time">2 ساعت پیش</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text"><span>سفارش واریز</span>
-                                                شما ثبت شد
-                                            </div>
-                                            <div class="nk-notification-time">2 ساعت پیش</div>
-                                        </div>
-                                    </div>
+                                    {% endfor %}
+
                                 </div>
                                 <!-- .nk-notification -->
                             </div>
                             <!-- .nk-dropdown-body -->
                             <div class="dropdown-foot center">
-                                <a href="#">مشاهده همه</a>
+                                <a href="{% url 'dashboard:notification_user_personal__list' %}">مشاهده همه</a>
                             </div>
                         </div>
                     </li>
@@ -158,32 +109,21 @@
                             <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                 <div class="user-card">
                                     <div class="user-avatar">
-                                        <span>ف‌ت</span>
+                                        <span>
+                                            <img src="{{ user.get_image_url }}" alt="{{ user.get_full_name }}">
+                                        </span>
                                     </div>
                                     <div class="user-info">
-                                        <span class="lead-text">فرشید ترنیان</span>
-                                        <span class="sub-text">your@email.com</span>
-                                    </div>
-                                    <div class="user-action">
-                                        <a class="btn btn-icon me-n2"
-                                           href="html/user-profile-setting.html"><em
-                                                class="icon ni ni-setting"></em></a>
+                                        <span class="lead-text">{{ user.get_full_name }}</span>
+                                        <span class="sub-text">{{ user.get_raw_phonenumber }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
                                     <li>
-                                        <a href="html/user-profile-regular.html"><em
-                                                class="icon ni ni-user-alt"></em><span>مشاهده پروفایل</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="html/user-profile-setting.html"><em
-                                                class="icon ni ni-setting-alt"></em><span>تنظیمات حساب</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="html/user-profile-activity.html"><em
-                                                class="icon ni ni-activity-alt"></em><span>فعالیت ورود</span></a>
+                                        <a href="{% url 'dashboard:notification_user_personal__list' %}"><em
+                                                class="icon ni ni-notice"></em><span>اعلانات</span></a>
                                     </li>
                                     <li>
                                         <a class="dark-switch" href="#"><em
@@ -194,7 +134,7 @@
                             <div class="dropdown-inner">
                                 <ul class="link-list">
                                     <li>
-                                        <a href="#"><em
+                                        <a href="{% url 'account:logout' %}"><em
                                                 class="icon ni ni-signout"></em><span>خروج</span></a>
                                     </li>
                                 </ul>

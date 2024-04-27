@@ -3,6 +3,8 @@ from django.db.models.signals import post_save
 from django.db import IntegrityError
 from django.dispatch import receiver
 
+from apps.core.utils import log_event
+from apps.core.settings import get_default_inventory
 from apps.notification.models import NotificationUser
 from apps.notification.utils import create_notify_admins
 from . import models
@@ -12,11 +14,16 @@ from . import models
 def create_basic_product_inventory(sender, instance, created, **kwargs):
     if created:
         # create product inventory
+        quantity = 0
+        price = 0
+        default_inv = get_default_inventory()
+        if default_inv:
+            quantity = default_inv.quantity
+            price = default_inv.price
         models.ProductInventory.objects.create(
             product=instance,
-            # TODO: should be use default config (by admin)
-            quantity=0,
-            price=0
+            quantity=quantity,
+            price=price
         )
 
 
@@ -50,6 +57,10 @@ def create_custom_product_status(sender, instance, created, **kwargs):
         models.CustomProductStatus.objects.create(
             custom_product=instance,
         )
+        # create notification for admins
+        create_notify_admins('CUSTOM_PRODUCT_CREATED', _('Custom Product Created'), kwargs={
+            'custom_product_link': instance.get_dashboard_absolute_url(),
+        })
 
 
 @receiver(post_save, sender=models.CustomProductStatus)
@@ -97,7 +108,7 @@ def create_cart_status(sender, instance, created, **kwargs):
                 cart=instance
             )
         except (IntegrityError,):
-            pass
+            log_event(_('There Is Some Issue In Cart Status Creation'), 'ERROR', exc_info=True)
 
 
 @receiver(post_save, sender=models.CartStatus)

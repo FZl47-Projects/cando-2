@@ -29,6 +29,14 @@ class Index(TemplateView):
         return context
 
 
+class SuccessView(TemplateView):
+    template_name = 'public/success_page.html'
+
+
+class FailView(TemplateView):
+    template_name = 'public/fail_page.html'
+
+
 class Cart(TemplateView):
     template_name = 'public/cart.html'
 

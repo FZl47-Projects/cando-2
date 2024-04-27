@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, View
 from django.db.models import Min, Max, Count, Case, When, Value
 from django.core.exceptions import PermissionDenied
@@ -93,13 +94,14 @@ class BasicProductDetail(TemplateView):
 class FactorCakeImage(CreateViewMixin, TemplateView):
     form = forms.FactorCakeImageCreateForm
     success_message = _('Your Cake Receipt Image Has Been Saved Successfully')
-    # redirect_url = None => redirect to success page (redirect to referer for now)
+    redirect_url = reverse_lazy('public:success')
     template_name = 'product/factor-cake-image.html'
 
 
 class CustomProductCreate(CreateViewMixin, TemplateView):
     form = forms.CustomProductCreateForm
     success_message = _('Your Custom Product Has Been Created and Will Be Added to Your Shopping Cart After Checking')
+    redirect_url = reverse_lazy('public:success')
     template_name = 'product/custom-product-create.html'
 
     def get_context_data(self, **kwargs):

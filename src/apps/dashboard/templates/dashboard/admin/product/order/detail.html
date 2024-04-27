@@ -269,7 +269,7 @@
                                                             <div class="data-col">
                                                                 <span class="data-label">ادرس</span>
                                                                 <span class="data-value">
-                                                                    {{ order.invoice.address.address }}
+                                                                    <a href="{{ order.invoice.address.get_dashboard_absolute_url }}">{{ order.invoice.address.address }}</a>
                                                                     <span class="badge badge-dim bg-info">{{ order.invoice.address.plate|default:'-' }}</span>
                                                                 </span>
                                                             </div>

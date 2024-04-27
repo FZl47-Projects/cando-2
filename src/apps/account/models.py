@@ -101,7 +101,13 @@ class User(BaseModel, AbstractUser):
     def __str__(self):
         return f'{self.role} - {self.phonenumber}'
 
+    def get_dashboard_url(self):
+        if self.role in ('super_user', 'operator_user'):
+            return reverse('dashboard:index')
+        return reverse('dashboard_user:index')
+
     def get_dashboard_absolute_url(self):
+        # get by admin
         return reverse('dashboard:user__detail', args=(self.id,))
 
     def get_role_label(self):
@@ -127,7 +133,7 @@ class User(BaseModel, AbstractUser):
         return '-'
 
     def get_current_cart_or_create(self):
-        cart = Cart.objects.filter(is_active=True)
+        cart = self.cart_set.filter(is_active=True)
         if not cart.exists():
             cart = Cart.objects.create(user=self)
             return cart
@@ -143,7 +149,7 @@ class User(BaseModel, AbstractUser):
         return self.address_set.all()
 
     def get_orders(self):
-        return self.cart_set.filter(invoice__purchase__isnull=False)
+        return self.cart_set.exclude(invoice__purchase=None)
 
     def get_invoices(self):
         return Invoice.objects.filter(cart__user=self)
@@ -169,3 +175,12 @@ class User(BaseModel, AbstractUser):
 
     def get_factor_cake_images(self):
         return self.factorcakeimage_set.all()
+
+    def get_notifications(self):
+        return self.notificationuser_set.filter(is_showing=True)
+
+    def get_unread_notifications(self):
+        return self.get_notifications().filter(seen=False)
+
+    def have_unread_notification(self):
+        return self.get_unread_notifications().exists()

@@ -2,7 +2,10 @@ import abc
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.db.models import Q
-from apps.core.utils import create_form_messages
+from django.core.exceptions import PermissionDenied
+from django.views.generic.base import TemplateResponseMixin
+
+from apps.core.utils import create_form_messages, log_event
 
 
 class BaseCUViewMixin(abc.ABC):
@@ -26,6 +29,15 @@ class BaseCUViewMixin(abc.ABC):
     def get_redirect_url(self):
         if not self.redirect_url:
             self.redirect_url = self.request.META.get('HTTP_REFERER', '/')  # referrer url
+
+        # add object url to redirect url
+        obj = getattr(self, 'obj', None)
+        if obj:
+            try:
+                self.redirect_url += f"?next_url={obj.get_dashboard_absolute_url()}"
+            except (TypeError, ValueError, AttributeError):
+                log_event('There is Some issue in add next_url(object dashboard absolute url) to redirect url',
+                          'WARNING', exc_info=True)
         return self.redirect_url
 
     def set_success_message(self):
@@ -221,3 +233,79 @@ class DeleteViewMixin(abc.ABC):
         self.do_success()
         self.set_success_message()
         return redirect(self.get_redirect_url())
+
+
+class MultipleUserViewMixin(abc.ABC, TemplateResponseMixin):
+    user_template = None
+    super_user_template = None
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def get_user_context(self):
+        pass
+
+    def get_super_user_context(self):
+        pass
+
+    def get_context(self):
+        user = self.request.user
+        if user.role == 'super_user':
+            return self.get_super_user_context()
+        elif user.role == 'normal_user':
+            return self.get_user_context()
+
+    def get_template_names(self):
+        usr_role = self.request.user.role
+        if usr_role == 'super_user':
+            tmp = self.super_user_template
+        else:
+            tmp = self.user_template
+        if tmp is None:
+            raise PermissionDenied
+
+            # raise ValueError(
+            #     "TemplateResponseMixin requires either a definition of "
+            #     "'super_user_template' or 'user_template' an implementation of 'get_template_names()'"
+            # )
+
+        return [tmp]
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        if not user.is_authenticated:
+            raise PermissionDenied
+        self.extra_context = self.get_context()
+        return super().dispatch(request, *args, **kwargs)
+
+
+class MultipleUserListViewMixin(MultipleUserViewMixin):
+
+    def get_super_user_queryset(self):
+        pass
+
+    def get_user_queryset(self):
+        pass
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.role == 'super_user':
+            return self.get_super_user_queryset()
+        elif user.role == 'normal_user':
+            return self.get_user_queryset()
+
+
+class UserRoleViewMixin(abc.ABC):
+
+    @property
+    @abc.abstractmethod
+    def role_access(self):
+        pass
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        if not user.is_authenticated:
+            raise PermissionDenied
+        if user.role not in self.role_access:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)

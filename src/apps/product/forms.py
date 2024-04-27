@@ -32,7 +32,6 @@ class AttributesFieldUtil:
             }
             f = ProductAttrSelectCreateForm(attr_selected_data)
             if not f.is_valid():
-                print(f.errors)
                 log_event(_('Product Field DoesNotExist | There Is Some Problem In Selected Attributes'), 'ERROR')
                 raise ValueError(_('There Is Some Problem In Selected Attributes'))
             attr_selected_obj = f.save()
@@ -64,7 +63,9 @@ class BasicProductCreateForm(forms.ModelForm):
                 images_file_objs.append(
                     Image(image=img_file)
                 )
+            clean_images = list(self.cleaned_data.get('images', []))
             images_file_objs = Image.objects.bulk_create(images_file_objs)
+            images_file_objs.extend(clean_images)
             self.cleaned_data['images'] = images_file_objs
 
         if not self.cleaned_data.get('categories'):
@@ -111,7 +112,19 @@ class ProductAttrCategoryCreateForm(forms.ModelForm):
         fields = '__all__'
 
 
+class ProductAttrCategoryUpdateForm(forms.ModelForm):
+    class Meta:
+        model = models.ProductAttrCategory
+        fields = '__all__'
+
+
 class ProductAttrGroupCreateForm(forms.ModelForm):
+    class Meta:
+        model = models.ProductAttrGroup
+        fields = '__all__'
+
+
+class ProductAttrGroupUpdateForm(forms.ModelForm):
     class Meta:
         model = models.ProductAttrGroup
         fields = '__all__'
@@ -123,7 +136,19 @@ class SimpleProductAttrCreateForm(forms.ModelForm):
         fields = '__all__'
 
 
+class SimpleProductAttrUpdateForm(forms.ModelForm):
+    class Meta:
+        model = models.SimpleProductAttr
+        fields = '__all__'
+
+
 class CategoryCreateForm(forms.ModelForm):
+    class Meta:
+        model = models.Category
+        fields = '__all__'
+
+
+class CategoryUpdateForm(forms.ModelForm):
     class Meta:
         model = models.Category
         fields = '__all__'

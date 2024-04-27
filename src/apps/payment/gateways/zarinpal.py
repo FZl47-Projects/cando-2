@@ -17,6 +17,10 @@ class Zarinpal:
     is_success = False
     SANDBOX = ZARINPAL_CONFIG['SANDBOX']
 
+    def __init__(self):
+        self._authority = None
+        self.response = None
+
     def get_api_startpay(self):
         if self.SANDBOX:
             return 'https://sandbox.zarinpal.com/pg/StartPay/{}/ZarinGate'

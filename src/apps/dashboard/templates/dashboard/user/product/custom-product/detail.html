@@ -1,0 +1,456 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %}جزئیات محصول دلخواه - {{ custom_product.id }}{% endblock %}
+
+{% block Styles %}
+    <style>
+        .data-attr {
+            padding: 13px;
+            margin: 13px;
+        }
+
+        .data-attr .data-col {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .data-attr .data-label {
+            width: auto;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block Content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                {% include 'dashboard/user/base/components/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            {% include 'dashboard/user/base/components/menu-aside.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between g-3">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">جزئیات محصول دلخواه</h3>
+                                                <div class="nk-block-des text-soft">
+                                                    <nav>
+                                                        <ul class="breadcrumb breadcrumb-arrow">
+                                                            <li class="breadcrumb-item"><a
+                                                                    href="{% url 'dashboard:index' %}">صفحه اصلی</a>
+                                                            </li>
+                                                            <li class="breadcrumb-item"><a>محصولات</a></li>
+                                                            <li class="breadcrumb-item"><a
+                                                                    href="{% url 'dashboard:custom_product__list' %}">لیست
+                                                                محصولات دلخواه </a></li>
+                                                            <li class="breadcrumb-item active">
+                                                                #
+                                                                {{ custom_product.id }}
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
+                                                </div>
+                                            </div>
+                                            <div class="nk-block-head-content d-none">
+                                                <div class="drodown">
+                                                    <a href="#"
+                                                       class="dropdown-toggle btn btn-icon btn-secondary px-2 text-center"
+                                                       data-bs-toggle="dropdown" aria-expanded="false">
+                                                        عملیات
+                                                        <em class="icon ni ni-setting"></em>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <ul class="link-list-opt no-bdr">
+                                                            <li>
+                                                                <button type="button" class="btn text-success"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#modal-accept">تایید سفارش
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button type="button" class="btn text-warning"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#modal-reject">رد سفارش
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button type="button" class="btn text-danger"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#modal-delete">حذف
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered">
+                                            <!-- .nav-tabs -->
+                                            <div class="card-inner card-inner-lg">
+                                                <!-- .nk-block-head -->
+                                                <div class="nk-block">
+                                                    <div class="nk-data data-list data-list-s2">
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">نوع</span>
+                                                                <span class="data-value">
+                                                                    <span class="badge badge-dim bg-info">{{ custom_product.get_type_display }}</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">وضعیت</span>
+                                                                <span class="data-value">
+                                                                    <span class="badge badge-dim bg-{{ custom_product.status }}">
+                                                                        {{ custom_product.status.get_status_display }}
+                                                                        {% if custom_product.cart_item %}
+                                                                            <span class="font-70">(اضافه شده به سبد خرید)</span>
+                                                                        {% endif %}
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">تاریخ دریافت</span>
+                                                                <span class="data-value">
+                                                                    {{ custom_product.receipt_date }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">نوشته روی محصول</span>
+                                                                <span class="data-value">
+                                                                    {{ custom_product.writing_on|default:'-' }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">توضیحات</span>
+                                                                <span class="data-value">
+                                                                    {{ custom_product.description|default:'-' }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">عکس ها</span>
+                                                                <span class="data-value">
+                                                                    {% for image in custom_product.get_images %}
+                                                                        <div class="d-inline-block m-1">
+                                                                            <img class="click-full-size"
+                                                                                 src="{{ image.image.url }}"
+                                                                                 style="width: 100px;border-radius: 10px"
+                                                                                 loading="lazy">
+                                                                        </div>
+                                                                    {% endfor %}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">فیلد های انتخاب شده</span>
+                                                                <span class="data-value">
+                                                                    {% for attr in custom_product.get_attributes %}
+                                                                        <div class="data-item data-attr">
+                                                                            <div class="data-col">
+                                                                                <span class="data-label">
+                                                                                    <span>
+                                                                                       {{ attr.group.name }}
+                                                                                    </span>
+                                                                                </span>
+                                                                                <span class="data-value">
+                                                                                    <span>
+                                                                                        <a href="{{ attr.attr.get_dashboard_absolute_url }}">{{ attr.attr.name }}</a>
+                                                                                        <span class="price-el font-70 text-muted">({{ attr.attr.additional_price|default:'0' }})</span>
+                                                                                    </span>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    {% endfor %}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">قیمت حساب شده</span>
+                                                                <span class="data-value">
+                                                                    <span class="price-el">{{ custom_product.get_attributes_price }}</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">زمان ایجاد</span>
+                                                                <span class="data-value">
+                                                                    {{ custom_product.get_created_at_timepast }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">زمان بروزرسانی</span>
+                                                                <span class="data-value">
+                                                                    {{ custom_product.get_updated_at_timepast }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- data-list -->
+                                                    <div class="nk-data data-list data-list-s2">
+                                                        <div class="data-head">
+                                                            <h6 class="overline-title">جزئیات وضعیت</h6>
+                                                        </div>
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">توضیحات ادمین</span>
+                                                                <span class="data-value">
+                                                                        {{ custom_product.status.note|default:'-' }}
+                                                                    </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">قیمت ثبت شده</span>
+                                                                <span class="data-value">
+                                                                    <span class="price-el">{{ custom_product.status.price|default:'-' }}</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                    </div>
+                                                    <!-- data-list -->
+                                                    {% with purchase=custom_product.get_invoice_purchase %}
+                                                        {% if purchase %}
+                                                            <!-- data-list -->
+                                                            <div class="nk-data data-list data-list-s2">
+                                                                <div class="data-head">
+                                                                    <h6 class="overline-title">جزئیات وضعیت پرداخت</h6>
+                                                                </div>
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">تاریخ پرداخت</span>
+                                                                        <span class="data-value">
+                                                                            <span class="datetime-convert">
+                                                                                {{ purchase.created_at }}
+                                                                            </span>
+                                                                            <span class="fs-14px text-muted">
+                                                                                ({{ purchase.get_created_at_timepast }})
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">کد رهگیری</span>
+                                                                        <span class="data-value">
+                                                                            {{ purchase.tracking_code }}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">نام بانک</span>
+                                                                        <span class="data-value">
+                                                                            {{ purchase.bank_name }}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- data-item -->
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">قیمت پرداخت شده</span>
+                                                                        <span class="data-value">
+                                                                        <span class="price-el">{{ purchase.price_paid }}</span>
+                                                                    </span>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- data-item -->
+                                                            </div>
+                                                            <!-- data-list -->
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                </div>
+                                                <!-- .nk-block -->
+                                            </div>
+                                            <!-- .card-inner -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                {% include 'dashboard/user/base/components/footer.html' %}
+                                <!-- footer @e -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- modals -->
+        <div class="modal fade" tabindex="-1" id="modal-accept">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            تایید سفارش
+                        </h5>
+                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              action="{% url 'dashboard:custom_product__manage_status' custom_product_id=custom_product.id %}"
+                              class="form-validate is-alter" novalidate="novalidate">
+                            {% csrf_token %}
+                            <input type="hidden" name="status" value="accepted">
+                            <input type="hidden" name="custom_product" value="{{ custom_product.id }}">
+                            <div class="form-group">
+                                <label class="form-label" for="price">مبلغ</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" name="price" class="form-control" id="price" required=""
+                                           placeholder="مبلغ قابل پرداخت سفارش دلخواه">
+                                    <div class="text-left mt-2 fs-11px">
+                                        <span id="price-spread">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="note">توضیحات ادمین</label>
+                                <div class="form-control-wrap">
+                                    <textarea type="text" name="note" class="form-control" id="note"
+                                              placeholder="توضیحات ادمین برای این سفارش"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group text-left">
+                                <button type="submit" class="btn btn-lg btn-success p-1 px-2">
+                                    تایید سفارش
+                                    <em class="icon icon-circle ni ni-check bg-success"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" tabindex="-1" id="modal-reject">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            رد سفارش
+                        </h5>
+                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              action="{% url 'dashboard:custom_product__manage_status' custom_product_id=custom_product.id %}"
+                              class="form-validate is-alter" novalidate="novalidate">
+                            {% csrf_token %}
+                            <input type="hidden" name="status" value="rejected">
+                            <input type="hidden" name="custom_product" value="{{ custom_product.id }}">
+                            <div class="form-group">
+                                <label class="form-label" for="note">توضیحات ادمین</label>
+                                <div class="form-control-wrap">
+                                    <textarea type="text" name="note" class="form-control" id="note"
+                                              placeholder="توضیحات ادمین برای رد سفارش"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group text-left">
+                                <button type="submit" class="btn btn-lg btn-warning p-1 px-2">
+                                    رد سفارش
+                                    <em class="icon icon-circle ni ni-cross bg-warning"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" tabindex="-1" id="modal-delete">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            حذف سفارش
+                        </h5>
+                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              action="{% url 'dashboard:custom_product__delete' custom_product_id=custom_product.id %}"
+                              class="form-validate is-alter" novalidate="novalidate">
+                            {% csrf_token %}
+                            <div class="badge-dim bg-danger fs-17px p-2" style="border-radius: 10px">
+                                <p>ایا از حذف محصول دلخواه شماره
+                                    {{ custom_product.id }}
+                                    اطمینان دارید؟
+                                    پس از حذف امکان بازگشت وجود نخواهد داشت.</p>
+                            </div>
+                            <div class="form-group text-left mt-4">
+                                <button type="submit" class="btn btn-lg btn-danger p-1 px-2">
+                                    بله اطمینان دارم ! حذف
+                                    <em class="icon icon-circle ni ni-trash-empty bg-danger"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+{% endblock %}
+
+{% block Scripts %}
+    <script>
+        setPriceSpreadInput('#price', '#price-spread')
+
+        document.querySelectorAll('.bg-accepted').forEach(function (el) {
+            el.classList.add('bg-success')
+        })
+        document.querySelectorAll('.bg-rejected').forEach(function (el) {
+            el.classList.add('bg-danger')
+        })
+        document.querySelectorAll('.bg-pending').forEach(function (el) {
+            el.classList.add('bg-warning')
+        })
+    </script>
+{% endblock %}

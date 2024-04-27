@@ -1,0 +1,448 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %}جزئیات سفارش - {{ order.tc }}{% endblock %}
+
+{% block Styles %}
+    <style>
+        .data-attr {
+            padding: 13px;
+            margin: 13px;
+        }
+
+        .data-attr .data-col {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .data-attr .data-label {
+            width: auto;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block Content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                {% include 'dashboard/user/base/components/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            {% include 'dashboard/user/base/components/menu-aside.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between g-3">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">جزئیات سفارش</h3>
+                                                <div class="nk-block-des text-soft">
+                                                    <nav>
+                                                        <ul class="breadcrumb breadcrumb-arrow">
+                                                            <li class="breadcrumb-item"><a
+                                                                    href="{% url 'dashboard:index' %}">صفحه اصلی</a>
+                                                            </li>
+                                                            <li class="breadcrumb-item"><a>سفارشات و فاکتور ها</a></li>
+                                                            <li class="breadcrumb-item"><a
+                                                                    href="{% url 'dashboard:order__list' %}">لیست
+                                                                سفارشات </a></li>
+                                                            <li class="breadcrumb-item active">
+                                                                #{{ order.tc }}
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
+                                                </div>
+                                            </div>
+                                            <div class="nk-block-head-content d-none">
+                                                <div class="drodown">
+                                                    <a href="#"
+                                                       class="dropdown-toggle btn btn-icon btn-secondary px-2 text-center"
+                                                       data-bs-toggle="dropdown" aria-expanded="false">
+                                                        عملیات
+                                                        <em class="icon ni ni-setting"></em>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <ul class="link-list-opt no-bdr">
+                                                            <li>
+                                                                <button type="button" class="btn text-success"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#modal-manage-status">تغییر
+                                                                    وضعیت
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button type="button" class="btn text-danger"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#modal-delete">حذف
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered">
+                                            <!-- .nav-tabs -->
+                                            <div class="card-inner card-inner-lg">
+                                                <!-- .nk-block-head -->
+                                                <div class="nk-block">
+                                                    <div class="nk-data data-list data-list-s2">
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">کد رهگیری</span>
+                                                                <span class="data-value">
+                                                                    {{ order.tc }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">فاکتور</span>
+                                                                <span class="data-value">
+                                                                    <a class="badge badge-dim bg-info"
+                                                                       href="{{ order.invoice.get_dashboard_absolute_url }}">مشاهده</a>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">وضعیت پرداخت</span>
+                                                                <span class="data-value">
+                                                                    {% if order.get_invoice_purchase %}
+                                                                        <span class="badge badge-dim bg-success">پرداخت شده است</span>
+                                                                    {% else %}
+                                                                        <span class="badge badge-dim bg-warning">پرداخت نشده است</span>
+                                                                    {% endif %}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">وضعیت</span>
+                                                                <span class="data-value">
+                                                                    <span class="badge badge-dim bg-{{ order.status.status }}">
+                                                                        {{ order.status.get_status_display }}
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">تعداد محصولات</span>
+                                                                <span class="data-value">
+                                                                    {{ order.get_all_products_count }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">توضیحات کاربر</span>
+                                                                <span class="data-value">
+                                                                    {{ order.invoice.note|default:'-' }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">قیمت کل</span>
+                                                                <span class="data-value">
+                                                                    <span class="price-el">{{ order.get_total_price }}</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">زمان ایجاد</span>
+                                                                <span class="data-value">
+                                                                    {{ order.get_created_at_timepast }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">زمان بروزرسانی</span>
+                                                                <span class="data-value">
+                                                                    {{ order.get_updated_at_timepast }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- data-list -->
+                                                    {% with purchase=order.get_invoice_purchase %}
+                                                        {% if purchase %}
+                                                            <!-- data-list -->
+                                                            <div class="nk-data data-list data-list-s2">
+                                                                <div class="data-head">
+                                                                    <h6 class="overline-title">جزئیات وضعیت پرداخت</h6>
+                                                                </div>
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">تاریخ پرداخت</span>
+                                                                        <span class="data-value">
+                                                                            <span class="datetime-convert">
+                                                                                {{ purchase.created_at }}
+                                                                            </span>
+                                                                            <span class="fs-14px text-muted">
+                                                                                ({{ purchase.get_created_at_timepast }})
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">کد رهگیری</span>
+                                                                        <span class="data-value">
+                                                                            {{ purchase.tracking_code }}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">نام بانک</span>
+                                                                        <span class="data-value">
+                                                                            {{ purchase.bank_name }}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- data-item -->
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">قیمت پرداخت شده</span>
+                                                                        <span class="data-value">
+                                                                        <span class="price-el">{{ purchase.price_paid }}</span>
+                                                                    </span>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- data-item -->
+                                                            </div>
+                                                            <!-- data-list -->
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                </div>
+                                                <!-- .nk-block -->
+                                            </div>
+                                            <!-- .card-inner -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <div class="nk-block">
+                                        <div class="card card-bordered">
+                                            <!-- .nav-tabs -->
+                                            <div class="card-inner card-inner-lg">
+                                                <!-- .nk-block-head -->
+                                                <div class="nk-block">
+                                                    <div>
+                                                        <h5>ادرس و تاریخ</h5>
+                                                    </div>
+                                                    <div class="nk-data data-list data-list-s2">
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">ادرس</span>
+                                                                <span class="data-value">
+                                                                    <a href="{{ order.invoice.address.get_dashboard_absolute_url }}">{{ order.invoice.address.address }}</a>
+                                                                    <span class="badge badge-dim bg-info">{{ order.invoice.address.plate|default:'-' }}</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">مکان یابی</span>
+                                                                <span class="data-value">
+                                                                    ...
+                                                                    coming soon
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- .nk-block -->
+                                            </div>
+                                            <!-- .card-inner -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <div class="nk-block">
+                                        <div class="card card-bordered">
+                                            <!-- .nav-tabs -->
+                                            <div class="card-inner card-inner-lg">
+                                                <!-- .nk-block-head -->
+                                                <div class="nk-block">
+                                                    <div>
+                                                        <h5>محصولات</h5>
+                                                    </div>
+                                                    <div class="nk-data">
+                                                        {% for product in order.get_products %}
+                                                            <div class="card card-bordered my-3 col-12 col-sm-3 col-md-4">
+                                                                <a href="{{ product.product.get_absolute_url }}">
+                                                                    <img src="{{ product.product.get_image_cover }}"
+                                                                         class="card-img-top" alt=""
+                                                                         style="width: 100%;height: 180px;object-fit: cover">
+                                                                </a>
+                                                                <div class="card-inner">
+                                                                    <h5 class="card-title">
+                                                                        <a href="{{ product.product.get_absolute_url }}">
+                                                                            {{ product.product.title|truncatechars:20 }}
+                                                                            ({{ product.quantity }}x)
+                                                                        </a>
+                                                                    </h5>
+                                                                    <p class="card-text">
+                                                                        {% for attr in product.get_attrs %}
+                                                                            <div class="data-item data-attr">
+                                                                                <div class="data-col">
+                                                                                <span class="data-label">
+                                                                                    <span>
+                                                                                       {{ attr.group.name }}
+                                                                                    </span>
+                                                                                </span>
+                                                                                    <span class="data-value">
+                                                                                    <span>
+                                                                                      {{ attr.attr.name }}
+                                                                                        <span class="price-el font-70 text-muted">({{ attr.attr.additional_price|default:'0' }})</span>
+                                                                                    </span>
+                                                                                </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        {% endfor %}
+                                                                    </p>
+                                                                    <div class="text-end">
+                                                                        <p class="price-el">{{ product.get_total_price }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                        {% for product in order.get_custom_products %}
+                                                            <div class="card card-bordered my-3 col-12 col-sm-3 col-md-4">
+                                                                <a href="{{ product.custom_product.get_dashboard_absolute_url }}">
+                                                                    <img src="{{ product.custom_product.get_image_cover }}"
+                                                                         class="card-img-top" alt=""
+                                                                         style="width: 100%;height: 180px;object-fit: cover">
+                                                                </a>
+                                                                <div class="card-inner">
+                                                                    <h5 class="card-title">
+                                                                        <a href="{{ product.custom_product.get_dashboard_absolute_url }}">
+                                                                            {{ product.custom_product.title|truncatechars:20 }}</a>
+                                                                    </h5>
+                                                                    <p class="card-text">
+                                                                        {% for attr in product.custom_product.get_attributes %}
+                                                                            <div class="data-item data-attr">
+                                                                                <div class="data-col">
+                                                                                <span class="data-label">
+                                                                                    <span>
+                                                                                       {{ attr.group.name }}
+                                                                                    </span>
+                                                                                </span>
+                                                                                    <span class="data-value">
+                                                                                    <span>
+                                                                                       {{ attr.attr.name }}
+                                                                                        <span class="price-el font-70 text-muted">({{ attr.attr.additional_price|default:'0' }})</span>
+                                                                                    </span>
+                                                                                </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        {% endfor %}
+                                                                    </p>
+                                                                    <div class="text-end">
+                                                                        <p class="price-el">{{ product.custom_product.get_total_price }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                                <!-- .nk-block -->
+                                            </div>
+                                            <!-- .card-inner -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                {% include 'dashboard/user/base/components/footer.html' %}
+                                <!-- footer @e -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- modals -->
+
+        <div class="modal fade" tabindex="-1" id="modal-delete">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            حذف سفارش
+                        </h5>
+                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              action="{% url 'dashboard:order__delete' order_id=order.id %}"
+                              class="form-validate is-alter" novalidate="novalidate">
+                            {% csrf_token %}
+                            <div class="badge-dim bg-danger fs-17px p-2" style="border-radius: 10px">
+                                <p>ایا از حذف سفارش شماره
+                                    {{ order.tc }}
+                                    اطمینان دارید؟
+                                    پس از حذف امکان بازگشت وجود نخواهد داشت.</p>
+                            </div>
+                            <div class="form-group text-left mt-4">
+                                <button type="submit" class="btn btn-lg btn-danger p-1 px-2">
+                                    بله اطمینان دارم ! حذف
+                                    <em class="icon icon-circle ni ni-trash-empty bg-danger"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+{% endblock %}
+
+{% block Scripts %}
+    <script>
+        document.querySelectorAll('.bg-in_progress').forEach(function (el) {
+            el.classList.add('bg-info')
+        })
+        document.querySelectorAll('.bg-cancelled').forEach(function (el) {
+            el.classList.add('bg-danger')
+        })
+        document.querySelectorAll('.bg-delivered').forEach(function (el) {
+            el.classList.add('bg-success')
+        })
+        document.querySelectorAll('.bg-shipped').forEach(function (el) {
+            el.classList.add('bg-primary')
+        })
+        document.querySelectorAll('.bg-pending').forEach(function (el) {
+            el.classList.add('bg-warning')
+        })
+    </script>
+{% endblock %}

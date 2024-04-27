@@ -59,6 +59,9 @@ class Invoice(InvoiceBase):
     def get_dashboard_absolute_url(self):
         return reverse('dashboard:invoice__detail', args=(self.id,))
 
+    def get_purchase_url(self):
+        return reverse('payment:invoice__purchase', args=(self.id,))
+
 
 class PurchaseInvoice(BaseModel):
     user = models.ForeignKey('account.User', on_delete=models.SET_NULL, null=True, blank=True)
@@ -76,5 +79,4 @@ class PurchaseInvoice(BaseModel):
         return reverse('dashboard:purchase_invoice__detail', args=(self.id,))
 
     def get_absolute_url(self):
-        # TODO: need to complete
-        pass
+        return self.get_dashboard_absolute_url()

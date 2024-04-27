@@ -6,8 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="3218dff5-1747-4748-95c5-4f5419735ae2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/storage/gallery/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/storage/gallery/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/storage/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/storage/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/base_template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/user/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/user/base/base_template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/dashboard/shared/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/dashboard/shared/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/dashboard/admin/js/charts/gd-default.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/dashboard/admin/js/charts/gd-default.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base/base_template.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,11 +45,12 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR&quot;,
     &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Project-Company/Smarten/cando-2/src/apps/dashboard/templates/dashboard/admin/product/inventory&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Project-Company/Smarten/cando-2/src/apps/dashboard/templates/dashboard/user/navigation/address&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -56,18 +61,18 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\inventory" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\account\user" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\payment\invoice\purchase" />
-      <recent name="C:\Users\ehyasystem\Desktop\web-projects\cando-2\src\apps\dashboard\templates\dashboard\admin\payment\invoice" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\product\order" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\user\navigation\address" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\user" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\navigation\address" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\navigation" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\notification" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\navigation\address" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\urls\shared" />
+      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\views\dashboard\admin" />
       <recent name="C:\Users\ehyasystem\Desktop\web-projects\cando-2\src\apps\dashboard\templates\dashboard\admin" />
       <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\dashboard\templates\dashboard\admin\account\user" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps\storage\templates\storage\gallery" />
-      <recent name="F:\Project-Company\Smarten\cando-2\src\apps" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -96,7 +101,11 @@
       <workItem from="1713471770094" duration="8380000" />
       <workItem from="1713538469798" duration="6424000" />
       <workItem from="1713706864528" duration="31117000" />
-      <workItem from="1713759800343" duration="139000" />
+      <workItem from="1713759800343" duration="282000" />
+      <workItem from="1713817401337" duration="6748000" />
+      <workItem from="1713889059297" duration="12832000" />
+      <workItem from="1714063688160" duration="31035000" />
+      <workItem from="1714161965958" duration="18031000" />
     </task>
     <servers />
   </component>

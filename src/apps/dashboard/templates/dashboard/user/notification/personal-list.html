@@ -1,0 +1,286 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %}لیست اعلانات{% endblock %}
+
+{% block Content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                {% include 'dashboard/user/base/components/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            {% include 'dashboard/user/base/components/menu-aside.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">لیست اعلانات</h3>
+                                                <nav>
+                                                    <ul class="breadcrumb breadcrumb-arrow">
+                                                        <li class="breadcrumb-item"><a
+                                                                href="{% url 'dashboard:index' %}">صفحه اصلی</a></li>
+                                                        <li class="breadcrumb-item"><a>اعلانات </a></li>
+                                                        <li class="breadcrumb-item active">لیست اعلانات کاربران</li>
+                                                    </ul>
+                                                </nav>
+                                                <div class="nk-block-des text-soft mt-2">
+                                                    <p>شما
+                                                        <span class="separate-el">{{ total_count }}</span>
+                                                        اعلان دارید.</p>
+                                                </div>
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                            <div class="nk-block-head-content">
+                                                <div class="toggle-wrap nk-block-tools-toggle">
+                                                    <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1"
+                                                       data-target="pageMenu"><em
+                                                            class="icon ni ni-menu-alt-r"></em></a>
+                                                    <div class="toggle-expand-content" data-content="pageMenu">
+                                                        <ul class="nk-block-tools g-3">
+                                                            <li class="nk-block-tools-opt">
+                                                                <div class="drodown">
+                                                                    <a href="#"
+                                                                       class="dropdown-toggle btn btn-white btn-outline-light"
+                                                                       data-bs-toggle="dropdown">
+                                                                        <em
+                                                                                class="icon ni ni-download-cloud"></em>
+                                                                        <span>خروجی گرفتن</span>
+                                                                    </a>
+                                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                                        <ul class="link-list-opt no-bdr">
+                                                                            <li>
+                                                                                <a href="#"><span>خروجی اکسل</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!-- .toggle-wrap -->
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                        </div>
+                                        <!-- .nk-block-between -->
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered card-stretch">
+                                            <div class="card-inner-group">
+                                                <div class="card-inner position-relative card-tools-toggle">
+                                                    <div class="card-title-group">
+                                                        <!-- .card-tools -->
+                                                        <div class="card-tools me-n1">
+                                                            <ul class="btn-toolbar gx-1">
+                                                                <li>
+                                                                    <a href="#"
+                                                                       class="btn btn-icon search-toggle toggle-search"
+                                                                       data-target="search"><em
+                                                                            class="icon ni ni-search"></em>
+                                                                        {% if request.GET.search %}
+                                                                            <div class="dot dot-primary"></div>
+                                                                        {% endif %}
+                                                                    </a>
+                                                                </li>
+                                                                <!-- li -->
+                                                                <li>
+                                                                    <div class="toggle-wrap">
+                                                                        <a href="#"
+                                                                           class="btn btn-icon btn-trigger toggle"
+                                                                           data-target="cardTools"><em
+                                                                                class="icon ni ni-menu-right"></em></a>
+                                                                        <div class="toggle-content"
+                                                                             data-content="cardTools">
+                                                                            <ul class="btn-toolbar gx-1">
+                                                                                <li class="toggle-close">
+                                                                                    <a href="#"
+                                                                                       class="btn btn-icon btn-trigger toggle"
+                                                                                       data-target="cardTools"><em
+                                                                                            class="icon ni ni-arrow-left"></em></a>
+                                                                                </li>
+                                                                                <!-- li -->
+                                                                            </ul>
+                                                                            <!-- .btn-toolbar -->
+                                                                        </div>
+                                                                        <!-- .toggle-content -->
+                                                                    </div>
+                                                                    <!-- .toggle-wrap -->
+                                                                </li>
+                                                                <!-- li -->
+                                                            </ul>
+                                                            <!-- .btn-toolbar -->
+                                                        </div>
+                                                        <!-- .card-tools -->
+                                                    </div>
+                                                    <!-- .card-title-group -->
+                                                    <form>
+                                                        <div class="card-search search-wrap" data-search="search">
+
+                                                            <div class="card-body">
+                                                                <div class="search-content">
+                                                                    <a href="#"
+                                                                       class="search-back btn btn-icon toggle-search"
+                                                                       data-target="search"><em
+                                                                            class="icon ni ni-arrow-left"></em></a>
+                                                                    <input type="text" name="search"
+                                                                           class="form-control border-transparent form-focus-none"
+                                                                           value="{{ request.GET.search }}"
+                                                                           placeholder="جستجو بر اساس عنوان"/>
+                                                                    <button class="search-submit btn btn-icon"><em
+                                                                            class="icon ni ni-search"></em></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <!-- .card-search -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                                <div class="card-inner p-0 text-center">
+                                                    <div class="nk-tb-list nk-tb-ulist">
+                                                        <div class="nk-tb-item nk-tb-head">
+                                                            <div class="nk-tb-col nk-tb-col-check">
+                                                                <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                           id="cid"/>
+                                                                    <label class="custom-control-label"
+                                                                           for="cid"></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="nk-tb-col"><span class="sub-text">عنوان</span>
+                                                            </div>
+                                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">تاریخ ایجاد</span>
+                                                            </div>
+                                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">توضیحات</span>
+                                                            </div>
+                                                            <div class="nk-tb-col text-end"><span class="sub-text">اقدامات</span>
+                                                            </div>
+                                                        </div>
+                                                        {% for notification in object_list %}
+                                                            <!-- .nk-tb-item -->
+                                                            <div class="nk-tb-item">
+                                                                <div class="nk-tb-col nk-tb-col-check">
+                                                                    <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                                        <input type="checkbox"
+                                                                               class="custom-control-input action-checkbox"
+                                                                               data-notification-id="{{ notification.id }}"
+                                                                               id="cid-{{ forloop.counter }}"/>
+                                                                        <label class="custom-control-label"
+                                                                               for="cid-{{ forloop.counter }}"></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="nk-tb-col">
+                                                                    <a href="{{ notification.get_dashboard_absolute_url }}">
+                                                                        <span>{{ notification.title|truncatechars:20 }}</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-md">
+                                                                    <span>
+                                                                        <span class="datetime-convert">{{ notification.get_created_at }}</span>
+                                                                        <span class="fs-9px badge badge-dim bg-info">({{ notification.get_created_at_timepast }})</span>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-md">
+                                                                    <span class="tb-status">{{ notification.description|default:'-' |truncatechars:15 }}</span>
+                                                                </div>
+                                                                <div class="nk-tb-col nk-tb-col-tools">
+                                                                    <ul class="nk-tb-actions gx-1">
+                                                                        <li>
+                                                                            <div class="drodown">
+                                                                                <a href="#"
+                                                                                   class="dropdown-toggle btn btn-icon btn-trigger"
+                                                                                   data-bs-toggle="dropdown"><em
+                                                                                        class="icon ni ni-more-h"></em></a>
+                                                                                <div class="dropdown-menu dropdown-menu-end">
+                                                                                    <ul class="link-list-opt no-bdr">
+                                                                                        <li>
+                                                                                            <a href="{{ notification.get_dashboard_absolute_url }}"><em
+                                                                                                    class="icon ni ni-eye"></em><span>مشاهده جزئیات</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            {% empty %}
+                                                            <div class="container-not-found-base nk-tb-item">
+                                                                <div class="nk-tb-col">
+                                                                    <p>چیزی یافت نشد</p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .nk-tb-item -->
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!-- .nk-tb-list -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                                <div class="card-inner">
+                                                    <div class="nk-block-between-md">
+                                                        <div class="g">
+                                                            <ul class="pagination justify-content-center justify-content-md-start">
+                                                                {% if page_obj.has_previous %}
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page=1">اول</a>
+                                                                    </li>
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+                                                                    </li>
+                                                                {% endif %}
+
+                                                                <span class="fs-13px mt-1 mx-2">
+                                                                        صفحه {{ page_obj.number }} از {{ page_obj.paginator.num_pages }}.
+                                                                </span>
+
+                                                                {% if page_obj.has_next %}
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.next_page_number }}">بعدی</a>
+                                                                    </li>
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.paginator.num_pages }}">اخرین</a>
+                                                                    </li>
+                                                                {% endif %}
+                                                            </ul>
+                                                            <!-- .pagination -->
+                                                        </div>
+
+                                                        <!-- .pagination-goto -->
+                                                    </div>
+                                                    <!-- .nk-block-between -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                            </div>
+                                            <!-- .card-inner-group -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                {% include 'dashboard/user/base/components/footer.html' %}
+                                <!-- footer @e -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+{% endblock %}
+

@@ -103,11 +103,11 @@
                                         class="nk-menu-text">مدیریت کوپن تخفیف</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="html/project-card.html" class="nk-menu-link"><span
+                                <a href="#" class="nk-menu-link"><span
                                         class="nk-menu-text">ایجاد تخفیف</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="html/project-card.html" class="nk-menu-link"><span
+                                <a href="#" class="nk-menu-link"><span
                                         class="nk-menu-text">لیست تخفیف ها</span></a>
                             </li>
                         </ul>
@@ -177,7 +177,7 @@
                 </a>
                 <ul class="nk-menu-sub">
                     <li class="nk-menu-item">
-                        <a href="html/support-kb.html" class="nk-menu-link"><span
+                        <a href="#" class="nk-menu-link"><span
                                 class="nk-menu-text">لیست تیکت ها</span></a>
                     </li>
                 </ul>
@@ -191,16 +191,10 @@
                 </a>
                 <ul class="nk-menu-sub">
                     <li class="nk-menu-item">
-                        <a href="html/pages/auths/auth-login.html" class="nk-menu-link"
-                           target="_blank"><span class="nk-menu-text">ایجاد اعلان کاربر</span></a>
+                        <a href="{% url 'dashboard:notification_user__list' %}" class="nk-menu-link"><span class="nk-menu-text">لیست اعلانات</span></a>
                     </li>
                     <li class="nk-menu-item">
-                        <a href="html/pages/auths/auth-login.html" class="nk-menu-link"
-                           target="_blank"><span class="nk-menu-text">لیست اعلانات</span></a>
-                    </li>
-                    <li class="nk-menu-item">
-                        <a href="html/pages/auths/auth-register.html" class="nk-menu-link"
-                           target="_blank"><span class="nk-menu-text">لیست اعلانات شخصی</span></a>
+                        <a href="{% url 'dashboard:notification_user_personal__list' %}" class="nk-menu-link"><span class="nk-menu-text">لیست اعلانات شخصی</span></a>
                     </li>
                 </ul>
                 <!-- .nk-menu-sub -->
@@ -255,6 +249,17 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nk-menu-item">
+                        <a href="#" class="nk-menu-link nk-menu-toggle"><span
+                                class="nk-menu-text">ادرس و مکان یابی</span></a>
+                        <ul class="nk-menu-sub">
+                            <li class="nk-menu-item">
+                                <a href="{% url 'dashboard:address_default__manage' %}"
+                                   class="nk-menu-link"><span
+                                        class="nk-menu-text">تنظیم ادرس پیشفرض</span></a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                 <!-- .nk-menu-sub -->
             </li>
@@ -271,11 +276,11 @@
                 </a>
                 <ul class="nk-menu-sub">
                     <li class="nk-menu-item">
-                        <a href="html/pages/auths/auth-login.html" class="nk-menu-link"
+                        <a href="{% url 'dashboard:notification_user_personal__list' %}" class="nk-menu-link"
                            target="_blank"><span class="nk-menu-text">اعلانات شخصی</span></a>
                     </li>
                     <li class="nk-menu-item">
-                        <a href="html/pages/auths/auth-login.html" class="nk-menu-link"
+                        <a href="#" class="nk-menu-link"
                            target="_blank"><span class="nk-menu-text">فعالیت وررود</span></a>
                     </li>
                     <li class="nk-menu-item">
@@ -283,12 +288,12 @@
                                 class="nk-menu-text">احراز هویت</span></a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="html/pages/auths/auth-login-v3.html"
+                                <a href="#"
                                    class="nk-menu-link" target="_blank"><span
                                         class="nk-menu-text">تغییر رمز عبور</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="html/pages/auths/auth-register-v3.html"
+                                <a href="{% url 'account:reset_password' %}"
                                    class="nk-menu-link" target="_blank"><span
                                         class="nk-menu-text">فراموشی رمز عبور</span></a>
                             </li>
