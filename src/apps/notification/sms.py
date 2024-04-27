@@ -28,6 +28,13 @@ class NotificationUser:
         })
 
     @classmethod
+    def handler_new_factor_cake_iamge_admin(cls, notification, phonenumber):
+        pattern = '#'  # TODO: should be completed
+        send_sms(phonenumber, pattern, {
+            'notification_url': get_host_url(notification.get_link()),
+        })
+
+    @classmethod
     def handler_custom_product_created(cls, notification, phonenumber):
         pattern = 'jh01r9a6y1pl234'
         send_sms(phonenumber, pattern, {

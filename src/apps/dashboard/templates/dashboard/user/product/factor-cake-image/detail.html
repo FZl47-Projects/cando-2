@@ -95,17 +95,7 @@
                                                             <div class="data-col">
                                                                 <span class="data-label">وضعیت بازدید</span>
                                                                 <span class="data-value">
-                                                                    {% if factor_cake_image.seen %}
-                                                                        <span class="badge badge-dim bg-success">
-                                                                            دیده شده
-                                                                            <em class="icon ni ni-check-circle-fill text-success"></em>
-                                                                         </span>
-                                                                    {% else %}
-                                                                        <span class="badge badge-dim bg-danger">
-                                                                            دیده نشده
-                                                                             <em class="icon ni ni-cross-circle-fill text-danger"></em>
-                                                                        </span>
-                                                                    {% endif %}
+                                                                     <span class="badge badge-dim bg-{{ factor_cake_image.status }} fs-11px">{{ factor_cake_image.get_status_display }}</span>
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -210,4 +200,16 @@
         <!-- main @e -->
     </div>
     <!-- app-root @e -->
+{% endblock %}
+
+
+{% block Scripts %}
+    <script>
+        document.querySelectorAll('.bg-seen').forEach(function (el) {
+            el.classList.add('bg-success')
+        })
+        document.querySelectorAll('.bg-unseen').forEach(function (el) {
+            el.classList.add('bg-danger')
+        })
+    </script>
 {% endblock %}
