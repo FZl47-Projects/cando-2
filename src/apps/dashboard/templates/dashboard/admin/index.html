@@ -591,5 +591,15 @@
         document.querySelectorAll('.bg-pending').forEach(function (el) {
             el.classList.add('bg-warning')
         })
+        // custom product
+        document.querySelectorAll('.bg-accepted').forEach(function (el) {
+            el.classList.add('bg-success')
+        })
+        document.querySelectorAll('.bg-rejected').forEach(function (el) {
+            el.classList.add('bg-danger')
+        })
+        document.querySelectorAll('.bg-pending').forEach(function (el) {
+            el.classList.add('bg-warning')
+        })
     </script>
 {% endblock %}
