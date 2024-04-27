@@ -602,14 +602,14 @@
                         <h5 class="modal-title">
                             حذف کاربر
                         </h5>
-                        <a href="{% url 'dashboard:user__delete' user_id=user.id %}" class="close"
+                        <a href="#" class="close"
                            data-bs-dismiss="modal" aria-label="بستن">
                             <em class="icon ni ni-cross"></em>
                         </a>
                     </div>
                     <div class="modal-body">
                         <form method="post"
-                              action="#"
+                              action="{% url 'dashboard:user__delete' user_id=user.id %}"
                               class="form-validate is-alter" novalidate="novalidate">
                             {% csrf_token %}
                             <div class="badge-dim bg-danger fs-17px p-2" style="border-radius: 10px">
