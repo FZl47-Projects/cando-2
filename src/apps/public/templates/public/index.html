@@ -68,8 +68,8 @@
                             </a>
                         </div>
                     </div>
-                    <!-- <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div> -->
+                    <div class="swiper-button-prev d-none"></div>
+                    <div class="swiper-button-next d-none"></div>
                     <div class="swiper-pagination"></div>
                 </div>
             </section>
@@ -102,8 +102,8 @@
                                                 src="{{ product.get_image_cover }}" alt="{{ product }}"
                                                 class="overflow-hidden"></a>
                                         <div class="d-flex justify-content-between flex-wrap ">
-                                            <div class="col-12 col-md-6 col-lg-6">
-                                                <a href="{{ product.get_absolute_url }}"><span>{{ product.title }} </span></a>
+                                            <div class="col-12">
+                                                <a href="{{ product.get_absolute_url }}"><span>{{ product.title|truncatechars:15 }} </span></a>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-between mt-4">
@@ -122,7 +122,7 @@
                                                 <a href="{{ product.get_absolute_url }}"><i class="fa fa-eye p-2 rounded"></i></a>
                                             </div>
                                         </div>
-                                        <div class="offer">ویترین</div>
+                                        <div class="offer" style="font-size: 11px">ویترین</div>
                                     </div>
                                 </div>
                             {% endfor %}

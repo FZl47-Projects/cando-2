@@ -84,6 +84,10 @@ img {
     font-weight: 600;
 }
 
+.product-cart img{
+    height: 250px;
+}
+
 .product-cart .amount {
     font-size: 14px;
 }

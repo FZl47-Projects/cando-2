@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3218dff5-1747-4748-95c5-4f5419735ae2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/base_template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/user/base/base_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/user/base/base_template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/user/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/user/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/dashboard/shared/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/dashboard/shared/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locale/fa_IR/LC_MESSAGES/django.po" beforeDir="false" afterPath="$PROJECT_DIR$/src/locale/fa_IR/LC_MESSAGES/django.po" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/notification/sms.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/notification/sms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/signals.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
