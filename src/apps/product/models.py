@@ -278,7 +278,7 @@ class CustomProduct(BaseModel):
     def get_image_cover(self):
         try:
             return self.get_images().first().image.url
-        except ValueError:
+        except (ValueError, AttributeError):
             pass
 
     def get_price(self):
