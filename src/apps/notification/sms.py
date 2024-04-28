@@ -5,7 +5,7 @@ class NotificationUser:
 
     @classmethod
     def handler_custom_notification(cls, notification, phonenumber):
-        pattern = '#'  # TODO: should be completed
+        pattern = 'q8q3b180hnk30a1'
         send_sms(phonenumber, pattern, {
             'notification_url': get_host_url(notification.get_link()),
             'user_name': notification.to_user.get_full_name()
@@ -28,8 +28,8 @@ class NotificationUser:
         })
 
     @classmethod
-    def handler_new_factor_cake_iamge_admin(cls, notification, phonenumber):
-        pattern = '#'  # TODO: should be completed
+    def handler_new_factor_cake_image_admin(cls, notification, phonenumber):
+        pattern = '53obo7vc564pi5d'
         send_sms(phonenumber, pattern, {
             'notification_url': get_host_url(notification.get_link()),
         })
@@ -129,6 +129,7 @@ NOTIFICATION_USER_HANDLERS = {
     'CUSTOM_NOTIFICATION': NotificationUser.handler_custom_notification,
     'PAYMENT_SUCCESSFULLY_USER': NotificationUser.handler_payment_successfully_user,
     'NEW_PAYMENT_ADMIN': NotificationUser.handler_new_payment_admin,
+    'FACTOR_CAKE_IMAGE_CREATED_ADMIN': NotificationUser.handler_new_factor_cake_image_admin,
     'CUSTOM_PRODUCT_CREATED': NotificationUser.handler_custom_product_created,
     'CUSTOM_PRODUCT_ADDED_TO_CART': NotificationUser.handler_custom_product_added_to_cart,
     'CUSTOM_PRODUCT_STATUS_REJECTED': NotificationUser.handler_custom_product_status_rejected,

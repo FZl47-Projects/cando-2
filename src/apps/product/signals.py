@@ -54,7 +54,7 @@ def create_comment_notify_status(sender, instance, created, **kwargs):
 def create_factor_cake_image(sender, instance, created, **kwargs):
     if created:
         # create notification for admins
-        create_notify_admins('FACTOR_CAKE_IMAGE_CREATED', _('Factor Cake Image Created'), kwargs={
+        create_notify_admins('FACTOR_CAKE_IMAGE_CREATED_ADMIN', _('Factor Cake Image Created'), kwargs={
             'link': instance.get_dashboard_absolute_url(),
         })
 
