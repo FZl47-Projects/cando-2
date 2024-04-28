@@ -302,6 +302,7 @@ function setPriceSpreadInput(input_selector, field_selector, default_val = '0', 
 // full size element
 document.querySelectorAll('.click-full-size').forEach(function (el) {
     el.addEventListener('click', function () {
+        this.style.objectFit = 'none'
         this.requestFullscreen()
     })
 })
