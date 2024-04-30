@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-27 01:51+0330\n"
+"POT-Creation-Date: 2024-04-30 04:47+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -300,25 +300,29 @@ msgstr "نظر محصول تایید شد"
 msgid "Comment Product Rejected"
 msgstr "نظر محصول رد شد"
 
-#: .\apps\product\signals.py:61
+#: .\apps\product\signals.py:57
+msgid "Factor Cake Image Created"
+msgstr "تصویر فاکتور کیک با موفقیت ایجاد و ثبت شد"
+
+#: .\apps\product\signals.py:70
 #, fuzzy
 #| msgid "Product Created Successfully"
 msgid "Custom Product Created"
 msgstr "محصول با موفقیت ایجاد شد"
 
-#: .\apps\product\signals.py:84
+#: .\apps\product\signals.py:93
 msgid "Custom Product Added To Cart"
 msgstr "محصول دلخواه به سبد خرید اضافه شد"
 
-#: .\apps\product\signals.py:93
+#: .\apps\product\signals.py:102
 msgid "Custom Product Status Rejected"
 msgstr "وضعیت محصول دلخواه رد شد"
 
-#: .\apps\product\signals.py:111
+#: .\apps\product\signals.py:118
 msgid "There Is Some Issue In Cart Status Creation"
 msgstr "اشکالی در زمان ایجاد وضعیت سبد خرید وجود دارد"
 
-#: .\apps\product\signals.py:122
+#: .\apps\product\signals.py:129
 msgid "Cart Status Updated"
 msgstr "وضعیت سبد خرید بروز شد"
 

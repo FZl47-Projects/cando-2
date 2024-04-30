@@ -5,10 +5,10 @@
 {% block Styles %}
     <style>
         .cnt-file-obj {
-            width: 200px;
             height: 200px;
             margin: 10px;
             display: inline-block;
+            max-width: 100%;
         }
 
         .cnt-file-obj img {
@@ -57,6 +57,18 @@
             padding: 2px;
             border-radius: 7px;
             backdrop-filter: blur(2px);
+        }
+
+        @media screen and (max-width: 767px) {
+            .cnt-file-obj {
+                width: 180px;
+            }
+        }
+
+        @media screen and (max-width: 350px) {
+            .cnt-file-obj {
+                width: 115px;
+            }
         }
 
 
@@ -163,9 +175,9 @@
                                                     <!-- .card-title-group -->
                                                 </div>
                                                 <!-- .card-inner -->
-                                                <div class="card-inner p-4">
+                                                <div class="card-inner p-3 text-center">
                                                     {% for object in object_list %}
-                                                        <div class="card-bordered cnt-file-obj">
+                                                        <div class="card-bordered cnt-file-obj col-sm-6 col-md-4 col-lg-3">
                                                             <div class="position-relative">
                                                                 <div class="cnt-file-tools">
                                                                     <span>
