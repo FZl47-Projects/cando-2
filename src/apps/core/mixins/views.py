@@ -119,8 +119,8 @@ class CreateOrUpdateViewMixin(UpdateViewMixin, abc.ABC):
     def is_create_state(self):
         obj = self.get_object()
         if obj:
-            return True
-        return False
+            return False
+        return True
 
 
 class UpdateMultipleObjViewMixin(BaseCUViewMixin):
