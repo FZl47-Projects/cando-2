@@ -1,5 +1,16 @@
 from config.settings import BASE_DIR
 
+DEBUG = True
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+
+
 # STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -26,3 +37,17 @@ LOGGING = {
         },
     },
 }
+
+
+Q_CLUSTER = {
+    'name': 'django-q',
+    'timeout': 60,
+    'orm': 'default'
+}
+
+
+REDIS_CONFIG = {
+    'HOST': 'localhost',
+    'PORT': '6379'
+}
+

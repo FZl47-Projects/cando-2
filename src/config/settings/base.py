@@ -14,8 +14,6 @@ load_dotenv(BASE_DIR / '.env')
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
-
 HOST_ADDRESS = 'http://127.0.0.1:8000'  # without slash
 
 ALLOWED_HOSTS = ['*']
@@ -80,13 +78,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -150,18 +141,7 @@ USER_ROLES = [
     'normal_user',
 ]
 
-Q_CLUSTER = {
-    'name': 'django-q',
-    'timeout': 60,
-    'orm': 'default'
-}
-
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
-
-REDIS_CONFIG = {
-    'HOST': 'localhost',
-    'PORT': '6379'
-}
 
 RESET_PASSWORD_CONFIG = {
     'TIMEOUT': 300,  # by sec
@@ -183,7 +163,7 @@ SMS_CONFIG = {
 
 GATEWAYS_BANK = {
     'ZARINPAL': {
-        'SANDBOX': True,
+        'SANDBOX': False,
         'MERCHANT_CODE': os.environ.get('ZARINPAL_MERCHANT'),
         'DESCRIPTION': 'خرید از مجموعه کندو',
     }
