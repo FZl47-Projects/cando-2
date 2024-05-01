@@ -1,7 +1,7 @@
 from config.settings.base import *
 
 
-PRODUCTION = False
+PRODUCTION = True
 
 
 if PRODUCTION:
