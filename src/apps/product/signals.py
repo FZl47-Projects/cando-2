@@ -109,7 +109,9 @@ def create_custom_product_cart_item(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=models.Cart)
 def create_cart_status(sender, instance, created, **kwargs):
-    # create cart status(order)
+    # create cart status(order) after payment
+    if not instance.get_invoice_purchase():
+        return
     try:
         models.CartStatus.objects.create(
             cart=instance

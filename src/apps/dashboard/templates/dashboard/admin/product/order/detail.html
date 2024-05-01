@@ -73,11 +73,13 @@
                                                     <div class="dropdown-menu dropdown-menu-end">
                                                         <ul class="link-list-opt no-bdr">
                                                             <li>
-                                                                <button type="button" class="btn text-success"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#modal-manage-status">تغییر
-                                                                    وضعیت
-                                                                </button>
+                                                                {% if order.status %}
+                                                                    <button type="button" class="btn text-success"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#modal-manage-status">تغییر
+                                                                        وضعیت
+                                                                    </button>
+                                                                {% endif %}
                                                             </li>
                                                             <li>
                                                                 <button type="button" class="btn text-danger"
@@ -400,44 +402,46 @@
             <!-- wrap @e -->
         </div>
         <!-- modals -->
-        <div class="modal fade" tabindex="-1" id="modal-manage-status">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">
-                            تغییر وضعیت
-                        </h5>
-                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
-                            <em class="icon ni ni-cross"></em>
-                        </a>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post"
-                              action="{% url 'dashboard:order__manage_status' order_status_id=order.status.id %}"
-                              class="form-validate is-alter" novalidate="novalidate">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label class="form-label" for="status">وضعیت</label>
-                                <div class="form-control-wrap">
-                                    <select name="status" id="status" value="{{ order.status.status }}"
-                                            class="js-select2 select-by-value">
-                                        {% for STATUS_OPTION in order.status.STATUS_OPTIONS %}
-                                            <option value="{{ STATUS_OPTION.0 }}">{{ STATUS_OPTION.1 }}</option>
-                                        {% endfor %}
-                                    </select>
+        {% if order.status %}
+            <div class="modal fade" tabindex="-1" id="modal-manage-status">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                تغییر وضعیت
+                            </h5>
+                            <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                                <em class="icon ni ni-cross"></em>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post"
+                                  action="{% url 'dashboard:order__manage_status' order_status_id=order.status.id %}"
+                                  class="form-validate is-alter" novalidate="novalidate">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label class="form-label" for="status">وضعیت</label>
+                                    <div class="form-control-wrap">
+                                        <select name="status" id="status" value="{{ order.status.status }}"
+                                                class="js-select2 select-by-value">
+                                            {% for STATUS_OPTION in order.status.STATUS_OPTIONS %}
+                                                <option value="{{ STATUS_OPTION.0 }}">{{ STATUS_OPTION.1 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group text-left">
-                                <button type="submit" class="btn btn-lg btn-success p-1 px-2">
-                                    تغییر وضعیت سفارش
-                                    <em class="icon icon-circle ni ni-check bg-success"></em>
-                                </button>
-                            </div>
-                        </form>
+                                <div class="form-group text-left">
+                                    <button type="submit" class="btn btn-lg btn-success p-1 px-2">
+                                        تغییر وضعیت سفارش
+                                        <em class="icon icon-circle ni ni-check bg-success"></em>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
 
         <div class="modal fade" tabindex="-1" id="modal-delete">
             <div class="modal-dialog" role="document">
