@@ -183,7 +183,7 @@
                                                                     <span>
                                                                         <em class="icon ni ni-trash-empty" type="button"
                                                                             data-bs-toggle="modal"
-                                                                            data-bs-target="#modal-delete-obj"></em>
+                                                                            data-bs-target="#modal-delete-obj-{{ object.id }}"></em>
                                                                     </span>
                                                                 </div>
                                                                 <img src="{{ object.get_image_url }}"
@@ -258,7 +258,7 @@
             <!-- wrap @e -->
         </div>
         {% for object in object_list %}
-            <div class="modal fade" tabindex="-1" id="modal-delete-obj">
+            <div class="modal fade" tabindex="-1" id="#modal-delete-obj-{{ object.id }}">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
