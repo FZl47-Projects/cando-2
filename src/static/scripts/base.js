@@ -324,3 +324,10 @@ function formatBytes(bytes, decimals = 2) {
 
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
 }
+
+
+function togglePageLoading(title) {
+    let loading = document.getElementById('page-loading')
+    loading.querySelector('.loading-title').innerHTML = title
+    loading.classList.toggle('active')
+}

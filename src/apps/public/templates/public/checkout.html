@@ -137,7 +137,7 @@
                                                     </option>
                                                 {% endfor %}
                                             </select>
-                                            <a href="#" class="p-2">ایجاد ادرس</a>
+                                            <a href="{% url 'dashboard:address__list' %}" class="p-2">ایجاد ادرس</a>
                                         </li>
                                         <li dir="rtl">
                                             <div>
@@ -190,9 +190,10 @@
                                     </ul>
                                     <div class="text-left">
                                         {% if cart.get_total_price > 0 %}
-                                            <button class="btn btn-primary my-3" href="#">پرداخت سبد خرید</button>
+                                            <button class="btn btn-primary my-3" onclick="togglePageLoading('در انقال به درگاه پرداخت، لطفا صبور باشید')">پرداخت سبد خرید</button>
                                         {% else %}
                                             <span class="text-danger">قیمت نامشخص</span>
+                                            <span class="font-80">در انتخاب زمان ارسال دقت داشته باشید ممکن است محصولات شما قادر به ارسال در زمان مشخص شده از سمت شما نباشد</span>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -203,7 +204,7 @@
             </div>
         </div>
     </div>
-     <!--footer area start-->
+    <!--footer area start-->
     {% include 'base/components/footer.html' %}
     <!--footer area end-->
 {% endblock %}

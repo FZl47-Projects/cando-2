@@ -87,6 +87,7 @@
             content: "";
         }
 
+
     </style>
 
     {% block Style %}
@@ -95,6 +96,14 @@
 </head>
 <body>
 {% block Content %}{% endblock %}
+
+
+<div id="page-loading">
+    <div class="loading-content">
+        <p class="loading-title"></p>
+        <span class="loader"></span>
+    </div>
+</div>
 
 <script src="{% static 'scripts/var.js' %}"></script>
 <script src="{% static 'scripts/notify.js' %}"></script>
