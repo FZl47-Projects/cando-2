@@ -26,6 +26,16 @@ class DefaultAddressManage(UserRoleViewMixin, CreateOrUpdateViewMixin, TemplateV
         default_address = get_default_address().first()
         return default_address  # return object or None
 
+    def do_success(self):
+        default_address_setting = models.DefaultStoreAddress.objects.first()
+        if default_address_setting:
+            default_address_setting.address = self.obj
+            default_address_setting.save()
+        else:
+            default_address_setting = models.DefaultStoreAddress.objects.create(
+                address=self.obj
+            )
+
     def set_success_message(self):
         if self.is_create_state():
             self.success_message = _('Default Address Created Successfully')

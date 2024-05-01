@@ -282,10 +282,10 @@ class MultipleUserViewMixin(abc.ABC, TemplateResponseMixin):
 class MultipleUserListViewMixin(MultipleUserViewMixin):
 
     def get_super_user_queryset(self):
-        pass
+        return []
 
     def get_user_queryset(self):
-        pass
+        return []
 
     def get_queryset(self):
         user = self.request.user

@@ -330,4 +330,5 @@ function togglePageLoading(title) {
     let loading = document.getElementById('page-loading')
     loading.querySelector('.loading-title').innerHTML = title
     loading.classList.toggle('active')
+    document.body.classList.toggle('page-loading-active')
 }

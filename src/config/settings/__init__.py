@@ -1,8 +1,6 @@
 from config.settings.base import *
 
-
-PRODUCTION = True
-
+PRODUCTION = False
 
 if PRODUCTION:
     from config.settings.production import *
