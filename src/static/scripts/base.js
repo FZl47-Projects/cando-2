@@ -329,6 +329,11 @@ function formatBytes(bytes, decimals = 2) {
 function togglePageLoading(title) {
     let loading = document.getElementById('page-loading')
     loading.querySelector('.loading-title').innerHTML = title
+    goToTopPage()
     loading.classList.toggle('active')
     document.body.classList.toggle('page-loading-active')
+}
+
+function goToTopPage() {
+    window.scrollTo(0, 0);
 }
