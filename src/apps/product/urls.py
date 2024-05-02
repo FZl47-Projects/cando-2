@@ -13,8 +13,18 @@ urlpatterns = [
 
     path('comment/create', views.CommentCreate.as_view(), name='comment__create'),
 
-    path('factor-cake-image', views.FactorCakeImage.as_view(), name='factor_cake_image__create'),
+    path('factor-cake-image', views.FactorCakeImageCreate.as_view(), name='factor_cake_image__create'),
 
     path('custom-product-create', views.CustomProductCreate.as_view(), name='custom_product__create'),
-    path('custom-product-cart/<int:custom_product_cart_id>/delete', views.CustomProductCartDelete.as_view(), name='custom_product_cart__delete'),
+    path('custom-product-cart/<int:custom_product_cart_id>/delete', views.CustomProductCartDelete.as_view(),
+         name='custom_product_cart__delete'),
 ]
+
+# API
+from .api import views
+
+urlpatterns.extend(
+    [
+        path('api/factor-cake-image', views.FactorCakeImageCreate.as_view())
+    ]
+)

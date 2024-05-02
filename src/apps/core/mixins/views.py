@@ -60,7 +60,7 @@ class BaseCUViewMixin(abc.ABC):
         return self.form
 
 
-class CreateViewMixin(BaseCUViewMixin):
+class  CreateViewMixin(BaseCUViewMixin):
 
     def do_before_create(self):
         pass

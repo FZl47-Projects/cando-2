@@ -1,5 +1,7 @@
 from django.views.generic import ListView, TemplateView, View
 from django.utils.translation import gettext_lazy as _
+from django.db.models.functions import Concat
+from django.db.models import Value
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 
@@ -13,7 +15,7 @@ from apps.account import models, forms
 class UserList(UserRoleViewMixin, FilterSimpleListViewMixin, ListView):
     role_access = ('super_user',)
     paginate_by = 20
-    search_fields = ('phonenumber__icontains',)
+    search_fields = ('phonenumber__icontains','full_name__icontains')
     filter_fields = ('is_active', 'role')
     template_name = 'dashboard/admin/account/user/list.html'
 
@@ -27,6 +29,13 @@ class UserList(UserRoleViewMixin, FilterSimpleListViewMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['total_count'] = self.get_queryset().count()
         return context
+
+    def search(self, objects):
+        # advance search
+        qs = self.request.GET.get(self.search_param)
+        if qs:
+            objects = objects.annotate(full_name=Concat('first_name', Value(' '), 'last_name'))
+        return super().search(objects)
 
 
 class UserDetail(UserRoleViewMixin, TemplateView):

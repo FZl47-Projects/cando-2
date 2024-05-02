@@ -7,7 +7,6 @@ User = get_user_model()
 
 def create_notify_admins(type, title, kwargs):
     admins = User.objects.filter(role__in=['super_user'])
-    print(admins)
     notifications = []
     for admin in admins:
         n = NotificationUser(

@@ -91,7 +91,7 @@ class BasicProductDetail(TemplateView):
         return context
 
 
-class FactorCakeImage(CreateViewMixin, TemplateView):
+class FactorCakeImageCreate(CreateViewMixin, TemplateView):
     form = forms.FactorCakeImageCreateForm
     success_message = _('Your Cake Receipt Image Has Been Saved Successfully')
     redirect_url = reverse_lazy('public:success')
