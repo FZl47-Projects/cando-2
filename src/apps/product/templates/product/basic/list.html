@@ -116,7 +116,7 @@
                                         </li>
                                         {% for category in categories %}
                                             <li class="{% if category.id|stringformat:'i' == request.GET.categories %}active{% endif %}">
-                                                <a href="?categories={{ category.id }}" class="add-params-to-href">
+                                                <a href="?categories={{ category.id }}&filter=true" class="add-params-to-href">
                                                     {{ category.name }}
                                                     <span class="font-70">({{ category.get_products.count }})</span>
                                                 </a>
