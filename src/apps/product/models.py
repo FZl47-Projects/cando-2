@@ -102,6 +102,15 @@ class BasicProduct(BaseProduct):
     def get_price(self):
         return self.productinventory.price
 
+    def get_display_price(self):
+        p = self.productinventory.display_price
+        return p if p >= self.get_price() else None
+
+    def get_discount_by_display_price(self):
+        price = self.get_price()
+        dp_price = self.get_display_price()
+        return int(100 - (100 // (dp_price / price)))
+
     def get_quantity(self):
         return self.productinventory.quantity
 
@@ -153,6 +162,7 @@ class ProductInventory(BaseModel):
     product = models.OneToOneField('BasicProduct', on_delete=models.CASCADE)
     quantity = models.SmallIntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=0)
+    display_price = models.DecimalField(max_digits=10, decimal_places=0, null=True)  # just for display/showing
 
     def __str__(self):
         return f'{self.product} - {self.quantity}:{self.price}'

@@ -4,7 +4,7 @@
 
 {% block Styles %}
     <style>
-        .pr-gallery-item{
+        .pr-gallery-item {
             display: inline-block;
             margin: 4px;
             border-radius: 5px;
@@ -14,14 +14,14 @@
             height: 100px;
         }
 
-        .pr-gallery-item img{
+        .pr-gallery-item img {
             width: 100px;
             height: 100%;
             border-radius: inherit;
             object-fit: fill;
         }
 
-        .pr-gallery-item em{
+        .pr-gallery-item em {
             cursor: pointer;
             position: absolute;
             top: 5px;
@@ -29,7 +29,7 @@
             font-size: 17px;
             padding: 5px;
             background: rgba(227, 227, 227, 0.9);
-            border: 1px solid rgba(234,35,26,0.6);
+            border: 1px solid rgba(234, 35, 26, 0.6);
             border-radius: 20px;
             backdrop-filter: blur(5px);
         }
@@ -84,7 +84,8 @@
                                                             <div class="user-card user-card-s2">
                                                                 <div class="user-avatar lg bg-primary">
                                                                     <img src="{{ product.get_image_cover }}"
-                                                                         alt="{{ product.title }}" style="border-radius: 17px"/>
+                                                                         alt="{{ product.title }}"
+                                                                         style="border-radius: 17px"/>
                                                                 </div>
                                                                 <div class="user-info">
                                                                     <div class="badge bg-light rounded-pill ucap">
@@ -165,10 +166,18 @@
                                                                         <span class="sub-text">تخفیف</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-12 mt-3">
-                                                                    <div class="profile-stats">
-                                                                        <span class="amount price-el fs-15px">{{ product.get_price }}</span>
-                                                                        <span class="sub-text">قیمت</span>
+                                                                <div class="col-12 mt-3 d-flex justify-content-between">
+                                                                    <div class="col-6">
+                                                                        <div class="profile-stats">
+                                                                            <span class="amount price-el fs-15px">{{ product.get_price }}</span>
+                                                                            <span class="sub-text">قیمت</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <div class="profile-stats">
+                                                                            <span class="amount price-el fs-15px">{{ product.get_display_price }}</span>
+                                                                            <span class="sub-text">قیمت نمایشی</span>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -467,12 +476,23 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="price">تعداد</label>
+                                <label class="form-label" for="price">قیمت اصلی</label>
                                 <div class="form-control-wrap">
                                     <input type="number" name="price" class="form-control" id="price"
                                            required=""
                                            placeholder="قیمت" value="{{ product.productinventory.price }}" min="0">
                                     <div class="text-left fs-12px mt-1" id="label-inventory-price-update">
+                                        <p>0</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="display-price">قیمت نمایشی</label>
+                                <div class="form-control-wrap">
+                                    <input type="number" name="display_price" class="form-control" id="display-price"
+                                           placeholder="قیمت" value="{{ product.productinventory.display_price }}"
+                                           min="0">
+                                    <div class="text-left fs-12px mt-1" id="label-inventory-display-price-update">
                                         <p>0</p>
                                     </div>
                                 </div>
@@ -701,11 +721,12 @@
 {% block Scripts %}
     <script>
         setPriceSpreadInput('#price', '#label-inventory-price-update', document.getElementById('price').value)
+        setPriceSpreadInput('#display-price', '#label-inventory-display-price-update', document.getElementById('display-price').value)
 
-        document.querySelectorAll('.pr-gallery-item').forEach(function (el){
+        document.querySelectorAll('.pr-gallery-item').forEach(function (el) {
             let btn_delete = el.querySelector('em')
-            if (btn_delete){
-                btn_delete.addEventListener('click',function (){
+            if (btn_delete) {
+                btn_delete.addEventListener('click', function () {
                     this.parentElement.remove()
                 })
             }

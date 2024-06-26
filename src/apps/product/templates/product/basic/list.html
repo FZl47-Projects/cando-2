@@ -60,11 +60,11 @@
             margin-top: 10px !important;
         }
 
-        .single_product{
+        .single_product {
             position: relative;
         }
 
-        .product-showcase-info{
+        .product-showcase-info {
             position: absolute;
             z-index: 9999;
             left: 10px;
@@ -77,6 +77,19 @@
             color: #fff;
         }
 
+        .product-discount-info {
+            position: absolute;
+            z-index: 9999;
+            left: 10px;
+            top: 30px;
+            border-radius: 5px;
+            padding: 1px 4px;
+            font-size: 13px;
+            background: #ff951c;
+            box-shadow: 0 2px 1px #d95110;
+            color: #fff;
+        }
+
     </style>
 {% endblock %}
 
@@ -84,7 +97,7 @@
 
 
     <!--header area start-->
-     {% render_partial 'apps.public.components.HeaderComponentView' %}
+    {% render_partial 'apps.public.components.HeaderComponentView' %}
 
     <section class="breadcrumb">
         <li>
@@ -116,7 +129,8 @@
                                         </li>
                                         {% for category in categories %}
                                             <li class="{% if category.id|stringformat:'i' == request.GET.categories %}active{% endif %}">
-                                                <a href="?categories={{ category.id }}&filter=true" class="add-params-to-href">
+                                                <a href="?categories={{ category.id }}&filter=true"
+                                                   class="add-params-to-href">
                                                     {{ category.name }}
                                                     <span class="font-70">({{ category.get_products.count }})</span>
                                                 </a>
@@ -221,9 +235,18 @@
                                                                 </div>
                                                             {% endif %}
                                                         </div>
+                                                        {% if product.get_display_price %}
+                                                            <div class="product_info">
+                                                                <div class="product-discount-info"
+                                                                     style="top: 50px">
+                                                                    %{{ product.get_discount_by_display_price }}
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
                                                         <div class="product_thumb">
                                                             <a href="{{ product.get_absolute_url }}"><img
-                                                                    src="{{ product.get_image_cover }}" alt="{{ product.title }}"></a>
+                                                                    src="{{ product.get_image_cover }}"
+                                                                    alt="{{ product.title }}"></a>
                                                             <div class="action_links">
                                                                 <ul class="d-flex justify-content-center">
                                                                     <li class="add_to_cart"><a href="cart.html"
@@ -241,13 +264,18 @@
                                                             </div>
                                                         </div>
                                                         <figcaption class="product_content text-center">
-                                                            <p><a href="{{ product.get_absolute_url }}">{{ product.title|truncatechars:20 }}</a>
+                                                            <p><a href="{{ product.get_absolute_url }}">
+                                                                {{ product.title|truncatechars:20 }}</a>
                                                             </p>
                                                             <div class="price_box">
                                                                 <span class="current_price">
                                                                     {% if product.has_in_stock %}
-                                                                        <span class="price-el">{{ product.get_price }}</span>
-                                                                        {% else %}
+                                                                        {% if product.get_display_price %}
+                                                                            <del class="offer-price price-el d-block"
+                                                                                 style="font-size: 12px">{{ product.get_display_price }}</del>
+                                                                        {% endif %}
+                                                                        <span class="price-el {% if product.get_display_price %}text-success{% endif %}">{{ product.get_price }}</span>
+                                                                    {% else %}
                                                                         <span class="text-danger">ناموجود</span>
                                                                     {% endif %}
                                                                 </span>
@@ -257,14 +285,16 @@
                                                 </article>
                                             </div>
                                             {% empty %}
-                                                <div class="col-lg-4 col-md-4 col-sm-6 mx-auto">
-                                                    <div class="container-not-found-base text-center">
-                                                        <p>محصولی یافت نشد</p>
-                                                        {% if request.GET.search or request.GET.filter %}
-                                                            <a class="font-70 text-warning" href="{% url 'product:basic_product__list' %}">حذف فیلتر و جست و جو</a>
-                                                        {% endif %}
-                                                    </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-6 mx-auto">
+                                                <div class="container-not-found-base text-center">
+                                                    <p>محصولی یافت نشد</p>
+                                                    {% if request.GET.search or request.GET.filter %}
+                                                        <a class="font-70 text-warning"
+                                                           href="{% url 'product:basic_product__list' %}">حذف فیلتر و
+                                                            جست و جو</a>
+                                                    {% endif %}
                                                 </div>
+                                            </div>
                                         {% endfor %}
                                     </div>
                                 </div>

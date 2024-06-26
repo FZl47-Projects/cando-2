@@ -22,6 +22,15 @@
             color: #fff;
         }
 
+        .product-discount-info {
+            border-radius: 5px;
+            padding: 1px 4px;
+            font-size: 13px;
+            background: #ff951c;
+            box-shadow: 0 2px 1px #d95110;
+            color: #fff;
+        }
+
         .review {
             margin: 10px auto;
             border: 1px solid rgba(238, 238, 238, 0.6);
@@ -62,15 +71,29 @@
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <h2 class="product__title">{{ product.title }}</h2>
-                                {% if product.type == 'showcase' %}
-                                    <div class="product-showcase-info">
-                                        محصول ویترینی
-                                    </div>
-                                {% endif %}
+                                <div>
+                                    {% if product.type == 'showcase' %}
+                                        <div class="product-showcase-info">
+                                            محصول ویترینی
+                                        </div>
+                                    {% endif %}
+                                    {% if product.get_display_price %}
+                                        <div class="mt-2 text-center">
+                                            <div class="product-discount-info"
+                                                 style="top: 50px">
+                                                %{{ product.get_discount_by_display_price }}
+                                                تخفیف
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
                             </div>
                             <div class="price_box">
                                 {% if product.has_in_stock %}
-                                    <span id="price-el" class="current_price price-el"
+                                    {% if product.get_display_price %}
+                                        <del class="offer-price price-el d-block">{{ product.get_display_price }}</del>
+                                    {% endif %}
+                                    <span id="price-el" class="current_price price-el {% if product.get_display_price %}text-success{% endif %}"
                                           data-price="{{ product.get_price }}">{{ product.get_price }}</span>
                                 {% else %}
                                     <span class="text-danger" style="font-size: 19px">محصول ناموجود است</span>

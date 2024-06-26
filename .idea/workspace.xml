@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b67b92eb-891b-4635-a6d8-3f15e1bdb7c9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/product/basic/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/product/basic/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/basic/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/basic/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/basic/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/basic/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "main",
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+</project>

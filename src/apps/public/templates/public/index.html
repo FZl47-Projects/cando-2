@@ -85,17 +85,20 @@
                                         <a href="{{ product.get_absolute_url }}"><img
                                                 src="{{ product.get_image_cover }}" alt="{{ product }}"
                                                 class="overflow-hidden"></a>
-                                        <div class="d-flex justify-content-between flex-wrap ">
+                                        <div class="d-flex justify-content-between flex-wrap">
                                             <div class="col-12">
                                                 <a href="{{ product.get_absolute_url }}"><span>{{ product.title|truncatechars:15 }} </span></a>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-between mt-4">
                                             <div class="col-7 price">
-                                                {#                                                <del class="offer-price"> 15000 تومان</del>#}
-                                                {#                                                <br>#}
                                                 {% if product.has_in_stock %}
-                                                    <span class="text-success price-el">{{ product.get_price }}</span>
+                                                    {% if product.get_display_price %}
+                                                        <del class="offer-price price-el"
+                                                             style="font-size: 13px">{{ product.get_display_price }}</del>
+                                                    {% endif %}
+                                                    <span class="text-success price-el d-block"
+                                                          style="font-size: 16px">{{ product.get_price }}</span>
                                                 {% else %}
                                                     <span>
                                                         ناموجود
@@ -103,10 +106,16 @@
                                                 {% endif %}
                                             </div>
                                             <div class="col-5 d-flex justify-content-end plus">
-                                                <a href="{{ product.get_absolute_url }}"><i class="fa fa-eye p-2 rounded"></i></a>
+                                                <a href="{{ product.get_absolute_url }}"><i
+                                                        class="fa fa-eye p-2 rounded"></i></a>
                                             </div>
                                         </div>
                                         <div class="offer" style="font-size: 11px">ویترین</div>
+                                        {% if product.get_display_price %}
+                                            <div class="offer bg-info" style="font-size: 11px;margin-top: 40px">
+                                                %{{ product.get_discount_by_display_price }}
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             {% endfor %}
