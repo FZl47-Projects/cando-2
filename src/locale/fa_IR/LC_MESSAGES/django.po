@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-30 04:47+0330\n"
+"POT-Creation-Date: 2024-06-26 22:56+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,52 +37,52 @@ msgstr "بدون دسته بندی"
 msgid "Incorrect Data"
 msgstr "دیتای وارد شده نامعتبر است"
 
-#: .\apps\dashboard\views\dashboard\shared\account.py:47
+#: .\apps\dashboard\views\dashboard\shared\account.py:56
 #, fuzzy
 #| msgid "Category Created Successfully"
 msgid "User Updated Successfully"
 msgstr "دسته بندی با موفقیت ایجاد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\account.py:56
-#: .\apps\dashboard\views\dashboard\shared\navigation.py:73
+#: .\apps\dashboard\views\dashboard\shared\account.py:65
+#: .\apps\dashboard\views\dashboard\shared\navigation.py:83
 #: .\apps\dashboard\views\dashboard\shared\notification.py:75
 #: .\apps\dashboard\views\dashboard\shared\payment.py:71
 #: .\apps\dashboard\views\dashboard\shared\payment.py:119
 #: .\apps\dashboard\views\dashboard\shared\product.py:89
 #: .\apps\dashboard\views\dashboard\shared\product.py:99
 #: .\apps\dashboard\views\dashboard\shared\product.py:108
-#: .\apps\dashboard\views\dashboard\shared\product.py:156
-#: .\apps\dashboard\views\dashboard\shared\product.py:166
-#: .\apps\dashboard\views\dashboard\shared\product.py:211
-#: .\apps\dashboard\views\dashboard\shared\product.py:279
-#: .\apps\dashboard\views\dashboard\shared\product.py:289
-#: .\apps\dashboard\views\dashboard\shared\product.py:329
-#: .\apps\dashboard\views\dashboard\shared\product.py:385
-#: .\apps\dashboard\views\dashboard\shared\product.py:395
-#: .\apps\dashboard\views\dashboard\shared\product.py:444
-#: .\apps\dashboard\views\dashboard\shared\product.py:454
-#: .\apps\dashboard\views\dashboard\shared\product.py:501
-#: .\apps\dashboard\views\dashboard\shared\product.py:511
-#: .\apps\dashboard\views\dashboard\shared\product.py:558
-#: .\apps\dashboard\views\dashboard\shared\product.py:678
-#: .\apps\dashboard\views\dashboard\shared\product.py:737
-#: .\apps\dashboard\views\dashboard\shared\product.py:747
+#: .\apps\dashboard\views\dashboard\shared\product.py:158
+#: .\apps\dashboard\views\dashboard\shared\product.py:171
+#: .\apps\dashboard\views\dashboard\shared\product.py:239
+#: .\apps\dashboard\views\dashboard\shared\product.py:307
+#: .\apps\dashboard\views\dashboard\shared\product.py:317
+#: .\apps\dashboard\views\dashboard\shared\product.py:357
+#: .\apps\dashboard\views\dashboard\shared\product.py:413
+#: .\apps\dashboard\views\dashboard\shared\product.py:423
+#: .\apps\dashboard\views\dashboard\shared\product.py:472
+#: .\apps\dashboard\views\dashboard\shared\product.py:482
+#: .\apps\dashboard\views\dashboard\shared\product.py:529
+#: .\apps\dashboard\views\dashboard\shared\product.py:539
+#: .\apps\dashboard\views\dashboard\shared\product.py:586
+#: .\apps\dashboard\views\dashboard\shared\product.py:706
+#: .\apps\dashboard\views\dashboard\shared\product.py:765
+#: .\apps\dashboard\views\dashboard\shared\product.py:775
 msgid "Operation Successfully Completed"
 msgstr "عملیات با موفقیت انجام شد"
 
-#: .\apps\dashboard\views\dashboard\shared\navigation.py:31
+#: .\apps\dashboard\views\dashboard\shared\navigation.py:41
 #, fuzzy
 #| msgid "Category Created Successfully"
 msgid "Default Address Created Successfully"
 msgstr "دسته بندی با موفقیت ایجاد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\navigation.py:33
+#: .\apps\dashboard\views\dashboard\shared\navigation.py:43
 #, fuzzy
 #| msgid "Tag Created Successfully"
 msgid "Default Address Updated Successfully"
 msgstr "تگ با موفقیت ایجاد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\navigation.py:39
+#: .\apps\dashboard\views\dashboard\shared\navigation.py:49
 #, fuzzy
 #| msgid "Tag Created Successfully"
 msgid "Address Created Successfully"
@@ -98,63 +98,65 @@ msgstr "دسته بندی با موفقیت ایجاد شد"
 msgid "Product Created Successfully"
 msgstr "محصول با موفقیت ایجاد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\product.py:203
+#: .\apps\dashboard\views\dashboard\shared\product.py:208
+#: .\apps\dashboard\views\dashboard\shared\product.py:231
 #, fuzzy
 #| msgid "Product Attribute Category Created Successfully"
 msgid "Custom Product Attr Category Created Successfully"
 msgstr "دسته بندی فیلد ویژگی محصول با موفقیت ایجاد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\product.py:205
+#: .\apps\dashboard\views\dashboard\shared\product.py:210
+#: .\apps\dashboard\views\dashboard\shared\product.py:233
 #, fuzzy
 #| msgid "Product Attribute Category Created Successfully"
 msgid "Custom Product Attr Category Updated Successfully"
 msgstr "دسته بندی فیلد ویژگی محصول با موفقیت ایجاد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\product.py:234
+#: .\apps\dashboard\views\dashboard\shared\product.py:262
 #, fuzzy
 #| msgid "Category Created Successfully"
 msgid "Default Inventory Created Successfully"
 msgstr "دسته بندی با موفقیت ایجاد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\product.py:236
+#: .\apps\dashboard\views\dashboard\shared\product.py:264
 #, fuzzy
 #| msgid "Category Created Successfully"
 msgid "Default Inventory Updated Successfully"
 msgstr "دسته بندی با موفقیت ایجاد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\product.py:261
+#: .\apps\dashboard\views\dashboard\shared\product.py:289
 msgid "Category Created Successfully"
 msgstr "دسته بندی با موفقیت ایجاد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\product.py:340
+#: .\apps\dashboard\views\dashboard\shared\product.py:368
 msgid "Tag Created Successfully"
 msgstr "تگ با موفقیت ایجاد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\product.py:347
+#: .\apps\dashboard\views\dashboard\shared\product.py:375
 msgid "Product Attribute Category Created Successfully"
 msgstr "دسته بندی فیلد ویژگی محصول با موفقیت ایجاد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\product.py:406
+#: .\apps\dashboard\views\dashboard\shared\product.py:434
 msgid "Product Attribute Group Created Successfully"
 msgstr "گروه فیلد ویژگی محصول با موفقیت ایجاد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\product.py:465
+#: .\apps\dashboard\views\dashboard\shared\product.py:493
 msgid "Product Attribute Field Created Successfully"
 msgstr " فیلد ویژگی محصول با موفقیت ایجاد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\product.py:587
+#: .\apps\dashboard\views\dashboard\shared\product.py:615
 msgid "Product Comment Has Been Successfully Rejected"
 msgstr "نظر محصول رد شد"
 
-#: .\apps\dashboard\views\dashboard\shared\product.py:589
+#: .\apps\dashboard\views\dashboard\shared\product.py:617
 msgid "Product Comment Has Been Successfully Approved"
 msgstr "نظر محصول تایید شد"
 
-#: .\apps\dashboard\views\dashboard\shared\product.py:591
+#: .\apps\dashboard\views\dashboard\shared\product.py:619
 msgid "Product Comment Has Been Processed"
 msgstr "نظر محصول بررسی شد"
 
-#: .\apps\dashboard\views\dashboard\shared\product.py:631
+#: .\apps\dashboard\views\dashboard\shared\product.py:659
 msgid "Discount Coupon Created Successfully"
 msgstr "کد تخفیف با موفقیت ایجاد شد"
 
@@ -217,72 +219,88 @@ msgstr "شما باید یک زمان در اینده مشخص کنید"
 msgid "There Are Too Many Products In Your Shopping Cart"
 msgstr "محصولات سبد خرید شما بیش از حد مجاز است"
 
-#: .\apps\product\forms.py:304
+#: .\apps\product\forms.py:304 .\apps\product\forms.py:341
 msgid "You Should Create Custom Product Category Fields"
 msgstr "شما باید دسته بندی فیلد محصولات دلخواه را ایجاد کنید"
 
-#: .\apps\product\models.py:55
+#: .\apps\product\models.py:57
 msgid "active"
 msgstr "فعال"
 
-#: .\apps\product\models.py:56
+#: .\apps\product\models.py:58
 msgid "inactive"
 msgstr "غیر فعال"
 
-#: .\apps\product\models.py:57
+#: .\apps\product\models.py:59
 msgid "archived"
 msgstr "ارشیو شده"
 
-#: .\apps\product\models.py:60
+#: .\apps\product\models.py:62
 msgid "simple"
 msgstr "ساده"
 
-#: .\apps\product\models.py:61
+#: .\apps\product\models.py:63
 msgid "showcase"
 msgstr "ویترین"
 
-#: .\apps\product\models.py:247
+#: .\apps\product\models.py:313
 msgid "Picture On"
 msgstr "عکس کیک"
 
-#: .\apps\product\models.py:248
+#: .\apps\product\models.py:314
 msgid "Model On"
 msgstr "مدل کیک"
 
-#: .\apps\product\models.py:303 .\apps\product\models.py:424
-#: .\apps\product\models.py:586
+#: .\apps\product\models.py:330
+msgid "Cake Product"
+msgstr "محصول کیک"
+
+#: .\apps\product\models.py:336
+msgid "Cake"
+msgstr "کیک"
+
+#: .\apps\product\models.py:343
+msgid "Sweets Product"
+msgstr "محصول شیرینی"
+
+#: .\apps\product\models.py:352
+msgid "Sweets"
+msgstr "شیرینی"
+
+#: .\apps\product\models.py:357 .\apps\product\models.py:492
+#: .\apps\product\models.py:654
 msgid "Pending"
 msgstr "در حال بررسی"
 
-#: .\apps\product\models.py:304 .\apps\product\models.py:422
+#: .\apps\product\models.py:358 .\apps\product\models.py:490
 msgid "Accepted"
 msgstr "تایید شده"
 
-#: .\apps\product\models.py:305 .\apps\product\models.py:423
+#: .\apps\product\models.py:359 .\apps\product\models.py:491
 msgid "Rejected"
 msgstr "رد شده"
 
-#: .\apps\product\models.py:445
+#: .\apps\product\models.py:513
 msgid "Seen"
 msgstr "دیده شده"
 
-#: .\apps\product\models.py:446
+#: .\apps\product\models.py:514
 msgid "Unseen"
 msgstr "دیده نشده"
 
-#: .\apps\product\models.py:587
+#: .\apps\product\models.py:655
 msgid "Cancelled"
 msgstr "لغو شده"
 
-#: .\apps\product\models.py:588
+#: .\apps\product\models.py:656
 msgid "In_progress"
 msgstr "در حال انجام"
 
-#: .\apps\product\models.py:589
+#: .\apps\product\models.py:657
 msgid "Shipped"
 msgstr "ارسال شده است"
 
-#: .\apps\product\models.py:590
+#: .\apps\product\models.py:658
 msgid "Delivered"
 msgstr "تحویل گرفته شده است"
 
@@ -304,25 +322,25 @@ msgstr "نظر محصول رد شد"
 msgid "Factor Cake Image Created"
 msgstr "تصویر فاکتور کیک با موفقیت ایجاد و ثبت شد"
 
-#: .\apps\product\signals.py:70
+#: .\apps\product\signals.py:70 .\apps\product\signals.py:83
 #, fuzzy
 #| msgid "Product Created Successfully"
 msgid "Custom Product Created"
 msgstr "محصول با موفقیت ایجاد شد"
 
-#: .\apps\product\signals.py:93
+#: .\apps\product\signals.py:106
 msgid "Custom Product Added To Cart"
 msgstr "محصول دلخواه به سبد خرید اضافه شد"
 
-#: .\apps\product\signals.py:102
+#: .\apps\product\signals.py:115
 msgid "Custom Product Status Rejected"
 msgstr "وضعیت محصول دلخواه رد شد"
 
-#: .\apps\product\signals.py:118
+#: .\apps\product\signals.py:133
 msgid "There Is Some Issue In Cart Status Creation"
 msgstr "اشکالی در زمان ایجاد وضعیت سبد خرید وجود دارد"
 
-#: .\apps\product\signals.py:129
+#: .\apps\product\signals.py:144
 msgid "Cart Status Updated"
 msgstr "وضعیت سبد خرید بروز شد"
 
@@ -330,7 +348,7 @@ msgstr "وضعیت سبد خرید بروز شد"
 msgid "Your Cake Receipt Image Has Been Saved Successfully"
 msgstr "عکس فاکتور کیک شما با موفقیت ثبت شد"
 
-#: .\apps\product\views.py:103
+#: .\apps\product\views.py:103 .\apps\product\views.py:121
 msgid ""
 "Your Custom Product Has Been Created and Will Be Added to Your Shopping Cart "
 "After Checking"
@@ -338,24 +356,24 @@ msgstr ""
 "محصول دلخواه شما با موفقیت ایجاد شد و پس از بررسی به سبد خرید شما اضافه "
 "خواهد شد"
 
-#: .\apps\product\views.py:120 .\apps\product\views.py:151
+#: .\apps\product\views.py:138 .\apps\product\views.py:169
 msgid "Product Cart Successfully Deleted"
 msgstr "محصول سبد خرید با موفقیت حذف شد"
 
-#: .\apps\product\views.py:138
+#: .\apps\product\views.py:156
 msgid ""
 "Your Comment Has Been Successfully Registered And Will Be Displayed After "
 "Review"
 msgstr "نظر شما با موفقیت ثبت شد و پس از بررسی و تایید نمایش داده خواهد شد"
 
-#: .\apps\product\views.py:147
+#: .\apps\product\views.py:165
 msgid "Product Has Been Successfully Added To The Cart"
 msgstr "محصول با موفیت به سبد خرید اضافه شد"
 
-#: .\apps\product\views.py:168
+#: .\apps\product\views.py:186
 msgid "Product Has Been Successfully Added To The Wish List"
 msgstr "محصول با موفقیت به لیست مورد علاقه مندی های شما اضافه شد"
 
-#: .\config\settings\base.py:106
+#: .\config\settings\base.py:97
 msgid "Persian"
 msgstr "فارسی"
