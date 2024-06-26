@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, Http404
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
@@ -143,7 +143,9 @@ class CustomProductDetail(MultipleUserViewMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         custom_product_id = kwargs.get('custom_product_id')
-        custom_product = get_object_or_404(models.CustomProduct, id=custom_product_id)
+        custom_product = models.CustomProduct.objects.get_subclass(id=custom_product_id)
+        if not custom_product:
+            raise Http404
         object_access(custom_product, self.request.user)
         context = {
             'custom_product': custom_product
@@ -158,7 +160,10 @@ class CustomProductDelete(UserRoleViewMixin, DeleteViewMixin, View):
 
     def get_object(self, request, *args, **kwargs):
         custom_product_id = kwargs.get('custom_product_id')
-        return get_object_or_404(models.CustomProduct, id=custom_product_id)
+        custom_product = models.CustomProduct.objects.get_subclass(id=custom_product_id)
+        if not custom_product:
+            raise Http404
+        return custom_product
 
 
 class CustomProductManageStatus(UserRoleViewMixin, UpdateViewMixin, View):
@@ -183,10 +188,10 @@ class CustomProductManageStatus(UserRoleViewMixin, UpdateViewMixin, View):
         return super().get_redirect_url()
 
 
-class CustomProductAttrCategoryManage(UserRoleViewMixin, CreateOrUpdateViewMixin, TemplateView):
+class CustomProductCakeAttrCategoryManage(UserRoleViewMixin, CreateOrUpdateViewMixin, TemplateView):
     role_access = ('super_user',)
-    template_name = 'dashboard/admin/product/custom-product/settings/attr-category.html'
-    form = forms.CustomProductAttrCategoryManageForm
+    template_name = 'dashboard/admin/product/custom-product/settings/cake-attr-category.html'
+    form = forms.CustomProductCakeAttrCategoryManageForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -195,7 +200,30 @@ class CustomProductAttrCategoryManage(UserRoleViewMixin, CreateOrUpdateViewMixin
         return context
 
     def get_object(self):
-        custom_product_attr_category = models.CustomProductAttrCategory.objects.first()
+        custom_product_attr_category = models.CustomProductCakeAttrCategory.objects.first()
+        return custom_product_attr_category  # return object or None
+
+    def set_success_message(self):
+        if self.is_create_state():
+            self.success_message = _('Custom Product Attr Category Created Successfully')
+        else:
+            self.success_message = _('Custom Product Attr Category Updated Successfully')
+        super().set_success_message()
+
+
+class CustomProductSweetsAttrCategoryManage(UserRoleViewMixin, CreateOrUpdateViewMixin, TemplateView):
+    role_access = ('super_user',)
+    template_name = 'dashboard/admin/product/custom-product/settings/sweets-attr-category.html'
+    form = forms.CustomProductSweetsAttrCategoryManageForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['custom_product_attr_category'] = self.get_object()
+        context['groups'] = models.ProductAttrGroup.objects.all()
+        return context
+
+    def get_object(self):
+        custom_product_attr_category = models.CustomProductSweetsAttrCategory.objects.first()
         return custom_product_attr_category  # return object or None
 
     def set_success_message(self):

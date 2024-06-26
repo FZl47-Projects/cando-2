@@ -273,7 +273,7 @@ class ProductAttrSelectCreateForm(forms.ModelForm):
         fields = '__all__'
 
 
-class CustomProductCreateForm(forms.ModelForm):
+class CustomProductCakeCreateForm(forms.ModelForm):
     description = forms.CharField(max_length=300, required=False)
     writing_on = forms.CharField(max_length=100, required=False)
     images = forms.ImageField(required=False)
@@ -281,7 +281,7 @@ class CustomProductCreateForm(forms.ModelForm):
     attrs_selected = forms.CharField(max_length=10, required=False)
 
     class Meta:
-        model = models.CustomProduct
+        model = models.CustomProductCake
         fields = '__all__'
 
     def clean(self):
@@ -293,7 +293,7 @@ class CustomProductCreateForm(forms.ModelForm):
 
         data = self.data
         # create attributes selected
-        custom_pr_category = models.CustomProductAttrCategory.objects.first()
+        custom_pr_category = models.CustomProductCakeAttrCategory.objects.first()
         if custom_pr_category:
             try:
                 attrs_selected = AttributesFieldUtil.create_attrs_by_groups(data, custom_pr_category.get_groups())
@@ -313,6 +313,34 @@ class CustomProductCreateForm(forms.ModelForm):
             self.cleaned_data['images'] = images_obj
 
 
+class CustomProductSweetsCreateForm(forms.ModelForm):
+    # prevent check 'attr_selected' field
+    attrs_selected = forms.CharField(max_length=10, required=False)
+
+    class Meta:
+        model = models.CustomProductSweets
+        fields = '__all__'
+
+    def clean(self):
+        super().clean()
+
+        files = self.files
+        if not self.is_valid():
+            return
+
+        data = self.data
+        # create attributes selected
+        custom_pr_category = models.CustomProductSweetsAttrCategory.objects.first()
+        if custom_pr_category:
+            try:
+                attrs_selected = AttributesFieldUtil.create_attrs_by_groups(data, custom_pr_category.get_groups())
+                self.cleaned_data['attrs_selected'] = attrs_selected
+            except ValueError as e:
+                self.add_error('attrs_selected', e.__str__())
+        else:
+            log_event(_('You Should Create Custom Product Category Fields'), 'ERROR')
+
+
 class CustomProductRejectStatusForm(forms.ModelForm):
     class Meta:
         model = models.CustomProductStatus
@@ -325,9 +353,15 @@ class CustomProductAcceptStatusForm(forms.ModelForm):
         fields = ('note', 'custom_product', 'status', 'price')
 
 
-class CustomProductAttrCategoryManageForm(forms.ModelForm):
+class CustomProductCakeAttrCategoryManageForm(forms.ModelForm):
     class Meta:
-        model = models.CustomProductAttrCategory
+        model = models.CustomProductCakeAttrCategory
+        fields = '__all__'
+
+
+class CustomProductSweetsAttrCategoryManageForm(forms.ModelForm):
+    class Meta:
+        model = models.CustomProductSweetsAttrCategory
         fields = '__all__'
 
 

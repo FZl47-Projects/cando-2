@@ -98,18 +98,36 @@ class FactorCakeImageCreate(CreateViewMixin, TemplateView):
     template_name = 'product/factor-cake-image.html'
 
 
-class CustomProductCreate(CreateViewMixin, TemplateView):
-    form = forms.CustomProductCreateForm
+class CustomProductCakeCreate(CreateViewMixin, TemplateView):
+    form = forms.CustomProductCakeCreateForm
     success_message = _('Your Custom Product Has Been Created and Will Be Added to Your Shopping Cart After Checking')
     redirect_url = reverse_lazy('public:success')
-    template_name = 'product/custom-product-create.html'
+    template_name = 'product/custom-product-cake-create.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['attr_category'] = models.CustomProductAttrCategory.objects.first()
+        context['attr_category'] = models.CustomProductCakeAttrCategory.objects.first()
         return context
 
-    def add_additional_data(self, data):
+    def add_additional_data(self, data, obj=None):
+        user = self.request.user
+        if not user.is_authenticated:
+            raise PermissionDenied
+        data['user'] = user
+
+
+class CustomProductSweetsCreate(CreateViewMixin, TemplateView):
+    form = forms.CustomProductSweetsCreateForm
+    success_message = _('Your Custom Product Has Been Created and Will Be Added to Your Shopping Cart After Checking')
+    redirect_url = reverse_lazy('public:success')
+    template_name = 'product/custom-product-sweets-create.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['attr_category'] = models.CustomProductSweetsAttrCategory.objects.first()
+        return context
+
+    def add_additional_data(self, data, obj=None):
         user = self.request.user
         if not user.is_authenticated:
             raise PermissionDenied

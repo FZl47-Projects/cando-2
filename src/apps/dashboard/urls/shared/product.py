@@ -32,8 +32,11 @@ urlpatterns = [
 
     # settings
     # product attributes section
-    path('settings/custom-product/attr/field/category', views.CustomProductAttrCategoryManage.as_view(),
-         name='custom_product_attr_category__manage'),
+    path('settings/custom-product/cake/attr/field/category', views.CustomProductCakeAttrCategoryManage.as_view(),
+         name='custom_product_cake_attr_category__manage'),
+
+    path('settings/custom-product/sweets/attr/field/category', views.CustomProductSweetsAttrCategoryManage.as_view(),
+         name='custom_product_sweets_attr_category__manage'),
 
     # attr category
     path('settings/product/attr/category/create', views.ProductAttrCategoryCreate.as_view(),

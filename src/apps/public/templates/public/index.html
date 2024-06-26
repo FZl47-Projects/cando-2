@@ -128,12 +128,20 @@
 
             <section class="banner d-flex flex-wrap container-lg py-3">
                 <div class="col-12 col-md-6 p-2">
-                    <a href="{% url 'product:custom_product__create' %}">
-                        <img src="{% static 'images/کیک دلخواه.webp' %}" alt="">
+                    <a href="{% url 'product:custom_cake_product__create' %}">
+                        <img src="{% static 'images/سفارش کیک.webp' %}" alt="سفارش کیک دلخواه">
                     </a>
                 </div>
                 <div class="col-12 col-md-6 p-2">
-                    <img src="{% static 'images/پیگیری.webp' %}" alt="">
+                    <a href="{% url 'product:custom_sweets_product__create' %}">
+                        <img src="{% static 'images/سفارش شیرینی.webp' %}" alt="سفارش شیرینی دلخواه">
+                    </a>
+                </div>
+            </section>
+
+            <section class="banner d-flex flex-wrap container-lg py-3 mb-4">
+                <div class="col-12 p-2">
+                    <img src="{% static 'images/پیگیری سفارش ثبت شده.webp' %}" alt="پیگیری سفارش">
                 </div>
             </section>
 

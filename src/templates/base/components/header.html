@@ -13,9 +13,9 @@
             <ul class="menu-list d-none d-md-flex">
                 <li><a href="{% url 'public:home' %}">خانه</a></li>
                 <li><a href="{% url 'public:cart' %}">سبد خرید</a></li>
-                <li><a href="#">مورد علاقه ها</a></li>
                 <li><a href="{% url 'product:basic_product__list' %}">محصولات</a></li>
-                <li><a href="{% url 'product:custom_product__create' %}">محصول دلخواه</a></li>
+                <li><a href="{% url 'product:custom_cake_product__create' %}">کیک دلخواه</a></li>
+                <li><a href="{% url 'product:custom_sweets_product__create' %}">شیرینی دلخواه</a></li>
                 <li><a href="{% url 'product:factor_cake_image__create' %}">اپلود تصویر فاکتور </a></li>
             </ul>
         </div>
@@ -94,9 +94,15 @@
                         </a>
                     </li>
                     <li class="item-list">
-                        <a href="{% url 'product:custom_product__create' %}">
+                        <a href="{% url 'product:custom_cake_product__create' %}">
                             <span><i class="fa fa-birthday-cake"></i></span>
-                            <span>محصول دلخواه</span>
+                            <span>کیک دلخواه</span>
+                        </a>
+                    </li>
+                    <li class="item-list">
+                        <a href="{% url 'product:custom_sweets_product__create' %}">
+                            <span><i class="fa fa-birthday-cake"></i></span>
+                            <span>شیرینی دلخواه</span>
                         </a>
                     </li>
                     <li class="item-list">

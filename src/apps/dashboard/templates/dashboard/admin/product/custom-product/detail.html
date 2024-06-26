@@ -119,9 +119,9 @@
                                                         <!-- data-item -->
                                                         <div class="data-item">
                                                             <div class="data-col">
-                                                                <span class="data-label">نوع</span>
+                                                                <span class="data-label">نوع محصول دلخواه</span>
                                                                 <span class="data-value">
-                                                                    <span class="badge badge-dim bg-info">{{ custom_product.get_type_display }}</span>
+                                                                    <span class="badge badge-dim bg-info">{{ custom_product.get_type_model_label }}</span>
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -149,28 +149,29 @@
                                                             </div>
                                                         </div>
                                                         <!-- data-item -->
-                                                        <div class="data-item">
-                                                            <div class="data-col">
-                                                                <span class="data-label">نوشته روی محصول</span>
-                                                                <span class="data-value">
+                                                        {% if custom_product.get_type_model != 'sweets' %}
+                                                            <!-- data-item -->
+                                                            <div class="data-item">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">نوع </span>
+                                                                    <span class="data-value">
+                                                                        <span class="badge badge-dim bg-info">{{ custom_product.get_type_display }}</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <!-- data-item -->
+                                                            <div class="data-item">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">نوشته روی محصول</span>
+                                                                    <span class="data-value">
                                                                     {{ custom_product.writing_on|default:'-' }}
                                                                 </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- data-item -->
-                                                        <div class="data-item">
-                                                            <div class="data-col">
-                                                                <span class="data-label">توضیحات</span>
-                                                                <span class="data-value">
-                                                                    {{ custom_product.description|default:'-' }}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <!-- data-item -->
-                                                        <div class="data-item">
-                                                            <div class="data-col">
-                                                                <span class="data-label">عکس ها</span>
-                                                                <span class="data-value">
+                                                            <div class="data-item">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">عکس ها</span>
+                                                                    <span class="data-value">
                                                                     {% for image in custom_product.get_images %}
                                                                         <div class="d-inline-block m-1">
                                                                             <img class="click-full-size"
@@ -179,6 +180,26 @@
                                                                                  loading="lazy">
                                                                         </div>
                                                                     {% endfor %}
+                                                                </span>
+                                                                </div>
+                                                            </div>
+                                                        {% else %}
+                                                            <!-- data-item -->
+                                                            <div class="data-item">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">عنوان</span>
+                                                                    <span class="data-value">
+                                                                    {{ custom_product.name|default:'-' }}
+                                                                </span>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">توضیحات</span>
+                                                                <span class="data-value">
+                                                                    {{ custom_product.description|default:'-' }}
                                                                 </span>
                                                             </div>
                                                         </div>

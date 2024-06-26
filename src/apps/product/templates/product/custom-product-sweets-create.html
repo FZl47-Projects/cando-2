@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block Title %}
-    ایجاد محصول دلخواه
+    ایجاد شیرینی دلخواه
 {% endblock %}
 
 {% block Link %}
@@ -55,14 +55,11 @@
                     <div class="col-12">
                         <div class="contact_form col-12 col-md-8 col-lg-7 mx-auto"
                              data-bgimg="{% static 'template/img/others/contact-form-bg-shape.png' %}">
-                            <h2>ایجاد محصول دلخواه</h2>
+                            <h2>ایجاد شیرینی دلخواه</h2>
                             <form id="contact-form" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
-                                <div class="form_input mb-4">
-                                    <select name="type" class="form-control" required>
-                                        <option value="model_on">چاپ عکس از روی مدل</option>
-                                        <option value="picture_on">چاپ عکس روی کیک</option>
-                                    </select>
+                                <div class="form_input">
+                                    <input type="text" name="name" placeholder="نام شیرینی" required>
                                 </div>
                                 <div class="form_input d-flex justify-content-between align-items-center"
                                      style="gap: 10px">
@@ -73,23 +70,9 @@
                                           data-bs-original-title="" title="" data-mds-dtp-group="group1"
                                           data-from-date="true">📅</span>
                                 </div>
-                                <div class="form_input mb-4 container-image-fields">
-                                    <span class="font-80">تصویر</span>
-                                    <div class="d-flex justify-content-between">
-                                        <input name="images" class="form-control p-2 mb-0"
-                                               type="file"
-                                               required accept="image/*">
-                                        <div id="btn-add-image-field" class="p-2 text-success" style="cursor: pointer">
-                                            <i class="fa fa-plus"></i>
-                                        </div>
-                                    </div>
-                                </div>
                                 {% for group in attr_category.get_groups %}
                                     {% include 'product/components/product-group.html' with group=group %}
                                 {% endfor %}
-                                <div class="form_input">
-                                    <input name="writing_on" placeholder="نوشته روی کیک" type="text">
-                                </div>
                                 <div class="form_textarea">
                                     <textarea name="description" placeholder="توضیحات"></textarea>
                                 </div>

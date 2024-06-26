@@ -2,6 +2,8 @@ from django.utils.translation import gettext_lazy as _
 from django.shortcuts import reverse
 from django.db import models
 
+from model_utils.managers import InheritanceManager
+
 from apps.core.mixins.models import RemovePastFileMixin
 from apps.core.models import BaseModel
 from apps.core.utils import now_shamsi_date, convert_str_to_shamsi_date
@@ -252,21 +254,22 @@ class ProductAttrSelected(BaseModel):
         return f'{self.group} - {self.attr}'
 
 
+class CustomProductManger(InheritanceManager):
+
+    def all(self):
+        return self.select_subclasses()
+
+
 class CustomProduct(BaseModel):
-    TYPE_OPTIONS = (
-        ('picture_on', _('Picture On')),
-        ('model_on', _('Model On')),
-    )
     user = models.ForeignKey('account.User', on_delete=models.SET_NULL, null=True)
-    type = models.CharField(max_length=12, choices=TYPE_OPTIONS)
     receipt_date = models.DateTimeField()
-    images = models.ManyToManyField('storage.Image')
-    writing_on = models.CharField(max_length=100, null=True)
     description = models.TextField(null=True, blank=True)
     attrs_selected = models.ManyToManyField('ProductAttrSelected')
 
     class Meta:
         ordering = ('-id',)
+
+    objects = CustomProductManger()
 
     def __str__(self):
         return f"#{self.id} custom product | {self.user or '-'}"
@@ -281,15 +284,6 @@ class CustomProduct(BaseModel):
         attributes = self.get_attributes()
         price = attributes.aggregate(price_total=models.Sum('attr__additional_price'))['price_total'] or 0
         return price
-
-    def get_images(self):
-        return self.images.all()
-
-    def get_image_cover(self):
-        try:
-            return self.get_images().first().image.url
-        except (ValueError, AttributeError):
-            pass
 
     def get_price(self):
         try:
@@ -306,6 +300,56 @@ class CustomProduct(BaseModel):
             return self.cart_item.cart.invoice.purchase
         except AttributeError:
             return None
+
+    def get_type_model(self):
+        return None
+
+    def get_type_model_label(self):
+        return None
+
+
+class CustomProductCake(CustomProduct):
+    TYPE_OPTIONS = (
+        ('picture_on', _('Picture On')),
+        ('model_on', _('Model On')),
+    )
+    images = models.ManyToManyField('storage.Image')
+    type = models.CharField(max_length=12, choices=TYPE_OPTIONS)
+    writing_on = models.CharField(max_length=100, null=True)
+
+    def get_images(self):
+        return self.images.all()
+
+    def get_image_cover(self):
+        try:
+            return self.get_images().first().image.url
+        except (ValueError, AttributeError):
+            pass
+
+    def get_model_title(self):
+        return _('Cake Product')
+
+    def get_type_model(self):
+        return 'cake'
+
+    def get_type_model_label(self):
+        return _('Cake')
+
+
+class CustomProductSweets(CustomProduct):
+    name = models.CharField(max_length=100)
+
+    def get_model_title(self):
+        return _('Sweets Product')
+
+    def get_image_cover(self):
+        return '/static/images/شیرینی.webp'
+
+    def get_type_model(self):
+        return 'sweets'
+
+    def get_type_model_label(self):
+        return _('Sweets')
 
 
 class CustomProductStatus(BaseModel):
@@ -331,7 +375,7 @@ class CustomProductCart(BaseModel):
         return f'{self.cart} - {self.custom_product}'
 
 
-class CustomProductAttrCategory(BaseModel):
+class CustomProductCakeAttrCategory(BaseModel):
     """
         Singleton
         TODO: should use SingletonModel
@@ -339,7 +383,21 @@ class CustomProductAttrCategory(BaseModel):
     groups = models.ManyToManyField('ProductAttrGroup', blank=True)
 
     def __str__(self):
-        return f'custom product attr category setting'
+        return f'custom cake product attr category setting'
+
+    def get_groups(self):
+        return self.groups.all()
+
+
+class CustomProductSweetsAttrCategory(BaseModel):
+    """
+        Singleton
+        TODO: should use SingletonModel
+    """
+    groups = models.ManyToManyField('ProductAttrGroup', blank=True)
+
+    def __str__(self):
+        return f'custom sweets product attr category setting'
 
     def get_groups(self):
         return self.groups.all()

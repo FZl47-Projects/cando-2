@@ -59,7 +59,20 @@ def create_factor_cake_image(sender, instance, created, **kwargs):
         })
 
 
-@receiver(post_save, sender=models.CustomProduct)
+@receiver(post_save, sender=models.CustomProductCake)
+def create_custom_product_status(sender, instance, created, **kwargs):
+    if created:
+        # create custom product status
+        models.CustomProductStatus.objects.create(
+            custom_product=instance,
+        )
+        # create notification for admins
+        create_notify_admins('CUSTOM_PRODUCT_CREATED', _('Custom Product Created'), kwargs={
+            'custom_product_link': instance.get_dashboard_absolute_url(),
+        })
+
+
+@receiver(post_save, sender=models.CustomProductSweets)
 def create_custom_product_status(sender, instance, created, **kwargs):
     if created:
         # create custom product status

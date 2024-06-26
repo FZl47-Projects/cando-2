@@ -63,38 +63,6 @@
                                                     </nav>
                                                 </div>
                                             </div>
-                                            <div class="nk-block-head-content d-none">
-                                                <div class="drodown">
-                                                    <a href="#"
-                                                       class="dropdown-toggle btn btn-icon btn-secondary px-2 text-center"
-                                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                                        عملیات
-                                                        <em class="icon ni ni-setting"></em>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <ul class="link-list-opt no-bdr">
-                                                            <li>
-                                                                <button type="button" class="btn text-success"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#modal-accept">تایید سفارش
-                                                                </button>
-                                                            </li>
-                                                            <li>
-                                                                <button type="button" class="btn text-warning"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#modal-reject">رد سفارش
-                                                                </button>
-                                                            </li>
-                                                            <li>
-                                                                <button type="button" class="btn text-danger"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#modal-delete">حذف
-                                                                </button>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <!-- .nk-block-head -->
@@ -108,9 +76,9 @@
                                                         <!-- data-item -->
                                                         <div class="data-item">
                                                             <div class="data-col">
-                                                                <span class="data-label">نوع</span>
+                                                                <span class="data-label">نوع محصول دلخواه</span>
                                                                 <span class="data-value">
-                                                                    <span class="badge badge-dim bg-info">{{ custom_product.get_type_display }}</span>
+                                                                    <span class="badge badge-dim bg-info">{{ custom_product.get_type_model_label }}</span>
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -119,7 +87,7 @@
                                                             <div class="data-col">
                                                                 <span class="data-label">وضعیت</span>
                                                                 <span class="data-value">
-                                                                    <span class="badge badge-dim bg-{{ custom_product.status }}">
+                                                                    <span class="badge badge-dim bg-{{ custom_product.status.status }}">
                                                                         {{ custom_product.status.get_status_display }}
                                                                         {% if custom_product.cart_item %}
                                                                             <span class="font-70">(اضافه شده به سبد خرید)</span>
@@ -137,29 +105,29 @@
                                                                 </span>
                                                             </div>
                                                         </div>
-                                                        <!-- data-item -->
-                                                        <div class="data-item">
-                                                            <div class="data-col">
-                                                                <span class="data-label">نوشته روی محصول</span>
-                                                                <span class="data-value">
+                                                        {% if custom_product.get_type_model != 'sweets' %}
+                                                            <div class="data-item">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">نوع</span>
+                                                                    <span class="data-value">
+                                                                    <span class="badge badge-dim bg-info">{{ custom_product.get_type_display }}</span>
+                                                                </span>
+                                                                </div>
+                                                            </div>
+                                                            <!-- data-item -->
+                                                            <div class="data-item">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">نوشته روی محصول</span>
+                                                                    <span class="data-value">
                                                                     {{ custom_product.writing_on|default:'-' }}
                                                                 </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- data-item -->
-                                                        <div class="data-item">
-                                                            <div class="data-col">
-                                                                <span class="data-label">توضیحات</span>
-                                                                <span class="data-value">
-                                                                    {{ custom_product.description|default:'-' }}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <!-- data-item -->
-                                                        <div class="data-item">
-                                                            <div class="data-col">
-                                                                <span class="data-label">عکس ها</span>
-                                                                <span class="data-value">
+                                                            <!-- data-item -->
+                                                            <div class="data-item">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">عکس ها</span>
+                                                                    <span class="data-value">
                                                                     {% for image in custom_product.get_images %}
                                                                         <div class="d-inline-block m-1">
                                                                             <img class="click-full-size"
@@ -168,6 +136,16 @@
                                                                                  loading="lazy">
                                                                         </div>
                                                                     {% endfor %}
+                                                                </span>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
+                                                                <span class="data-label">توضیحات</span>
+                                                                <span class="data-value">
+                                                                    {{ custom_product.description|default:'-' }}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -319,88 +297,6 @@
             <!-- wrap @e -->
         </div>
         <!-- modals -->
-        <div class="modal fade" tabindex="-1" id="modal-accept">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">
-                            تایید سفارش
-                        </h5>
-                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
-                            <em class="icon ni ni-cross"></em>
-                        </a>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post"
-                              action="{% url 'dashboard:custom_product__manage_status' custom_product_id=custom_product.id %}"
-                              class="form-validate is-alter" novalidate="novalidate">
-                            {% csrf_token %}
-                            <input type="hidden" name="status" value="accepted">
-                            <input type="hidden" name="custom_product" value="{{ custom_product.id }}">
-                            <div class="form-group">
-                                <label class="form-label" for="price">مبلغ</label>
-                                <div class="form-control-wrap">
-                                    <input type="text" name="price" class="form-control" id="price" required=""
-                                           placeholder="مبلغ قابل پرداخت سفارش دلخواه">
-                                    <div class="text-left mt-2 fs-11px">
-                                        <span id="price-spread">0</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="note">توضیحات ادمین</label>
-                                <div class="form-control-wrap">
-                                    <textarea type="text" name="note" class="form-control" id="note"
-                                              placeholder="توضیحات ادمین برای این سفارش"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group text-left">
-                                <button type="submit" class="btn btn-lg btn-success p-1 px-2">
-                                    تایید سفارش
-                                    <em class="icon icon-circle ni ni-check bg-success"></em>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" tabindex="-1" id="modal-reject">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">
-                            رد سفارش
-                        </h5>
-                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
-                            <em class="icon ni ni-cross"></em>
-                        </a>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post"
-                              action="{% url 'dashboard:custom_product__manage_status' custom_product_id=custom_product.id %}"
-                              class="form-validate is-alter" novalidate="novalidate">
-                            {% csrf_token %}
-                            <input type="hidden" name="status" value="rejected">
-                            <input type="hidden" name="custom_product" value="{{ custom_product.id }}">
-                            <div class="form-group">
-                                <label class="form-label" for="note">توضیحات ادمین</label>
-                                <div class="form-control-wrap">
-                                    <textarea type="text" name="note" class="form-control" id="note"
-                                              placeholder="توضیحات ادمین برای رد سفارش"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group text-left">
-                                <button type="submit" class="btn btn-lg btn-warning p-1 px-2">
-                                    رد سفارش
-                                    <em class="icon icon-circle ni ni-cross bg-warning"></em>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="modal fade" tabindex="-1" id="modal-delete">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -441,7 +337,6 @@
 
 {% block Scripts %}
     <script>
-        setPriceSpreadInput('#price', '#price-spread')
 
         document.querySelectorAll('.bg-accepted').forEach(function (el) {
             el.classList.add('bg-success')
