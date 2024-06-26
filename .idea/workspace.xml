@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b67b92eb-891b-4635-a6d8-3f15e1bdb7c9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/locale/fa_IR/LC_MESSAGES/django.po" beforeDir="false" afterPath="$PROJECT_DIR$/src/locale/fa_IR/LC_MESSAGES/django.po" afterDir="false" />
-    </list>
+    <list default="true" id="b67b92eb-891b-4635-a6d8-3f15e1bdb7c9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,7 +48,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1719429950878</updated>
-      <workItem from="1719429972243" duration="82000" />
+      <workItem from="1719429972243" duration="116000" />
     </task>
     <servers />
   </component>
