@@ -5,22 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b67b92eb-891b-4635-a6d8-3f15e1bdb7c9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/cando-2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cando-2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/core/mixins/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/mixins/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/base/components/menu-aside.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/category/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/category/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/urls/shared/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/urls/shared/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/dashboard/shared/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/dashboard/shared/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/custom-product-cake-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/custom-product-cake-create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/custom-product-sweets-create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/custom-product-sweets-create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/public/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/templates/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/public/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/public/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/settings/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/scripts/base.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/scripts/base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apps/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

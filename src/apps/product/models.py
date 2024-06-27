@@ -105,8 +105,11 @@ class BasicProduct(BaseProduct):
         return self.productinventory.price
 
     def get_display_price(self):
-        p = self.productinventory.display_price
-        return p if p >= self.get_price() else None
+        try:
+            p = self.productinventory.display_price
+            return p if p >= self.get_price() else None
+        except (TypeError, ValueError):
+            return None
 
     def get_discount_by_display_price(self):
         price = self.get_price()
