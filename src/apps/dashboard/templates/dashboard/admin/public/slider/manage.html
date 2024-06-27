@@ -1,0 +1,274 @@
+{% extends 'dashboard/admin/base/base_template.html' %}
+
+{% block Title %}مدیریت اسلایدر ها{% endblock %}
+
+{% block Content %}
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main">
+            <!-- wrap @s -->
+            <div class="nk-wrap">
+                {% include 'dashboard/admin/base/components/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                <div class="nk-content">
+                    <div class="container wide-xl">
+                        <div class="nk-content-inner">
+                            {% include 'dashboard/admin/base/components/menu-aside.html' %}
+                            <!-- .nk-aside -->
+                            <div class="nk-content-body">
+                                <div class="nk-content-wrap">
+                                    <div class="nk-block-head nk-block-head-sm">
+                                        <div class="nk-block-between">
+                                            <div class="nk-block-head-content">
+                                                <h3 class="nk-block-title page-title">مدیریت اسلایدر ها</h3>
+                                                <nav>
+                                                    <ul class="breadcrumb breadcrumb-arrow">
+                                                        <li class="breadcrumb-item"><a
+                                                                href="{% url 'dashboard:index' %}">صفحه اصلی</a></li>
+                                                        <li class="breadcrumb-item active">مدیریت اسلایدر ها</li>
+                                                    </ul>
+                                                </nav>
+                                                <div class="nk-block-des text-soft mt-2">
+                                                    <p>شما
+                                                        <span class="separate-el">{{ total_count }}</span>
+                                                        اسلایدر دارید.</p>
+                                                </div>
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                            <div class="nk-block-head-content">
+                                                <div class="toggle-wrap nk-block-tools-toggle">
+                                                    <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1"
+                                                       data-target="pageMenu"><em
+                                                            class="icon ni ni-menu-alt-r"></em></a>
+                                                    <div class="toggle-expand-content" data-content="pageMenu">
+                                                        <ul class="nk-block-tools g-3">
+                                                            <li class="nk-block-tools-opt">
+                                                                <button type="button" class="btn btn-success"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#create-category-object">ایجاد
+                                                                    اسلایدر
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!-- .toggle-wrap -->
+                                            </div>
+                                            <!-- .nk-block-head-content -->
+                                        </div>
+                                        <!-- .nk-block-between -->
+                                    </div>
+                                    <!-- .nk-block-head -->
+                                    <div class="nk-block">
+                                        <div class="card card-bordered card-stretch">
+                                            <div class="card-inner-group">
+
+                                                <!-- .card-inner -->
+                                                <div class="card-inner p-0 text-center">
+                                                    <div class="nk-tb-list nk-tb-ulist">
+                                                        <div class="nk-tb-item nk-tb-head">
+                                                            <div class="nk-tb-col">
+                                                                <span class="sub-text">عنوان</span>
+                                                            </div>
+                                                            <div class="nk-tb-col tb-col-xl">
+                                                                <span class="sub-text">تصویر</span>
+                                                            </div>
+                                                            <div class="nk-tb-col text-end"><span class="sub-text">اقدامات</span>
+                                                            </div>
+                                                        </div>
+                                                        {% for slider in object_list %}
+                                                            <!-- .nk-tb-item -->
+                                                            <div class="nk-tb-item">
+                                                                <div class="nk-tb-col">
+                                                                    {{ slider.name }}
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-xl">
+                                                                    <img src="{{ slider.get_picture_url }}"
+                                                                         alt="{{ slider.name }}"
+                                                                         style="width: 150px;height: 150px"
+                                                                         class="click-full-size">
+                                                                </div>
+                                                                <div class="nk-tb-col nk-tb-col-tools">
+                                                                    <ul class="nk-tb-actions gx-1">
+                                                                        <li>
+                                                                            <div class="drodown">
+                                                                                <a href="#"
+                                                                                   class="dropdown-toggle btn btn-icon btn-trigger"
+                                                                                   data-bs-toggle="dropdown"><em
+                                                                                        class="icon ni ni-more-h"></em></a>
+                                                                                <div class="dropdown-menu dropdown-menu-end">
+                                                                                    <ul class="link-list-opt no-bdr">
+                                                                                        <li>
+                                                                                            <a
+                                                                                                    type="button"
+                                                                                                    class="text-danger"
+                                                                                                    data-bs-toggle="modal"
+                                                                                                    data-bs-target="#delete-object-{{ slider.id }}">
+                                                                                                <em
+                                                                                                        class="icon ni ni-trash"></em><span>حذف اسلایدر
+
+                                                                                            </span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            {% empty %}
+                                                            <div class="container-not-found-base">
+                                                                <p>اسلایدر یافت نشد</p>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <!-- .nk-tb-list -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                                <div class="card-inner">
+                                                    <div class="nk-block-between-md">
+                                                        <div class="g">
+                                                            <ul class="pagination justify-content-center justify-content-md-start">
+                                                                {% if page_obj.has_previous %}
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page=1">اول</a>
+                                                                    </li>
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+                                                                    </li>
+                                                                {% endif %}
+
+                                                                <span class="fs-13px mt-1 mx-2">
+                                                                        صفحه {{ page_obj.number }} از {{ page_obj.paginator.num_pages }}.
+                                                                </span>
+
+                                                                {% if page_obj.has_next %}
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.next_page_number }}">بعدی</a>
+                                                                    </li>
+                                                                    <li class="page-item"><a
+                                                                            class="page-link add-params-to-href"
+                                                                            href="?page={{ page_obj.paginator.num_pages }}">اخرین</a>
+                                                                    </li>
+                                                                {% endif %}
+                                                            </ul>
+                                                            <!-- .pagination -->
+                                                        </div>
+
+                                                        <!-- .pagination-goto -->
+                                                    </div>
+                                                    <!-- .nk-block-between -->
+                                                </div>
+                                                <!-- .card-inner -->
+                                            </div>
+                                            <!-- .card-inner-group -->
+                                        </div>
+                                        <!-- .card -->
+                                    </div>
+                                    <!-- .nk-block -->
+                                </div>
+                                <!-- footer @s -->
+                                {% include 'dashboard/admin/base/components/footer.html' %}
+                                <!-- footer @e -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+
+    <!-- modals -->
+    <div class="modal fade" tabindex="-1" id="create-category-object">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">اطلاعات اسلایدر</h5>
+                    <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                        <em class="icon ni ni-cross"></em>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <form class="form-validate is-alter" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="form-label" for="name">نام اسلایدر</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="name" name="name" required=""
+                                       placeholder="نام اسلایدر">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="customMultipleFilesLabel">تصویر اسلایدر
+                            </label>
+                            <div class="form-control-wrap">
+                                <div class="form-file">
+                                    <input type="file" name="picture" class="form-file-input"
+                                           id="customMultipleFiles" accept="images/*">
+                                    <label class="form-file-label" for="customMultipleFiles">انتخاب
+                                        فایل </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-end mt-5">
+                            <button type="submit" class="btn btn-lg btn-success">
+                                ایجاد اسلایدر
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for slider in object_list %}
+
+        <div class="modal fade" tabindex="-1" id="delete-object-{{ slider.id }}">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            حذف اسلایدر
+                        </h5>
+                        <a href="#" class="close" data-bs-dismiss="modal" aria-label="بستن">
+                            <em class="icon ni ni-cross"></em>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post"
+                              action="{% url 'dashboard:slider__delete' slider_id=slider.id %}"
+                              class="form-validate is-alter" novalidate="novalidate">
+                            {% csrf_token %}
+                            <div class="badge-dim bg-danger fs-17px p-2" style="border-radius: 10px">
+                                <p>ایا از حذف اسلایدر
+                                    {{ slider.name }}
+                                    اطمینان دارید؟
+                                    پس از حذف امکان بازگشت وجود نخواهد داشت.</p>
+                            </div>
+                            <div class="form-group text-left mt-4">
+                                <button type="submit" class="btn btn-lg btn-danger p-1 px-2">
+                                    بله اطمینان دارم ! حذف
+                                    <em class="icon icon-circle ni ni-trash-empty bg-danger"></em>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <!-- end modals -->
+
+
+{% endblock %}
+
+

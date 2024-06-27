@@ -1,4 +1,5 @@
 import abc
+from django.utils.translation import gettext_lazy as _
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.db.models import Q
@@ -60,7 +61,7 @@ class BaseCUViewMixin(abc.ABC):
         return self.form
 
 
-class  CreateViewMixin(BaseCUViewMixin):
+class CreateViewMixin(BaseCUViewMixin):
 
     def do_before_create(self):
         pass
@@ -205,7 +206,7 @@ class FilterSimpleListViewMixin(abc.ABC):
 
 
 class DeleteViewMixin(abc.ABC):
-    success_message = None
+    success_message = _('Operation Successfully Completed')
     is_success = False
     redirect_url = None
 

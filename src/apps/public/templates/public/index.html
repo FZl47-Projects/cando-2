@@ -34,23 +34,17 @@
                 <div class="swiper" id="slider-main">
                     <div class="swiper-wrapper">
                         <!-- START ITEM SLIDER -->
-                        <div class="swiper-slide">
-                            <a href="#">
-                                <img
-                                        src="{% static 'images/banner-home-1.jpg' %}"
-                                        alt="image-slider"
-                                />
-                            </a>
-                        </div>
-                        <!-- END ITEM SLIDER -->
-                        <div class="swiper-slide">
-                            <a href="#">
-                                <img
-                                        src="{% static 'images/سفارش-کیک-تصویری-2.jpg' %}"
-                                        alt="image-slider"
-                                />
-                            </a>
-                        </div>
+                        {% for slider in sliders %}
+                            <div class="swiper-slide">
+                                <a href="#">
+                                    <img
+                                            src="{{ slider.get_picture_url }}"
+                                            alt="{{ slider.name }}"
+                                    />
+                                </a>
+                            </div>
+                        {% endfor %}
+
                     </div>
                     <div class="swiper-button-prev d-none"></div>
                     <div class="swiper-button-next d-none"></div>

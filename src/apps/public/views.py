@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from apps.core.settings import get_default_address
 from apps.product import models as product_models
+from apps.public import models
 
 
 def err_403_handler(request, exception):
@@ -23,9 +24,8 @@ class Index(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # products
-        BasicProduct = product_models.BasicProduct
-        context['products__showcase'] = BasicProduct.objects.get_showcases()
+        context['products__showcase'] = product_models.BasicProduct.objects.get_showcases()
+        context['sliders'] = models.Slider.objects.all()
         return context
 
 

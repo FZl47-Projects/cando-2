@@ -168,3 +168,7 @@ GATEWAYS_BANK = {
         'DESCRIPTION': 'خرید از مجموعه کندو',
     }
 }
+
+PICTURE_FORMATS = [
+    'png', 'jpg', 'jpeg'
+]
