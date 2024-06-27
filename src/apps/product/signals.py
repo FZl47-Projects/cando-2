@@ -60,7 +60,7 @@ def create_factor_cake_image(sender, instance, created, **kwargs):
 
 
 @receiver(post_save, sender=models.CustomProductCake)
-def create_custom_product_status(sender, instance, created, **kwargs):
+def create_custom_product_cake_status(sender, instance, created, **kwargs):
     if created:
         # create custom product status
         models.CustomProductStatus.objects.create(
@@ -73,7 +73,7 @@ def create_custom_product_status(sender, instance, created, **kwargs):
 
 
 @receiver(post_save, sender=models.CustomProductSweets)
-def create_custom_product_status(sender, instance, created, **kwargs):
+def create_custom_product_sweets_status(sender, instance, created, **kwargs):
     if created:
         # create custom product status
         models.CustomProductStatus.objects.create(
