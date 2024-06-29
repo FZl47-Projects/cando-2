@@ -429,7 +429,7 @@ class Category(BaseModel):
         return self.name
 
     def get_products(self):
-        return self.basicproduct_set.all()
+        return self.basicproduct_set.filter(status='active')
 
     def get_dashboard_absolute_url(self):
         return reverse('dashboard:category__detail', args=(self.id,))

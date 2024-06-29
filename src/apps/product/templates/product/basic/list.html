@@ -121,14 +121,14 @@
                                 <div class="widget_filter_list mb-30">
                                     <h4>فیلتر بر اساس دسته بندی</h4>
                                     <ul>
-                                        <li class="{% if request.GET.categories == 'all' or not request.GET.categories %}active{% endif %}">
+                                        <li class="{% if request.GET.categories == 'all' or not request.GET.categories and not request.GET.categories__name %}active{% endif %}">
                                             <a href="?categories=all" class="add-params-to-href">
                                                 همه
                                                 <span class="font-70">({{ total_count }})</span>
                                             </a>
                                         </li>
                                         {% for category in categories %}
-                                            <li class="{% if category.id|stringformat:'i' == request.GET.categories %}active{% endif %}">
+                                            <li class="{% if category.id|stringformat:'i' == request.GET.categories or category.name == request.GET.categories__name %}active{% endif %}">
                                                 <a href="?categories={{ category.id }}&filter=true"
                                                    class="add-params-to-href">
                                                     {{ category.name }}
