@@ -19,6 +19,9 @@ urlpatterns = [
     path('product/basic/<int:product_id>/delete', views.BasicProductDelete.as_view(),
          name='basic_product__delete'),
 
+    path('product/basic/list/action', views.BasicProductListAction.as_view(),
+         name='basic_product__list_action'),
+
     path('product/inventory/<int:inventory_id>/update', views.ProductInventoryUpdate.as_view(),
          name='product_inventory__update'),
 

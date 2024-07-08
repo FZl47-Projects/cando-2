@@ -270,6 +270,19 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="form-label" for="type_of_display">نوع نمایش</label>
+                            <span class="form-note fs-11px text-danger">
+                                توجه کنید در نوع نمایش به صورت (جعبه ای) تصاویر فیلد ها نمایش داده نمیشود
+                            </span>
+                            <div class="form-control-wrap">
+                                <select name="type_of_display" id="type_of_display" required class="form-control js-select2">
+                                    {% for type in type_of_displays %}
+                                        <option value="{{ type.0 }}">{{ type.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group text-end mt-5">
                             <button type="submit" class="btn btn-lg btn-success">
                                 ایجاد گروه فیلد

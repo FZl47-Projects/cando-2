@@ -72,39 +72,45 @@
                                         <!-- .nk-block-between -->
                                     </div>
                                     <!-- .nk-block-head -->
+
                                     <div class="nk-block">
                                         <div class="card card-bordered card-stretch">
                                             <div class="card-inner-group">
                                                 <div class="card-inner position-relative card-tools-toggle">
                                                     <div class="card-title-group">
                                                         <div class="card-tools">
+
                                                             <div class="form-inline flex-nowrap gx-3">
                                                                 <div class="form-wrap w-200px">
-                                                                    <select class="form-select js-select2"
+                                                                    <select class="form-select js-select2 action-list-select"
                                                                             data-search="off"
                                                                             data-placeholder="عمل دسته جمعی">
                                                                         <option value="">عمل دسته جمعی</option>
-                                                                        <option value="to_available_stock">افزایش موجودی
+                                                                        <option value="to_available_stock">افزایش
+                                                                            موجودی
                                                                             پیشفرض
-                                                                        </option>
-                                                                        <option value="to_available_stock">
-                                                                            تنظیم تخفیف پیشفرض
                                                                         </option>
                                                                         <option value="to_out_of_stock">عدم موجودی
                                                                         </option>
-                                                                        <option value="to_inactive"> غیر فعال</option>
+                                                                        <option value="to_active">  فعال
+                                                                        </option>
+                                                                        <option value="to_inactive"> غیر فعال
+                                                                        </option>
                                                                         <option value="to_archive"> آرشیو</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="btn-wrap">
                                                                     <span class="d-none d-md-block"><button
-                                                                            class="btn btn-dim btn-outline-light disabled">اعمال</button></span>
+                                                                            class="btn btn-dim btn-outline-light disabled btn-submit-list-action"
+                                                                            disabled>اعمال</button></span>
                                                                     <span class="d-md-none">
-                                                                            <button class="btn btn-dim btn-outline-light btn-icon disabled"><em
+                                                                            <button class="btn btn-dim btn-outline-light btn-icon disabled btn-submit-list-action"
+                                                                                    disabled><em
                                                                                     class="icon ni ni-arrow-right"></em></button>
                                                                         </span>
                                                                 </div>
                                                             </div>
+
                                                             <!-- .form-inline -->
                                                         </div>
                                                         <!-- .card-tools -->
@@ -301,56 +307,62 @@
                                                     <!-- .card-search -->
                                                 </div>
                                                 <!-- .card-inner -->
-                                                <div class="card-inner p-0 text-center">
-                                                    <div class="nk-tb-list nk-tb-ulist">
-                                                        <div class="nk-tb-item nk-tb-head">
-                                                            <div class="nk-tb-col nk-tb-col-check">
-                                                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                                                    <input type="checkbox" class="custom-control-input"
-                                                                           id="cid"/>
-                                                                    <label class="custom-control-label"
-                                                                           for="cid"></label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="nk-tb-col"><span class="sub-text">عنوان</span>
-                                                            </div>
-                                                            <div class="nk-tb-col tb-col-sm"><span
-                                                                    class="sub-text">قیمت</span></div>
-                                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">موجودی</span>
-                                                            </div>
-                                                            <div class="nk-tb-col tb-col-xl"><span
-                                                                    class="sub-text">نوع</span></div>
-                                                            <div class="nk-tb-col tb-col-xl"><span
-                                                                    class="sub-text">دسته بندی</span></div>
-                                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">تعداد فروش</span>
-                                                            </div>
-                                                            <div class="nk-tb-col tb-col-md"><span class="sub-text">وضعیت</span>
-                                                            </div>
-                                                            <div class="nk-tb-col text-end"><span class="sub-text">اقدامات</span>
-                                                            </div>
-                                                        </div>
-                                                        {% for product in object_list %}
-                                                            <!-- .nk-tb-item -->
-                                                            <div class="nk-tb-item">
+                                                <form action="{% url 'dashboard:basic_product__list_action' %}" method="post" id="form-action-list">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="action_type" value="">
+                                                    <div class="card-inner p-0 text-center">
+                                                        <div class="nk-tb-list nk-tb-ulist">
+                                                            <div class="nk-tb-item nk-tb-head">
                                                                 <div class="nk-tb-col nk-tb-col-check">
                                                                     <div class="custom-control custom-control-sm custom-checkbox notext">
                                                                         <input type="checkbox"
-                                                                               class="custom-control-input action-checkbox"
-                                                                               data-product-id="{{ product.id }}"
-                                                                               id="cid-{{ forloop.counter }}"/>
+                                                                               class="custom-control-input"
+                                                                               id="cid"/>
                                                                         <label class="custom-control-label"
-                                                                               for="cid-{{ forloop.counter }}"></label>
+                                                                               for="cid"></label>
                                                                     </div>
                                                                 </div>
-                                                                <div class="nk-tb-col">
-                                                                    <a href="{{ product.get_dashboard_absolute_url }}">
-                                                                        <div class="user-card">
-                                                                            <div class="user-avatar xs bg-primary">
-                                                                                <img src="{{ product.get_image_cover }}"
-                                                                                     alt="{{ product.title }}"
-                                                                                     style="object-fit: cover">
-                                                                            </div>
-                                                                            <div class="user-name">
+                                                                <div class="nk-tb-col"><span
+                                                                        class="sub-text">عنوان</span>
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-sm"><span
+                                                                        class="sub-text">قیمت</span></div>
+                                                                <div class="nk-tb-col tb-col-md"><span class="sub-text">موجودی</span>
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-xl"><span
+                                                                        class="sub-text">نوع</span></div>
+                                                                <div class="nk-tb-col tb-col-xl"><span
+                                                                        class="sub-text">دسته بندی</span></div>
+                                                                <div class="nk-tb-col tb-col-md"><span class="sub-text">تعداد فروش</span>
+                                                                </div>
+                                                                <div class="nk-tb-col tb-col-md"><span class="sub-text">وضعیت</span>
+                                                                </div>
+                                                                <div class="nk-tb-col text-end"><span class="sub-text">اقدامات</span>
+                                                                </div>
+                                                            </div>
+                                                            {% for product in object_list %}
+                                                                <!-- .nk-tb-item -->
+                                                                <div class="nk-tb-item">
+                                                                    <div class="nk-tb-col nk-tb-col-check">
+                                                                        <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                                            <input type="checkbox" name="product_id"
+                                                                                   value="{{ product.id }}"
+                                                                                   class="custom-control-input action-checkbox"
+                                                                                   data-product-id="{{ product.id }}"
+                                                                                   id="cid-{{ forloop.counter }}"/>
+                                                                            <label class="custom-control-label"
+                                                                                   for="cid-{{ forloop.counter }}"></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="nk-tb-col">
+                                                                        <a href="{{ product.get_dashboard_absolute_url }}">
+                                                                            <div class="user-card">
+                                                                                <div class="user-avatar xs bg-primary">
+                                                                                    <img src="{{ product.get_image_cover }}"
+                                                                                         alt="{{ product.title }}"
+                                                                                         style="object-fit: cover">
+                                                                                </div>
+                                                                                <div class="user-name">
                                                                             <span class="tb-lead">{{ product.title|truncatechars:20 }}
                                                                                 {% if product.get_quantity > 0 %}
                                                                                     <span class="dot dot-success d-xl-none ms-1"></span>
@@ -358,24 +370,24 @@
                                                                                     <span class="dot dot-danger d-xl-none ms-1"></span>
                                                                                 {% endif %}
                                                                             </span>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="nk-tb-col tb-col-sm">
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-sm">
                                                                     <span class="sub-text">
                                                                         <span class="price-el">{{ product.get_price }}</span>
                                                                     </span>
-                                                                </div>
-                                                                <div class="nk-tb-col tb-col-md">
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-md">
                                                                     <span class="sub-text {% if product.get_quantity > 0 %}text-success{% else %}text-danger{% endif %}">
                                                                         <span class="separate-el">{{ product.get_quantity }}</span>
                                                                     </span>
-                                                                </div>
-                                                                <div class="nk-tb-col tb-col-xl">
-                                                                    <span class="sub-text">{{ product.get_type_display }}</span>
-                                                                </div>
-                                                                <div class="nk-tb-col tb-col-xl">
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-xl">
+                                                                        <span class="sub-text">{{ product.get_type_display }}</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-xl">
                                                                     <span class="sub-text">
                                                                         {% for category in product.get_categories|slice:':3' %}
                                                                             <a href="{{ category.get_dashboard_absolute_url }}">{{ category.name|truncatechars:10 }}</a>
@@ -384,53 +396,54 @@
                                                                             <span class="fs-18px">...</span>
                                                                         {% endif %}
                                                                     </span>
-                                                                </div>
-                                                                <div class="nk-tb-col tb-col-md">
-                                                                    <span class="tb-status">{{ product.get_total_sales_count }}</span>
-                                                                </div>
-                                                                <div class="nk-tb-col tb-col-md">
-                                                                    <span class="tb-status badge badge-dim bg-{{ product.status }} fs-11px">{{ product.get_status_display }}</span>
-                                                                </div>
-                                                                <div class="nk-tb-col nk-tb-col-tools">
-                                                                    <ul class="nk-tb-actions gx-1">
-                                                                        <li>
-                                                                            <div class="drodown">
-                                                                                <a href="#"
-                                                                                   class="dropdown-toggle btn btn-icon btn-trigger"
-                                                                                   data-bs-toggle="dropdown"><em
-                                                                                        class="icon ni ni-more-h"></em></a>
-                                                                                <div class="dropdown-menu dropdown-menu-end">
-                                                                                    <ul class="link-list-opt no-bdr">
-                                                                                        <li>
-                                                                                            <a href="{{ product.get_dashboard_absolute_url }}"><em
-                                                                                                    class="icon ni ni-eye"></em><span>مشاهده جزئیات</span></a>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <a href="{{ product.get_absolute_url }}"><em
-                                                                                                    class="icon ni ni-eye"></em><span>مشاهده در سایت</span></a>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <a href="{% url 'dashboard:order__list' %}?spr={{ product.id }}"><em
-                                                                                                    class="icon ni ni-cart"></em><span>سفارشات</span></a>
-                                                                                        </li>
-                                                                                    </ul>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-md">
+                                                                        <span class="tb-status">{{ product.get_total_sales_count }}</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col tb-col-md">
+                                                                        <span class="tb-status badge badge-dim bg-{{ product.status }} fs-11px">{{ product.get_status_display }}</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col nk-tb-col-tools">
+                                                                        <ul class="nk-tb-actions gx-1">
+                                                                            <li>
+                                                                                <div class="drodown">
+                                                                                    <a href="#"
+                                                                                       class="dropdown-toggle btn btn-icon btn-trigger"
+                                                                                       data-bs-toggle="dropdown"><em
+                                                                                            class="icon ni ni-more-h"></em></a>
+                                                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                                                        <ul class="link-list-opt no-bdr">
+                                                                                            <li>
+                                                                                                <a href="{{ product.get_dashboard_absolute_url }}"><em
+                                                                                                        class="icon ni ni-eye"></em><span>مشاهده جزئیات</span></a>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a href="{{ product.get_absolute_url }}"><em
+                                                                                                        class="icon ni ni-eye"></em><span>مشاهده در سایت</span></a>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a href="{% url 'dashboard:order__list' %}?spr={{ product.id }}"><em
+                                                                                                        class="icon ni ni-cart"></em><span>سفارشات</span></a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            {% empty %}
-                                                            <div class="container-not-found-base nk-tb-item">
-                                                                <div class="nk-tb-col">
-                                                                    <p>چیزی یافت نشد</p>
+                                                                {% empty %}
+                                                                <div class="container-not-found-base nk-tb-item">
+                                                                    <div class="nk-tb-col">
+                                                                        <p>چیزی یافت نشد</p>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <!-- .nk-tb-item -->
-                                                        {% endfor %}
+                                                                <!-- .nk-tb-item -->
+                                                            {% endfor %}
+                                                        </div>
+                                                        <!-- .nk-tb-list -->
                                                     </div>
-                                                    <!-- .nk-tb-list -->
-                                                </div>
+                                                </form>
                                                 <!-- .card-inner -->
                                                 <div class="card-inner">
                                                     <div class="nk-block-between-md">
@@ -475,6 +488,7 @@
                                         </div>
                                         <!-- .card -->
                                     </div>
+
                                     <!-- .nk-block -->
                                 </div>
                                 <!-- footer @s -->
@@ -505,5 +519,38 @@
         document.querySelectorAll('.bg-archived').forEach(function (el) {
             el.classList.add('bg-warning')
         })
+
+        // action list
+
+        document.getElementById('cid').addEventListener('change', function () {
+            if (this.checked) {
+                document.querySelectorAll('.action-checkbox').forEach(function (el) {
+                    el.setAttribute('checked', 'checked')
+                    el.checked = true
+                })
+            } else {
+                document.querySelectorAll('.action-checkbox').forEach(function (el) {
+                    el.removeAttribute('checked')
+                    el.checked = false
+                })
+            }
+        })
+
+        $('.action-list-select').on('change', function () {
+            document.querySelectorAll('.btn-submit-list-action').forEach(function (el) {
+                el.removeAttribute('disabled')
+                el.classList.remove('disabled')
+            })
+            document.querySelector('#form-action-list [name="action_type"]').value = this.value
+        });
+
+        document.querySelectorAll('.btn-submit-list-action').forEach(function (el) {
+            el.addEventListener('click', function () {
+                let form = document.getElementById('form-action-list')
+                form.submit()
+            })
+        })
+
+
     </script>
 {% endblock %}

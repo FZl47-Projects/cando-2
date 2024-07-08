@@ -40,3 +40,17 @@
 .product-attr-field .additional-price{
     font-size: 12px;
 }
+
+.product-attr-group-style-column{
+    text-align: center;
+}
+
+.product-attr-group-style-column .product-attr-field{
+    display: inline-block;
+    padding: 5px 20px;
+    border: 1px solid #e5e5e5;
+}
+
+.product-attr-group-style-column .product-attr-field-title{
+    margin-left: 10px;
+}

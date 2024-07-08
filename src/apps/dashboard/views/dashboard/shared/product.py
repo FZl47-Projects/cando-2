@@ -1,10 +1,11 @@
-from django.shortcuts import get_object_or_404, Http404
+from django.shortcuts import get_object_or_404, Http404, redirect
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.views.generic import TemplateView, ListView, View
 
+from apps.core.settings import get_default_inventory
 from apps.core.utils import now_shamsi_date
 from apps.core.auth import object_access
 from apps.core.mixins.views import (
@@ -111,6 +112,38 @@ class BasicProductDelete(UserRoleViewMixin, DeleteViewMixin, View):
     def get_object(self, request, *args, **kwargs):
         product_id = kwargs.get('product_id')
         return get_object_or_404(models.BasicProduct, id=product_id)
+
+
+class BasicProductListAction(UserRoleViewMixin, View):
+    role_access = ('super_user',)
+    success_message = _('Operation Successfully Completed')
+    redirect_url = reverse_lazy('dashboard:basic_product__list')
+
+    def post(self, request):
+        data = request.POST
+        action_type = data.get('action_type')
+        product_ids = data.getlist('product_id', [])
+        products = models.BasicProduct.objects.filter(id__in=product_ids)
+
+        if action_type == 'to_available_stock':
+            default_inventory = get_default_inventory()
+            if default_inventory:
+                models.ProductInventory.objects.filter(product__in=products).update(quantity=default_inventory.quantity)
+
+        elif action_type == 'to_out_of_stock':
+            models.ProductInventory.objects.filter(product__in=products, quantity__gt=0).update(quantity=0)
+
+        elif action_type == 'to_inactive':
+            products.update(status='inactive')
+
+        elif action_type == 'to_active':
+            products.update(status='active')
+
+        elif action_type == 'to_archive':
+            products.update(status='archived')
+
+        messages.success(request, self.success_message)
+        return redirect(self.redirect_url)
 
 
 class CustomProductList(MultipleUserListViewMixin, FilterSimpleListViewMixin, ListView):
@@ -451,6 +484,7 @@ class ProductAttrGroupList(UserRoleViewMixin, FilterSimpleListViewMixin, ListVie
         context = super().get_context_data(**kwargs)
         context['total_count'] = self.get_queryset().count()
         context['fields'] = models.SimpleProductAttr.objects.all()
+        context['type_of_displays'] = models.ProductAttrGroup.TYPE_DISPLAY
         return context
 
 

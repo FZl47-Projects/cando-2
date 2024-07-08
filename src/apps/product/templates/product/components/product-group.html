@@ -1,25 +1,34 @@
-<div class="product-attr-group">
+<div class="product-attr-group product-attr-group-style-{{ group.type_of_display }}">
     <label class="product-attr-group-title" for="#product-group-{{ group.id }}-id">{{ group.name }}</label>
     <div class="product-attr-fields">
-        {% for field in group.get_fields %}
-            <div class="product-attr-field">
-                <label>
-                    <div>
-                        {% if field.picture %}
-                            <img src="{{ field.get_picture_url }}">
-                        {% endif %}
-                        <span>{{ field.name }}</span>
-                        {% if field.additional_price > 0 %}
-                            <span class="additional-price">(<span class="price-el">{{ field.additional_price }}</span>)</span>
-                        {% endif %}
-                    </div>
-                    <div>
-                        <input type="radio" class="form-check-input" name="product_group_{{ group.id }}"
-                               value="{{ field.id }}"
-                               {% if forloop.last %}required{% endif %}>
-                    </div>
-                </label>
-            </div>
-        {% endfor %}
+        {% if group.type_of_display == 'box' %}
+            <select name="product_group_{{ group.id }}" id="product-group-{{ group.id }}-id" class="form-select">
+                {% for field in group.get_fields %}
+                    <option value="{{ field.id }}">{{ field.name }}</option>
+                {% endfor %}
+            </select>
+        {% else %}
+            {% for field in group.get_fields %}
+                <div class="product-attr-field">
+                    <label>
+                        <div>
+                            {% if field.picture %}
+                                <img src="{{ field.get_picture_url }}">
+                            {% endif %}
+                            <span class="product-attr-field-title">{{ field.name }}</span>
+                            {% if field.additional_price > 0 %}
+                                <span class="additional-price">(<span
+                                        class="price-el">{{ field.additional_price }}</span>)</span>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <input type="radio" class="form-check-input" name="product_group_{{ group.id }}"
+                                   value="{{ field.id }}"
+                                   {% if forloop.last %}required{% endif %}>
+                        </div>
+                    </label>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 </div>

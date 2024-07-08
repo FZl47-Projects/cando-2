@@ -105,6 +105,15 @@
                                                         <!-- data-item -->
                                                         <div class="data-item">
                                                             <div class="data-col">
+                                                                <span class="data-label">نوع نمایش</span>
+                                                                <span class="data-value">
+                                                                    {{ group.get_type_of_display_display }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- data-item -->
+                                                        <div class="data-item">
+                                                            <div class="data-col">
                                                                 <span class="data-label">زمان ایجاد</span>
                                                                 <span class="data-value">
                                                                     {{ group.get_created_at_timepast }}
@@ -174,6 +183,16 @@
                                         {% for field in fields %}
                                             <option value="{{ field.id }}"
                                                     {% if field in group.get_fields %}selected{% endif %}>{{ field.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="type_of_display">نوع نمایش</label>
+                                <div class="form-control-wrap">
+                                    <select name="type_of_display" id="type_of_display" class="js-select2 select-by-value" value="{{ group.type_of_display }}" required>
+                                        {% for type in group.TYPE_DISPLAY %}
+                                            <option value="{{ type.0 }}">{{ type.1 }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>

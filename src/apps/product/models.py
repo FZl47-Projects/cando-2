@@ -202,12 +202,18 @@ class ProductAttrCategory(BaseModel):
 
 
 class ProductAttrGroup(BaseModel):
+    TYPE_DISPLAY = (
+        ('row', _('Row')),
+        ('column', _('Column')),
+        ('box', _('Box')),
+    )
     """
         Product Attribute Group
         Examples: color, size,...
     """
     name = models.CharField(max_length=100)
     fields = models.ManyToManyField('SimpleProductAttr')
+    type_of_display = models.CharField(max_length=7, choices=TYPE_DISPLAY, default='row')
 
     def __str__(self):
         return self.name
@@ -684,7 +690,10 @@ class ProductCart(BaseModel):
         return self.get_attrs().aggregate(total=models.Sum('attr__additional_price'))['total'] or 0
 
     def get_total_price(self):
-        return (self.product.get_price() + self.get_attrs_price()) * self.quantity
+        product_price = 0
+        if self.product:
+            product_price = self.product.get_price()
+        return (product_price + self.get_attrs_price()) * self.quantity
 
     def get_detail(self):
         return f"""
