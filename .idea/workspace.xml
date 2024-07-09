@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b67b92eb-891b-4635-a6d8-3f15e1bdb7c9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/cando-2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cando-2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/core/auth/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/core/auth/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/attributes/group/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/attributes/group/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/attributes/group/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/attributes/group/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/product/basic/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/templates/dashboard/admin/product/product/basic/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/urls/shared/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/urls/shared/product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/dashboard/views/dashboard/shared/product.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/dashboard/views/dashboard/shared/product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apps/product/templates/product/components/product-group.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/apps/product/templates/product/components/product-group.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/static/styles/product-attr.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/styles/product-attr.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/locale/fa_IR/LC_MESSAGES/django.po" beforeDir="false" afterPath="$PROJECT_DIR$/src/locale/fa_IR/LC_MESSAGES/django.po" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +64,8 @@
       <updated>1719429950878</updated>
       <workItem from="1719429972243" duration="116000" />
       <workItem from="1720348348223" duration="6189000" />
-      <workItem from="1720426027019" duration="2179000" />
+      <workItem from="1720426027019" duration="2993000" />
+      <workItem from="1720521708106" duration="494000" />
     </task>
     <servers />
   </component>
