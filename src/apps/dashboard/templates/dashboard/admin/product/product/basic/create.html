@@ -24,7 +24,8 @@
                                                 <h3 class="nk-block-title page-title">ایجاد محصول</h3>
                                                 <nav>
                                                     <ul class="breadcrumb breadcrumb-arrow">
-                                                        <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}">صفحه اصلی</a></li>
+                                                        <li class="breadcrumb-item"><a
+                                                                href="{% url 'dashboard:index' %}">صفحه اصلی</a></li>
                                                         <li class="breadcrumb-item"><a>محصولات</a></li>
                                                         <li class="breadcrumb-item active">ایجاد محصول</li>
                                                     </ul>
@@ -175,12 +176,61 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+                                                                                <div class="col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label class="form-label"
+                                                                                               for="quantity">تعداد
+                                                                                            موجودی</label>
+                                                                                        <div class="form-control-wrap">
+                                                                                            <input type="number"
+                                                                                                   class="form-control"
+                                                                                                   id="quantity"
+                                                                                                   name="quantity"
+                                                                                                   placeholder="تعداد موجودی محصول"
+                                                                                            />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label class="form-label"
+                                                                                               for="price">قیمت </label>
+                                                                                        <div class="form-control-wrap">
+                                                                                            <input type="number"
+                                                                                                   class="form-control"
+                                                                                                   id="price"
+                                                                                                   name="price"
+                                                                                                   placeholder="قیمت محصول"
+                                                                                            />
+                                                                                            <p id="price-value-label" class="text-end p-1 fs-13px"></p>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label class="form-label"
+                                                                                               for="display_price">قیمت
+                                                                                            نمایشی </label>
+                                                                                        <div class="form-control-wrap">
+                                                                                            <input type="number"
+                                                                                                   class="form-control"
+                                                                                                   id="display_price"
+                                                                                                   name="display_price"
+                                                                                                   placeholder="قیمت نمایشی محصول"
+                                                                                            />
+                                                                                            <p id="dp-price-value-label"
+                                                                                               class="text-end p-1 fs-13px"></p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
                                                                                 <div class="col-12">
                                                                                     <div class="form-group">
                                                                                         <label class="form-label">وضعیت
                                                                                             نمایش</label>
                                                                                         <div class="form-control-wrap">
-                                                                                            <select class="form-select js-select2" name="status"
+                                                                                            <select class="form-select js-select2"
+                                                                                                    name="status"
                                                                                                     required>
                                                                                                 <option value="active"
                                                                                                         selected>فعال
@@ -300,7 +350,9 @@
                                                                     </div>
                                                                     <div class="nk-stepper-step text-center">
                                                                         <h5 class="title mb-2">تکمیل</h5>
-                                                                        <p class="text-soft">تبریک ! اطلاعات تایید شدند با ثبت دکمه ایجاد محصول، محصول ایجاد خواهد شد</p>
+                                                                        <p class="text-soft">تبریک ! اطلاعات تایید شدند
+                                                                            با ثبت دکمه ایجاد محصول، محصول ایجاد خواهد
+                                                                            شد</p>
                                                                         <div class="gfx w-50 mx-auto">
                                                                             <svg width="100%" viewBox="0 0 228 157"
                                                                                  fill="none"
@@ -3416,7 +3468,8 @@
                                                                         <button class="btn btn-primary">ادامه</button>
                                                                     </li>
                                                                     <li class="step-submit">
-                                                                        <button id="btn-submit-product" class="btn btn-primary" type="submit">
+                                                                        <button id="btn-submit-product"
+                                                                                class="btn btn-primary" type="submit">
                                                                             ایجاد محصول
                                                                         </button>
                                                                     </li>
@@ -3448,7 +3501,10 @@
 
 {% block Scripts %}
     <script>
-        document.getElementById('btn-submit-product').addEventListener('click',function (){
+        setPriceSpreadInput('input[name="price"]', '#price-value-label', 0, 0)
+        setPriceSpreadInput('input[name="display_price"]', '#dp-price-value-label', 0, 0)
+
+        document.getElementById('btn-submit-product').addEventListener('click', function () {
             document.getElementById('stepper-create-profile').submit()
         })
     </script>

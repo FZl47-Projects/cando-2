@@ -33,6 +33,24 @@ class BasicProductCreate(UserRoleViewMixin, CreateViewMixin, TemplateView):
         })
         return context
 
+    def do_success(self):
+        super().do_success()
+        # set product inventory data
+        data = self.request.POST.copy()
+        price = data.get('price')
+        dp_price = data.get('display_price')
+        quantity = data.get('quantity')
+        product_inv = self.obj.get_product_inv()
+        if not product_inv:
+            return
+        if price:
+            product_inv.price = price
+        if dp_price:
+            product_inv.display_price = dp_price
+        if quantity:
+            product_inv.quantity = quantity
+        product_inv.save()
+
 
 class BasicProductList(UserRoleViewMixin, FilterSimpleListViewMixin, ListView):
     role_access = ('super_user',)

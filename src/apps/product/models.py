@@ -119,6 +119,12 @@ class BasicProduct(BaseProduct):
     def get_quantity(self):
         return self.productinventory.quantity
 
+    def get_product_inv(self):
+        try:
+            return self.productinventory
+        except self.productinventory.DoesNotExist:
+            return None
+
     def get_sales(self):
         return ProductSold.objects.filter(product_selected__product=self)
 
