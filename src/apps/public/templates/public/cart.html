@@ -142,12 +142,12 @@
                                                     <span>انتخاب زمان ارسال </span>
                                                 </div>
                                                 <select name="delivery_time" class="col-6 form-select">
-                                                    <option value="fastest">ارسال در سریع ترین زمان ممکن</option>
                                                     {% if cart.has_custom_products %}
                                                         <option value="until_completed">ارسال پس از تکمیل شدن تمام
                                                             محصولات
                                                         </option>
                                                     {% endif %}
+                                                    <option value="fastest">ارسال در سریع ترین زمان ممکن</option>
                                                 </select>
                                             </li>
                                         </ul>
