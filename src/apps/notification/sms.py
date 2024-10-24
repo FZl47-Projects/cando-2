@@ -1,3 +1,4 @@
+from django.urls import reverse
 from apps.core.utils import send_sms, get_host_url
 
 
@@ -45,7 +46,7 @@ class NotificationUser:
     def handler_custom_product_added_to_cart(cls, notification, phonenumber):
         pattern = 'kzc10z9fnrpeef2'
         send_sms(phonenumber, pattern, {
-            'notification_url': get_host_url(notification.get_link()),
+            'notification_url': get_host_url(reverse('public:cart')),
             'user_name': notification.to_user.get_full_name()
         })
 
