@@ -119,21 +119,24 @@
             dtp1Instance.show()
         })
 
-        let btn_add_image_field = document.querySelector('#btn-add-image-field')
-        let container_image_fields = document.querySelector('.container-image-fields')
-        btn_add_image_field.addEventListener('click', function () {
-            let cnt_field = document.createElement('div')
-            cnt_field.className = 'container-field-image-additional form_input'
-            cnt_field.innerHTML = `
+        try {
+            let btn_add_image_field = document.querySelector('#btn-add-image-field')
+            let container_image_fields = document.querySelector('.container-image-fields')
+            btn_add_image_field.addEventListener('click', function () {
+                let cnt_field = document.createElement('div')
+                cnt_field.className = 'container-field-image-additional form_input'
+                cnt_field.innerHTML = `
                         <input type="file" class="m-0 form-control" name="images" required>
                         <i class="btn-delete-image-field fa fa-trash text-danger"></i>
                     `
-            container_image_fields.appendChild(cnt_field)
-            cnt_field.querySelector('.btn-delete-image-field').addEventListener('click', function () {
-                this.parentElement.remove()
-            })
+                container_image_fields.appendChild(cnt_field)
+                cnt_field.querySelector('.btn-delete-image-field').addEventListener('click', function () {
+                    this.parentElement.remove()
+                })
 
-        })
+            })
+        } catch (e) {
+        }
 
         let _user = '{{ user.is_authenticated }}'
         if (_user != 'True') {

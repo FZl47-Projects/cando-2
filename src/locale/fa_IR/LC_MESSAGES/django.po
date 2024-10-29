@@ -387,7 +387,7 @@ msgstr "نظر شما با موفقیت ثبت شد و پس از بررسی و �
 
 #: .\apps\product\views.py:166
 msgid "Product Has Been Successfully Added To The Cart"
-msgstr "محصول با موفیت به سبد خرید اضافه شد"
+msgstr "محصول با موفقیت به سبد خرید اضافه شد"
 
 #: .\apps\product\views.py:187
 msgid "Product Has Been Successfully Added To The Wish List"

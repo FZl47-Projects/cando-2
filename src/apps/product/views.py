@@ -12,7 +12,6 @@ from apps.product import models, forms
 
 class BasicProductList(FilterSimpleListViewMixin, ListView):
     paginate_by = 20
-    filter_fields = ('categories', 'categories__name')
     template_name = 'product/basic/list.html'
 
     def get_queryset(self):
@@ -32,7 +31,8 @@ class BasicProductList(FilterSimpleListViewMixin, ListView):
         products = self.search(products)
         products = self.filter(products)
         products = self.order_by(products)
-        context['object_list'] = products
+
+        context['page_obj'] = context['page_obj'].object_list = products
         context['categories'] = models.Category.objects.all()
         context['tags'] = models.Tag.objects.all()
         return context
@@ -44,11 +44,15 @@ class BasicProductList(FilterSimpleListViewMixin, ListView):
         # by price
         min_price = params.get('min_price')
         max_price = params.get('max_price')
-        max_price = params.get('max_price')
+        category = params.get('categories', 'all')
+
         if min_price:
             objects = objects.filter(productinventory__price__gte=min_price)
         if max_price:
             objects = objects.filter(productinventory__price__lte=max_price)
+
+        if category != 'all':
+            objects = objects.filter(categories__id__in=[category])
 
         return objects
 

@@ -344,6 +344,7 @@
                                                             </div>
                                                         {% endfor %}
                                                         {% for product in order.get_custom_products %}
+
                                                             <div class="card card-bordered my-3 col-12 col-sm-3 col-md-4">
                                                                 <a href="{{ product.custom_product.get_dashboard_absolute_url }}">
                                                                     <img src="{{ product.custom_product.get_image_cover }}"
