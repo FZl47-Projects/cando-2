@@ -31,9 +31,12 @@ class NotificationUser:
     @classmethod
     def handler_new_factor_cake_image_admin(cls, notification, phonenumber):
         pattern = '53obo7vc564pi5d'
-        send_sms(phonenumber, pattern, {
-            'notification_url': get_host_url(notification.get_link()),
-        })
+
+        # DISABLED !
+
+        # send_sms(phonenumber, pattern, {
+        #     'notification_url': get_host_url(notification.get_link()),
+        # })
 
     @classmethod
     def handler_custom_product_created(cls, notification, phonenumber):

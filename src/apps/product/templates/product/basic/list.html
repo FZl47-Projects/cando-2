@@ -129,7 +129,7 @@
                                     <h4>فیلتر بر اساس دسته بندی</h4>
                                     <ul>
                                         <li class="{% if request.GET.categories == 'all' or not request.GET.categories and not request.GET.categories__name %}active{% endif %}">
-                                            <a href="?categories=all" class="add-params-to-href">
+                                            <a href="?categories=all" class="add-params-to-href" exclude-params="categories__name">
                                                 همه
                                                 <span class="font-70">({{ total_count }})</span>
                                             </a>
@@ -137,7 +137,7 @@
                                         {% for category in categories %}
                                             <li class="{% if category.id|stringformat:'i' == request.GET.categories or category.name == request.GET.categories__name %}active{% endif %}">
                                                 <a href="?categories={{ category.id }}&filter=true"
-                                                   class="add-params-to-href">
+                                                   class="add-params-to-href" exclude-params="categories__name">
                                                     {{ category.name }}
                                                     <span class="font-70">({{ category.get_products.count }})</span>
                                                 </a>
@@ -196,7 +196,7 @@
                         <div class="product_sidebar_header mb-60 d-flex justify-content-between align-items-center">
                             <div class="page__amount border">
                                 <p>
-                                    <span>نمایش {{ object_list.count }}</span>
+                                    <span>نمایش {{ page_obj.object_list.count }}</span>
                                     محصول از
                                     <span>{{ total_count }}</span>
                                 </p>

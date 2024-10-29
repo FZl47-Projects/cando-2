@@ -213,12 +213,20 @@ function toggleRelatedField(fieldId, show = true) {
 let query_params = (new URL(location)).searchParams;
 document.querySelectorAll('.add-params-to-href').forEach(function (el) {
     let href = el.getAttribute('href')
+    let exclude_params = el.getAttribute('exclude-params') || null
     let href_params = new URLSearchParams(href)
     for (let p of query_params) {
         let k = p[0]
         let v = String(p[1])
         if (href.includes(k) === false) {
-            href_params.set(k, v)
+            if (!exclude_params){
+                href_params.set(k, v)
+            }else{
+                if (exclude_params != k){
+                    href_params.set(k, v)
+                }
+            }
+
         }
     }
     let params = href_params.toString()

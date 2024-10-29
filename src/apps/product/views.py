@@ -5,13 +5,13 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, View
 from django.db.models import Min, Max, Count, Case, When, Value
 from django.core.exceptions import PermissionDenied
+from django.core.paginator import Paginator
 
 from apps.core.mixins.views import CreateViewMixin, FilterSimpleListViewMixin, DeleteViewMixin
 from apps.product import models, forms
 
 
 class BasicProductList(FilterSimpleListViewMixin, ListView):
-    paginate_by = 20
     template_name = 'product/basic/list.html'
 
     def get_queryset(self):
@@ -32,7 +32,10 @@ class BasicProductList(FilterSimpleListViewMixin, ListView):
         products = self.filter(products)
         products = self.order_by(products)
 
-        context['page_obj'] = context['page_obj'].object_list = products
+        page_num = self.request.GET.get('page', 1)
+        page_obj = Paginator(products, 20).get_page(page_num)
+
+        context['page_obj'] = page_obj
         context['categories'] = models.Category.objects.all()
         context['tags'] = models.Tag.objects.all()
         return context
@@ -45,6 +48,7 @@ class BasicProductList(FilterSimpleListViewMixin, ListView):
         min_price = params.get('min_price')
         max_price = params.get('max_price')
         category = params.get('categories', 'all')
+        category_name = params.get('categories__name', 'all')
 
         if min_price:
             objects = objects.filter(productinventory__price__gte=min_price)
@@ -53,6 +57,9 @@ class BasicProductList(FilterSimpleListViewMixin, ListView):
 
         if category != 'all':
             objects = objects.filter(categories__id__in=[category])
+
+        if category_name != 'all':
+            objects = objects.filter(categories__name__in=[category_name])
 
         return objects
 
