@@ -55,11 +55,11 @@ const sliderHeader = new Swiper('#showcase-day-slider', {
         spaceBetween: 10, // <- doesn't work
       },
       992: {
-        slidesPerView: 3,
+        slidesPerView: 4,
         spaceBetween: 10, // <- doesn't work
       },
       1200: {
-          slidesPerView: 4,
+          slidesPerView: 5,
           spaceBetween: 10, // <- doesn't work
 
         },

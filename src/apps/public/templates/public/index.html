@@ -69,12 +69,12 @@
                         <button type="button" class="btn text-danger btn-md bg-white px-4 py-2">دیدن همه</button>
                     </div>
                 </div>
-                <div class="col-12 col-md-10 p-2">
+                <div class="col-12 col-md-12 p-2">
                     <div class="swiper" id="showcase-day-slider">
                         <div class="swiper-wrapper">
                             <!-- cart Product box -->
                             {% for product in products__showcase|slice:':12' %}
-                                <div class="swiper-slide p-0">
+                                <div class="swiper-slide p-1">
                                     <div class="product-cart rounded p-2 bg-white position-relative">
                                         <a href="{{ product.get_absolute_url }}"><img
                                                 src="{{ product.get_image_cover }}" alt="{{ product }}"
