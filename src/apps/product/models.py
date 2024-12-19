@@ -376,6 +376,7 @@ class CustomProductStatus(BaseModel):
     status = models.CharField(max_length=12, choices=STATUS_OPTIONS, default='pending')
     custom_product = models.OneToOneField('CustomProduct', on_delete=models.CASCADE, related_name='status')
     note = models.TextField(null=True, blank=True)
+    is_prepayment = models.BooleanField(default=True)
     price = models.PositiveBigIntegerField(null=True)
 
     def __str__(self):

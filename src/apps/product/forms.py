@@ -350,7 +350,7 @@ class CustomProductRejectStatusForm(forms.ModelForm):
 class CustomProductAcceptStatusForm(forms.ModelForm):
     class Meta:
         model = models.CustomProductStatus
-        fields = ('note', 'custom_product', 'status', 'price')
+        fields = ('note', 'custom_product', 'status', 'price', 'is_prepayment')
 
 
 class CustomProductCakeAttrCategoryManageForm(forms.ModelForm):

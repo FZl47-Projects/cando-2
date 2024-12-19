@@ -231,7 +231,7 @@
                                                         <!-- data-item -->
                                                         <div class="data-item">
                                                             <div class="data-col">
-                                                                <span class="data-label">قیمت حساب شده</span>
+                                                                <span class="data-label">قیمت حساب شده توسط سیستم</span>
                                                                 <span class="data-value">
                                                                     <span class="price-el">{{ custom_product.get_attributes_price }}</span>
                                                                 </span>
@@ -256,29 +256,43 @@
                                                         </div>
                                                     </div>
                                                     <!-- data-list -->
-                                                    <div class="nk-data data-list data-list-s2">
-                                                        <div class="data-head">
-                                                            <h6 class="overline-title">جزئیات وضعیت</h6>
-                                                        </div>
-                                                        <div class="data-item">
-                                                            <div class="data-col">
-                                                                <span class="data-label">توضیحات ادمین</span>
-                                                                <span class="data-value">
+                                                    {% if custom_product.status.status != 'pending' %}
+                                                        <div class="nk-data data-list data-list-s2">
+                                                            <div class="data-head">
+                                                                <h6 class="overline-title">جزئیات وضعیت</h6>
+                                                            </div>
+                                                            <div class="data-item">
+                                                                <div class="data-col">
+                                                                    <span class="data-label">توضیحات ادمین</span>
+                                                                    <span class="data-value">
                                                                         {{ custom_product.status.note|default:'-' }}
                                                                     </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- data-item -->
-                                                        <div class="data-item">
-                                                            <div class="data-col">
-                                                                <span class="data-label">قیمت ثبت شده</span>
-                                                                <span class="data-value">
+                                                            {% if custom_product.status.status == 'accepted' %}
+                                                                <!-- data-item -->
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">قیمت ثبت شده</span>
+                                                                        <span class="data-value">
                                                                     <span class="price-el">{{ custom_product.status.price|default:'-' }}</span>
                                                                 </span>
-                                                            </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- data-item -->
+                                                                <div class="data-item">
+                                                                    <div class="data-col">
+                                                                        <span class="data-label">نوع قیمت ثبت شده</span>
+                                                                        <span class="data-value">
+                                                                    <span>{% if custom_product.status.is_prepayment %}
+                                                                        پیش پرداخت{% else %}قیمت کامل{% endif %}</span>
+                                                                </span>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- data-item -->
+                                                            {% endif %}
                                                         </div>
-                                                        <!-- data-item -->
-                                                    </div>
+                                                    {% endif %}
                                                     <!-- data-list -->
                                                     {% with purchase=custom_product.get_invoice_purchase %}
                                                         {% if purchase %}
@@ -380,12 +394,22 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="form-label" for="prepayment">نوع مبلغ</label>
+                                <div class="form-control-wrap">
+                                    <select name="is_prepayment" class="form-control form-select" id="prepayment">
+                                        <option value="true">پیش پرداخت</option>
+                                        <option value="false">مبلغ کامل</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="form-label" for="note">توضیحات ادمین</label>
                                 <div class="form-control-wrap">
                                     <textarea type="text" name="note" class="form-control" id="note"
                                               placeholder="توضیحات ادمین برای این سفارش"></textarea>
                                 </div>
                             </div>
+
                             <div class="form-group text-left">
                                 <button type="submit" class="btn btn-lg btn-success p-1 px-2">
                                     تایید سفارش

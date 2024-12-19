@@ -107,6 +107,11 @@
                                         </td>
                                         <td class="product-price">
                                             <span class="price-el">{{ custom_product_cart.custom_product.get_price }}</span>
+                                            {% if custom_product_cart.custom_product.status.is_prepayment %}
+                                                    <span class="d-block text-warning font-80">
+                                                        <b>(پیش پرداخت)</b>
+                                                    </span>
+                                            {% endif %}
                                         </td>
                                         <td class="product_pro_button">
                                             <div>
